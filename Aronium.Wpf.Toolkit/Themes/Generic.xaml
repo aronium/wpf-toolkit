@@ -10,5 +10,6 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextBoxStyle.xaml"/>
 
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/OnOffButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ButtonGroupStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

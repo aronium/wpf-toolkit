@@ -48,6 +48,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ButtonGroup.cs" />
     <Compile Include="Controls\ClosableTabControl.cs" />
     <Compile Include="Controls\OnOffButton.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
@@ -76,6 +77,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Themes\ButtonGroupStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

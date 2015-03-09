@@ -19,7 +19,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="ContentSite" Property="Background" Value="{DynamicResource ItemMouseHoverBackground}" />
+                            <Setter TargetName="ContentSite" Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="ContentSite" Property="Background" Value="{StaticResource Accent}" />
