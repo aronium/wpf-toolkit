@@ -1,0 +1,8 @@
+*.suo
+*.cache
+*.user
+
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/

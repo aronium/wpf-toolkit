@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="AccentColor">#1BA1E2</Color>
+    <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
+
+    <SolidColorBrush x:Key="BackgroundBrush">#FFFFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="BorderBrush">#FFCCCCCC</SolidColorBrush>
+    <SolidColorBrush x:Key="Foreground">#FF444444</SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundDisabled">#FFCCCCCC</SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundHoverBrush">#FFEEEEEE</SolidColorBrush>
+
+    <SolidColorBrush x:Key="DisabledBrush">#FFCCCCCC</SolidColorBrush>
+
+    <SolidColorBrush x:Key="SelectedItemForeground" Color="White" />
+    <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />
+    <SolidColorBrush x:Key="ItemMouseHoverBackground" Color="#FFEEEEEE" />
+
+    <!-- Scroll Bar -->
+    <SolidColorBrush x:Key="ScrollBarMouseDownBrush" Color="#6D6D6D"/>
+    <SolidColorBrush x:Key="ScrollbarGlyphBrush" Color="#AEACAC" />
+    <SolidColorBrush x:Key="ScrollbarGlyphMouseOver" Color="#7E7C7C"/>
+    
+    <!--On off button-->
+    <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FFF1F1F1" />
+    <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#FF52D468" />
+    <SolidColorBrush x:Key="OnOffButtonBorderBrush" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="OnOffButtonBorderBrushCheked" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="OnOffButtonThumbBackground" Color="White" />
+    <SolidColorBrush x:Key="OnOffButtonThumbBackgroundChecked" Color="White" />
+
+</ResourceDictionary>

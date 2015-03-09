@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type local:OnOffButton}">
+        <Setter Property="CornerRadius" Value="9" />
+        <Setter Property="IsThreeState" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource OnOffButtonSliderBackground}" />
+        <Setter Property="BackgroundChecked" Value="{DynamicResource OnOffButtonSliderBackgroundChecked}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource OnOffButtonBorderBrush}" />
+        <Setter Property="BorderBrushChecked" Value="{DynamicResource OnOffButtonBorderBrushCheked}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+
+        <Setter Property="ThumbBackground" Value="{DynamicResource OnOffButtonThumbBackground}" />
+        <Setter Property="ThumbBackgroundChecked" Value="{DynamicResource OnOffButtonThumbBackgroundChecked}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:OnOffButton}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Slider-->
+                        <Border x:Name="PART_Slider" 
+                                VerticalAlignment="Center"
+                                Height="{TemplateBinding SliderHeight}"
+                                Width="{TemplateBinding SliderWidth}"
+                                CornerRadius="{TemplateBinding CornerRadius}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" />
+
+                        <!--Thumb and label-->
+                        <Canvas Height="{TemplateBinding ThumbSize}">
+                            <Ellipse Canvas.Left="1" 
+                                     Margin="{TemplateBinding SliderPadding}"
+                                     Name="PART_Thumb" 
+                                     Width="{TemplateBinding ThumbSize}"
+                                     Height="{TemplateBinding ThumbSize}"
+                                     Fill="{TemplateBinding ThumbBackground}"
+                                     Stroke="{TemplateBinding BorderBrush}" 
+                                     StrokeThickness="0.3">
+                                <Ellipse.BitmapEffect>
+                                    <DropShadowBitmapEffect Softness="0.1" ShadowDepth="0.7" Direction="270" Color="#BBBBBB"/>
+                                </Ellipse.BitmapEffect>
+                            </Ellipse>
+                        </Canvas>
+
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          x:Name="PART_Content"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Grid.Column="1" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="PART_Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=BackgroundChecked}" />
+                            <Setter TargetName="PART_Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=BorderBrushChecked}" />
+
+                            <Setter Property="Stroke" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=ThumbBorderBrushChecked}" TargetName="PART_Thumb" />
+                            <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextElement.Foreground" TargetName="PART_Content" Value="{DynamicResource DisabledBrush}" />
+                            <!--<Setter Property="TextBlock.Foreground" TargetName="PART_Content" Value="{DynamicResource DisabledBrush}" />-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
