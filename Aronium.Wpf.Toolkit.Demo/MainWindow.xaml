@@ -3,72 +3,87 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:aronium="http://aronium.com/wpf"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="650" Width="725">
+        Title="MainWindow" Height="550" Width="850">
 
     <Grid>
         <TabControl>
             <TabItem Header="Tab item 1">
                 <ScrollViewer>
-                    <WrapPanel>
 
-                        <Button Content="Standard button" HorizontalAlignment="Center" Margin="10"/>
-                        <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,10,10,10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                        <aronium:OnOffButton IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="10"/>
-                        <aronium:OnOffButton Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                        <GroupBox Header="Text Box">
+                            <StackPanel>
+                                <TextBox Text="{Binding IntegerProperty}" Margin="0,5"/>
+                                <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
+                                <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
+                            </StackPanel>
+                        </GroupBox>
 
-                        <ComboBox Width="200" Margin="10">
-                            <ComboBoxItem Content="Item 1" />
-                            <ComboBoxItem Content="Item 2" />
-                            <ComboBoxItem Content="Item 3" />
-                            <ComboBoxItem Content="Item 4" />
-                            <ComboBoxItem Content="Item 5" />
-                        </ComboBox>
+                        <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="1" />
 
-                        <ComboBox IsEditable="True" Margin="10" Width="200">
-                            <ComboBoxItem Content="Editable Item 1" />
-                            <ComboBoxItem Content="Editable Item 2" />
-                            <ComboBoxItem Content="Editable Item 3" />
-                            <ComboBoxItem Content="Editable Item 4" />
-                            <ComboBoxItem Content="Editable Item 5" />
-                        </ComboBox>
+                        <GroupBox Header="Combo Box" Grid.Column="2">
+                            <StackPanel>
+                                <ComboBox Margin="0,5">
+                                    <ComboBoxItem Content="Item 1" />
+                                    <ComboBoxItem Content="Item 2" />
+                                    <ComboBoxItem Content="Item 3" />
+                                    <ComboBoxItem Content="Item 4" />
+                                    <ComboBoxItem Content="Item 5" />
+                                </ComboBox>
 
-                        <ComboBox IsEnabled="False" Margin="10">
-                            <ComboBoxItem IsSelected="True" Content="Disabled" />
-                        </ComboBox>
+                                <ComboBox IsEditable="True" Margin="0,5">
+                                    <ComboBoxItem Content="Editable Item 1" />
+                                    <ComboBoxItem Content="Editable Item 2" />
+                                    <ComboBoxItem Content="Editable Item 3" />
+                                    <ComboBoxItem Content="Editable Item 4" />
+                                    <ComboBoxItem Content="Editable Item 5" />
+                                </ComboBox>
 
-                        <TextBox Margin="10" Text="{Binding IntegerProperty}" Width="200"/>
-                        <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="10" Width="200"/>
-                        <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="10" Width="200"/>
+                                <ComboBox IsEnabled="False" Margin="0,5">
+                                    <ComboBoxItem IsSelected="True" Content="Disabled" />
+                                </ComboBox>
+                            </StackPanel>
+                        </GroupBox>
 
-                        <aronium:ButtonGroup Margin="10">
-                            <Button Content="Group button 1" />
-                            <Button Content="Group button 2"/>
-                            <Button Content="Group button disabled" IsEnabled="False"/>
-                            <Button Content="Group button 3" />
-                        </aronium:ButtonGroup>
+                        <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="3" />
 
-                        <Grid Margin="10" Width="600">
+                        <GroupBox Header="Buttons" Grid.Column="4">
+                            <StackPanel>
+                                <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5"/>
+                                <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,5"/>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            
-                            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <GroupBox Header="Group box 1">
-                                    <Label Content="Group box content" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20"/>
-                                </GroupBox>
-                            </ScrollViewer>
-                            <GridSplitter ResizeBehavior="PreviousAndNext" Grid.Column="1" ResizeDirection="Columns" />
+                                <aronium:OnOffButton IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5"/>
+                                <aronium:OnOffButton Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
 
-                            <ListBox Grid.Column="2" Height="Auto" MaxHeight="150">
+                                <Label Content="Button group" />
+
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" Padding="0,5">
+                                    <aronium:ButtonGroup HorizontalAlignment="Left">
+                                        <Button Content="Group button 1" />
+                                        <Button Content="Group button 2"/>
+                                        <Button Content="Group button disabled" IsEnabled="False"/>
+                                        <Button Content="Group button 3" />
+                                    </aronium:ButtonGroup>
+                                </ScrollViewer>
+
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="5" />
+
+                        <GroupBox Header="List Box" Grid.Column="6" Padding="0">
+
+                            <ListBox BorderThickness="0">
                                 <ListBoxItem Content="List box item 1" />
                                 <ListBoxItem Content="List box item 2" />
                                 <ListBoxItem Content="List box item 3" />
@@ -79,22 +94,10 @@
                                 <ListBoxItem Content="List box item 9" />
                                 <ListBoxItem Content="List box item 10" />
                             </ListBox>
-                            
-                            <!--Second row-->
-                            <ListBox Grid.Row="2">
-                                <ListBoxItem Content="List box item 1" />
-                                <ListBoxItem Content="List box item 2" />
-                                <ListBoxItem Content="List box item 3" />
-                                <ListBoxItem Content="List box item 4" />
-                                <ListBoxItem Content="List box item 5" />
-                            </ListBox>
-                            <GridSplitter ResizeBehavior="PreviousAndNext" Grid.Row="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" ResizeDirection="Rows" />
-                            <GroupBox Header="Group box 1" Grid.Row="2" Grid.Column="2">
-                                <Label Content="Group box content" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20"/>
-                            </GroupBox>
-                        </Grid>
+                        </GroupBox>
 
-                    </WrapPanel>
+                    </Grid>
+
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Tab item 2">
