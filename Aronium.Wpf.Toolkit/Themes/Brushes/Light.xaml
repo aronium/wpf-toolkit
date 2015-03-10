@@ -16,6 +16,9 @@
 
     <SolidColorBrush x:Key="SelectedItemForeground" Color="White" />
     <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />
+    
+    <!--Group box-->
+    <SolidColorBrush x:Key="GroupBoxHeaderBackgroundBrush" Color="#FFEEEEEE" />
 
     <!-- Scroll Bar -->
     <SolidColorBrush x:Key="ScrollBarMouseDownBrush" Color="#6D6D6D"/>

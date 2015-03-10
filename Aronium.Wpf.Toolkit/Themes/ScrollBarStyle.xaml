@@ -48,7 +48,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
-                    <Border />
+                    <!--Background must be set to Transparent in order to accept mouse events-->
+                    <Border Background="Transparent" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -89,7 +90,10 @@
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageUpCommand" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource ScrollBarThumb}" Name="el" Margin="{StaticResource VerticalDefaultMargin}" Background="{DynamicResource ScrollbarGlyphBrush}" />
+                    <Thumb Style="{StaticResource ScrollBarThumb}" 
+                           Name="el" 
+                           Margin="{StaticResource VerticalDefaultMargin}" 
+                           Background="{DynamicResource ScrollbarGlyphBrush}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageDownCommand" />
