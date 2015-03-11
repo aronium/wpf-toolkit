@@ -4,7 +4,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -21,6 +21,7 @@
 
                             <ContentPresenter Margin="6" HorizontalAlignment="Left"
                                               ContentSource="Header"
+                                              TextElement.Foreground="{DynamicResource GroupBoxHeaderForegroundBrush}"
                                               RecognizesAccessKey="True" />
                         </Border>
 

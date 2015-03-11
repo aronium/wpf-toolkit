@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:aronium="http://aronium.com/wpf"
         WindowStartupLocation="CenterScreen"
+        FontSize="13"
         Title="MainWindow" Height="550" Width="850">
 
     <Grid Margin="5" >
@@ -36,6 +37,7 @@
                                 <TextBox Text="{Binding IntegerProperty}" Margin="0,5"/>
                                 <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
                                 <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
+                                <PasswordBox />
                             </StackPanel>
                         </GroupBox>
 
@@ -110,9 +112,7 @@
 
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Tab item 2">
-
-            </TabItem>
+            <TabItem Header="Tab item 2 with some long header"></TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -27,7 +27,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         public MainWindow()
         {
             InitializeComponent();
-
+            
             this.DataContext = this;
 
             this.IntegerProperty = new Random().Next(0, 1000);

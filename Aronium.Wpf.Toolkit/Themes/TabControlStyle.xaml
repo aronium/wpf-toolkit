@@ -54,6 +54,7 @@
                             <Setter TargetName="arrow" Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="arrow" Property="VerticalAlignment" Value="Center" />
                             <Setter TargetName="arrow" Property="Margin" Value="0,0,-5,0" />
+                            <Setter TargetName="ContentSite" Property="HorizontalAlignment" Value="Left" />
                         </Trigger>
 
                         <Trigger Property="TabItem.TabStripPlacement" Value="Right">
@@ -61,6 +62,7 @@
                             <Setter TargetName="arrow" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="arrow" Property="VerticalAlignment" Value="Center" />
                             <Setter TargetName="arrow" Property="Margin" Value="-5,0,0,0" />
+                            <Setter TargetName="ContentSite" Property="HorizontalAlignment" Value="Right" />
                         </Trigger>
 
                         <Trigger Property="TabItem.TabStripPlacement" Value="Bottom">

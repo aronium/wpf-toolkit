@@ -162,16 +162,36 @@
         </Setter>
         <Style.Resources>
             <Style TargetType="ComboBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ComboBoxItem">
-                            <Border Name="Border" Padding="4,2">
-                                <ContentPresenter />
+                            <Border Name="Border" 
+                                    Padding="4,2"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter/>
+                                    <Polygon Name="check" Points="398.218,92.985 199.729,291.475 113.754,205.476 50,269.242 199.733,419.015 462,156.726"
+                                             Stretch="Uniform"
+                                             Height="8"
+                                             Margin="4,0,2,0"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Right"
+                                             Visibility="Collapsed"
+                                             Fill="{TemplateBinding Foreground}" />
+                                </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsHighlighted" Value="true">
                                     <Setter TargetName="Border" Property="Background" Value="{DynamicResource Accent}"/>
                                     <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="check" Property="Visibility" Value="Visible"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
