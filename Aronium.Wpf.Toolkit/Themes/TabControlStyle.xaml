@@ -17,6 +17,7 @@
                                                   HorizontalAlignment="Center"
                                                   ContentSource="Header"
                                                   Margin="12,4"
+                                                  TextElement.Foreground="{DynamicResource Foreground}"
                                                   TextBlock.FontSize="13"
                                                   RecognizesAccessKey="True" />
                                 <Polygon Name="arrow" Visibility="Collapsed" Stroke="{DynamicResource Accent}" Fill="{DynamicResource Accent}" />

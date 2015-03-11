@@ -69,8 +69,7 @@
                             <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="PART_Content" Value="{DynamicResource DisabledBrush}" />
-                            <!--<Setter Property="TextBlock.Foreground" TargetName="PART_Content" Value="{DynamicResource DisabledBrush}" />-->
+                            <Setter Property="TextElement.Foreground" TargetName="PART_Content" Value="{DynamicResource ForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
 

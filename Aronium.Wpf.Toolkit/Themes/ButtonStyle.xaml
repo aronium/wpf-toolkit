@@ -4,6 +4,7 @@
     <Style x:Key="DefaultButtonStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Padding" Value="5,0,5,1" />
         <Setter Property="Height" Value="28" />
@@ -22,6 +23,7 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           RecognizesAccessKey="True"
+                                          TextElement.Foreground="{TemplateBinding Foreground}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -36,8 +38,8 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundDisabledBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

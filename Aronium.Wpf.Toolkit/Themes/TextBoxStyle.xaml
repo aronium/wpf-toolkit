@@ -4,6 +4,8 @@
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBoxBase">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="Height" Value="24" />
@@ -62,17 +64,18 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0" Opacity="1">
                             <Grid>
                                 <Border x:Name="ReadOnlyVisualElement" 
-                                        Background="Gainsboro"
+                                        Background="{DynamicResource BackgroundDisabledBrush}"
                                         CornerRadius="0" Opacity="0" />
                                 <ScrollViewer x:Name="PART_ContentHost" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                               BorderThickness="0" 
                                               IsTabStop="False" 
-                                              Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}" />
+                                              Padding="{TemplateBinding Padding}" 
+                                              Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
-                        <Border x:Name="DisabledVisualElement" Background="{DynamicResource DisabledBrush}"
+                        <Border x:Name="DisabledVisualElement" Background="{DynamicResource BackgroundDisabledBrush}"
                                 IsHitTestVisible="False" Margin="1" Opacity="0" CornerRadius="0" />
                         <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="1"
                                 IsHitTestVisible="False" Margin="0" CornerRadius="0" />

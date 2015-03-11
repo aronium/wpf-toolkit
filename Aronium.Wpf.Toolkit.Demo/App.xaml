@@ -5,7 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Light.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Brushes/Light.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

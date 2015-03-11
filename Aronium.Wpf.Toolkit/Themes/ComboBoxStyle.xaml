@@ -32,6 +32,7 @@
 
     <Style TargetType="ComboBox">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -39,6 +40,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="Height" Value="24" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -72,10 +74,10 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Border x:Name="Border" 
-                                SnapsToDevicePixels="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 Grid.ColumnSpan="2" 
-                                Background="{DynamicResource BackgroundBrush}" 
-                                BorderBrush="{DynamicResource BorderBrush}" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="1">
 
                             <ToggleButton Name="ToggleButton" 
@@ -88,23 +90,24 @@
 
                         </Border>
                         <ContentPresenter Name="ContentSite" 
-                                              IsHitTestVisible="False"  
-                                              Content="{TemplateBinding SelectionBoxItem}" 
-                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                                              Margin="5,3,23,3" 
-                                              VerticalAlignment="Center" 
-                                              HorizontalAlignment="Left"/>
+                                          IsHitTestVisible="False"  
+                                          Content="{TemplateBinding SelectionBoxItem}" 
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                          Margin="5,3,23,3" 
+                                          TextElement.Foreground="{TemplateBinding Foreground}"
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Left"/>
                         <TextBox x:Name="PART_EditableTextBox" 
-                                     Template="{StaticResource ComboBoxTextBox}" 
-                                     HorizontalAlignment="Stretch" 
-                                     HorizontalContentAlignment="Stretch"
-                                     VerticalAlignment="Center" 
-                                     Margin="2,0,16,0"
-                                     Focusable="True" 
-                                     Background="Transparent"
-                                     Visibility="Hidden" 
-                                     IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                                 Template="{StaticResource ComboBoxTextBox}" 
+                                 HorizontalAlignment="Stretch" 
+                                 HorizontalContentAlignment="Stretch"
+                                 VerticalAlignment="Center" 
+                                 Margin="2,0,16,0"
+                                 Focusable="True" 
+                                 Background="Transparent"
+                                 Visibility="Hidden" 
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         <Popup VerticalOffset="-1" 
                                    SnapsToDevicePixels="True" 
                                    Name="Popup" 
@@ -128,8 +131,12 @@
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
-                        <Border x:Name="DisabledVisualElement" Background="Silver" IsHitTestVisible="False" Margin="1" Opacity="0" CornerRadius="0" />
-
+                        <Border x:Name="DisabledVisualElement" 
+                                Background="{DynamicResource BackgroundDisabledBrush}" 
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                IsHitTestVisible="False" 
+                                Margin="1" 
+                                Opacity="0"/>
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -200,4 +207,5 @@
             </Style>
         </Style.Resources>
     </Style>
+    
 </ResourceDictionary>

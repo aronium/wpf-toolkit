@@ -6,6 +6,8 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GroupBox">
@@ -14,22 +16,25 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                        <!--Header-->
+                        <Border BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{DynamicResource GroupBoxHeaderBackgroundBrush}"
                                 BorderBrush="{TemplateBinding BorderBrush}">
-
-                            <ContentPresenter Margin="6" HorizontalAlignment="Left"
+                            <ContentPresenter Margin="4" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               ContentSource="Header"
                                               TextElement.Foreground="{DynamicResource GroupBoxHeaderForegroundBrush}"
                                               RecognizesAccessKey="True" />
                         </Border>
 
+                        <!--Content-->
                         <Border Grid.Row="1"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="1,0,1,1"
-                                CornerRadius="0,0,2,2" BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>
