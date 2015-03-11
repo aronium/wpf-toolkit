@@ -5,8 +5,18 @@
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="550" Width="850">
 
-    <Grid>
-        <TabControl>
+    <Grid Margin="5" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Margin="0,0,0,10" >
+            <TextBlock Text="Tab placement" VerticalAlignment="Center" Margin="0,0,5,0" />
+            <ComboBox ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
+        </DockPanel>
+        
+        <TabControl Grid.Row="1" TabStripPlacement="Left" Name="tabControl">
             <TabItem Header="Tab item 1">
                 <ScrollViewer>
 

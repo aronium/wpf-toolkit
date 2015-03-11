@@ -162,8 +162,6 @@
         </Setter>
         <Style.Resources>
             <Style TargetType="ComboBoxItem">
-                <Setter Property="SnapsToDevicePixels" Value="true"/>
-                <Setter Property="OverridesDefaultStyle" Value="true"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ComboBoxItem">

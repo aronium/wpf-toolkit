@@ -46,5 +46,13 @@ namespace Aronium.Wpf.Toolkit.Demo
             get { return _integerProperty; }
             set { _integerProperty = value; OnPropertyChanged("IntegerProperty"); }
         }
+
+        public IEnumerable<Dock> TabPlacementValues
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Dock)).Cast<Dock>();
+            }
+        }
     }
 }
