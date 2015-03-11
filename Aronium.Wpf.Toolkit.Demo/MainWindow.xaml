@@ -16,9 +16,9 @@
             <ComboBox ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
         </DockPanel>
         
-        <TabControl Grid.Row="1" TabStripPlacement="Left" Name="tabControl">
+        <TabControl Grid.Row="1" Name="tabControl">
             <TabItem Header="Tab item 1">
-                <ScrollViewer>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                     <Grid>
                         <Grid.ColumnDefinitions>
