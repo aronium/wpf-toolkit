@@ -5,7 +5,7 @@
     
     <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
 
-    <SolidColorBrush x:Key="BackgroundBrush">#FF595A5E</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundBrush">#FF313539</SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDisabledBrush">#FF575757</SolidColorBrush>
     <SolidColorBrush x:Key="BorderBrush">#FF999999</SolidColorBrush>
     <SolidColorBrush x:Key="BorderDisabledBrush">#FF7B7C7E</SolidColorBrush>
