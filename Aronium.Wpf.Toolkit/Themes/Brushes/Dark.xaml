@@ -7,12 +7,12 @@
 
     <SolidColorBrush x:Key="BackgroundBrush">#FF313539</SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDisabledBrush">#FF575757</SolidColorBrush>
-    <SolidColorBrush x:Key="BorderBrush">#FF999999</SolidColorBrush>
-    <SolidColorBrush x:Key="BorderDisabledBrush">#FF7B7C7E</SolidColorBrush>
+    <SolidColorBrush x:Key="BorderBrush">#FF595E57</SolidColorBrush>
+    <SolidColorBrush x:Key="BorderDisabledBrush">#FF3A3F44</SolidColorBrush>
     <SolidColorBrush x:Key="Foreground" Color="White" />
     <SolidColorBrush x:Key="ForegroundDisabled">#FFCCCCCC</SolidColorBrush>
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
-    <SolidColorBrush x:Key="BackgroundHoverBrush">#FF6D6D70</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundHoverBrush">#FF484E55</SolidColorBrush>
 
     <SolidColorBrush x:Key="SelectedItemForeground" Color="White" />
     <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />
