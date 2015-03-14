@@ -35,8 +35,6 @@ namespace Aronium.Wpf.Toolkit.Demo
             this.DataContext = this;
 
             this.IntegerProperty = new Random().Next(0, 1000);
-
-            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, (sender, e) => { MessageBox.Show("Close command executed with prameter " + e.Parameter); }));
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -56,8 +54,8 @@ namespace Aronium.Wpf.Toolkit.Demo
                 {
                     var currentResourceIndex = GetResourceIndex();
 
-                    _themeName = value; 
-                    
+                    _themeName = value;
+
                     OnPropertyChanged("ThemeName");
 
                     ChangeTheme(currentResourceIndex);
@@ -100,7 +98,6 @@ namespace Aronium.Wpf.Toolkit.Demo
             }
         }
 
-
         public int IntegerProperty
         {
             get { return _integerProperty; }
@@ -113,11 +110,6 @@ namespace Aronium.Wpf.Toolkit.Demo
             {
                 return Enum.GetValues(typeof(Dock)).Cast<Dock>();
             }
-        }
-
-        private void splitButton1_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Split button clicked.");
         }
     }
 }

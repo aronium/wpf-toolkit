@@ -45,6 +45,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent("Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SplitButton)); 
 
         #endregion
+
+        private Button contentButton;
+        private ToggleButton dropDownButton;
         
         #region - Constructor -
 
@@ -53,8 +56,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public SplitButton()
         {
-
-        } 
+            this.GotFocus += OnGotFocus;
+        }
 
         #endregion
 
@@ -84,6 +87,20 @@ namespace Aronium.Wpf.Toolkit.Controls
             foreach (MenuItem item in (d as DropDownButton).DropDown.Items)
             {
                 item.CommandTarget = d as IInputElement;
+            }
+        }
+
+        /// <summary>
+        /// Occurs when control is focused.
+        /// </summary>
+        /// <param name="sender">Focused control.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            // If main button is not focused, meaning this was the initial control focus (e.g. keyboard navigation), focus main button automatically.
+            if (contentButton != null && !contentButton.IsFocused && !dropDownButton.IsFocused)
+            {
+                contentButton.Focus();
             }
         }
 
@@ -125,8 +142,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnApplyTemplate();
 
-            var dropDownButton = this.Template.FindName("PART_DropDownButton", this) as ToggleButton;
-            var button = this.Template.FindName("PART_Button", this) as Button;
+            dropDownButton = this.Template.FindName("PART_DropDownButton", this) as ToggleButton;
+            contentButton = this.Template.FindName("PART_Button", this) as Button;
 
             if (dropDownButton != null)
             {
@@ -137,9 +154,9 @@ namespace Aronium.Wpf.Toolkit.Controls
                 dropDownButton.Click += OnDropDownButtonClick;
             }
 
-            if (button != null)
+            if (contentButton != null)
             {
-                button.Click += OnButtonClick;
+                contentButton.Click += OnButtonClick;
             }
         }
         #endregion

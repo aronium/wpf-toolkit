@@ -50,12 +50,12 @@
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource Accent}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Accent}" />
                             <Setter Property="IsHitTestVisible" Value="False" />
