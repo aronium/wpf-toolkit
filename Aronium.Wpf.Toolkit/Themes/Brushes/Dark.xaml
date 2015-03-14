@@ -10,7 +10,7 @@
     <SolidColorBrush x:Key="BorderBrush">#FF595E57</SolidColorBrush>
     <SolidColorBrush x:Key="BorderDisabledBrush">#FF3A3F44</SolidColorBrush>
     <SolidColorBrush x:Key="Foreground" Color="White" />
-    <SolidColorBrush x:Key="ForegroundDisabled">#FFCCCCCC</SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundDisabled">#FF999999</SolidColorBrush>
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundHoverBrush" Color="#FF484E55" />
 

@@ -82,12 +82,12 @@
                                 BorderThickness="1">
 
                             <ToggleButton Name="ToggleButton" 
-                                      Template="{StaticResource ComboBoxToggleButton}" 
-                                      Grid.Column="2" 
-                                      Height="{TemplateBinding Height}"
-                                      Focusable="false" 
-                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                                      ClickMode="Press"/>
+                                          Template="{StaticResource ComboBoxToggleButton}" 
+                                          Grid.Column="2" 
+                                          Height="{TemplateBinding Height}"
+                                          Focusable="false" 
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                          ClickMode="Press"/>
 
                         </Border>
                         <ContentPresenter Name="ContentSite" 
