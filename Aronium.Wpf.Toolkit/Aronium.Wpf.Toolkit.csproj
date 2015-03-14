@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="Controls\ButtonGroup.cs" />
     <Compile Include="Controls\ClosableTabControl.cs" />
+    <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\OnOffButton.cs" />
+    <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\TextSeparator.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,6 +96,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\DropDownButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +139,10 @@
     <Page Include="Themes\ScrollBarStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SplitButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\TabControlStyle.xaml">
       <SubType>Designer</SubType>

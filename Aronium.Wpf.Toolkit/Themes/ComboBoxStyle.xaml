@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -98,6 +99,7 @@
                                           TextElement.Foreground="{TemplateBinding Foreground}"
                                           VerticalAlignment="Center" 
                                           HorizontalAlignment="Left"/>
+                        
                         <TextBox x:Name="PART_EditableTextBox" 
                                  Template="{StaticResource ComboBoxTextBox}" 
                                  HorizontalAlignment="Stretch" 
@@ -108,6 +110,7 @@
                                  Background="Transparent"
                                  Visibility="Hidden" 
                                  IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        
                         <Popup VerticalOffset="-1" 
                                    SnapsToDevicePixels="True" 
                                    Name="Popup" 
@@ -131,6 +134,7 @@
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
+                        
                         <Border x:Name="DisabledVisualElement" 
                                 Background="{DynamicResource BackgroundDisabledBrush}" 
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"

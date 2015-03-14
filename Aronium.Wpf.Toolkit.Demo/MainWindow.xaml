@@ -88,14 +88,36 @@
 
                                 <Label Content="Button group" />
 
-                                <ScrollViewer HorizontalScrollBarVisibility="Auto" Padding="0,5">
-                                    <aronium:ButtonGroup HorizontalAlignment="Left">
-                                        <Button Content="Group button 1" />
-                                        <Button Content="Group button 2"/>
-                                        <Button Content="Group button disabled" IsEnabled="False"/>
-                                        <Button Content="Group button 3" />
-                                    </aronium:ButtonGroup>
-                                </ScrollViewer>
+                                <aronium:ButtonGroup HorizontalAlignment="Left">
+                                    <Button Content="Group button 1" />
+                                    <Button Content="Group button 2"/>
+                                    <Button Content="Group button 3"/>
+                                </aronium:ButtonGroup>
+
+                                <aronium:DropDownButton Content="Drop Down Button" Margin="0,10" Width="150">
+                                    <aronium:DropDownButton.DropDown>
+                                        <ContextMenu>
+                                            <MenuItem Header="Drop down menu 1" />
+                                            <MenuItem Header="Drop down menu 2" />
+                                            <MenuItem Header="Drop down menu 3" />
+                                            <MenuItem Header="Drop down menu 4" />
+                                            <Separator />
+                                            <MenuItem Header="Drop down menu 5" />
+                                        </ContextMenu>
+                                    </aronium:DropDownButton.DropDown>
+                                </aronium:DropDownButton>
+                                <aronium:SplitButton Name="splitButton1" Command="Close" CommandParameter="{Binding IntegerProperty}" Click="splitButton1_Click" Content="Drop Down Button" Margin="0,10" Width="150">
+                                    <aronium:SplitButton.DropDown>
+                                        <ContextMenu>
+                                            <MenuItem Header="Drop down menu 1" />
+                                            <MenuItem Header="Drop down menu 2" />
+                                            <MenuItem Header="Drop down menu 3" />
+                                            <MenuItem Header="Drop down menu 4" />
+                                            <Separator />
+                                            <MenuItem Header="Drop down menu 5" />
+                                        </ContextMenu>
+                                    </aronium:SplitButton.DropDown>
+                                </aronium:SplitButton>
 
                             </StackPanel>
                         </GroupBox>

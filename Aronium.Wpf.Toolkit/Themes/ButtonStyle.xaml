@@ -6,7 +6,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="Padding" Value="5,0,5,1" />
+        <Setter Property="Padding" Value="5,0" />
         <Setter Property="Height" Value="28" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />

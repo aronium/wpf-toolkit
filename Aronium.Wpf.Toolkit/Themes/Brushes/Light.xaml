@@ -12,7 +12,7 @@
     <SolidColorBrush x:Key="Foreground" Color="#FF444444" />
     <SolidColorBrush x:Key="ForegroundDisabled">#FFCCCCCC</SolidColorBrush>
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
-    <SolidColorBrush x:Key="BackgroundHoverBrush">#FFEEEEEE</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundHoverBrush" Color="#FFEEEEEE" />
 
     <SolidColorBrush x:Key="SelectedItemForeground" Color="White" />
     <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />

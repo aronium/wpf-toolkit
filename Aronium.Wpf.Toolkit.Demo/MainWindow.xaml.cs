@@ -23,7 +23,7 @@ namespace Aronium.Wpf.Toolkit.Demo
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private int _integerProperty;
-        private string _themeName = "Light";
+        private string _themeName = "Dark";
         private List<string> _themes;
 
         public MainWindow()
@@ -35,6 +35,8 @@ namespace Aronium.Wpf.Toolkit.Demo
             this.DataContext = this;
 
             this.IntegerProperty = new Random().Next(0, 1000);
+
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, (sender, e) => { MessageBox.Show("Close command executed with prameter " + e.Parameter); }));
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -111,6 +113,11 @@ namespace Aronium.Wpf.Toolkit.Demo
             {
                 return Enum.GetValues(typeof(Dock)).Cast<Dock>();
             }
+        }
+
+        private void splitButton1_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Split button clicked.");
         }
     }
 }

@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ButtonStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ComboBoxStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/DropDownButtonStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/GridSplitterStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/GroupBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/LabelStyle.xaml"/>
@@ -10,6 +11,7 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/PasswordBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ProgressBarStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ScrollBarStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/SplitButtonStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TabControlStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ToolTipStyle.xaml"/>
