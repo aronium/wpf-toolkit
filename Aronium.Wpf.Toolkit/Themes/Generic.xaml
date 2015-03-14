@@ -8,10 +8,12 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/LabelStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ListBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/PasswordBoxStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ProgressBarStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ScrollBarStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TabControlStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ToolTipStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextSeparatorStyle.xaml"/>
 
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/OnOffButtonStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ButtonGroupStyle.xaml"/>

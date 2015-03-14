@@ -58,7 +58,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public OnOffButton()
         {
-            this.SizeChanged += new SizeChangedEventHandler(OnSizeChanged);
             this.Checked += new RoutedEventHandler(OnChecked);
             this.Unchecked += new RoutedEventHandler(OnUnchecked);
         }
@@ -118,17 +117,6 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (this.IsChecked == true)
-            {
-                Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    RunCheckedAnimationIfAvailable();
-                }), System.Windows.Threading.DispatcherPriority.Loaded);
-            }
-        }
-
         private static void OnSliderWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((OnOffButton)d).UpdateSliderWidth();
@@ -153,6 +141,14 @@ namespace Aronium.Wpf.Toolkit.Controls
             slider = this.Template.FindName("PART_Thumb", this) as Ellipse;
 
             CreateAnimations();
+
+            if (this.IsChecked == true)
+            {
+                Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    RunCheckedAnimationIfAvailable();
+                }), System.Windows.Threading.DispatcherPriority.Loaded);
+            }
         }
 
         #endregion
@@ -168,7 +164,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         } 
 
         #endregion
-
+        
         #region - Properties -
 
         /// <summary>

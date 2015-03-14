@@ -68,6 +68,11 @@
                                 <ComboBox IsEnabled="False" Margin="0,5">
                                     <ComboBoxItem IsSelected="True" Content="Disabled" />
                                 </ComboBox>
+                                
+                                <aronium:TextSeparator FontSize="13" Content="Progress Bar" />
+                                
+                                <ProgressBar Value="40" Maximum="100" Margin="0,10" />
+                                
                             </StackPanel>
                         </GroupBox>
 
