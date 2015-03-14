@@ -8,158 +8,197 @@
         FontSize="13"
         Title="MainWindow" Height="550" Width="850">
 
-    <Grid Margin="5" >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <DockPanel Margin="0,0,0,10" >
-            <TextBlock Text="Tab placement" VerticalAlignment="Center" Margin="0,0,5,0" />
-            <ComboBox ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
-            <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
-            <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
-        </DockPanel>
         
-        <TabControl Grid.Row="1" Name="tabControl">
-            <TabItem Header="Tab item 1">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Menu IsMainMenu="True" HorizontalAlignment="Stretch">
+            <MenuItem Header="File">
+                <MenuItem Header="Open">
+                    <MenuItem Header="File" />
+                    <MenuItem Header="Project" />
+                    <MenuItem Header="Web site" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Setting" />
+                <MenuItem Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Command="Cut" />
+                <MenuItem Command="Copy" />
+                <MenuItem Command="Paste" />
+                <Separator />
+                <MenuItem Header="Options" />
+            </MenuItem>
+            <MenuItem Header="View" />
+            <MenuItem Header="Help" />
+        </Menu>
+        
+        <Grid Margin="5" Grid.Row="1">
+            
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Grid item 1" />
+                    <MenuItem Header="Grid item 2" />
+                    <Separator />
+                    <MenuItem Header="Grid item 3" />
+                </ContextMenu>
+            </Grid.ContextMenu>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+            <DockPanel Margin="0,0,0,10" >
+                <TextBlock Text="Tab placement" VerticalAlignment="Center" Margin="0,0,5,0" />
+                <ComboBox ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
+                <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
+                <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
+            </DockPanel>
 
-                        <GroupBox Header="Text Box">
-                            <StackPanel>
-                                <TextBox Text="{Binding IntegerProperty}" Margin="0,5"/>
-                                <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
-                                <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
-                                <PasswordBox />
-                            </StackPanel>
-                        </GroupBox>
+            <TabControl Grid.Row="1" Name="tabControl">
+                <TabItem Header="Tab item 1">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                        <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="1" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <GroupBox Header="Combo Box" Grid.Column="2">
-                            <StackPanel>
-                                <ComboBox Margin="0,5">
-                                    <ComboBoxItem Content="Item 1" />
-                                    <ComboBoxItem Content="Item 2" />
-                                    <ComboBoxItem Content="Item 3" />
-                                    <ComboBoxItem Content="Item 4" />
-                                    <ComboBoxItem Content="Item 5" />
-                                </ComboBox>
+                            <GroupBox Header="Text Box">
+                                <StackPanel>
+                                    <TextBox Text="{Binding IntegerProperty}" Margin="0,5"/>
+                                    <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
+                                    <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
+                                    <PasswordBox />
+                                </StackPanel>
+                            </GroupBox>
 
-                                <ComboBox IsEditable="True" Margin="0,5">
-                                    <ComboBoxItem Content="Editable Item 1" />
-                                    <ComboBoxItem Content="Editable Item 2" />
-                                    <ComboBoxItem Content="Editable Item 3" />
-                                    <ComboBoxItem Content="Editable Item 4" />
-                                    <ComboBoxItem Content="Editable Item 5" />
-                                </ComboBox>
+                            <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="1" />
 
-                                <ComboBox IsEnabled="False" Margin="0,5">
-                                    <ComboBoxItem IsSelected="True" Content="Disabled" />
-                                </ComboBox>
-                                
-                                <aronium:TextSeparator FontSize="13" Content="Progress Bar" />
-                                
-                                <ProgressBar Value="40" Maximum="100" Margin="0,10" />
-                                
-                            </StackPanel>
-                        </GroupBox>
+                            <GroupBox Header="Combo Box" Grid.Column="2">
+                                <StackPanel>
+                                    <ComboBox Margin="0,5">
+                                        <ComboBoxItem Content="Item 1" />
+                                        <ComboBoxItem Content="Item 2" />
+                                        <ComboBoxItem Content="Item 3" />
+                                        <ComboBoxItem Content="Item 4" />
+                                        <ComboBoxItem Content="Item 5" />
+                                    </ComboBox>
 
-                        <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="3" />
+                                    <ComboBox IsEditable="True" Margin="0,5">
+                                        <ComboBoxItem Content="Editable Item 1" />
+                                        <ComboBoxItem Content="Editable Item 2" />
+                                        <ComboBoxItem Content="Editable Item 3" />
+                                        <ComboBoxItem Content="Editable Item 4" />
+                                        <ComboBoxItem Content="Editable Item 5" />
+                                    </ComboBox>
 
-                        <GroupBox Header="Buttons" Grid.Column="4">
-                            <StackPanel>
-                                <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5"/>
-                                <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,5"/>
+                                    <ComboBox IsEnabled="False" Margin="0,5">
+                                        <ComboBoxItem IsSelected="True" Content="Disabled" />
+                                    </ComboBox>
 
-                                <aronium:OnOffButton IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5"/>
-                                <aronium:OnOffButton Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                                    <aronium:TextSeparator FontSize="13" Content="Progress Bar" />
 
-                                <Label Content="Button group" />
+                                    <ProgressBar Value="40" Maximum="100" Margin="0,10" />
 
-                                <aronium:ButtonGroup HorizontalAlignment="Left">
-                                    <Button Content="Group button 1" />
-                                    <Button Content="Group button 2"/>
-                                    <Button Content="Group button 3"/>
-                                </aronium:ButtonGroup>
+                                </StackPanel>
+                            </GroupBox>
 
-                                <aronium:DropDownButton Content="Drop Down Button" Margin="0,10" Width="150">
-                                    <aronium:DropDownButton.DropDown>
-                                        <ContextMenu>
-                                            <MenuItem Header="Drop down menu 1" IsCheckable="True" IsChecked="True">
-                                                <MenuItem.Icon>
-                                                    <Path Data="M462,283.742v-55.485l-29.981-10.662c-11.431-4.065-20.628-12.794-25.274-24.001c-0.002-0.004-0.004-0.009-0.006-0.013c-4.659-11.235-4.333-23.918,0.889-34.903l13.653-28.724l-39.234-39.234l-28.72,13.652c-10.979,5.219-23.68,5.546-34.908,0.889c-0.005-0.002-0.01-0.003-0.014-0.005c-11.215-4.65-19.933-13.834-24-25.273L283.741,50h-55.484l-10.662,29.981c-4.065,11.431-12.794,20.627-24.001,25.274c-0.005,0.002-0.009,0.004-0.014,0.005c-11.235,4.66-23.919,4.333-34.905-0.889l-28.723-13.653l-39.234,39.234l13.653,28.721c5.219,10.979,5.545,23.681,0.889,34.91c-0.002,0.004-0.004,0.009-0.006,0.013c-4.649,11.214-13.834,19.931-25.271,23.998L50,228.257v55.485l29.98,10.661c11.431,4.065,20.627,12.794,25.274,24c0.002,0.005,0.003,0.01,0.005,0.014c4.66,11.236,4.334,23.921-0.888,34.906l-13.654,28.723l39.234,39.234l28.721-13.652c10.979-5.219,23.681-5.546,34.909-0.889c0.005,0.002,0.01,0.004,0.014,0.006c11.214,4.649,19.93,13.833,23.998,25.271L228.257,462h55.484l10.595-29.79c4.103-11.538,12.908-20.824,24.216-25.525c0.005-0.002,0.009-0.004,0.014-0.006c11.127-4.628,23.694-4.311,34.578,0.863l28.902,13.738l39.234-39.234l-13.66-28.737c-5.214-10.969-5.539-23.659-0.886-34.877c0.002-0.005,0.004-0.009,0.006-0.014c4.654-11.225,13.848-19.949,25.297-24.021L462,283.742z M256,331.546c-41.724,0-75.548-33.823-75.548-75.546s33.824-75.547,75.548-75.547c41.723,0,75.546,33.824,75.546,75.547S297.723,331.546,256,331.546z"
+                            <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="3" />
+
+                            <GroupBox Header="Buttons" Grid.Column="4">
+                                <StackPanel>
+                                    <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5"/>
+                                    <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,5"/>
+
+                                    <aronium:OnOffButton IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5"/>
+                                    <aronium:OnOffButton Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+
+                                    <Label Content="Button group" />
+
+                                    <aronium:ButtonGroup HorizontalAlignment="Left">
+                                        <Button Content="Group button 1" />
+                                        <Button Content="Group button 2"/>
+                                        <Button Content="Group button 3"/>
+                                    </aronium:ButtonGroup>
+
+                                    <aronium:DropDownButton Content="Drop Down Button" Margin="0,10" Width="150">
+                                        <aronium:DropDownButton.DropDown>
+                                            <ContextMenu>
+                                                <MenuItem Header="Drop down menu 1" IsCheckable="True" IsChecked="True">
+                                                    <MenuItem.Icon>
+                                                        <Path Data="M462,283.742v-55.485l-29.981-10.662c-11.431-4.065-20.628-12.794-25.274-24.001c-0.002-0.004-0.004-0.009-0.006-0.013c-4.659-11.235-4.333-23.918,0.889-34.903l13.653-28.724l-39.234-39.234l-28.72,13.652c-10.979,5.219-23.68,5.546-34.908,0.889c-0.005-0.002-0.01-0.003-0.014-0.005c-11.215-4.65-19.933-13.834-24-25.273L283.741,50h-55.484l-10.662,29.981c-4.065,11.431-12.794,20.627-24.001,25.274c-0.005,0.002-0.009,0.004-0.014,0.005c-11.235,4.66-23.919,4.333-34.905-0.889l-28.723-13.653l-39.234,39.234l13.653,28.721c5.219,10.979,5.545,23.681,0.889,34.91c-0.002,0.004-0.004,0.009-0.006,0.013c-4.649,11.214-13.834,19.931-25.271,23.998L50,228.257v55.485l29.98,10.661c11.431,4.065,20.627,12.794,25.274,24c0.002,0.005,0.003,0.01,0.005,0.014c4.66,11.236,4.334,23.921-0.888,34.906l-13.654,28.723l39.234,39.234l28.721-13.652c10.979-5.219,23.681-5.546,34.909-0.889c0.005,0.002,0.01,0.004,0.014,0.006c11.214,4.649,19.93,13.833,23.998,25.271L228.257,462h55.484l10.595-29.79c4.103-11.538,12.908-20.824,24.216-25.525c0.005-0.002,0.009-0.004,0.014-0.006c11.127-4.628,23.694-4.311,34.578,0.863l28.902,13.738l39.234-39.234l-13.66-28.737c-5.214-10.969-5.539-23.659-0.886-34.877c0.002-0.005,0.004-0.009,0.006-0.014c4.654-11.225,13.848-19.949,25.297-24.021L462,283.742z M256,331.546c-41.724,0-75.548-33.823-75.548-75.546s33.824-75.547,75.548-75.547c41.723,0,75.546,33.824,75.546,75.547S297.723,331.546,256,331.546z"
                                                           Height="12"
                                                           Stretch="Uniform"
                                                           Fill="{DynamicResource Foreground}" />
-                                                </MenuItem.Icon>
-                                            </MenuItem>
-                                            <Separator />
-                                            <MenuItem Command="New" />
-                                            <MenuItem Command="Open" />
-                                            <Separator />
-                                            <MenuItem Header="Drop down menu 2" IsEnabled="False" />
-                                            <MenuItem IsChecked="True" Header="Drop down menu 3" />
-                                            <MenuItem Header="Drop down menu 4" />
-                                            <Separator />
-                                            <MenuItem Header="Drop down menu 5">
-                                                <MenuItem Header="Submenu 1" />
-                                                <MenuItem Header="Submenu 2" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
                                                 <Separator />
-                                                <MenuItem Header="Submenu 3" />
-                                            </MenuItem>
-                                        </ContextMenu>
-                                    </aronium:DropDownButton.DropDown>
-                                </aronium:DropDownButton>
-                                <aronium:SplitButton Name="splitButton1" Content="Drop Down Button" Margin="0,10" Width="150">
-                                    <aronium:SplitButton.DropDown>
-                                        <ContextMenu>
-                                            <MenuItem Header="Drop down menu 1" IsCheckable="True" />
-                                            <MenuItem Header="Drop down menu 2" />
-                                            <MenuItem Header="Drop down menu 3" />
-                                            <MenuItem Header="Drop down menu 4" />
-                                            <Separator />
-                                            <MenuItem Header="Drop down menu 5" />
-                                        </ContextMenu>
-                                    </aronium:SplitButton.DropDown>
-                                </aronium:SplitButton>
+                                                <MenuItem Command="New" />
+                                                <MenuItem Command="Open" />
+                                                <Separator />
+                                                <MenuItem Header="Drop down menu 2" IsEnabled="False" />
+                                                <MenuItem IsChecked="True" Header="Drop down menu 3" />
+                                                <MenuItem Header="Drop down menu 4" />
+                                                <Separator />
+                                                <MenuItem Header="Drop down menu 5">
+                                                    <MenuItem Header="Submenu 1" />
+                                                    <MenuItem Header="Submenu 2" />
+                                                    <Separator />
+                                                    <MenuItem Header="Submenu 3" />
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </aronium:DropDownButton.DropDown>
+                                    </aronium:DropDownButton>
+                                    <aronium:SplitButton Name="splitButton1" Content="Drop Down Button" Margin="0,10" Width="150">
+                                        <aronium:SplitButton.DropDown>
+                                            <ContextMenu>
+                                                <MenuItem Header="Drop down menu 1" IsCheckable="True" />
+                                                <MenuItem Header="Drop down menu 2" />
+                                                <MenuItem Header="Drop down menu 3" />
+                                                <MenuItem Header="Drop down menu 4" />
+                                                <Separator />
+                                                <MenuItem Header="Drop down menu 5" />
+                                            </ContextMenu>
+                                        </aronium:SplitButton.DropDown>
+                                    </aronium:SplitButton>
 
-                            </StackPanel>
-                        </GroupBox>
+                                </StackPanel>
+                            </GroupBox>
 
-                        <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="5" />
+                            <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="5" />
 
-                        <GroupBox Header="List Box" Grid.Column="6" Padding="0">
+                            <GroupBox Header="List Box" Grid.Column="6" Padding="0">
 
-                            <ListBox BorderThickness="0">
-                                <ListBoxItem Content="List box item 1" />
-                                <ListBoxItem Content="List box item 2" />
-                                <ListBoxItem Content="List box item 3" />
-                                <ListBoxItem Content="List box item 4" />
-                                <ListBoxItem Content="List box item 8" />
-                                <ListBoxItem Content="List box item 7" />
-                                <ListBoxItem Content="List box item 8" />
-                                <ListBoxItem Content="List box item 9" />
-                                <ListBoxItem Content="List box item 10" />
-                            </ListBox>
-                        </GroupBox>
+                                <ListBox BorderThickness="0">
+                                    <ListBoxItem Content="List box item 1" />
+                                    <ListBoxItem Content="List box item 2" />
+                                    <ListBoxItem Content="List box item 3" />
+                                    <ListBoxItem Content="List box item 4" />
+                                    <ListBoxItem Content="List box item 8" />
+                                    <ListBoxItem Content="List box item 7" />
+                                    <ListBoxItem Content="List box item 8" />
+                                    <ListBoxItem Content="List box item 9" />
+                                    <ListBoxItem Content="List box item 10" />
+                                </ListBox>
+                            </GroupBox>
 
-                    </Grid>
+                        </Grid>
 
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Tab item 2 with some long header"></TabItem>
-        </TabControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Tab item 2 with some long header"></TabItem>
+            </TabControl>
+        </Grid>
     </Grid>
 </Window>
