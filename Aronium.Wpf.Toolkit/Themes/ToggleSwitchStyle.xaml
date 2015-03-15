@@ -28,7 +28,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--Slider-->
-                        <Border x:Name="PART_Slider" 
+                        <Border x:Name="Slider" 
                                 VerticalAlignment="Center"
                                 Height="{TemplateBinding SliderHeight}"
                                 Width="{TemplateBinding SliderWidth}"
@@ -54,7 +54,7 @@
                         </Canvas>
 
                         <ContentPresenter Content="{TemplateBinding Content}"
-                                          x:Name="PART_Content"
+                                          x:Name="ContentSite"
                                           Margin="{TemplateBinding Padding}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -62,14 +62,14 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="PART_Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BackgroundChecked}" />
-                            <Setter TargetName="PART_Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BorderBrushChecked}" />
+                            <Setter TargetName="Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BackgroundChecked}" />
+                            <Setter TargetName="Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BorderBrushChecked}" />
 
                             <Setter Property="Stroke" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBorderBrushChecked}" TargetName="PART_Thumb" />
                             <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="PART_Content" Value="{DynamicResource ForegroundDisabled}" />
+                            <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
                             <Setter Property="Opacity" Value=".7" />
                         </Trigger>
                     </ControlTemplate.Triggers>

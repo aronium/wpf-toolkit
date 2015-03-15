@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="AccentColor">#03A9F4</Color>
-    
+
     <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
 
     <SolidColorBrush x:Key="BackgroundBrush">#FF313539</SolidColorBrush>
@@ -16,7 +16,7 @@
 
     <SolidColorBrush x:Key="SelectedItemForeground" Color="White" />
     <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />
-    
+
     <!--Group box-->
     <SolidColorBrush x:Key="GroupBoxHeaderBackgroundBrush" Color="{StaticResource AccentColor}" />
     <SolidColorBrush x:Key="GroupBoxHeaderForegroundBrush" Color="#FFFFFFFF" />
@@ -25,7 +25,7 @@
     <SolidColorBrush x:Key="ScrollBarMouseDownBrush" Color="#FFECECEC"/>
     <SolidColorBrush x:Key="ScrollbarGlyphBrush" Color="#FF9C9A9A" />
     <SolidColorBrush x:Key="ScrollbarGlyphMouseOver" Color="#FFC7C7C7"/>
-    
+
     <!--On off button-->
     <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FF6D6E70" />
     <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#FF52D468" />

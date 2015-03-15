@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:aronium="http://aronium.com/wpf"
         WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource BackgroundBrush}"
-        Foreground="{DynamicResource Foreground}"
-        FontSize="13"
+        Style="{DynamicResource Window}"
         Title="MainWindow" Height="550" Width="850">
 
     <Grid>
@@ -13,7 +11,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Menu IsMainMenu="True" HorizontalAlignment="Stretch">
             <MenuItem Header="File">
                 <MenuItem Header="Open">
@@ -35,9 +33,9 @@
             <MenuItem Header="View" />
             <MenuItem Header="Help" />
         </Menu>
-        
+
         <Grid Margin="5" Grid.Row="1">
-            
+
             <Grid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Grid item 1" />
@@ -46,7 +44,7 @@
                     <MenuItem Header="Grid item 3" />
                 </ContextMenu>
             </Grid.ContextMenu>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -121,61 +119,110 @@
 
                             <GroupBox Header="Buttons" Grid.Column="4">
                                 <StackPanel>
-                                    <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5"/>
-                                    <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,5"/>
+                                    <WrapPanel Margin="0,10">
+                                        <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5,5,5"/>
+                                        <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center"/>
+                                    </WrapPanel>
 
-                                    <aronium:ToggleSwitch IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5"/>
-                                    <aronium:ToggleSwitch Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                                    <WrapPanel Margin="0,10">
+                                        <aronium:ToggleSwitch IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5,5,5"/>
+                                        <aronium:ToggleSwitch Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                                    </WrapPanel>
 
                                     <Label Content="Button group" />
 
-                                    <aronium:ButtonGroup HorizontalAlignment="Left">
-                                        <Button Content="Group button 1" />
-                                        <Button Content="Group button 2"/>
-                                        <Button Content="Group button 3"/>
+                                    <aronium:ButtonGroup HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Button Content="Group button 1"/>
+                                        <aronium:DropDownButton Content="Drop down">
+                                            <aronium:DropDownButton.DropDown>
+                                                <ContextMenu>
+                                                    <MenuItem Header="One" />
+                                                    <MenuItem Header="Two" />
+                                                    <MenuItem Header="Three" />
+                                                </ContextMenu>
+                                            </aronium:DropDownButton.DropDown>
+                                        </aronium:DropDownButton>
+                                        <Button Content="Group button 3" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                                        <Button Content="Group button 4"/>
                                     </aronium:ButtonGroup>
 
-                                    <aronium:DropDownButton Content="Drop Down Button" Margin="0,10" Width="150">
-                                        <aronium:DropDownButton.DropDown>
-                                            <ContextMenu>
-                                                <MenuItem Header="Drop down menu 1" IsCheckable="True" IsChecked="True">
-                                                    <MenuItem.Icon>
-                                                        <Path Data="M462,283.742v-55.485l-29.981-10.662c-11.431-4.065-20.628-12.794-25.274-24.001c-0.002-0.004-0.004-0.009-0.006-0.013c-4.659-11.235-4.333-23.918,0.889-34.903l13.653-28.724l-39.234-39.234l-28.72,13.652c-10.979,5.219-23.68,5.546-34.908,0.889c-0.005-0.002-0.01-0.003-0.014-0.005c-11.215-4.65-19.933-13.834-24-25.273L283.741,50h-55.484l-10.662,29.981c-4.065,11.431-12.794,20.627-24.001,25.274c-0.005,0.002-0.009,0.004-0.014,0.005c-11.235,4.66-23.919,4.333-34.905-0.889l-28.723-13.653l-39.234,39.234l13.653,28.721c5.219,10.979,5.545,23.681,0.889,34.91c-0.002,0.004-0.004,0.009-0.006,0.013c-4.649,11.214-13.834,19.931-25.271,23.998L50,228.257v55.485l29.98,10.661c11.431,4.065,20.627,12.794,25.274,24c0.002,0.005,0.003,0.01,0.005,0.014c4.66,11.236,4.334,23.921-0.888,34.906l-13.654,28.723l39.234,39.234l28.721-13.652c10.979-5.219,23.681-5.546,34.909-0.889c0.005,0.002,0.01,0.004,0.014,0.006c11.214,4.649,19.93,13.833,23.998,25.271L228.257,462h55.484l10.595-29.79c4.103-11.538,12.908-20.824,24.216-25.525c0.005-0.002,0.009-0.004,0.014-0.006c11.127-4.628,23.694-4.311,34.578,0.863l28.902,13.738l39.234-39.234l-13.66-28.737c-5.214-10.969-5.539-23.659-0.886-34.877c0.002-0.005,0.004-0.009,0.006-0.014c4.654-11.225,13.848-19.949,25.297-24.021L462,283.742z M256,331.546c-41.724,0-75.548-33.823-75.548-75.546s33.824-75.547,75.548-75.547c41.723,0,75.546,33.824,75.546,75.547S297.723,331.546,256,331.546z"
+                                    <aronium:ButtonGroup HorizontalAlignment="Left" Margin="0,5" Orientation="Vertical">
+                                        <Button Width="30">
+                                            <Path Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                                                  Width="14" 
+                                                  Height="14" 
+                                                  Stretch="Fill" 
+                                                  Data="M331,331H181V181h150V331z M188.841,366H146v-42.842l-54.132,54.131L50,335.477V462h126.525
+                                                        l-41.815-41.869L188.841,366z M91.869,134.71L50,176.525V50h126.525l-41.814,41.868L188.843,146H146v42.841L91.869,134.71z
+                                                        M462,50.001v126.524l-41.868-41.814L366,188.843V146h-42.841l54.131-54.13l-41.815-41.869H462z M420.131,377.291L462,335.475V462
+                                                        H335.476l41.813-41.867L323.158,366H366v-42.84L420.131,377.291z" />
+                                        </Button>
+                                        <Button Width="30">
+                                            <Path Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                                                  Width="14" 
+                                                  Height="14" 
+                                                  Stretch="Fill" 
+                                                  Data="M460.475,408.443L351.4,299.37c15.95-25.137,25.2-54.923,25.2-86.833
+                                                        C376.601,122.914,303.687,50,214.062,50c-89.623,0-162.537,72.914-162.537,162.537s72.914,162.537,162.537,162.537
+                                                        c30.326,0,58.733-8.356,83.055-22.876L406.918,462L460.475,408.443z M96.315,212.538c0-64.927,52.819-117.748,117.746-117.748
+                                                        c64.926,0,117.748,52.821,117.748,117.748c0,64.926-52.822,117.747-117.748,117.747C149.135,330.285,96.315,277.464,96.315,212.538z
+                                                        M282.276,231.882h-47.729v47.729h-36.859v-47.729h-47.73v-36.86h47.73v-47.729h36.859v47.729h47.729V231.882z" />
+                                        </Button>
+                                        <Button Width="30">
+                                            <Path Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                                                  Width="14" 
+                                                  Height="14" 
+                                                  Stretch="Fill" 
+                                                  Data="M460.475,408.443L351.4,299.37c15.95-25.137,25.2-54.923,25.2-86.833
+                                                        C376.601,122.914,303.687,50,214.062,50c-89.623,0-162.537,72.914-162.537,162.537s72.914,162.537,162.537,162.537
+                                                        c30.325,0,58.732-8.356,83.055-22.876L406.918,462L460.475,408.443z M96.315,212.538c0-64.927,52.819-117.748,117.746-117.748
+                                                        c64.926,0,117.748,52.821,117.748,117.748c0,64.926-52.822,117.747-117.748,117.747C149.135,330.285,96.315,277.464,96.315,212.538z
+                                                        M282.276,231.882H149.957v-36.86h132.319V231.882z" />
+                                        </Button>
+                                    </aronium:ButtonGroup>
+
+                                    <WrapPanel Margin="0,10">
+                                        <aronium:DropDownButton Content="Drop Down Button" Margin="0,10, 10, 10" Width="150">
+                                            <aronium:DropDownButton.DropDown>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Drop down menu 1" IsCheckable="True" IsChecked="True">
+                                                        <MenuItem.Icon>
+                                                            <Path Data="M462,283.742v-55.485l-29.981-10.662c-11.431-4.065-20.628-12.794-25.274-24.001c-0.002-0.004-0.004-0.009-0.006-0.013c-4.659-11.235-4.333-23.918,0.889-34.903l13.653-28.724l-39.234-39.234l-28.72,13.652c-10.979,5.219-23.68,5.546-34.908,0.889c-0.005-0.002-0.01-0.003-0.014-0.005c-11.215-4.65-19.933-13.834-24-25.273L283.741,50h-55.484l-10.662,29.981c-4.065,11.431-12.794,20.627-24.001,25.274c-0.005,0.002-0.009,0.004-0.014,0.005c-11.235,4.66-23.919,4.333-34.905-0.889l-28.723-13.653l-39.234,39.234l13.653,28.721c5.219,10.979,5.545,23.681,0.889,34.91c-0.002,0.004-0.004,0.009-0.006,0.013c-4.649,11.214-13.834,19.931-25.271,23.998L50,228.257v55.485l29.98,10.661c11.431,4.065,20.627,12.794,25.274,24c0.002,0.005,0.003,0.01,0.005,0.014c4.66,11.236,4.334,23.921-0.888,34.906l-13.654,28.723l39.234,39.234l28.721-13.652c10.979-5.219,23.681-5.546,34.909-0.889c0.005,0.002,0.01,0.004,0.014,0.006c11.214,4.649,19.93,13.833,23.998,25.271L228.257,462h55.484l10.595-29.79c4.103-11.538,12.908-20.824,24.216-25.525c0.005-0.002,0.009-0.004,0.014-0.006c11.127-4.628,23.694-4.311,34.578,0.863l28.902,13.738l39.234-39.234l-13.66-28.737c-5.214-10.969-5.539-23.659-0.886-34.877c0.002-0.005,0.004-0.009,0.006-0.014c4.654-11.225,13.848-19.949,25.297-24.021L462,283.742z M256,331.546c-41.724,0-75.548-33.823-75.548-75.546s33.824-75.547,75.548-75.547c41.723,0,75.546,33.824,75.546,75.547S297.723,331.546,256,331.546z"
                                                           Height="12"
                                                           Stretch="Uniform"
                                                           Fill="{DynamicResource Foreground}" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                                <Separator />
-                                                <MenuItem Command="New" />
-                                                <MenuItem Command="Open" />
-                                                <Separator />
-                                                <MenuItem Header="Drop down menu 2" IsEnabled="False" />
-                                                <MenuItem IsChecked="True" Header="Drop down menu 3" />
-                                                <MenuItem Header="Drop down menu 4" />
-                                                <Separator />
-                                                <MenuItem Header="Drop down menu 5">
-                                                    <MenuItem Header="Submenu 1" />
-                                                    <MenuItem Header="Submenu 2" />
+                                                        </MenuItem.Icon>
+                                                    </MenuItem>
                                                     <Separator />
-                                                    <MenuItem Header="Submenu 3" />
-                                                </MenuItem>
-                                            </ContextMenu>
-                                        </aronium:DropDownButton.DropDown>
-                                    </aronium:DropDownButton>
-                                    <aronium:SplitButton Name="splitButton1" Content="Drop Down Button" Margin="0,10" Width="150">
-                                        <aronium:SplitButton.DropDown>
-                                            <ContextMenu>
-                                                <MenuItem Header="Drop down menu 1" IsCheckable="True" />
-                                                <MenuItem Header="Drop down menu 2" />
-                                                <MenuItem Header="Drop down menu 3" />
-                                                <MenuItem Header="Drop down menu 4" />
-                                                <Separator />
-                                                <MenuItem Header="Drop down menu 5" />
-                                            </ContextMenu>
-                                        </aronium:SplitButton.DropDown>
-                                    </aronium:SplitButton>
-
+                                                    <MenuItem Command="New" />
+                                                    <MenuItem Command="Open" />
+                                                    <Separator />
+                                                    <MenuItem Header="Drop down menu 2" IsEnabled="False" />
+                                                    <MenuItem IsChecked="True" Header="Drop down menu 3" />
+                                                    <MenuItem Header="Drop down menu 4" />
+                                                    <Separator />
+                                                    <MenuItem Header="Drop down menu 5">
+                                                        <MenuItem Header="Submenu 1" />
+                                                        <MenuItem Header="Submenu 2" />
+                                                        <Separator />
+                                                        <MenuItem Header="Submenu 3" />
+                                                    </MenuItem>
+                                                </ContextMenu>
+                                            </aronium:DropDownButton.DropDown>
+                                        </aronium:DropDownButton>
+                                        <aronium:SplitButton Name="splitButton1" Content="Drop Down Button" Width="150">
+                                            <aronium:SplitButton.DropDown>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Drop down menu 1" IsCheckable="True" />
+                                                    <MenuItem Header="Drop down menu 2" />
+                                                    <MenuItem Header="Drop down menu 3" />
+                                                    <MenuItem Header="Drop down menu 4" />
+                                                    <Separator />
+                                                    <MenuItem Header="Drop down menu 5" />
+                                                </ContextMenu>
+                                            </aronium:SplitButton.DropDown>
+                                        </aronium:SplitButton>
+                                    </WrapPanel>
                                 </StackPanel>
                             </GroupBox>
 
