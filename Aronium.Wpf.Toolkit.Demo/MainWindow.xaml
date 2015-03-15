@@ -82,6 +82,7 @@
                                     <PasswordBox />
                                     <aronium:NumericUpDown Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
                                     <aronium:NumericUpDown DecimalPlaces="2" Increment=".5" Margin="0,5"/>
+                                    <aronium:NumericUpDown Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
                                 </StackPanel>
                             </GroupBox>
 
