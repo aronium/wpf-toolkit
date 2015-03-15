@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:aronium="http://aronium.com/wpf"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Style="{DynamicResource Window}"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
         Title="MainWindow" Height="550" Width="850">
@@ -89,7 +90,7 @@
 
                             <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="1" />
 
-                            <GroupBox Header="Combo Box" Grid.Column="2">
+                            <GroupBox Header="Combo Box" Grid.Column="2" SnapsToDevicePixels="True">
                                 <StackPanel>
                                     <ComboBox Margin="0,5">
                                         <ComboBoxItem Content="Item 1" />

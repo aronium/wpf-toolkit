@@ -91,7 +91,8 @@
 
                         </Border>
                         <ContentPresenter Name="ContentSite" 
-                                          IsHitTestVisible="False"  
+                                          IsHitTestVisible="False" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           Content="{TemplateBinding SelectionBoxItem}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
@@ -112,25 +113,21 @@
                                  IsReadOnly="{TemplateBinding IsReadOnly}"/>
                         
                         <Popup VerticalOffset="-1" 
-                                   SnapsToDevicePixels="True" 
-                                   Name="Popup" 
-                                   Placement="Bottom" 
-                                   IsOpen="{TemplateBinding IsDropDownOpen}" 
-                                   AllowsTransparency="True"  
-                                   Focusable="False"
-                                   PopupAnimation="Slide">
-                            <!-- Margin on Popup is required for shadow to be visible, if any -->
-                            <Grid Name="DropDown" 
-                                      SnapsToDevicePixels="True" 
-                                      MinWidth="{TemplateBinding ActualWidth}" 
-                                      MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                      Margin="0,0,5,5">
+                               Name="Popup" 
+                               Placement="Bottom" 
+                               IsOpen="{TemplateBinding IsDropDownOpen}" 
+                               AllowsTransparency="True"  
+                               Focusable="False"
+                               PopupAnimation="Slide">
+                            <Grid Name="DropDown"
+                                  MinWidth="{TemplateBinding ActualWidth}" 
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 <Border x:Name="DropDownBorder"
-                                            Background="{DynamicResource BackgroundBrush}" 
-                                            BorderThickness="1" 
-                                            BorderBrush="{DynamicResource Accent}" />
-                                <ScrollViewer Margin="1" SnapsToDevicePixels="True">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        Background="{DynamicResource BackgroundBrush}" 
+                                        BorderThickness="1" 
+                                        BorderBrush="{DynamicResource Accent}" />
+                                <ScrollViewer>
+                                    <StackPanel IsItemsHost="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
