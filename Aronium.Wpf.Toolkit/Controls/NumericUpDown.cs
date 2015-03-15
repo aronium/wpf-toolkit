@@ -81,7 +81,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
         {
-            //base.OnMouseWheel(e);
+            base.OnMouseWheel(e);
 
             if (e.Delta > 0)
             {
