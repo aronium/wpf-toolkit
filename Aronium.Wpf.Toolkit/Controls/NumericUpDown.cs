@@ -148,11 +148,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             this.Text = value.ToString(stringFormat);
 
-            if (!IsFocused)
-            {
-                this.Focus();
-            }
-
             this.Select(this.Text.Length, 0);
 
             this.changingText = false;
@@ -161,6 +156,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         private void Up()
         {
             if (!this.IsEnabled || this.IsReadOnly) return;
+
+            if (!IsFocused)
+            {
+                this.Focus();
+            }
 
             if (decimal.TryParse(this.Text, out decimalValueParsed))
             {
@@ -174,6 +174,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         private void Down()
         {
             if (!this.IsEnabled || this.IsReadOnly) return;
+
+            if (!IsFocused)
+            {
+                this.Focus();
+            }
 
             if (decimal.TryParse(this.Text, out decimalValueParsed))
             {

@@ -4,6 +4,7 @@
         xmlns:aronium="http://aronium.com/wpf"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource Window}"
+        FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
         Title="MainWindow" Height="550" Width="850">
 
     <Grid>
@@ -52,7 +53,7 @@
 
             <DockPanel Margin="0,0,0,10" >
                 <TextBlock Text="Tab placement" VerticalAlignment="Center" Margin="0,0,5,0" />
-                <ComboBox ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
+                <ComboBox Name="cbTabPlacement" ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
                 <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
                 <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
             </DockPanel>
@@ -81,6 +82,8 @@
                                     <aronium:NumericUpDown Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
                                     <aronium:NumericUpDown DecimalPlaces="2" Increment=".5" Margin="0,5"/>
                                     <aronium:NumericUpDown Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
+
+                                    <TextBlock Text="Text Title" Style="{DynamicResource Title}" />
                                 </StackPanel>
                             </GroupBox>
 

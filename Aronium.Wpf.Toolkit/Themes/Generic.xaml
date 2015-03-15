@@ -18,6 +18,7 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ToolTipStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextSeparatorStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/Typography.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/WindowStyle.xaml"/>
 
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ToggleSwitchStyle.xaml"/>
