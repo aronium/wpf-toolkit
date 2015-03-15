@@ -1,0 +1,147 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
+
+    <Geometry x:Key="ArrowDown">M0,0 L1,0 0.5,1Z</Geometry>
+    <Geometry x:Key="ArrowUp">M0,1 L1,1 0.5,0Z</Geometry>
+
+    <Style x:Key="EmptyArrowRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <ContentPresenter Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      RecognizesAccessKey="True"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.8" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type local:NumericUpDown}">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="0.55" Storyboard.TargetProperty="Opacity"
+                                                Storyboard.TargetName="DisabledVisualElement" />
+                                        <DoubleAnimation Duration="0" To="0.5"
+                                                Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                Storyboard.TargetName="PART_ContentHost" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="ReadOnly">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="0.55" Storyboard.TargetProperty="Opacity"
+                                                Storyboard.TargetName="ReadOnlyVisualElement" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.15"
+                                                        Storyboard.TargetName="Bd"
+                                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                                        To="{DynamicResource AccentColor}" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ValidationStates">
+                                <VisualState x:Name="Valid" />
+                                <VisualState x:Name="InvalidUnfocused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                Storyboard.TargetName="ValidationErrorElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Name="Bd"
+                                SnapsToDevicePixels="True"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border x:Name="ReadOnlyVisualElement" Background="{DynamicResource ReadOnlyBrush}" CornerRadius="2" Opacity="0" Grid.ColumnSpan="2"/>
+                                <ScrollViewer x:Name="PART_ContentHost" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              BorderThickness="0" 
+                                              IsTabStop="False" 
+                                              Margin="1"
+                                              VerticalScrollBarVisibility="Disabled"
+                                              Padding="{TemplateBinding Padding}" 
+                                              Foreground="{TemplateBinding Foreground}" />
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0">
+                                    <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}" Margin="0" x:Name="PART_Up" IsTabStop="False" Focusable="False">
+                                        <Path Fill="{DynamicResource Foreground}" 
+                                              Data="{StaticResource ArrowUp}"
+                                              Height="5"
+                                              Width="7"
+                                              Stretch="Fill"/>
+                                    </RepeatButton>
+
+                                    <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}" Margin="0" x:Name="PART_Down" IsTabStop="False" Focusable="False">
+                                        <Path Fill="{DynamicResource Foreground}" 
+                                              Data="{StaticResource ArrowDown}"
+                                              Height="5"
+                                              Width="7"
+                                              Stretch="Fill"/>
+                                    </RepeatButton>
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+
+                        <Border x:Name="DisabledVisualElement" Background="{DynamicResource BackgroundDisabledBrush}"
+                                IsHitTestVisible="False" Margin="1" Opacity="0" CornerRadius="0" />
+                        <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="1"
+                                IsHitTestVisible="False" Margin="0" CornerRadius="0" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="IsEnabled" Value="False" TargetName="PART_Down" />
+                            <Setter Property="IsEnabled" Value="False" TargetName="PART_Up" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>                    

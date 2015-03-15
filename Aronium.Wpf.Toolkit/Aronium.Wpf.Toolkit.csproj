@@ -51,7 +51,8 @@
     <Compile Include="Controls\ButtonGroup.cs" />
     <Compile Include="Controls\ClosableTabControl.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
-    <Compile Include="Controls\OnOffButton.cs" />
+    <Compile Include="Controls\NumericUpDown.cs" />
+    <Compile Include="Controls\ToggleSwitch.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\TextSeparator.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
@@ -128,7 +129,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\OnOffButtonStyle.xaml">
+    <Page Include="Themes\NumericUpDownStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ToggleSwitchStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

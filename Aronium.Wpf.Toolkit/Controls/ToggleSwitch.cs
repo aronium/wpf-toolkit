@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
-    public class OnOffButton : ToggleButton
+    public class ToggleSwitch : ToggleButton
     {
         #region - Fields -
         private Ellipse slider;
@@ -23,31 +23,31 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         public static DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", 
             typeof(CornerRadius), 
-            typeof(OnOffButton),
+            typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(new CornerRadius(9), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
         
-        public static DependencyProperty BackgroundCheckedProperty = DependencyProperty.Register("BackgroundChecked", typeof(Brush), typeof(OnOffButton));
+        public static DependencyProperty BackgroundCheckedProperty = DependencyProperty.Register("BackgroundChecked", typeof(Brush), typeof(ToggleSwitch));
                 
-        public static DependencyProperty BorderBrushCheckedProperty = DependencyProperty.Register("BorderBrushChecked", typeof(Brush), typeof(OnOffButton));
+        public static DependencyProperty BorderBrushCheckedProperty = DependencyProperty.Register("BorderBrushChecked", typeof(Brush), typeof(ToggleSwitch));
         
-        public static DependencyProperty SliderWidthProperty = DependencyProperty.Register("SliderWidth", typeof(double), typeof(OnOffButton),
+        public static DependencyProperty SliderWidthProperty = DependencyProperty.Register("SliderWidth", typeof(double), typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(34.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 new PropertyChangedCallback(OnSliderWidthChanged)));
 
-        public static DependencyProperty SliderHeightProperty = DependencyProperty.Register("SliderHeight", typeof(double), typeof(OnOffButton),
+        public static DependencyProperty SliderHeightProperty = DependencyProperty.Register("SliderHeight", typeof(double), typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(20.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public static DependencyProperty ThumbSizeProperty = DependencyProperty.Register("ThumbSize", typeof(double), typeof(OnOffButton),
+        public static DependencyProperty ThumbSizeProperty = DependencyProperty.Register("ThumbSize", typeof(double), typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(18.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         
-        public static DependencyProperty ThumbBackgroundProperty = DependencyProperty.Register("ThumbBackground", typeof(Brush), typeof(OnOffButton));
+        public static DependencyProperty ThumbBackgroundProperty = DependencyProperty.Register("ThumbBackground", typeof(Brush), typeof(ToggleSwitch));
        
-        public static DependencyProperty ThumbBackgroundCheckedProperty = DependencyProperty.Register("ThumbBackgroundChecked", typeof(Brush), typeof(OnOffButton));
+        public static DependencyProperty ThumbBackgroundCheckedProperty = DependencyProperty.Register("ThumbBackgroundChecked", typeof(Brush), typeof(ToggleSwitch));
         
-        public static DependencyProperty SliderPaddingProperty = DependencyProperty.Register("SliderPadding", typeof(Thickness), typeof(OnOffButton));
+        public static DependencyProperty SliderPaddingProperty = DependencyProperty.Register("SliderPadding", typeof(Thickness), typeof(ToggleSwitch));
 
         #endregion
 
@@ -56,7 +56,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Initializes new instance of OnOffButton class.
         /// </summary>
-        public OnOffButton()
+        public ToggleSwitch()
         {
             this.Checked += new RoutedEventHandler(OnChecked);
             this.Unchecked += new RoutedEventHandler(OnUnchecked);
@@ -119,7 +119,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private static void OnSliderWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((OnOffButton)d).UpdateSliderWidth();
+            ((ToggleSwitch)d).UpdateSliderWidth();
         }
 
         private void UpdateSliderWidth()

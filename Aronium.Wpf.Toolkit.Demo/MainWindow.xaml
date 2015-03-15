@@ -80,6 +80,8 @@
                                     <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
                                     <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
                                     <PasswordBox />
+                                    <aronium:NumericUpDown Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <aronium:NumericUpDown DecimalPlaces="2" Increment=".5" Margin="0,5"/>
                                 </StackPanel>
                             </GroupBox>
 
@@ -121,8 +123,8 @@
                                     <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5"/>
                                     <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,5"/>
 
-                                    <aronium:OnOffButton IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5"/>
-                                    <aronium:OnOffButton Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                                    <aronium:ToggleSwitch IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5"/>
+                                    <aronium:ToggleSwitch Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
 
                                     <Label Content="Button group" />
 

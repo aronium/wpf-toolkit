@@ -2,7 +2,7 @@
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="{x:Type local:OnOffButton}">
+    <Style TargetType="{x:Type local:ToggleSwitch}">
         <Setter Property="CornerRadius" Value="9" />
         <Setter Property="IsThreeState" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -20,7 +20,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:OnOffButton}">
+                <ControlTemplate TargetType="{x:Type local:ToggleSwitch}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -62,11 +62,11 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="PART_Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=BackgroundChecked}" />
-                            <Setter TargetName="PART_Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=BorderBrushChecked}" />
+                            <Setter TargetName="PART_Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BackgroundChecked}" />
+                            <Setter TargetName="PART_Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BorderBrushChecked}" />
 
-                            <Setter Property="Stroke" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=ThumbBorderBrushChecked}" TargetName="PART_Thumb" />
-                            <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:OnOffButton}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
+                            <Setter Property="Stroke" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBorderBrushChecked}" TargetName="PART_Thumb" />
+                            <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="PART_Content" Value="{DynamicResource ForegroundDisabled}" />
