@@ -51,14 +51,23 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <DockPanel Margin="0,0,0,10" >
-                <TextBlock Text="Tab placement" VerticalAlignment="Center" Margin="0,0,5,0" />
-                <ComboBox Name="cbTabPlacement" ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
-                <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
-                <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
-            </DockPanel>
+            <Grid Margin="0,0,0,10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel>
+                    <TextBlock Text="Tab placement" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <ComboBox Name="cbTabPlacement" ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
+                    <CheckBox IsChecked="{Binding ShowTabControlBorder}" Margin="5,0,0,0" Content="Show border" />
+                </DockPanel>
+                <DockPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
+                    <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
+                </DockPanel>
+            </Grid>
 
-            <TabControl Grid.Row="1" Name="tabControl">
+            <TabControl Grid.Row="1" Name="tabControl" BorderBrush="{DynamicResource Accent}">
                 <TabItem Header="Tab item 1">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
@@ -79,9 +88,9 @@
                                     <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
                                     <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
                                     <PasswordBox />
-                                    <aronium:NumericUpDown Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <aronium:NumericUpDown DecimalPlaces="2" Increment=".5" Margin="0,5"/>
-                                    <aronium:NumericUpDown Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
+                                    <aronium:NumericUpDown Width="50" HorizontalAlignment="Left" Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <aronium:NumericUpDown Width="50" HorizontalAlignment="Left" DecimalPlaces="2" Increment=".5" Margin="0,5"/>
+                                    <aronium:NumericUpDown Width="50" HorizontalAlignment="Left" Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
                                     <aronium:WatermarkTextBox Margin="0,5" Watermark="Watermarked TextBox" />
                                     <TextBlock Text="Title" Style="{DynamicResource Title}" />
                                 </StackPanel>
@@ -99,8 +108,6 @@
                                         <ComboBoxItem Content="Item 5" />
                                     </ComboBox>
 
-                                    <TextBlock Text="Textblock1" />
-
                                     <ComboBox IsEditable="True" Margin="0,5" Width="180" HorizontalAlignment="Left">
                                         <ComboBoxItem Content="Editable Item 1" />
                                         <ComboBoxItem Content="Editable Item 2" />
@@ -109,11 +116,11 @@
                                         <ComboBoxItem Content="Editable Item 5" />
                                     </ComboBox>
 
-                                    <ComboBox IsEnabled="False" Margin="0,5">
+                                    <ComboBox IsEnabled="False" Margin="0,5" Width="180" HorizontalAlignment="Left">
                                         <ComboBoxItem IsSelected="True" Content="Disabled" />
                                     </ComboBox>
 
-                                    <aronium:TextSeparator FontSize="13" Content="Progress Bar" />
+                                    <aronium:TextSeparator FontSize="18" FontFamily="Segoe UI Light" Content="Text separator" />
 
                                     <ProgressBar Value="40" Maximum="100" Margin="0,10" />
 
@@ -135,7 +142,7 @@
                                         <aronium:ToggleSwitch Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
                                     </WrapPanel>
 
-                                    <Label Content="Button group" />
+                                    <Label IsEnabled="False" Content="Button group" />
 
                                     <aronium:ButtonGroup HorizontalAlignment="Left" Orientation="Horizontal">
                                         <Button Content="Group button 1"/>
@@ -253,13 +260,19 @@
 
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Tab item 2 with some long header" IsSelected="True">
+                <TabItem Header="Tab item 2 with some long header">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Grid Width="300" Height="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <!--GridSplitter demo-->
+                        <Grid Width="120" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
@@ -297,27 +310,32 @@
                             </Grid.Resources>
 
                             <Border BorderThickness="1" SnapsToDevicePixels="True" BorderBrush="{StaticResource DottedBrush}">
-                                <TextBlock/>
+                                <TextBlock Text="1"/>
                             </Border>
                             <GridSplitter Grid.Row="0" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
                             <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"/>
                             <Border BorderThickness="1" SnapsToDevicePixels="True" BorderBrush="{StaticResource DottedBrush}" Grid.Row="2">
-                                <TextBlock/>
+                                <TextBlock Text="3"/>
                             </Border>
 
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
-                                <TextBlock/>
+                                <TextBlock Text="2"/>
                             </Border>
                             <GridSplitter Grid.Row="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Row="2" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
-                                <TextBlock/>
+                                <TextBlock Text="4"/>
                             </Border>
 
                         </Grid>
+                        
                         <WrapPanel Grid.Column="1" Margin="5">
                             <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
                             <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
                             <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
+
+                            <RadioButton Content="CheckBox" IsChecked="True" Margin="5"/>
+                            <RadioButton Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                            <RadioButton Content="CheckBox" IsEnabled="False" Margin="5"/>
                         </WrapPanel>
                     </Grid>
                 </TabItem>

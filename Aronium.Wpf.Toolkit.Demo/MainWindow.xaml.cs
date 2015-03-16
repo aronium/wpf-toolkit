@@ -25,6 +25,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         private int _integerProperty;
         private string _themeName = "Dark";
         private List<string> _themes;
+        private bool _showTabControlBorder;
 
         public MainWindow()
         {
@@ -109,6 +110,20 @@ namespace Aronium.Wpf.Toolkit.Demo
             get
             {
                 return Enum.GetValues(typeof(Dock)).Cast<Dock>();
+            }
+        }
+
+        public bool ShowTabControlBorder
+        {
+            get { return _showTabControlBorder; }
+            set
+            {
+                _showTabControlBorder = value;
+
+                tabControl.BorderThickness = new Thickness(value ? 1 : 0);
+                tabControl.Padding = new Thickness(value ? 5 : 0);
+
+                OnPropertyChanged("ShowTabControlBorder");
             }
         }
     }

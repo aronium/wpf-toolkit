@@ -90,15 +90,6 @@
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                                         </Grid>
                                     </Border>
-                                    <!--Border for open submenus on top level items-->
-                                    <!--<Border Margin="1,0,0,0" 
-                                            x:Name="TransitionBorder" 
-                                            Width="0" 
-                                            Height="2" 
-                                            VerticalAlignment="Top" 
-                                            HorizontalAlignment="Left" 
-                                            Background="{DynamicResource SubmenuItemBackgroundColor}" SnapsToDevicePixels="False"
-                                            BorderThickness="1" BorderBrush="{DynamicResource BorderBrush}"/>-->
                                 </Grid>
                             </Popup>
                         </Grid>
@@ -201,7 +192,7 @@
 
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
         <Setter Property="Height" Value="1"/>
-        <Setter Property="Margin" Value="28,2,0,2" />
+        <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Template">
             <Setter.Value>
