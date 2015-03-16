@@ -5,6 +5,7 @@
     <!--Tab item template-->
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -99,7 +100,9 @@
                           KeyboardNavigation.TabIndex="1"
                           Background="Transparent" />
                 <Border BorderBrush="{DynamicResource Accent}" BorderThickness="0,2,0,0" Padding="0,6,0,0" Grid.Row="1">
-                    <ContentPresenter x:Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}" ContentSource="SelectedContent" />
+                    <ContentPresenter x:Name="PART_SelectedContentHost" 
+                                      Margin="{TemplateBinding Padding}" 
+                                      ContentSource="SelectedContent" />
                 </Border>
             </Grid>
         </Border>
@@ -180,7 +183,6 @@
                 <!--Border used for bottom margin so arrow do not overlap content-->
                 <Border Padding="0,0,0,6" BorderBrush="{DynamicResource Accent}" BorderThickness="0,0,0,2" >
                     <ContentPresenter x:Name="PART_SelectedContentHost" 
-                                      
                                       Margin="{TemplateBinding Padding}"
                                       ContentSource="SelectedContent" />
                 </Border>

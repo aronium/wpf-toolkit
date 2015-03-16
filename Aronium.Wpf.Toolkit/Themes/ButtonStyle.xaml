@@ -48,6 +48,15 @@
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}" />
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource DefaultButtonStyle}" />
-    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource DefaultButtonStyle}" />
+    
+    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>
