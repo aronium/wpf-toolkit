@@ -253,7 +253,7 @@
 
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Tab item 2 with some long header">
+                <TabItem Header="Tab item 2 with some long header" IsSelected="True">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -314,7 +314,11 @@
                             </Border>
 
                         </Grid>
-                        <TextBlock Text="Text Block" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <WrapPanel Grid.Column="1" Margin="5">
+                            <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
+                            <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                            <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
+                        </WrapPanel>
                     </Grid>
                 </TabItem>
             </TabControl>
