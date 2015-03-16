@@ -34,6 +34,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter Margin="{TemplateBinding Padding}" 
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              TextElement.Foreground="{DynamicResource Foreground}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </Grid>

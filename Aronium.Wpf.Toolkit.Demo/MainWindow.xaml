@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:aronium="http://aronium.com/wpf"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
         Style="{DynamicResource Window}"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
         Title="MainWindow" Height="550" Width="850">
@@ -57,6 +56,7 @@
                 <ComboBox Name="cbTabPlacement" ToolTip="Change tab control tab strip placement" ItemsSource="{Binding TabPlacementValues}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ElementName=tabControl, Path=TabStripPlacement}" />
                 <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
                 <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
+                <TextBlock Text="Text box" Margin="10,0" />
             </DockPanel>
 
             <TabControl Grid.Row="1" Name="tabControl">
@@ -83,8 +83,8 @@
                                     <aronium:NumericUpDown Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
                                     <aronium:NumericUpDown DecimalPlaces="2" Increment=".5" Margin="0,5"/>
                                     <aronium:NumericUpDown Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
-
-                                    <TextBlock Text="Text Title" Style="{DynamicResource Title}" />
+                                    <aronium:WatermarkTextBox Margin="0,5" Watermark="Watermarked TextBox" />
+                                    <TextBlock Text="Title" Style="{DynamicResource Title}" />
                                 </StackPanel>
                             </GroupBox>
 
@@ -92,7 +92,7 @@
 
                             <GroupBox Header="Combo Box" Grid.Column="2" SnapsToDevicePixels="True">
                                 <StackPanel>
-                                    <ComboBox Margin="0,5">
+                                    <ComboBox Margin="0,5" Width="180" HorizontalAlignment="Left">
                                         <ComboBoxItem Content="Item 1" />
                                         <ComboBoxItem Content="Item 2" />
                                         <ComboBoxItem Content="Item 3" />
@@ -100,7 +100,9 @@
                                         <ComboBoxItem Content="Item 5" />
                                     </ComboBox>
 
-                                    <ComboBox IsEditable="True" Margin="0,5">
+                                    <TextBlock Text="Textblock1" />
+
+                                    <ComboBox IsEditable="True" Margin="0,5" Width="180" HorizontalAlignment="Left">
                                         <ComboBoxItem Content="Editable Item 1" />
                                         <ComboBoxItem Content="Editable Item 2" />
                                         <ComboBoxItem Content="Editable Item 3" />
@@ -251,7 +253,70 @@
 
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Tab item 2 with some long header"></TabItem>
+                <TabItem Header="Tab item 2 with some long header">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Width="300" Height="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.Resources>
+                                <DrawingBrush x:Key="DottedBrush" Viewport="0,0,4,4" ViewportUnits="Absolute" TileMode="Tile">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="{DynamicResource BorderBrush}">
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <RectangleGeometry Rect="0,0,50,50" />
+                                                        <RectangleGeometry Rect="50,50,50,50" />
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Grid Splitter Demo" />
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="TextAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+                                </Style>
+                            </Grid.Resources>
+
+                            <Border BorderThickness="1" SnapsToDevicePixels="True" BorderBrush="{StaticResource DottedBrush}">
+                                <TextBlock/>
+                            </Border>
+                            <GridSplitter Grid.Row="0" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
+                            <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"/>
+                            <Border BorderThickness="1" SnapsToDevicePixels="True" BorderBrush="{StaticResource DottedBrush}" Grid.Row="2">
+                                <TextBlock/>
+                            </Border>
+
+                            <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
+                                <TextBlock/>
+                            </Border>
+                            <GridSplitter Grid.Row="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
+                            <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Row="2" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
+                                <TextBlock/>
+                            </Border>
+
+                        </Grid>
+                        <TextBlock Text="Text block here" Grid.Column="1" />
+                    </Grid>
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>

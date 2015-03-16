@@ -180,6 +180,7 @@
                 <!--Border used for bottom margin so arrow do not overlap content-->
                 <Border Padding="0,0,0,6" BorderBrush="{DynamicResource Accent}" BorderThickness="0,0,0,2" >
                     <ContentPresenter x:Name="PART_SelectedContentHost" 
+                                      
                                       Margin="{TemplateBinding Padding}"
                                       ContentSource="SelectedContent" />
                 </Border>
@@ -197,6 +198,7 @@
 
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>

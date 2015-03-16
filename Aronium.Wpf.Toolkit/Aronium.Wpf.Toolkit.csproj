@@ -55,6 +55,7 @@
     <Compile Include="Controls\ToggleSwitch.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\TextSeparator.cs" />
+    <Compile Include="Controls\WatermarkTextBox.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -170,6 +171,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Typography.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\WatermarkTextBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
