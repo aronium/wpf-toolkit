@@ -338,7 +338,7 @@
                         </WrapPanel>
 
                         <Viewbox Height="300" Grid.Row="1" >
-                            <Calendar HorizontalAlignment="Left" Margin="5"/>
+                            <Calendar HorizontalAlignment="Left" Margin="5" PreviewMouseUp="OnCalendarPreviewMouseDown"/>
                         </Viewbox>
 
                         <StackPanel Grid.Row="1" Grid.Column="1">

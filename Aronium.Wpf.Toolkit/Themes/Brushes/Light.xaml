@@ -12,13 +12,14 @@
     <SolidColorBrush x:Key="BorderDisabledBrush">#FFCCCCCC</SolidColorBrush>
     <Color x:Key="ForegroundColor">#FF444444</Color>
     <SolidColorBrush x:Key="Foreground" Color="{StaticResource ForegroundColor}" />
-    <SolidColorBrush x:Key="ForegroundDisabled">#FFCCCCCC</SolidColorBrush>
+    <Color x:Key="ForegroundDisabledColor">#FFCCCCCC</Color>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="{StaticResource ForegroundDisabledColor}" />
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
-    
-    <Color x:Key="BackgroundHoverColor">#FF444444</Color>
+    <Color x:Key="BackgroundHoverColor">#FFEEEEEE</Color>
     <SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundHoverColor}" />
 
-    <SolidColorBrush x:Key="SelectedItemForeground" Color="White" />
+    <Color x:Key="SelectedItemForegroundColor">#FFFFFFFF</Color>
+    <SolidColorBrush x:Key="SelectedItemForeground" Color="{StaticResource SelectedItemForegroundColor}" />
     <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />
     
     <!--Group box-->

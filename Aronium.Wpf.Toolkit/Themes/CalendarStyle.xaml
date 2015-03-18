@@ -191,6 +191,13 @@
                             </Rectangle.Stroke>
                         </Rectangle>
                     </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="TextElement.Foreground" TargetName="NormalText" Value="{DynamicResource SelectedItemForeground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -216,17 +223,17 @@
                                 <VisualState Name="MouseOver">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="Background"
-                                   Storyboard.TargetProperty="Opacity"
-                                   To=".5"
-                                   Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To=".5"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState Name="Pressed">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="Background"
-                                   Storyboard.TargetProperty="Opacity"
-                                   To=".5"
-                                   Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To=".5"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -238,9 +245,9 @@
                                 <VisualState Name="Selected">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="SelectedBackground"
-                                   Storyboard.TargetProperty="Opacity"
-                                   To=".75"
-                                   Duration="0" />
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To=".75"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -251,11 +258,10 @@
                                 <VisualState Name="Active" />
                                 <VisualState Name="Inactive">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0"
-                                  Storyboard.TargetName="NormalText"
-                                  Storyboard.TargetProperty="(TextElement.Foreground).
-                      (SolidColorBrush.Color)"
-                                  To="#FF777777" />
+                                        <ColorAnimation Duration="0" Storyboard.TargetName="NormalText"
+                                                        Storyboard.TargetProperty="(TextElement.Foreground).
+                                                        (SolidColorBrush.Color)"
+                                                        To="{DynamicResource ForegroundDisabledColor}" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

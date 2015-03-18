@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -124,6 +125,15 @@ namespace Aronium.Wpf.Toolkit.Demo
                 tabControl.Padding = new Thickness(value ? 5 : 0);
 
                 OnPropertyChanged("ShowTabControlBorder");
+            }
+        }
+
+        private void OnCalendarPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseUp(e);
+            if (Mouse.Captured is CalendarItem)
+            {
+                Mouse.Capture(null);
             }
         }
     }
