@@ -57,6 +57,7 @@
     <Compile Include="Controls\TextSeparator.cs" />
     <Compile Include="Controls\WatermarkTextBox.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
+    <Compile Include="Utils\ApplicationUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
