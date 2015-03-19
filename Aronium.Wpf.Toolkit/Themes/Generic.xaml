@@ -17,6 +17,7 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ProgressBarStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/RadioButtonStyle.xaml"/> 
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ScrollBarStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/SeparatorStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/SplitButtonStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TabControlStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TextBoxStyle.xaml"/>
