@@ -7,7 +7,8 @@
     <Color x:Key="BackgroundColor">#FF313539</Color>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="BackgroundDisabledBrush">#FF575757</SolidColorBrush>
-    <SolidColorBrush x:Key="BorderBrush">#FF595E57</SolidColorBrush>
+    <Color x:Key="BorderBrushColor">#FF595E57</Color>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}" />
     <SolidColorBrush x:Key="BorderDisabledBrush">#FF3A3F44</SolidColorBrush>
     <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
     <SolidColorBrush x:Key="Foreground" Color="{StaticResource ForegroundColor}" />
