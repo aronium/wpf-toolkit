@@ -48,7 +48,24 @@
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}" />
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource DefaultButtonStyle}" />
-    
+
+    <!--Flat bordeless button style-->
+    <Style TargetType="{x:Type Button}" x:Key="FlatButtonStyle" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="0.7" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource DefaultButtonStyle}">
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
