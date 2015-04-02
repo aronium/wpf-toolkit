@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:core="clr-namespace:System;assembly=mscorlib">
 
-    <core:Double x:Key="ThumbDefaultSize">6</core:Double>
+    <core:Double x:Key="ThumbDefaultSize">8</core:Double>
     <Thickness x:Key="VerticalDefaultMargin">3,0,0,0</Thickness>
     <Thickness x:Key="HorizontalDefaultMargin">0,3,0,0</Thickness>
     
@@ -78,7 +78,7 @@
     </Style>
 
     <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
+        <Grid Background="Transparent" Margin="0,0,2,0">
             <Grid.RowDefinitions>
                 <!--<RowDefinition MaxHeight="18" Height="Auto"/>-->
                 <RowDefinition Height="0.0001*"/>
@@ -93,6 +93,7 @@
                     <Thumb Style="{StaticResource ScrollBarThumb}" 
                            Name="el" 
                            Margin="{StaticResource VerticalDefaultMargin}" 
+                           Opacity="0.3"
                            Background="{DynamicResource ScrollbarGlyphBrush}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
@@ -103,7 +104,7 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Margin" Value="4,0" TargetName="el" />-->
+                <Setter Property="Opacity" Value="1" TargetName="el" />
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetName="el" Storyboard.TargetProperty="Margin">
@@ -123,7 +124,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
+        <Grid Background="Transparent" Margin="0,0,0,2">
             <Grid.ColumnDefinitions>
                 <!--<ColumnDefinition MaxWidth="18"/>-->
                 <ColumnDefinition Width="0.00001*"/>
@@ -135,7 +136,11 @@
                     <RepeatButton Style="{DynamicResource ScrollBarPageButton}" Command="ScrollBar.PageLeftCommand" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource ScrollBarThumb}" Margin="{StaticResource HorizontalDefaultMargin}" Name="el" Background="{DynamicResource ScrollbarGlyphBrush}" />
+                    <Thumb Style="{StaticResource ScrollBarThumb}" 
+                           Opacity="0.3"
+                           Margin="{StaticResource HorizontalDefaultMargin}" 
+                           Name="el" 
+                           Background="{DynamicResource ScrollbarGlyphBrush}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageRightCommand" />
@@ -151,7 +156,7 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Margin" Value="4,0" TargetName="el" />-->
+                <Setter Property="Opacity" Value="1" TargetName="el" />
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetName="el" Storyboard.TargetProperty="Margin">
@@ -193,27 +198,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Rectangle Grid.Row="1" Grid.Column="1"/>
                         <ScrollContentPresenter Grid.Column="0" Grid.Row="0" Margin="{TemplateBinding Control.Padding}" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}" />
                         <ScrollBar Name="PART_VerticalScrollBar" 
-                                   Grid.Row="0" 
-                                   Grid.Column="1" 
+                                   HorizontalAlignment="Right"
                                    Value="{TemplateBinding VerticalOffset}" 
                                    Maximum="{TemplateBinding ScrollableHeight}" 
                                    ViewportSize="{TemplateBinding ViewportHeight}" 
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
                         <ScrollBar Name="PART_HorizontalScrollBar" 
                                    Orientation="Horizontal" 
-                                   Grid.Row="1" 
-                                   Grid.Column="0" 
+                                   VerticalAlignment="Bottom"
                                    Value="{TemplateBinding HorizontalOffset}" 
                                    Maximum="{TemplateBinding ScrollableWidth}" 
                                    ViewportSize="{TemplateBinding ViewportWidth}" 

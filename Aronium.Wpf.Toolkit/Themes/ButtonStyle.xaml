@@ -7,7 +7,6 @@
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Padding" Value="5,0" />
-        <Setter Property="Height" Value="28" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -21,6 +20,7 @@
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                                           RecognizesAccessKey="True"
                                           TextElement.Foreground="{TemplateBinding Foreground}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
