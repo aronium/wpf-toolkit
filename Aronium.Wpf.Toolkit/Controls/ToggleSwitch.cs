@@ -8,10 +8,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
+using System.Windows.Markup;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
     [TemplatePart(Name = "PART_Thumb", Type = typeof(Ellipse))]
+    [ContentProperty("Content")]
     public class ToggleSwitch : ToggleButton
     {
         #region - Fields -
