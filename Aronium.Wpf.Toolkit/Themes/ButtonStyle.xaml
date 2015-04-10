@@ -10,47 +10,100 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border Background="{TemplateBinding Background}"
+    </Style>
+
+    <ControlTemplate TargetType="{x:Type ButtonBase}" x:Key="StandardButtonTemplate">
+        <Border Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Padding="{TemplateBinding Padding}">
-                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                                           RecognizesAccessKey="True"
                                           TextElement.Foreground="{TemplateBinding Foreground}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource Accent}" />
-                            <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Standard button style-->
+    <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Template" Value="{StaticResource StandardButtonTemplate}" />
     </Style>
 
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}" />
-    <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource DefaultButtonStyle}" />
-
     <!--Flat bordeless button style-->
-    <Style TargetType="{x:Type Button}" x:Key="FlatButtonStyle" BasedOn="{StaticResource DefaultButtonStyle}">
+    <Style TargetType="Button" x:Key="FlatButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="0.7" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--RepeatButton template-->
+    <ControlTemplate TargetType="{x:Type RepeatButton}" x:Key="RepeatButtonTemplate">
+        <Border Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Padding="{TemplateBinding Padding}">
+            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                                RecognizesAccessKey="True"
+                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--RepeatButton style-->
+    <Style TargetType="RepeatButton" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Template" Value="{StaticResource RepeatButtonTemplate}" />
+    </Style>
+
+    <!--Flat bordeless RepeatButton style-->
+    <Style TargetType="RepeatButton" x:Key="FlatRepeatButtonStyle" BasedOn="{StaticResource {x:Type RepeatButton}}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -66,14 +119,46 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource DefaultButtonStyle}">
-        <Style.Triggers>
+    <!--ToggleButton template-->
+    <ControlTemplate TargetType="{x:Type ToggleButton}" x:Key="ToggleButtonTemplate">
+        <Border Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            Padding="{TemplateBinding Padding}">
+            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                                RecognizesAccessKey="True"
+                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
+            </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Accent}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
                 <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
             </Trigger>
-        </Style.Triggers>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <!--Toggle button style-->
+    <Style TargetType="ToggleButton" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Template" Value="{StaticResource ToggleButtonTemplate}" />
     </Style>
 
 </ResourceDictionary>

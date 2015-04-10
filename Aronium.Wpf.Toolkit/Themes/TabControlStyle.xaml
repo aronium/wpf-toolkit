@@ -18,17 +18,17 @@
                                                   HorizontalAlignment="Center"
                                                   ContentSource="Header"
                                                   Margin="12,4"
-                                                  TextElement.Foreground="{DynamicResource Foreground}"
+                                                  TextElement.Foreground="{TemplateBinding Foreground}"
                                                   TextBlock.FontSize="13"
                                                   RecognizesAccessKey="True" />
-                                <Polygon Name="arrow" Visibility="Collapsed" Stroke="{DynamicResource Accent}" Fill="{DynamicResource Accent}" />
+                                <Polygon Name="arrow" Visibility="Collapsed" Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" />
                             </Grid>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="arrow" />
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="Border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" />
                             <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundSelected}" />
                         </Trigger>
 
@@ -99,7 +99,7 @@
                           IsItemsHost="True"
                           KeyboardNavigation.TabIndex="1"
                           Background="Transparent" />
-                <Border BorderBrush="{DynamicResource Accent}" BorderThickness="0,2,0,0" Padding="0,6,0,0" Grid.Row="1">
+                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,2,0,0" Padding="0,6,0,0" Grid.Row="1">
                     <ContentPresenter x:Name="PART_SelectedContentHost" 
                                       Margin="{TemplateBinding Padding}" 
                                       ContentSource="SelectedContent" />
@@ -181,7 +181,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!--Border used for bottom margin so arrow do not overlap content-->
-                <Border Padding="0,0,0,6" BorderBrush="{DynamicResource Accent}" BorderThickness="0,0,0,2" >
+                <Border Padding="0,0,0,6" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,2" >
                     <ContentPresenter x:Name="PART_SelectedContentHost" 
                                       Margin="{TemplateBinding Padding}"
                                       ContentSource="SelectedContent" />
@@ -201,6 +201,7 @@
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>
