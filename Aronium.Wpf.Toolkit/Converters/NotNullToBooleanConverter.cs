@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Windows;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Data;
 
 namespace Aronium.Wpf.Toolkit.Converters
 {
-    public class NotNullToVisibilityConverter : IValueConverter
+    public class NotNullToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value == null ? Visibility.Collapsed : Visibility.Visible;
+            return value != null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

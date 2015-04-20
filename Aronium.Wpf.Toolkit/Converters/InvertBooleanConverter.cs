@@ -25,7 +25,12 @@ namespace Aronium.Wpf.Toolkit.Converters
         
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return Binding.DoNothing;
+            if (value is bool)
+            {
+                return !((bool)value);
+            }
+
+            return false;
         }
 
         #endregion

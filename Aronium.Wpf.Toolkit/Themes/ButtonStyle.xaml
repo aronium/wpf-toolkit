@@ -127,11 +127,11 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Padding="{TemplateBinding Padding}">
             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                RecognizesAccessKey="True"
-                                TextElement.Foreground="{TemplateBinding Foreground}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                              RecognizesAccessKey="True"
+                              TextElement.Foreground="{TemplateBinding Foreground}"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">

@@ -58,6 +58,7 @@
     <Compile Include="Controls\WatermarkTextBox.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\NotNullToBooleanConverter.cs" />
     <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\UppercaseConverter.cs" />
