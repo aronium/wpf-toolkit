@@ -3,14 +3,20 @@
 
     <Style TargetType="ProgressBar">
         <Setter Property="Height" Value="16" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
-
             <Setter.Value>
                 <ControlTemplate TargetType="ProgressBar">
-                    <Border BorderBrush="{DynamicResource BorderBrush}" 
-                            Background="{DynamicResource Background}" SnapsToDevicePixels="True" BorderThickness="1" Padding="1">
-                        <Border x:Name="PART_Track" Padding="0,1" Margin="1,0,1,0">
-                            <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" SnapsToDevicePixels="True" Fill="{DynamicResource Accent}" />
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Padding="{TemplateBinding Padding}">
+                        <Border x:Name="PART_Track">
+                            <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" SnapsToDevicePixels="True" Fill="{TemplateBinding Foreground}" />
                         </Border>
                     </Border>
                 </ControlTemplate>
