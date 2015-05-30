@@ -18,8 +18,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static DependencyProperty ShowCloseProperty = DependencyProperty.Register("ShowClose", typeof(bool), typeof(NotificationItem), new PropertyMetadata(true));
 
         DispatcherTimer timer;
-
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        
+        protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseDown(e);
 

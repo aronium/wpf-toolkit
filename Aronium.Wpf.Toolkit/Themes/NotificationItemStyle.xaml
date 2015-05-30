@@ -4,13 +4,16 @@
     
     <Style TargetType="local:NotificationItem">
         <Setter Property="ClickToClose" Value="{Binding RelativeSource={RelativeSource AncestorType=local:NotificationsControl}, Path=ClickToClose}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:NotificationItem">
                     <Border Focusable="False"
                             BorderThickness="1"
-                            BorderBrush="{DynamicResource BorderBrush}" 
-                            Background="{DynamicResource BackgroundBrush}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}" 
                             Padding="10" 
                             Margin="7" 
                             Opacity="0">
@@ -42,19 +45,13 @@
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center">
                                 <Polygon Points="438.393,374.595 319.757,255.977 438.378,137.348 374.595,73.607 255.995,192.225 137.375,73.622 73.607,137.352 192.246,255.983 73.622,374.625 137.352,438.393 256.002,319.734 374.652,438.378" 
-                                     Fill="{DynamicResource Foreground}" 
-                                     Stretch="Uniform" 
-                                     Height="14" 
-                                     Margin="5"/>
+                                         Fill="{TemplateBinding Foreground}" 
+                                         Stretch="Uniform" 
+                                         Height="14" 
+                                         Margin="5"/>
                             </Button>
 
-                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center">
-                                <ContentPresenter.Resources>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="TextWrapping" Value="Wrap"/>
-                                    </Style>
-                                </ContentPresenter.Resources>
-                            </ContentPresenter>
+                            <ContentControl Content="{TemplateBinding Content}" VerticalAlignment="Center" />
 
                         </Grid>
                     </Border>
