@@ -4,6 +4,7 @@
     
     <Style TargetType="local:NotificationItem">
         <Setter Property="ClickToClose" Value="{Binding RelativeSource={RelativeSource AncestorType=local:NotificationsControl}, Path=ClickToClose}" />
+        <Setter Property="ShowClose" Value="{Binding RelativeSource={RelativeSource AncestorType=local:NotificationsControl}, Path=ShowClose}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />

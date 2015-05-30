@@ -66,7 +66,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
-        private void Close()
+        internal void Close()
         {
             if (timer != null)
             {

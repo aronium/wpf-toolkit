@@ -15,6 +15,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         public static DependencyProperty DurationProperty = DependencyProperty.Register("Duration", typeof(int), typeof(NotificationsControl), new PropertyMetadata(10));
         public static DependencyProperty ClickToCloseProperty = DependencyProperty.Register("ClickToClose", typeof(bool), typeof(NotificationsControl));
+        public static DependencyProperty ShowCloseProperty = DependencyProperty.Register("ShowClose", typeof(bool), typeof(NotificationsControl), new PropertyMetadata(true));
 
         public static readonly RoutedEvent ItemClosedEvent = EventManager.RegisterRoutedEvent("ItemClosed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotificationsControl));
 
@@ -41,7 +42,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         public NotificationsControl()
         {
             this.Focusable = false;
-        } 
+
+            Application.Current.MainWindow.Closing += OnApplicationMainWindowClosing;
+        }
 
         #endregion
 
@@ -63,7 +66,16 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(ClickToCloseProperty); }
             set { SetValue(ClickToCloseProperty, value); }
-        } 
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether close button is visible on all notification items.
+        /// </summary>
+        public bool ShowClose
+        {
+            get { return (bool)GetValue(ShowCloseProperty); }
+            set { SetValue(ShowCloseProperty, value); }
+        }
 
         #endregion
 
@@ -111,7 +123,35 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 this.RaiseEvent(new RoutedEventArgs(ItemClosedEvent, sender));
             }
-        } 
+        }
+        
+        private void OnApplicationMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            /***********************************************************************************************
+             * 
+             * IMPORTANT!
+             * 
+             * Issue occured if notifications are visible on application close.
+             * If use click on notificaion, for some reason, it will not allow application to close.
+             * 
+             * On main window application close, remove items source and stop all running DispatcherTimers
+             * for all current items, if any.
+             * 
+             ***********************************************************************************************/
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(this); i++)
+            {
+                var container = ItemContainerGenerator.ContainerFromIndex(i) as NotificationItem;
+
+                if (container != null)
+                {
+                    container.Close();
+                }
+            }
+
+            this.ItemsSource = null;
+            this.Items.Clear();
+        }
 
         #endregion
     }
