@@ -29,5 +29,6 @@
 
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ToggleSwitchStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ButtonGroupStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/NotificationItemStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
