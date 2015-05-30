@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -30,7 +31,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             add { AddHandler(ItemClosedEvent, value); }
             remove { RemoveHandler(ItemClosedEvent, value); }
-        } 
+        }
 
         #endregion
 
@@ -41,9 +42,12 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public NotificationsControl()
         {
-            this.Focusable = false;
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.Focusable = false;
 
-            Application.Current.MainWindow.Closing += OnApplicationMainWindowClosing;
+                Application.Current.MainWindow.Closing += OnApplicationMainWindowClosing;
+            }
         }
 
         #endregion
@@ -85,15 +89,18 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.PrepareContainerForItemOverride(element, item);
 
-            NotificationItem notificationItem = element as NotificationItem;
-
-            if (!Object.ReferenceEquals(element, item) && notificationItem != null)
+            if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                notificationItem.Content = item;
-                if (Duration > 0)
-                    notificationItem.RunAutoHideTimer(Duration);
+                NotificationItem notificationItem = element as NotificationItem;
 
-                notificationItem.IsVisibleChanged += OnNotificationItemIsVisibleChanged;
+                if (!Object.ReferenceEquals(element, item) && notificationItem != null)
+                {
+                    notificationItem.Content = item;
+                    if (Duration > 0)
+                        notificationItem.RunAutoHideTimer(Duration);
+
+                    notificationItem.IsVisibleChanged += OnNotificationItemIsVisibleChanged;
+                }
             }
         }
 
@@ -111,7 +118,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
             return item is NotificationItem;
-        } 
+        }
 
         #endregion
 
@@ -124,7 +131,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 this.RaiseEvent(new RoutedEventArgs(ItemClosedEvent, sender));
             }
         }
-        
+
         private void OnApplicationMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             /***********************************************************************************************
