@@ -55,7 +55,7 @@
                             <Setter TargetName="arrow" Property="Points" Value="0,0 4,4 0,8" />
                             <Setter TargetName="arrow" Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="arrow" Property="VerticalAlignment" Value="Center" />
-                            <Setter TargetName="arrow" Property="Margin" Value="0,0,-5,0" />
+                            <Setter TargetName="arrow" Property="Margin" Value="0,2,-5,0" />
                             <Setter TargetName="ContentSite" Property="HorizontalAlignment" Value="Left" />
                         </Trigger>
 

@@ -17,7 +17,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Fields -
 
         private string stringFormat = "N0";
-        private static Regex regex = new Regex(@"^[0-9.]+$");
+        private static Regex regex = new Regex(@"^[0-9.-]+$");
         private decimal decimalValueParsed;
         private bool changingText;
 
