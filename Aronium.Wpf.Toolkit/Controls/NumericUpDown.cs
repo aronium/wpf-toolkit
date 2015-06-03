@@ -247,8 +247,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnApplyTemplate();
 
-            this.Text = Minimum.ToString(stringFormat);
-
             var upButton = this.Template.FindName("PART_Up", this) as RepeatButton;
             var downButton = this.Template.FindName("PART_Down", this) as RepeatButton;
 
