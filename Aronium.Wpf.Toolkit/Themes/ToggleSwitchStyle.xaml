@@ -13,6 +13,7 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
 
         <Setter Property="ThumbBackground" Value="{DynamicResource OnOffButtonThumbBackground}" />

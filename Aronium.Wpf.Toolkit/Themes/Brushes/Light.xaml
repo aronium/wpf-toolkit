@@ -10,7 +10,7 @@
     <Color x:Key="BorderBrushColor">#FFBDBDBD</Color>
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}" />
     <SolidColorBrush x:Key="BorderDisabledBrush">#FFCCCCCC</SolidColorBrush>
-    <Color x:Key="ForegroundColor">#FF333333</Color>
+    <Color x:Key="ForegroundColor">#FF444444</Color>
     <SolidColorBrush x:Key="Foreground" Color="{StaticResource ForegroundColor}" />
     <Color x:Key="ForegroundDisabledColor">#FFCCCCCC</Color>
     <SolidColorBrush x:Key="ForegroundDisabled" Color="{StaticResource ForegroundDisabledColor}" />

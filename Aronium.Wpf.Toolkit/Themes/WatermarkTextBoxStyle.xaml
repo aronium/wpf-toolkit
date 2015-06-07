@@ -67,7 +67,7 @@
                                 <Border x:Name="ReadOnlyVisualElement" 
                                         Background="{DynamicResource BackgroundDisabledBrush}"
                                         CornerRadius="0" Opacity="0" />
-                                <TextBlock Margin="4,0,0,0" 
+                                <TextBlock Margin="{TemplateBinding Padding}" 
                                            VerticalAlignment="Center" 
                                            HorizontalAlignment="Left" 
                                            Name="PART_Watermark" 
