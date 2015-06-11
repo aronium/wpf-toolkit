@@ -41,7 +41,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
+                <ControlTemplate TargetType="{x:Type local:NumericUpDown}">
                     <Grid Background="{TemplateBinding Background}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -110,7 +110,8 @@
                                               Padding="{TemplateBinding Padding}" 
                                               Foreground="{TemplateBinding Foreground}" />
 
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0">
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0"
+                                            x:Name="UpDownArrowContainer">
                                     <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}" 
                                                   Margin="0,0,0,1" 
                                                   x:Name="PART_Up" 
@@ -145,9 +146,16 @@
                                 IsHitTestVisible="False" Margin="0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="ShowUpDownArrows" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="UpDownArrowContainer" />
+                        </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="IsEnabled" Value="False" TargetName="PART_Down" />
                             <Setter Property="IsEnabled" Value="False" TargetName="PART_Up" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="Visibility" Value="Visible" TargetName="ValidationErrorElement" />
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

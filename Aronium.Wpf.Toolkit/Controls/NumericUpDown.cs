@@ -19,7 +19,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         private string stringFormat = "N0";
         private static Regex regex = new Regex(@"^[0-9.-]+$");
         private decimal decimalValueParsed;
-        private bool changingText;
+        private bool isTextUpdateInProgress;
 
         #endregion
 
@@ -49,6 +49,17 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// Identifies value property.
         /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(decimal), typeof(NumericUpDown));
+
+        /// <summary>
+        /// Identifies AcceptEmptyValueProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AcceptEmptyValueProperty = DependencyProperty.Register("AcceptEmptyValue", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
+
+
+        /// <summary>
+        /// Identifies ShowUpDownArrowsProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ShowUpDownArrowsProperty = DependencyProperty.Register("ShowUpDownArrows", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
 
         #endregion
 
@@ -95,11 +106,13 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
-            if (!changingText)
+            if (!isTextUpdateInProgress)
             {
                 if (string.IsNullOrEmpty(this.Text) || string.IsNullOrWhiteSpace(this.Text))
                 {
-                    this.UpdateText(this.Minimum);
+                    if (!AcceptEmptyValue)
+                        this.UpdateText(this.Minimum);
+
                     return;
                 }
 
@@ -134,7 +147,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (string.IsNullOrEmpty(this.Text.Trim()))
             {
-                this.UpdateText(this.Minimum);
+                if (!AcceptEmptyValue)
+                    this.UpdateText(this.Minimum);
             }
             else if (decimal.TryParse(this.Text, out decimalValueParsed))
             {
@@ -144,13 +158,13 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void UpdateText(decimal value)
         {
-            this.changingText = true;
+            this.isTextUpdateInProgress = true;
 
             this.Text = value.ToString(stringFormat);
 
             this.Select(this.Text.Length, 0);
 
-            this.changingText = false;
+            this.isTextUpdateInProgress = false;
         }
 
         private void Up()
@@ -164,7 +178,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (decimal.TryParse(this.Text, out decimalValueParsed))
             {
-                if (decimalValueParsed - Increment <= Maximum)
+                if (decimalValueParsed + Increment <= Maximum)
                 {
                     UpdateText(decimalValueParsed + Increment);
                 }
@@ -237,6 +251,24 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (decimal)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether empty text should be automatically converted to Minimum value.
+        /// </summary>
+        public bool AcceptEmptyValue
+        {
+            get { return (bool)GetValue(AcceptEmptyValueProperty); }
+            set { SetValue(AcceptEmptyValueProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether up and down arrows are displayed.
+        /// </summary>
+        public bool ShowUpDownArrows
+        {
+            get { return (bool)GetValue(ShowUpDownArrowsProperty); }
+            set { SetValue(ShowUpDownArrowsProperty, value); }
         }
 
         #endregion
