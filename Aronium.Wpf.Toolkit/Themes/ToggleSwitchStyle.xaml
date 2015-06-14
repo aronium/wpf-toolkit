@@ -71,7 +71,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
-                            <Setter Property="Opacity" Value=".7" />
+                            <Setter Property="Opacity" Value=".6" />
                         </Trigger>
                     </ControlTemplate.Triggers>
 
