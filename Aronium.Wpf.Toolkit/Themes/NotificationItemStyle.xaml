@@ -8,6 +8,8 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:NotificationItem">
