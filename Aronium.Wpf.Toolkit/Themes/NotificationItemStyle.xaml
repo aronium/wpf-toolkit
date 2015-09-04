@@ -8,6 +8,13 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Opacity="0.3" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:NotificationItem">
@@ -17,10 +24,8 @@
                             Background="{TemplateBinding Background}" 
                             Padding="10" 
                             Margin="7" 
-                            Opacity="0">
-                        <Border.Effect>
-                            <DropShadowEffect Opacity="0.5" />
-                        </Border.Effect>
+                            Opacity="0"
+                            Effect="{TemplateBinding Effect}">
                         <Border.Triggers>
                             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                 <BeginStoryboard>

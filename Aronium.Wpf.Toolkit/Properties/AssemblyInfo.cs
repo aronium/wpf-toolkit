@@ -33,6 +33,7 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("http://aronium.com/wpf", "Aronium.Wpf.Toolkit.Controls")]
 [assembly: XmlnsDefinition("http://aronium.com/wpf", "Aronium.Wpf.Toolkit.Converters")]
+[assembly: XmlnsDefinition("http://aronium.com/wpf", "Aronium.Wpf.Toolkit.Validators")]
 [assembly: XmlnsPrefix("http://aronium.com/wpf", "aronium")]
 
 [assembly:ThemeInfo(

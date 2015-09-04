@@ -7,6 +7,7 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ComboBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/DatePickerStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/DropDownButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/FlyoutStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/GridSplitterStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/GroupBoxStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/LabelStyle.xaml"/>
