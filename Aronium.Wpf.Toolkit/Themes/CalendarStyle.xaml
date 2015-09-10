@@ -4,11 +4,14 @@
 
     <!--Style for the days of a month.-->
     <Style TargetType="CalendarDayButton" x:Key="CalendarDayButtonStyle">
-        <Setter Property="MinWidth" Value="5" />
-        <Setter Property="MinHeight" Value="5" />
+        <Setter Property="Width" Value="28" />
+        <Setter Property="Height" Value="28" />
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="2" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarDayButton">
@@ -141,33 +144,25 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="TodayBackground" Opacity="0">
-                            <Rectangle.Stroke>
+                        <Ellipse x:Name="TodayBackground" Opacity="0">
+                            <Ellipse.Stroke>
                                 <SolidColorBrush Color="{DynamicResource AccentColor}" />
-                            </Rectangle.Stroke>
-                        </Rectangle>
-                        <Rectangle x:Name="SelectedBackground" Opacity="0">
-                            <Rectangle.Fill>
+                            </Ellipse.Stroke>
+                        </Ellipse>
+                        <Ellipse x:Name="SelectedBackground" Opacity="0">
+                            <Ellipse.Fill>
                                 <SolidColorBrush Color="{DynamicResource AccentColor}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
+                            </Ellipse.Fill>
+                        </Ellipse>
                         <Border Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}" />
-                        <Rectangle x:Name="HighlightBackground" Opacity="0">
-                            <Rectangle.Fill>
+                        <Ellipse x:Name="HighlightBackground" Opacity="0">
+                            <Ellipse.Fill>
                                 <SolidColorBrush Color="{DynamicResource BackgroundHoverColor}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <ContentPresenter x:Name="NormalText"
-                                          TextBlock.FontSize="{TemplateBinding FontSize}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          Margin="5,1,5,1">
-                            <TextElement.Foreground>
-                                <SolidColorBrush Color="{DynamicResource ForegroundColor}" />
-                            </TextElement.Foreground>
-                        </ContentPresenter>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter x:Name="NormalText" TextElement.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Path x:Name="Blackout"
                               Opacity="0"
                               Margin="3"
@@ -183,13 +178,13 @@
                               17.060919 L11.673828,15.256231 L10.352539,
                               17.060919 L8.1396484,17.060919 L10.519043,
                               14.042364 z" />
-                        <Rectangle x:Name="DayButtonFocusVisual"
+                        <Ellipse x:Name="DayButtonFocusVisual"
                                    Visibility="Collapsed"
                                    IsHitTestVisible="False">
-                            <Rectangle.Stroke>
+                            <Ellipse.Stroke>
                                 <SolidColorBrush Color="{DynamicResource AccentColor}" />
-                            </Rectangle.Stroke>
-                        </Rectangle>
+                            </Ellipse.Stroke>
+                        </Ellipse>
                     </Grid>
                     
                     <ControlTemplate.Triggers>
@@ -205,11 +200,13 @@
 
     <!--Style for the months of a year and years of a decade.-->
     <Style TargetType="CalendarButton" x:Key="CalendarButtonStyle">
-        <Setter Property="MinWidth" Value="40" />
-        <Setter Property="MinHeight" Value="42" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="MinWidth" Value="48" />
+        <Setter Property="MinHeight" Value="48" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="4" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarButton">
@@ -285,39 +282,30 @@
                                 <VisualState Name="CalendarButtonUnfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="SelectedBackground"
-                     RadiusX="1"
-                     RadiusY="1"
-                     Opacity="0">
-                            <Rectangle.Fill>
+                        <Ellipse x:Name="SelectedBackground" Opacity="0">
+                            <Ellipse.Fill>
                                 <SolidColorBrush Color="{DynamicResource AccentColor}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle x:Name="Background"
-                     RadiusX="1"
-                     RadiusY="1"
-                     Opacity="0">
-                            <Rectangle.Fill>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Ellipse x:Name="Background" Opacity="0">
+                            <Ellipse.Fill>
                                 <SolidColorBrush Color="{DynamicResource AccentColor}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
+                            </Ellipse.Fill>
+                        </Ellipse>
                         <ContentPresenter x:Name="NormalText"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="1,0,1,1">
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <TextElement.Foreground>
                                 <SolidColorBrush Color="{DynamicResource ForegroundColor}" />
                             </TextElement.Foreground>
                         </ContentPresenter>
-                        <Rectangle x:Name="CalendarButtonFocusVisual"
-                     Visibility="Collapsed"
-                     IsHitTestVisible="false"
-                     RadiusX="1"
-                     RadiusY="1">
-                            <Rectangle.Stroke>
+                        <Ellipse x:Name="CalendarButtonFocusVisual"
+                                 Visibility="Collapsed"
+                                 IsHitTestVisible="false">
+                            <Ellipse.Stroke>
                                 <SolidColorBrush Color="{DynamicResource AccentColor}" />
-                            </Rectangle.Stroke>
-                        </Rectangle>
+                            </Ellipse.Stroke>
+                        </Ellipse>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -437,7 +425,7 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
             <ContentPresenter x:Name="buttonContent"
-                              Margin="0,0,0,1"
+                              Margin="0,5,0,6"
                               ContentTemplate="{TemplateBinding ContentTemplate}"
                               TextElement.Foreground="{TemplateBinding Foreground}"
                               Content="{TemplateBinding Content}"
