@@ -26,6 +26,8 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(Flyout));
 
+        public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration", typeof(double), typeof(Flyout), new PropertyMetadata(200.0));
+
         #endregion
 
         #region - Routed events -
@@ -62,9 +64,9 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Fields -
 
-        private ThicknessAnimation outAnimation;
-        private ThicknessAnimation inAnimation;
-        private Border contentSite; 
+        private ThicknessAnimation _outAnimation;
+        private ThicknessAnimation _inAnimation;
+        private Border contentSite;
 
         #endregion
 
@@ -81,69 +83,39 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                this.KeyDown += OnKeyDown;
-
-                Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    CreateAnimationObjects();
-                }), System.Windows.Threading.DispatcherPriority.Loaded);
+                KeyDown += OnKeyDown;
             }
-        } 
+        }
         #endregion
 
         #region - Private methods -
-        
-        private void CreateAnimationObjects()
-        {
-            inAnimation = new ThicknessAnimation()
-            {
-                From = new Thickness(0, 0, -Flyoutwidth, 0),
-                To = new Thickness(0),
-                Duration = TimeSpan.FromMilliseconds(200)
-            };
-
-            inAnimation.Completed += OnSlideIn;
-
-            inAnimation.Freeze();
-
-            outAnimation = new ThicknessAnimation()
-            {
-                From = new Thickness(0),
-                To = new Thickness(0, 0, -Flyoutwidth, 0),
-                Duration = TimeSpan.FromMilliseconds(200)
-            };
-
-            outAnimation.Completed += OnCollapsed;
-
-            outAnimation.Freeze();
-        }
 
         private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Escape && this.IsVisible)
             {
-                Collapse();
+                Hide();
             }
         }
 
         private void OnHideFlyout(object sender, RoutedEventArgs e)
         {
-            Collapse();
+            Hide();
         }
 
         private void OnCollapsed(object sender, EventArgs e)
         {
-            this.Visibility = System.Windows.Visibility.Collapsed;
+            Visibility = Visibility.Collapsed;
 
             RaiseEvent(new RoutedEventArgs(CollapsedEvent));
         }
 
         private void OnSlideIn(object sender, EventArgs e)
         {
-            this.Focus();
+            Focus();
 
             RaiseEvent(new RoutedEventArgs(ExpandedEvent));
-        } 
+        }
 
         #endregion
 
@@ -167,19 +139,25 @@ namespace Aronium.Wpf.Toolkit.Controls
                 Show();
         }
 
+        /// <summary>
+        /// Shows flyout.
+        /// </summary>
         public void Show()
         {
-            this.Visibility = System.Windows.Visibility.Visible;
+            this.Visibility = Visibility.Visible;
 
             if (contentSite != null)
             {
-                contentSite.BeginAnimation(MarginProperty, inAnimation);
+                contentSite.BeginAnimation(MarginProperty, InAnimation);
             }
         }
 
-        public void Collapse()
+        /// <summary>
+        /// Hides flyout.
+        /// </summary>
+        public void Hide()
         {
-            contentSite.BeginAnimation(MarginProperty, outAnimation);
+            contentSite.BeginAnimation(MarginProperty, OutAnimation);
         }
 
         #endregion
@@ -220,6 +198,59 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets duration, in milliseconds, for animation used when showing or hiding flyout.
+        /// </summary>
+        public double Duration
+        {
+            get { return (double)GetValue(DurationProperty); }
+            set { SetValue(DurationProperty, value); }
+        }
+
+        private ThicknessAnimation InAnimation
+        {
+            get
+            {
+                if (_inAnimation == null)
+                {
+                    _inAnimation = new ThicknessAnimation()
+                    {
+                        From = new Thickness(0, 0, -Flyoutwidth, 0),
+                        To = new Thickness(0),
+                        Duration = TimeSpan.FromMilliseconds(Duration)
+                    };
+
+                    _inAnimation.Completed += OnSlideIn;
+
+                    _inAnimation.Freeze();
+                }
+
+                return _inAnimation;
+            }
+        }
+
+        private ThicknessAnimation OutAnimation
+        {
+            get
+            {
+                if (_outAnimation == null)
+                {
+                    _outAnimation = new ThicknessAnimation()
+                    {
+                        From = new Thickness(0),
+                        To = new Thickness(0, 0, -Flyoutwidth, 0),
+                        Duration = TimeSpan.FromMilliseconds(Duration)
+                    };
+
+                    _outAnimation.Completed += OnCollapsed;
+
+                    _outAnimation.Freeze();
+                }
+
+                return _outAnimation;
+            }
         }
 
         #endregion
