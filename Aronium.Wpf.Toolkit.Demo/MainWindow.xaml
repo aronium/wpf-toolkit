@@ -370,6 +370,9 @@
 
                     </Grid>
                 </TabItem>
+                <TabItem Header="Data grid">
+                    <DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" />
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>

@@ -27,6 +27,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         private string _themeName = "Dark";
         private List<string> _themes;
         private bool _showTabControlBorder;
+        List<User> _users;
 
         public MainWindow()
         {
@@ -125,6 +126,30 @@ namespace Aronium.Wpf.Toolkit.Demo
                 tabControl.Padding = new Thickness(value ? 5 : 0);
 
                 OnPropertyChanged("ShowTabControlBorder");
+            }
+        }
+
+        public List<User> Users
+        {
+            get
+            {
+                if (_users == null)
+                {
+                    _users = new List<User>();
+
+                    for (int i = 1; i <= 20; i++)
+                    {
+                        _users.Add(new User()
+                        {
+                            FirstName = "User",
+                            LastName = "User " + i,
+                            DateOfBirth = DateTime.Today.Date,
+                            Email = string.Format("user.{0}@email.com", i)
+                        });
+                    }
+                }
+
+                return _users;
             }
         }
 
