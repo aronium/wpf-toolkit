@@ -85,6 +85,6 @@
         </Setter>
     </Style>
 
-    <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}" />
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBoxStyle}" />
 
 </ResourceDictionary>
