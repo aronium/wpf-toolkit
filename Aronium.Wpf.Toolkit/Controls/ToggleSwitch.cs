@@ -27,7 +27,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", 
             typeof(CornerRadius), 
             typeof(ToggleSwitch),
-            new FrameworkPropertyMetadata(new CornerRadius(9), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+            new FrameworkPropertyMetadata(new CornerRadius(7), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
         
         public static DependencyProperty BackgroundCheckedProperty = DependencyProperty.Register("BackgroundChecked", typeof(Brush), typeof(ToggleSwitch));
                 
@@ -39,7 +39,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 new PropertyChangedCallback(OnSliderWidthChanged)));
 
         public static DependencyProperty SliderHeightProperty = DependencyProperty.Register("SliderHeight", typeof(double), typeof(ToggleSwitch),
-            new FrameworkPropertyMetadata(20.0,
+            new FrameworkPropertyMetadata(16.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public static DependencyProperty ThumbSizeProperty = DependencyProperty.Register("ThumbSize", typeof(double), typeof(ToggleSwitch),
