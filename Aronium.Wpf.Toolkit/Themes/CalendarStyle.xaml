@@ -460,7 +460,7 @@
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <DoubleAnimation Duration="0"
-                                                         To="1"
+                                                         To="0.3"
                                                          Storyboard.TargetProperty="Opacity"
                                                          Storyboard.TargetName="PART_DisabledVisual" />
                                     </Storyboard>
@@ -556,7 +556,7 @@
                                    Opacity="0"
                                    Stretch="Fill"
                                    Stroke="{DynamicResource BackgroundDisabledBrush}"
-                                   StrokeThickness="1"
+                                   StrokeThickness="0"
                                    Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
