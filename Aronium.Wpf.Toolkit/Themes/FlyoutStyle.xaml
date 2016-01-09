@@ -12,7 +12,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:Flyout">
                     <Grid>
-                        <Border Background="Black" Opacity="0.3" Name="PART_Backdrop" Visibility="{TemplateBinding Backdrop, Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}}"/>
+                        <Border Background="Black" Focusable="False" Opacity="0.3" Name="PART_Backdrop" Visibility="{TemplateBinding Backdrop, Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}}"/>
                         <Border Name="PART_ContentSite" 
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="1,0,0,0"
@@ -36,6 +36,7 @@
                                     <Button Name="PART_CollapseButton" 
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
+                                            Focusable="False"
                                             Height="Auto"
                                             Style="{DynamicResource FlatButtonStyle}" 
                                             Padding="10,10,15,10">

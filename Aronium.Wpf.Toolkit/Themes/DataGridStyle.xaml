@@ -107,17 +107,11 @@
     </Style>
 
     <!-- Row -->
-    <Style TargetType="DataGridRow">
+    <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="MinHeight" Value="{StaticResource DataGridDefaultCellHeight}" />
         <Style.Triggers>
-            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
-            </Trigger>
-            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
             </Trigger>
@@ -155,7 +149,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="DataGridCell" BasedOn="{StaticResource DefaultCellStyle}" />
+    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DefaultCellStyle}" />
 
     <!-- Content style / Right alignment -->
     <Style TargetType="{x:Type DataGridCell}" x:Key="AlignRight" BasedOn="{StaticResource DefaultCellStyle}">
