@@ -36,6 +36,8 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundHoBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -50,7 +52,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Grid.ColumnSpan="2" />
                         
-                        <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="Center">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                             <ContentPresenter.Resources>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="TextTrimming" Value="CharacterEllipsis" />
