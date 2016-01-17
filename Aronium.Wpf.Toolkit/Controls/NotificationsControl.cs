@@ -19,6 +19,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static DependencyProperty ShowCloseProperty = DependencyProperty.Register("ShowClose", typeof(bool), typeof(NotificationsControl), new PropertyMetadata(true));
 
         public static readonly RoutedEvent ItemClosedEvent = EventManager.RegisterRoutedEvent("ItemClosed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotificationsControl));
+        public static DependencyProperty SlideInProperty = DependencyProperty.Register("SlideIn", typeof(bool), typeof(NotificationsControl), new PropertyMetadata(true));
 
         #endregion
 
@@ -81,6 +82,15 @@ namespace Aronium.Wpf.Toolkit.Controls
             set { SetValue(ShowCloseProperty, value); }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether notification items should ease in instead of fade animation.
+        /// </summary>
+        public bool SlideIn
+        {
+            get { return (bool)GetValue(SlideInProperty); }
+            set { SetValue(SlideInProperty, value); }
+        }
+
         #endregion
 
         #region - Overrides -
@@ -139,7 +149,7 @@ namespace Aronium.Wpf.Toolkit.Controls
              * IMPORTANT!
              * 
              * Issue occured if notifications are visible on application close.
-             * If use click on notificaion, for some reason, it will not allow application to close.
+             * If user click on notificaion, for some reason, it will not allow application to close.
              * 
              * On main window application close, remove items source and stop all running DispatcherTimers
              * for all current items, if any.

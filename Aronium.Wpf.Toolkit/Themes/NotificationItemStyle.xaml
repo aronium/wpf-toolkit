@@ -5,39 +5,27 @@
     <Style TargetType="local:NotificationItem">
         <Setter Property="ClickToClose" Value="{Binding RelativeSource={RelativeSource AncestorType=local:NotificationsControl}, Path=ClickToClose}" />
         <Setter Property="ShowClose" Value="{Binding RelativeSource={RelativeSource AncestorType=local:NotificationsControl}, Path=ShowClose}" />
+        <Setter Property="SlideIn" Value="{Binding RelativeSource={RelativeSource AncestorType=local:NotificationsControl}, Path=SlideIn}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="Margin" Value="5" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Effect">
+        <Setter Property="BorderThickness" Value="1" />
+        <!--<Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect Opacity="0.3" />
             </Setter.Value>
-        </Setter>
+        </Setter>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:NotificationItem">
                     <Border Focusable="False"
-                            BorderThickness="1"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Background="{TemplateBinding Background}" 
                             Padding="10" 
-                            Margin="7" 
-                            Opacity="0"
                             Effect="{TemplateBinding Effect}">
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:0.2"
-                                                         From="0"
-                                                         To="1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Border.Triggers>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -64,6 +52,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="ShowClose" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="PART_CloseButton" />
+                        </Trigger>
+                        <Trigger Property="SlideIn" Value="True">
+                            <Setter Property="Margin" Value="7,7,0,7" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

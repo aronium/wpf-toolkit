@@ -16,15 +16,57 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(NotificationItem));
         public static DependencyProperty ClickToCloseProperty = DependencyProperty.Register("ClickToClose", typeof(bool), typeof(NotificationItem));
         public static DependencyProperty ShowCloseProperty = DependencyProperty.Register("ShowClose", typeof(bool), typeof(NotificationItem), new PropertyMetadata(true));
+        public static DependencyProperty SlideInProperty = DependencyProperty.Register("SlideIn", typeof(bool), typeof(NotificationItem), new PropertyMetadata(true));
+
+        private const double MARGIN = 5;
 
         DispatcherTimer timer;
-        
+
+        public NotificationItem()
+        {
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+
+            if (SlideIn)
+                RunSlideInAnimation();
+            else
+                RunFadeInAnimation();
+        }
+
+        private void RunSlideInAnimation()
+        {
+            // If width is not explicitly set before animation begins, control will stretch to fit content height
+            this.Width = this.ActualWidth;
+
+            this.BeginAnimation(MarginProperty, new ThicknessAnimation()
+            {
+                From = new Thickness(MARGIN, MARGIN, -(ActualWidth + 10), MARGIN),
+                To = new Thickness(MARGIN, MARGIN, 0, MARGIN),
+                Duration = TimeSpan.FromMilliseconds(300),
+                EasingFunction = new CircleEase() { EasingMode = EasingMode.EaseOut }
+            });
+        }
+
+        private void RunFadeInAnimation()
+        {
+            this.BeginAnimation(OpacityProperty, new DoubleAnimation()
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(200)
+            });
+        }
+
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseDown(e);
 
             if (this.ClickToClose)
-                this.Close();
+                this.AnimateOut();
         }
 
         public object Content
@@ -51,6 +93,12 @@ namespace Aronium.Wpf.Toolkit.Controls
             set { SetValue(ShowCloseProperty, value); }
         }
 
+        public bool SlideIn
+        {
+            get { return (bool)GetValue(SlideInProperty); }
+            set { SetValue(SlideInProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -75,33 +123,25 @@ namespace Aronium.Wpf.Toolkit.Controls
                 timer.IsEnabled = false;
             }
 
-            this.Visibility = Visibility.Collapsed;
+            Visibility = Visibility.Collapsed;
         }
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            EventHandler fadeOutAnimationCompletedHandler = null;
-            EventHandler sizeAnimationCompletedHandler = null;
+            AnimateOut();
+        }
 
-            var fadeOutAnimation = new DoubleAnimation()
-            {
-                From = 1,
-                To = 0,
-                Duration = TimeSpan.FromMilliseconds(200)
-            };
+        private void AnimateOut()
+        {
+            EventHandler outAnimationCompletedHandler = null;
+            EventHandler sizeAnimationCompletedHandler = null;
 
             var sizeAnimation = new DoubleAnimation()
             {
                 From = this.ActualHeight,
                 To = 0,
                 Duration = TimeSpan.FromMilliseconds(200),
-                BeginTime = TimeSpan.FromMilliseconds(100)
-            };
-
-            fadeOutAnimationCompletedHandler = (s, ea) =>
-            {
-                fadeOutAnimation.Completed -= fadeOutAnimationCompletedHandler;
-                this.BeginAnimation(HeightProperty, sizeAnimation);
+                BeginTime = TimeSpan.FromMilliseconds(200)
             };
 
             sizeAnimationCompletedHandler = (s, ea) =>
@@ -111,10 +151,47 @@ namespace Aronium.Wpf.Toolkit.Controls
                 this.Close();
             };
 
-            fadeOutAnimation.Completed += fadeOutAnimationCompletedHandler;
             sizeAnimation.Completed += sizeAnimationCompletedHandler;
 
-            this.BeginAnimation(OpacityProperty, fadeOutAnimation);
+            if (SlideIn)
+            {
+                var slideOutAnimation = new ThicknessAnimation()
+                {
+                    To = new Thickness((ActualWidth + 10), MARGIN, 0, MARGIN),
+                    Duration = TimeSpan.FromMilliseconds(300)
+                };
+
+                outAnimationCompletedHandler = (s, ea) =>
+                {
+                    slideOutAnimation.Completed -= outAnimationCompletedHandler;
+
+                    this.BeginAnimation(HeightProperty, sizeAnimation);
+                };
+
+                slideOutAnimation.Completed += outAnimationCompletedHandler;
+
+                this.BeginAnimation(MarginProperty, slideOutAnimation);
+            }
+            else
+            {
+                var fadeOutAnimation = new DoubleAnimation()
+                {
+                    From = 1,
+                    To = 0,
+                    Duration = TimeSpan.FromMilliseconds(200)
+                };
+
+                outAnimationCompletedHandler = (s, ea) =>
+                {
+                    fadeOutAnimation.Completed -= outAnimationCompletedHandler;
+
+                    this.BeginAnimation(HeightProperty, sizeAnimation);
+                };
+
+                fadeOutAnimation.Completed += outAnimationCompletedHandler;
+
+                this.BeginAnimation(OpacityProperty, fadeOutAnimation);
+            }
         }
 
         internal void RunAutoHideTimer(int duration)
