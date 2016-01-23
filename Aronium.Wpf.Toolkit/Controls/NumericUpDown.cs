@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
+using System.ComponentModel;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Text.RegularExpressions;
 using System.Windows.Markup;
-using System.ComponentModel;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
@@ -17,9 +15,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Fields -
 
         private string stringFormat = "N0";
-        private static Regex regex = new Regex(@"^[0-9.-]+$");
+        private static Regex regex = new Regex(@"^[0-9.,-]+$");
         private decimal decimalValueParsed;
-        private bool isTextUpdateInProgress;
+        private bool isUpdatingText;
 
         #endregion
 
@@ -59,7 +57,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Identifies ShowUpDownArrowsProperty dependency property.
         /// </summary>
-        public static readonly DependencyProperty ShowUpDownArrowsProperty = DependencyProperty.Register("ShowUpDownArrows", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
+        public static readonly DependencyProperty ShowPlusMinusButtonsProperty = DependencyProperty.Register("ShowPlusMinusButtons", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
 
         #endregion
 
@@ -106,7 +104,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
-            if (!isTextUpdateInProgress)
+            if (!isUpdatingText)
             {
                 if (string.IsNullOrEmpty(this.Text) || string.IsNullOrWhiteSpace(this.Text))
                 {
@@ -131,7 +129,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !regex.IsMatch(e.Text);
+            //e.Handled = !regex.IsMatch(e.Text);
         }
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -158,13 +156,15 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void UpdateText(decimal value)
         {
-            this.isTextUpdateInProgress = true;
+            this.isUpdatingText = true;
 
-            this.Text = value.ToString(stringFormat);
+            Value = value;
 
-            this.Select(this.Text.Length, 0);
+            this.SetValue(TextProperty, value.ToString(stringFormat, CultureInfo.InvariantCulture));
 
-            this.isTextUpdateInProgress = false;
+            this.Select(Text.Length, 0);
+
+            this.isUpdatingText = false;
         }
 
         private void Up()
@@ -176,7 +176,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 this.Focus();
             }
 
-            if (decimal.TryParse(this.Text, out decimalValueParsed))
+            if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimalValueParsed))
             {
                 if (decimalValueParsed + Increment <= Maximum)
                 {
@@ -194,7 +194,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 this.Focus();
             }
 
-            if (decimal.TryParse(this.Text, out decimalValueParsed))
+            if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimalValueParsed))
             {
                 if (decimalValueParsed - Increment >= Minimum)
                 {
@@ -263,12 +263,12 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether up and down arrows are displayed.
+        /// Gets or sets a value indicating whether plus and minus buttons are displayed.
         /// </summary>
-        public bool ShowUpDownArrows
+        public bool ShowPlusMinusButtons
         {
-            get { return (bool)GetValue(ShowUpDownArrowsProperty); }
-            set { SetValue(ShowUpDownArrowsProperty, value); }
+            get { return (bool)GetValue(ShowPlusMinusButtonsProperty); }
+            set { SetValue(ShowPlusMinusButtonsProperty, value); }
         }
 
         #endregion

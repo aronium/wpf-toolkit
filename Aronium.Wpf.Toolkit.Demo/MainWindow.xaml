@@ -107,9 +107,9 @@
                                     <TextBox Text="Disabled TextBox" IsEnabled="False" Margin="0,5"/>
                                     <TextBox Text="Read only TextBox" IsReadOnly="True" Margin="0,5"/>
                                     <PasswordBox />
-                                    <aronium:NumericUpDown Width="50" HorizontalAlignment="Left" Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <aronium:NumericUpDown Width="50" HorizontalAlignment="Left" DecimalPlaces="2" Increment=".5" Margin="0,5"/>
-                                    <aronium:NumericUpDown Width="50" HorizontalAlignment="Left" Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
+                                    <aronium:NumericUpDown Width="80" HorizontalAlignment="Left" Margin="0,5" Text="{Binding IntegerProperty, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <aronium:NumericUpDown Width="80" HorizontalAlignment="Left" DecimalPlaces="2" Text="{Binding DecimalProperty, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+                                    <aronium:NumericUpDown Width="80" HorizontalAlignment="Left" Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
                                     <aronium:WatermarkTextBox Margin="0,5" Watermark="Watermarked TextBox" />
                                     <TextBlock Text="Title" Style="{DynamicResource Title}" />
                                 </StackPanel>

@@ -2,21 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
 
-    <Geometry x:Key="ArrowDown">M0,0 L1,0 0.5,1Z</Geometry>
-    <Geometry x:Key="ArrowUp">M0,1 L1,1 0.5,0Z</Geometry>
+    <Geometry x:Key="Minus">M0 10h24v4H0z</Geometry>
+    <Geometry x:Key="Plus">M24 10H14V0h-4v10H0v4h10v10h4V14h10z</Geometry>
 
     <Style x:Key="EmptyArrowRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
-        <Setter Property="Opacity" Value="0.7" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Padding" Value="4,0" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <ContentPresenter Margin="{TemplateBinding Padding}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      RecognizesAccessKey="True"
-                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="1" />
@@ -95,48 +98,50 @@
                             <Grid>
 
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Border x:Name="ReadOnlyVisualElement" Background="{DynamicResource ReadOnlyBrush}" Opacity="0" Grid.ColumnSpan="2"/>
+                                <!--Minus-->
+                                <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}" 
+                                              x:Name="PART_Down" 
+                                              IsTabStop="False" 
+                                              Background="{TemplateBinding Background}"
+                                              Focusable="False">
+                                    <Path Fill="{DynamicResource Foreground}" 
+                                          Data="{StaticResource Minus}"
+                                          VerticalAlignment="Center"
+                                          Width="10"
+                                          Height="10"
+                                          Stretch="Uniform"/>
+                                </RepeatButton>
+                                
+                                <Border x:Name="ReadOnlyVisualElement" Background="{DynamicResource ReadOnlyBrush}" Opacity="0" Grid.ColumnSpan="3"/>
                                 <ScrollViewer x:Name="PART_ContentHost" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                               BorderThickness="0" 
                                               IsTabStop="False" 
+                                              Grid.Column="1"
                                               Margin="1"
                                               VerticalScrollBarVisibility="Disabled"
                                               Padding="{TemplateBinding Padding}" 
                                               Foreground="{TemplateBinding Foreground}" />
 
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0"
-                                            x:Name="UpDownArrowContainer">
-                                    <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}" 
-                                                  Margin="0,0,0,1" 
-                                                  x:Name="PART_Up" 
-                                                  IsTabStop="False" 
-                                                  Focusable="False">
-                                        <Path Fill="{DynamicResource Foreground}" 
-                                              Data="{StaticResource ArrowUp}"
-                                              Height="5"
-                                              Width="7"
-                                              Stretch="Fill"/>
-                                    </RepeatButton>
-
-                                    <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}" 
-                                                  Margin="0,1,0,0" 
-                                                  x:Name="PART_Down" 
-                                                  IsTabStop="False" 
-                                                  Focusable="False">
-                                        <Path Fill="{DynamicResource Foreground}" 
-                                              Data="{StaticResource ArrowDown}"
-                                              Height="5"
-                                              Width="7"
-                                              Stretch="Fill"/>
-                                    </RepeatButton>
-                                </StackPanel>
-
+                                <RepeatButton Style="{StaticResource EmptyArrowRepeatButtonStyle}"
+                                              Grid.Column="2"
+                                              Background="{TemplateBinding Background}"
+                                              x:Name="PART_Up" 
+                                              IsTabStop="False" 
+                                              Focusable="False">
+                                    <Path Fill="{DynamicResource Foreground}"
+                                          Data="{StaticResource Plus}"
+                                          VerticalAlignment="Center"
+                                          Width="10"
+                                          Height="10"
+                                          Stretch="Uniform"/>
+                                </RepeatButton>
                             </Grid>
                         </Border>
 
@@ -146,14 +151,15 @@
                                 IsHitTestVisible="False" Margin="0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="ShowUpDownArrows" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="UpDownArrowContainer" />
+                        <Trigger Property="ShowPlusMinusButtons" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Down" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Up" />
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="IsEnabled" Value="False" TargetName="PART_Down" />
                             <Setter Property="IsEnabled" Value="False" TargetName="PART_Up" />
                         </Trigger>
-                        <Trigger Property="Validation.HasError" Value="true">
+                        <Trigger Property="Validation.HasError" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="ValidationErrorElement" />
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
                         </Trigger>

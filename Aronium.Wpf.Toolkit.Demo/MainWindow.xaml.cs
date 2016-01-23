@@ -24,6 +24,7 @@ namespace Aronium.Wpf.Toolkit.Demo
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private int _integerProperty;
+        private decimal _decimalProperty;
         private string _themeName = "Dark";
         private List<string> _themes;
         private bool _showTabControlBorder;
@@ -150,6 +151,18 @@ namespace Aronium.Wpf.Toolkit.Demo
                 }
 
                 return _users;
+            }
+        }
+
+        public decimal DecimalProperty
+        {
+            get
+            {
+                return _decimalProperty;
+            }
+            set
+            {
+                _decimalProperty = value; OnPropertyChanged("DecimalProperty");
             }
         }
 
