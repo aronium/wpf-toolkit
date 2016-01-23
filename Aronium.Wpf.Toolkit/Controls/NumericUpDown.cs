@@ -129,7 +129,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            //e.Handled = !regex.IsMatch(e.Text);
+            e.Handled = !regex.IsMatch(e.Text);
         }
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)

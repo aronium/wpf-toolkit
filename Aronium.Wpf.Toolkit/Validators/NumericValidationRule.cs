@@ -37,7 +37,7 @@ namespace Aronium.Wpf.Toolkit.Validators
 
             decimal parsed = 0M;
             bool isNumberInRange = true;
-            if (decimal.TryParse(value.ToString(), out parsed))
+            if (decimal.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out parsed))
             {
                 if (parsed < this.Min || parsed > this.Max)
                 {
