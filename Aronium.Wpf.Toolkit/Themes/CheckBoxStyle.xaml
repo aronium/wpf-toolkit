@@ -74,7 +74,6 @@
                                     BorderBrush="{TemplateBinding BorderBrush}" />
                             
                             <Path x:Name="CheckIcon"
-                                  Stroke="{DynamicResource Accent}"
                                   Data="M1,4.4 L4,7 L10,0"
                                   VerticalAlignment="Center" 
                                   HorizontalAlignment="Center"
@@ -83,9 +82,7 @@
                                   StrokeThickness="2"
                                   Opacity="0" />
                             
-                            <Rectangle x:Name="IndeterminateIcon" 
-                                       Fill="{DynamicResource Accent}"
-                                       Height="2" Margin="3,0" Opacity="0" />
+                            <Rectangle x:Name="IndeterminateIcon" Height="2" Margin="3,0" Opacity="0" />
 
                         </Grid>
                         <ContentPresenter x:Name="contentPresenter" 
@@ -105,6 +102,22 @@
                             <Setter Property="Background" TargetName="Bd" Value="{DynamicResource BackgroundHoverBrush}" />
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Accent}" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Stroke" TargetName="CheckIcon" Value="{DynamicResource Accent}" />
+                            <Setter Property="Fill" TargetName="IndeterminateIcon" Value="{DynamicResource Accent}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Stroke" TargetName="CheckIcon" Value="{DynamicResource ForegroundDisabled}" />
+                            <Setter Property="Fill" TargetName="IndeterminateIcon" Value="{DynamicResource ForegroundDisabled}" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                     
                 </ControlTemplate>
