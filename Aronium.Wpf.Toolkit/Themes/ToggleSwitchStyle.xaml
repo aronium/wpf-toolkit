@@ -2,33 +2,15 @@
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="{x:Type local:ToggleSwitch}">
-        <Setter Property="IsThreeState" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Background" Value="{DynamicResource OnOffButtonSliderBackground}" />
-        <Setter Property="BackgroundChecked" Value="{DynamicResource OnOffButtonSliderBackgroundChecked}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource OnOffButtonBorderBrush}" />
-        <Setter Property="BorderBrushChecked" Value="{DynamicResource OnOffButtonBorderBrushCheked}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+    <ControlTemplate TargetType="{x:Type local:ToggleSwitch}" x:Key="DefaultToggleSwitchTemplate">
+        <Grid Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <Setter Property="ThumbBackground" Value="{DynamicResource OnOffButtonThumbBackground}" />
-        <Setter Property="ThumbBackgroundChecked" Value="{DynamicResource OnOffButtonThumbBackgroundChecked}" />
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ToggleSwitch}">
-                    <Grid Background="Transparent">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <!--Slider-->
-                        <Border x:Name="Slider" 
+            <!--Slider-->
+            <Border x:Name="Slider" 
                                 VerticalAlignment="Center"
                                 Height="{TemplateBinding SliderHeight}"
                                 Width="{TemplateBinding SliderWidth}"
@@ -37,46 +19,116 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}" />
 
-                        <!--Thumb and label-->
-                        <Canvas Height="{TemplateBinding ThumbSize}">
-                            <Ellipse Canvas.Left="1" 
-                                     Margin="{TemplateBinding SliderPadding}"
-                                     Name="PART_Thumb" 
-                                     Width="{TemplateBinding ThumbSize}"
-                                     Height="{TemplateBinding ThumbSize}"
-                                     Fill="{TemplateBinding ThumbBackground}"
-                                     Stroke="{TemplateBinding BorderBrush}" 
-                                     StrokeThickness="0.3">
-                                <Ellipse.BitmapEffect>
-                                    <DropShadowBitmapEffect Softness="0.1" ShadowDepth="0.7" Direction="270" Color="#BBBBBB"/>
-                                </Ellipse.BitmapEffect>
-                            </Ellipse>
-                        </Canvas>
+            <!--Thumb and label-->
+            <Canvas Height="{TemplateBinding ThumbSize}">
+                <Ellipse Canvas.Left="1" 
+                         Margin="{TemplateBinding SliderPadding}"
+                         Name="PART_Thumb" 
+                         Width="{TemplateBinding ThumbSize}"
+                         Height="{TemplateBinding ThumbSize}"
+                         Fill="{TemplateBinding ThumbBackground}"
+                         Stroke="{TemplateBinding BorderBrush}" 
+                         StrokeThickness="0.3">
+                    <Ellipse.BitmapEffect>
+                        <DropShadowBitmapEffect Softness="0.1" ShadowDepth="0.7" Direction="270" Color="#BBBBBB"/>
+                    </Ellipse.BitmapEffect>
+                </Ellipse>
+            </Canvas>
 
-                        <ContentPresenter Content="{TemplateBinding Content}"
+            <ContentPresenter Content="{TemplateBinding Content}"
                                           x:Name="ContentSite"
                                           Margin="{TemplateBinding Padding}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           Grid.Column="1" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BackgroundChecked}" />
-                            <Setter TargetName="Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BorderBrushChecked}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BackgroundChecked}" />
+                <Setter TargetName="Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BorderBrushChecked}" />
 
-                            <Setter Property="Stroke" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBorderBrushChecked}" TargetName="PART_Thumb" />
-                            <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
-                            <Setter Property="Opacity" Value=".6" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
+                <Setter Property="Stroke" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBorderBrushChecked}" TargetName="PART_Thumb" />
+                <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
+                <Setter Property="Opacity" Value=".6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
 
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="{x:Type local:ToggleSwitch}" x:Key="MetroToggleSwitchTemplate">
+        <Grid Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--Slider-->
+            <Border Height="{TemplateBinding SliderHeight}"
+                    VerticalAlignment="Center"
+                    Width="{TemplateBinding SliderWidth}"
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    BorderBrush="{TemplateBinding BorderBrush}">
+                <Border x:Name="Slider" Background="{TemplateBinding Background}" Margin="1" />
+            </Border>
+
+            <!--Thumb and label-->
+            <Canvas Margin="0,0.5" VerticalAlignment="Center" Height="{TemplateBinding SliderHeight}">
+                <Rectangle Name="PART_Thumb" 
+                           Width="{TemplateBinding ThumbSize}"
+                           Height="{TemplateBinding SliderHeight}"
+                           Fill="{TemplateBinding ThumbBackground}" />
+            </Canvas>
+
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              x:Name="ContentSite"
+                              Margin="{TemplateBinding Padding}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              Grid.Column="1" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Slider" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BackgroundChecked}" />
+                <Setter TargetName="Slider" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=BorderBrushChecked}" />
+
+                <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleSwitch}}, Path=ThumbBackgroundChecked}" TargetName="PART_Thumb" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
+                <Setter Property="Opacity" Value=".6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+    </ControlTemplate>
+    
+    <Style TargetType="{x:Type local:ToggleSwitch}">
+        <Setter Property="IsThreeState" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource OnOffButtonSliderBackground}" />
+        <Setter Property="BackgroundChecked" Value="{DynamicResource OnOffButtonSliderBackgroundChecked}" />
+        <Setter Property="BorderBrushChecked" Value="{DynamicResource OnOffButtonBorderBrushCheked}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+
+        <Setter Property="ThumbBackground" Value="{DynamicResource OnOffButtonThumbBackground}" />
+        <Setter Property="ThumbBackgroundChecked" Value="{DynamicResource OnOffButtonThumbBackgroundChecked}" />
+
+        <Setter Property="Template" Value="{StaticResource MetroToggleSwitchTemplate}" />
+        <Style.Triggers>
+            <Trigger Property="MetroStyle" Value="False">
+                <Setter Property="ThumbSize" Value="18" />
+                <Setter Property="Template" Value="{StaticResource DefaultToggleSwitchTemplate}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource OnOffButtonBorderBrush}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

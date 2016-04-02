@@ -12,12 +12,12 @@ using System.Windows.Markup;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
-    [TemplatePart(Name = "PART_Thumb", Type = typeof(Ellipse))]
+    [TemplatePart(Name = "PART_Thumb", Type = typeof(UIElement))]
     [ContentProperty("Content")]
     public class ToggleSwitch : ToggleButton
     {
         #region - Fields -
-        private Ellipse slider;
+        private UIElement slider;
         private DoubleAnimation checkAnimation;
         private DoubleAnimation uncheckAnimation;
         #endregion
@@ -43,7 +43,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public static DependencyProperty ThumbSizeProperty = DependencyProperty.Register("ThumbSize", typeof(double), typeof(ToggleSwitch),
-            new FrameworkPropertyMetadata(18.0,
+            new FrameworkPropertyMetadata(12.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         
         public static DependencyProperty ThumbBackgroundProperty = DependencyProperty.Register("ThumbBackground", typeof(Brush), typeof(ToggleSwitch));
@@ -51,6 +51,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static DependencyProperty ThumbBackgroundCheckedProperty = DependencyProperty.Register("ThumbBackgroundChecked", typeof(Brush), typeof(ToggleSwitch));
         
         public static DependencyProperty SliderPaddingProperty = DependencyProperty.Register("SliderPadding", typeof(Thickness), typeof(ToggleSwitch));
+
+        public static DependencyProperty MetroStyleProperty = DependencyProperty.Register("MetroStyle", typeof(bool), typeof(ToggleSwitch), new PropertyMetadata(true));
 
         #endregion
 
@@ -141,7 +143,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnApplyTemplate();
 
-            slider = this.Template.FindName("PART_Thumb", this) as Ellipse;
+            slider = this.Template.FindName("PART_Thumb", this) as UIElement;
 
             CreateAnimations();
 
@@ -163,7 +165,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         private double SliderOffset
         {
-            get { return this.SliderWidth - this.ThumbSize - 0.5; }
+            get { return MetroStyle ? this.SliderWidth - this.ThumbSize - 0.5 : this.SliderWidth - this.ThumbSize; }
         } 
 
         #endregion
@@ -226,7 +228,16 @@ namespace Aronium.Wpf.Toolkit.Controls
             get { return (Thickness)GetValue(SliderPaddingProperty); }
             set { SetValue(SliderPaddingProperty, value); }
         }
-        
+
+        /// <summary>
+        /// Gets or sets a value indincating whether control should be rendered in metro style.
+        /// </summary>
+        public bool MetroStyle
+        {
+            get { return (bool)GetValue(MetroStyleProperty); }
+            set { SetValue(MetroStyleProperty, value); }
+        }
+
         #endregion
     }
 }

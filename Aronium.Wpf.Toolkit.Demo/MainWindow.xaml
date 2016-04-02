@@ -156,9 +156,16 @@
                                     </WrapPanel>
 
                                     <WrapPanel Margin="0,10">
-                                        <aronium:ToggleSwitch IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5,5,5"/>
-                                        <aronium:ToggleSwitch Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
+                                        <aronium:ToggleSwitch MetroStyle="False" IsChecked="true" HorizontalAlignment="Center" x:Name="onoff" Margin="0,5,5,5"/>
+                                        <aronium:ToggleSwitch MetroStyle="False" Padding="10,0,0,0" Content="Enabled / Disabled" IsChecked="True" HorizontalAlignment="Center" IsEnabled="{Binding ElementName=onoff, Path=IsChecked}"/>
                                     </WrapPanel>
+
+                                    <WrapPanel Margin="0,10">
+                                        <aronium:ToggleSwitch MetroStyle="True" IsChecked="true" HorizontalAlignment="Center" Margin="0,5,5,5" x:Name="metroOnOff" />
+                                        <aronium:ToggleSwitch MetroStyle="True" FontSize="20" FontWeight="Bold" Padding="10,0,0,0" IsChecked="true" HorizontalAlignment="Center" Margin="0,5,5,5" IsEnabled="{Binding ElementName=metroOnOff, Path=IsChecked}" Content="Enabled / Disabled"/>
+                                    </WrapPanel>
+
+                                    <aronium:ToggleSwitch MetroStyle="True" HorizontalAlignment="Left" Background="Firebrick" BackgroundChecked="{StaticResource Accent}"/>
 
                                     <Label IsEnabled="False" Content="Button group" />
 
