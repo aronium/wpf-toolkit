@@ -24,35 +24,35 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Dependency properties -
 
-        public static DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", 
-            typeof(CornerRadius), 
+        public static DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius",
+            typeof(CornerRadius),
             typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(new CornerRadius(7), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
-        
+
         public static DependencyProperty BackgroundCheckedProperty = DependencyProperty.Register("BackgroundChecked", typeof(Brush), typeof(ToggleSwitch));
-                
+
         public static DependencyProperty BorderBrushCheckedProperty = DependencyProperty.Register("BorderBrushChecked", typeof(Brush), typeof(ToggleSwitch));
-        
+
         public static DependencyProperty SliderWidthProperty = DependencyProperty.Register("SliderWidth", typeof(double), typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(34.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                new PropertyChangedCallback(OnSliderWidthChanged)));
+                new PropertyChangedCallback(OnReloadRequired)));
 
         public static DependencyProperty SliderHeightProperty = DependencyProperty.Register("SliderHeight", typeof(double), typeof(ToggleSwitch),
             new FrameworkPropertyMetadata(16.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public static DependencyProperty ThumbSizeProperty = DependencyProperty.Register("ThumbSize", typeof(double), typeof(ToggleSwitch),
-            new FrameworkPropertyMetadata(12.0,
+            new FrameworkPropertyMetadata(10.0,
                 FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-        
+
         public static DependencyProperty ThumbBackgroundProperty = DependencyProperty.Register("ThumbBackground", typeof(Brush), typeof(ToggleSwitch));
-       
+
         public static DependencyProperty ThumbBackgroundCheckedProperty = DependencyProperty.Register("ThumbBackgroundChecked", typeof(Brush), typeof(ToggleSwitch));
-        
+
         public static DependencyProperty SliderPaddingProperty = DependencyProperty.Register("SliderPadding", typeof(Thickness), typeof(ToggleSwitch));
 
-        public static DependencyProperty MetroStyleProperty = DependencyProperty.Register("MetroStyle", typeof(bool), typeof(ToggleSwitch), new PropertyMetadata(true));
+        public static DependencyProperty MetroStyleProperty = DependencyProperty.Register("MetroStyle", typeof(bool), typeof(ToggleSwitch), new PropertyMetadata(true, new PropertyChangedCallback(OnReloadRequired)));
 
         #endregion
 
@@ -77,16 +77,16 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 checkAnimation = new DoubleAnimation()
                 {
-                    From = 1,
-                    To = SliderOffset,
+                    From = MetroStyle ? 0 : 1,
+                    To = SliderOffset + (MetroStyle ? 1 : 0),
                     Duration = TimeSpan.FromSeconds(0.3),
                     EasingFunction = new CircleEase()
                 };
 
                 uncheckAnimation = new DoubleAnimation()
                 {
-                    To = 1,
-                    From = SliderOffset,
+                    To = MetroStyle ? 0 : 1,
+                    From = SliderOffset + (MetroStyle ? 1 : 0),
                     Duration = TimeSpan.FromSeconds(0.3),
                     EasingFunction = new CircleEase()
                 };
@@ -122,15 +122,10 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
-        private static void OnSliderWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnReloadRequired(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ToggleSwitch)d).UpdateSliderWidth();
+            ((ToggleSwitch)d).CreateAnimations();
         }
-
-        private void UpdateSliderWidth()
-        {
-            CreateAnimations();
-        } 
 
         #endregion
 
@@ -166,10 +161,10 @@ namespace Aronium.Wpf.Toolkit.Controls
         private double SliderOffset
         {
             get { return MetroStyle ? this.SliderWidth - this.ThumbSize - 0.5 : this.SliderWidth - this.ThumbSize; }
-        } 
+        }
 
         #endregion
-        
+
         #region - Properties -
 
         /// <summary>

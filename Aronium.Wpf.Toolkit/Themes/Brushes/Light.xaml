@@ -32,7 +32,7 @@
     <SolidColorBrush x:Key="ScrollbarGlyphMouseOver" Color="#FF7E7C7C"/>
 
     <!--On off button-->
-    <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FFF1F1F1" />
+    <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FFA1A1A1" />
     <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#FF52D468" />
     <SolidColorBrush x:Key="OnOffButtonBorderBrush" Color="#FFDDDDDD" />
     <SolidColorBrush x:Key="OnOffButtonBorderBrushCheked" Color="#FFDDDDDD" />

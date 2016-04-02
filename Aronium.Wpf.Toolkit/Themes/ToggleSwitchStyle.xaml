@@ -2,6 +2,7 @@
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--IOS style switch control template-->
     <ControlTemplate TargetType="{x:Type local:ToggleSwitch}" x:Key="DefaultToggleSwitchTemplate">
         <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
@@ -58,6 +59,7 @@
 
     </ControlTemplate>
 
+    <!--Metro style switch control template-->
     <ControlTemplate TargetType="{x:Type local:ToggleSwitch}" x:Key="MetroToggleSwitchTemplate">
         <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
@@ -79,7 +81,9 @@
                 <Rectangle Name="PART_Thumb" 
                            Width="{TemplateBinding ThumbSize}"
                            Height="{TemplateBinding SliderHeight}"
-                           Fill="{TemplateBinding ThumbBackground}" />
+                           Fill="{TemplateBinding ThumbBackground}"
+                           Stroke="{TemplateBinding ThumbBackground}"
+                           StrokeThickness="1"/>
             </Canvas>
 
             <ContentPresenter Content="{TemplateBinding Content}"
@@ -118,12 +122,15 @@
 
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
 
-        <Setter Property="ThumbBackground" Value="{DynamicResource OnOffButtonThumbBackground}" />
-        <Setter Property="ThumbBackgroundChecked" Value="{DynamicResource OnOffButtonThumbBackgroundChecked}" />
+        <Setter Property="ThumbBackground" Value="{DynamicResource Foreground}" />
+        <Setter Property="ThumbBackgroundChecked" Value="{DynamicResource Foreground}" />
 
         <Setter Property="Template" Value="{StaticResource MetroToggleSwitchTemplate}" />
         <Style.Triggers>
             <Trigger Property="MetroStyle" Value="False">
+                <Setter Property="ThumbBackground" Value="{DynamicResource OnOffButtonThumbBackground}" />
+                <Setter Property="ThumbBackgroundChecked" Value="{DynamicResource OnOffButtonThumbBackgroundChecked}" />
+
                 <Setter Property="ThumbSize" Value="18" />
                 <Setter Property="Template" Value="{StaticResource DefaultToggleSwitchTemplate}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource OnOffButtonBorderBrush}" />
