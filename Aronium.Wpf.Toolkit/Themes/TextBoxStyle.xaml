@@ -18,7 +18,15 @@
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="MouseOver" />
-                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="0.55" Storyboard.TargetProperty="Opacity"
+                                                Storyboard.TargetName="DisabledVisualElement" />
+                                        <DoubleAnimation Duration="0" To="0.5"
+                                                Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                Storyboard.TargetName="PART_ContentHost" />
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="ReadOnly">
                                     <Storyboard>
                                         <DoubleAnimation Duration="0" To="0.55" Storyboard.TargetProperty="Opacity"
@@ -67,17 +75,14 @@
                                               Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
+                        <Border x:Name="DisabledVisualElement" Background="{DynamicResource BackgroundDisabledBrush}"
+                                IsHitTestVisible="False" Margin="1" Opacity="0" CornerRadius="0" />
                         <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="1"
                                 IsHitTestVisible="False" Margin="0" CornerRadius="0" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.5"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBoxStyle}" />
