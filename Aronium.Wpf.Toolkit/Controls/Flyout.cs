@@ -20,7 +20,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(Flyout), new UIPropertyMetadata());
 
-        public static readonly DependencyProperty FlyoutwidthProperty = DependencyProperty.Register("Flyoutwidth", typeof(double), typeof(Flyout), new UIPropertyMetadata(300.0));
+        public static readonly DependencyProperty FlyoutWidthProperty = DependencyProperty.Register("Flyoutwidth", typeof(double), typeof(Flyout), new UIPropertyMetadata(300.0));
 
         public static readonly DependencyProperty BackdropProperty = DependencyProperty.Register("Backdrop", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
 
@@ -176,10 +176,10 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Gets or sets flyout width.
         /// </summary>
-        public double Flyoutwidth
+        public double FlyoutWidth
         {
-            get { return (double)GetValue(FlyoutwidthProperty); }
-            set { SetValue(FlyoutwidthProperty, value); }
+            get { return (double)GetValue(FlyoutWidthProperty); }
+            set { SetValue(FlyoutWidthProperty, value); }
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 {
                     _inAnimation = new ThicknessAnimation()
                     {
-                        From = new Thickness(0, 0, -Flyoutwidth, 0),
+                        From = new Thickness(0, 0, -FlyoutWidth, 0),
                         To = new Thickness(0),
                         Duration = TimeSpan.FromMilliseconds(Duration)
                     };
@@ -240,7 +240,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     _outAnimation = new ThicknessAnimation()
                     {
                         From = new Thickness(0),
-                        To = new Thickness(0, 0, -Flyoutwidth, 0),
+                        To = new Thickness(0, 0, -FlyoutWidth, 0),
                         Duration = TimeSpan.FromMilliseconds(Duration)
                     };
 
