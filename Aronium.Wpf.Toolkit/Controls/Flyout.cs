@@ -20,7 +20,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(Flyout), new UIPropertyMetadata());
 
-        public static readonly DependencyProperty FlyoutWidthProperty = DependencyProperty.Register("Flyoutwidth", typeof(double), typeof(Flyout), new UIPropertyMetadata(300.0));
+        public static readonly DependencyProperty FlyoutWidthProperty = DependencyProperty.Register("FlyoutWidth", typeof(double), typeof(Flyout), new UIPropertyMetadata(300.0));
 
         public static readonly DependencyProperty BackdropProperty = DependencyProperty.Register("Backdrop", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
 
