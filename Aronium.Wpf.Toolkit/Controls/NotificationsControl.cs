@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,6 +8,8 @@ namespace Aronium.Wpf.Toolkit.Controls
 {
     public class NotificationsControl : ItemsControl
     {
+        private bool isApplicationClosing;
+
         #region - Routed events and dependency properties -
 
         public static DependencyProperty DurationProperty = DependencyProperty.Register("Duration", typeof(int), typeof(NotificationsControl), new PropertyMetadata(10));
@@ -136,38 +134,39 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnNotificationItemIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (!((bool)e.NewValue))
+            if (!isApplicationClosing && !((bool)e.NewValue))
             {
                 this.RaiseEvent(new RoutedEventArgs(ItemClosedEvent, sender));
             }
         }
 
-        private void OnApplicationMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OnApplicationMainWindowClosing(object sender, CancelEventArgs e)
         {
             /***********************************************************************************************
              * 
              * IMPORTANT!
              * 
              * Issue occured if notifications are visible on application close.
-             * If user click on notificaion, for some reason, it will not allow application to close.
+             * If routed event was fired during application shutdown, exception is thrown.
              * 
-             * On main window application close, remove items source and stop all running DispatcherTimers
-             * for all current items, if any.
+             * On main window application close, close items and stop running timers, if any.
              * 
              ***********************************************************************************************/
 
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(this); i++)
-            {
-                var container = ItemContainerGenerator.ContainerFromIndex(i) as NotificationItem;
+            isApplicationClosing = !e.Cancel;
 
-                if (container != null)
+            if (isApplicationClosing)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(this); i++)
                 {
-                    container.Close();
+                    var container = ItemContainerGenerator.ContainerFromIndex(i) as NotificationItem;
+
+                    if (container != null)
+                    {
+                        container.Close();
+                    }
                 }
             }
-
-            this.ItemsSource = null;
-            this.Items.Clear();
         }
 
         #endregion

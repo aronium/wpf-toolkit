@@ -5,11 +5,11 @@
     <system:Double x:Key="DataGridDefaultCellHeight">30</system:Double>
     
     <Style TargetType="{x:Type DataGrid}">
-        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource DataGridLineBrush}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource DataGridLineBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="RowHeaderWidth" Value="0" />
-        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
     </Style>
 
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
@@ -30,10 +30,10 @@
         <Setter Property="MinWidth" Value="0" />
         <Setter Property="MinHeight" Value="{StaticResource DataGridDefaultCellHeight}" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="SeparatorBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="SeparatorBrush" Value="{DynamicResource DataGridLineBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Padding" Value="6,0" />
-        <Setter Property="Background" Value="{DynamicResource BackgroundHoBrush}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -111,11 +111,11 @@
     <!-- Row -->
     <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
         <Setter Property="MinHeight" Value="{StaticResource DataGridDefaultCellHeight}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
+                <Setter Property="Background" Value="{DynamicResource DataGridBackgroundHoverBrush}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Accent}" />

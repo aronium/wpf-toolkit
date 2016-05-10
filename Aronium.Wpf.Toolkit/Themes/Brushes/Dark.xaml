@@ -4,8 +4,10 @@
     <Color x:Key="AccentColor">#FF1BA1E2</Color>
     <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
 
-    <Color x:Key="BackgroundColor">#FF313539</Color>
+    <Color x:Key="BackgroundColor">#FF333333</Color>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+    <Color x:Key="BackgroundDarkColor">#FF252525</Color>
+    <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDarkColor}" />
     <SolidColorBrush x:Key="BackgroundDisabledBrush">#FF575757</SolidColorBrush>
     <Color x:Key="BorderBrushColor">#FF595E57</Color>
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}" />
@@ -38,5 +40,10 @@
     <SolidColorBrush x:Key="OnOffButtonBorderBrushCheked" Color="#FF595959" />
     <SolidColorBrush x:Key="OnOffButtonThumbBackground" Color="White" />
     <SolidColorBrush x:Key="OnOffButtonThumbBackgroundChecked" Color="White" />
+    
+    <!--Datagrid-->
+    <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundDarkColor}" />
+    <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="#FF1E1E1E" />
+    <SolidColorBrush x:Key="DataGridLineBrush" Color="#FF373A36" /> 
 
 </ResourceDictionary>
