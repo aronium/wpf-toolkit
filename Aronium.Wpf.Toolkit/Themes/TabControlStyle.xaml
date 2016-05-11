@@ -7,6 +7,8 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="13,4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -18,11 +20,14 @@
                                                   VerticalAlignment="Center"
                                                   HorizontalAlignment="Center"
                                                   ContentSource="Header"
-                                                  Margin="12,4"
+                                                  Margin="{TemplateBinding Padding}"
                                                   TextElement.Foreground="{TemplateBinding Foreground}"
-                                                  TextBlock.FontSize="13"
+                                                  TextBlock.FontSize="{TemplateBinding FontSize}"
                                                   RecognizesAccessKey="True" />
-                                <Polygon Name="arrow" Visibility="Collapsed" Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" />
+                                <Polygon Name="arrow" 
+                                         Visibility="Collapsed" 
+                                         Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" 
+                                         Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -56,7 +61,7 @@
                             <Setter TargetName="arrow" Property="Points" Value="0,0 4,4 0,8" />
                             <Setter TargetName="arrow" Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="arrow" Property="VerticalAlignment" Value="Center" />
-                            <Setter TargetName="arrow" Property="Margin" Value="0,2,-5,0" />
+                            <Setter TargetName="arrow" Property="Margin" Value="0,2.5,-5,0" />
                             <Setter TargetName="ContentSite" Property="HorizontalAlignment" Value="Left" />
                         </Trigger>
 
@@ -64,8 +69,10 @@
                             <Setter TargetName="arrow" Property="Points" Value="0,4 4,0 4,8" />
                             <Setter TargetName="arrow" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="arrow" Property="VerticalAlignment" Value="Center" />
-                            <Setter TargetName="arrow" Property="Margin" Value="-5,0,0,0" />
+                            <Setter TargetName="arrow" Property="Margin" Value="-5,0.5,0,0" />
                             <Setter TargetName="ContentSite" Property="HorizontalAlignment" Value="Right" />
+                            <!--When turned on, for some reason, arrow is not positioned properly-->
+                            <Setter Property="UseLayoutRounding" Value="False" />
                         </Trigger>
 
                         <Trigger Property="TabItem.TabStripPlacement" Value="Bottom">
@@ -117,7 +124,8 @@
                 Background="{TemplateBinding Background}"
                 KeyboardNavigation.TabNavigation="Local"
                 KeyboardNavigation.DirectionalNavigation="Contained"
-                KeyboardNavigation.TabIndex="2">
+                KeyboardNavigation.TabIndex="2"
+                UseLayoutRounding="True">
             <Grid KeyboardNavigation.TabNavigation="Local">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -126,7 +134,6 @@
                 <TabPanel x:Name="HeaderPanel"
                           Panel.ZIndex="1"
                           IsItemsHost="True"
-                          MinWidth="120"
                           KeyboardNavigation.TabIndex="1"/>
                 <!--Border used for left margin so arrow do not overlap content-->
                 <Border Margin="6,0,0,0" Grid.Column="1">
@@ -160,7 +167,6 @@
                           Panel.ZIndex="1"
                           IsItemsHost="True"
                           Grid.Column="1"
-                          MinWidth="120"
                           KeyboardNavigation.TabIndex="1"
                           Background="Transparent" />
             </Grid>
@@ -170,12 +176,12 @@
     <!--Bottom template-->
     <ControlTemplate x:Key="TabControlTemplateBottom" TargetType="{x:Type TabControl}">
         <Border x:Name="Border"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Background="{TemplateBinding Background}"
-                    KeyboardNavigation.TabNavigation="Local"
-                    KeyboardNavigation.DirectionalNavigation="Contained"
-                    KeyboardNavigation.TabIndex="2">
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}"
+                KeyboardNavigation.TabNavigation="Local"
+                KeyboardNavigation.DirectionalNavigation="Contained"
+                KeyboardNavigation.TabIndex="2">
             <Grid KeyboardNavigation.TabNavigation="Local">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -196,7 +202,6 @@
                       Background="Transparent" />
             </Grid>
         </Border>
-
     </ControlTemplate>
 
     <Style TargetType="{x:Type TabControl}">
@@ -204,7 +209,8 @@
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <!-- If UseLayoutRounding is turned off, arrow with left layout is not positioned propely -->
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Style.Triggers>
             <Trigger Property="TabStripPlacement" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TabControlTemplate}" />
