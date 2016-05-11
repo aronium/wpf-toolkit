@@ -19,16 +19,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ClosableTabItem}">
                     <Grid x:Name="Root">
-                        <!--<Grid.Resources>
-                            <Style TargetType="MenuItem">
-                                <Setter Property="CommandTarget">
-                                    <Setter.Value>
-                                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}" Path="(ContextMenu.PlacementTarget)" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Grid.Resources>-->
-
                         <!--Header-->
                         <Border x:Name="PART_ItemBorder" 
                                 Background="{TemplateBinding Background}">
@@ -69,12 +59,23 @@
                                                       Height="10" Width="10" />
                                             </Border>
                                             <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="xPath" Property="Stroke" Value="{DynamicResource BackgroundHoverBrush}" />
-                                                    <Setter TargetName="CloseBorder" Property="Background" Value="{DynamicResource ForegroundSelected}" />
-                                                </Trigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ClosableTabItem}}, Path=IsSelected}" Value="True" />
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter TargetName="CloseBorder" Property="Background" Value="{DynamicResource CloseTabItemBackgroundHover}" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ClosableTabItem}}, Path=IsSelected}" Value="False" />
+                                                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter TargetName="CloseBorder" Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                                                </MultiDataTrigger>
+
                                                 <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="xPath" Property="Stroke" Value="{DynamicResource Accent}" />
+                                                    <Setter TargetName="xPath" Property="Opacity" Value="0.7" />
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -86,6 +87,15 @@
                             <!--Context menu-->
                             <Border.ContextMenu>
                                 <ContextMenu>
+                                    <!--<ContextMenu.Resources>
+                                        <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                                            <Setter Property="CommandTarget">
+                                                <Setter.Value>
+                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}" Path="(ContextMenu.PlacementTarget)" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ContextMenu.Resources>-->
                                     <MenuItem x:Name="CloseMenuItem" 
                                               Command="local:ClosableTabItem.CloseTabCommand"
                                               CommandParameter="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
@@ -96,7 +106,8 @@
                                         </MenuItem.Header>
                                     </MenuItem>
                                     <Separator x:Name="CloseMenuItemSeparator" />
-                                    <MenuItem Header="{TemplateBinding CloseAllButThisText}" Command="local:ClosableTabItem.CloseOthersCommand" 
+                                    <MenuItem Header="{TemplateBinding CloseAllButThisText}" 
+                                              Command="local:ClosableTabItem.CloseOthersCommand" 
                                               CommandParameter="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                                     <MenuItem Header="{TemplateBinding CloseAllButActiveText}" Command="local:ClosableTabItem.CloseAllButActiveCommand"/>
                                     <MenuItem Header="{TemplateBinding CloseAllText}" Command="local:ClosableTabItem.CloseAllCommand"/>
@@ -150,7 +161,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Opacity" Value="1" />
-                            <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Accent}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="1" />
@@ -167,7 +178,7 @@
             <!--The same as pressed-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Opacity" Value="1" />
-                <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
+                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -228,7 +239,7 @@
                           Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
                           Data="{DynamicResource _ArrowRight}"/>
                 </RepeatButton>
-                <ToggleButton Grid.Column="3" Margin="0,0,4,0"
+                <ToggleButton Grid.Column="3" Margin="0,-1,5,0"
                               Width="22" 
                               x:Name="PART_DropDown"
                               Style="{StaticResource _NavigationTabControlContextMenuButtonStyle}">

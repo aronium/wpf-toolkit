@@ -45,5 +45,8 @@
     <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="{StaticResource BackgroundHoverColor}" />
     <SolidColorBrush x:Key="DataGridLineBrush" Color="{StaticResource BorderBrushColor}" />
+    
+    <!--Closable tab control-->
+    <SolidColorBrush x:Key="CloseTabItemBackgroundHover" Color="#036797" />
 
 </ResourceDictionary>

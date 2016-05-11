@@ -16,7 +16,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Height="24"
                             BorderThickness="{TemplateBinding BorderThickness}" 
-                            SnapsToDevicePixels="True">
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
 
                         <Grid x:Name="Grid">
                             <Grid.ColumnDefinitions>
@@ -118,12 +118,12 @@
                         </Trigger>
                         <Trigger Property="Role" Value="SubmenuHeader">
                             <Setter Property="DockPanel.Dock" Value="Top"/>
-                            <Setter Property="Padding" Value="6,3,0,3"/>
+                            <Setter Property="Padding" Value="6,2,0,2"/>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackgroundColor}"/>
                         </Trigger>
                         <Trigger Property="Role" Value="SubmenuItem">
                             <Setter Property="DockPanel.Dock" Value="Top"/>
-                            <Setter Property="Padding" Value="6,3,0,3"/>
+                            <Setter Property="Padding" Value="6,2,0,2"/>
                             <Setter TargetName="ArrowPanel" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackgroundColor}"/>
                         </Trigger>
