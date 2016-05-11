@@ -28,7 +28,7 @@
                                 </Setter>
                             </Style>
                         </Grid.Resources>-->
-                        
+
                         <!--Header-->
                         <Border x:Name="PART_ItemBorder" 
                                 Background="{TemplateBinding Background}">
@@ -134,6 +134,45 @@
         </Setter>
     </Style>
 
+    <!--Right navigation tab items buttons-->
+    <Style TargetType="{x:Type ButtonBase}" x:Key="_BaseNavigationButtonStyle">
+        <Setter Property="Opacity" Value=".7" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border Padding="2" Background="Transparent">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="1" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="1" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style TargetType="{x:Type ToggleButton}" x:Key="_NavigationTabControlContextMenuButtonStyle" BasedOn="{StaticResource _BaseNavigationButtonStyle}">
+        <Style.Triggers>
+            <!--The same as pressed-->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Opacity" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type RepeatButton}" x:Key="_NavigationTabControlButtonStyle" BasedOn="{StaticResource _BaseNavigationButtonStyle}"/>
+
     <!--Top template-->
     <ControlTemplate x:Key="TabControlTemplate" TargetType="{x:Type local:ClosableTabControl}">
         <Border x:Name="Border"
@@ -167,116 +206,38 @@
                               Background="Transparent" />
                 </ScrollViewer>
 
-                <RepeatButton Grid.Column="1" x:Name="PART_ScrollLeft" Width="22" Margin="5,0,0,0">
-                    <RepeatButton.Style>
-                        <Style TargetType="{x:Type RepeatButton}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                        <Border x:Name="ButtonBorder" 
-                                                            Background="Transparent" 
-                                                            Margin="2,6"
-                                                            CornerRadius="2" 
-                                                            BorderThickness="1"
-                                                            BorderBrush="Transparent"
-                                                            VerticalAlignment="Stretch"
-                                                            HorizontalAlignment="Stretch" >
-                                            <Path x:Name="Path" Width="5" Margin="0,0,2,0" Height="10" Stretch="Fill" Fill="{DynamicResource Foreground}" Data="{DynamicResource _ArrowLeft}"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource TabHoverArrowBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource BackgroundHoverBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBackgroundBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource ForegroundDisabled}" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </RepeatButton.Style>
+                <RepeatButton Grid.Column="1" 
+                              x:Name="PART_ScrollLeft" 
+                              Style="{StaticResource _NavigationTabControlButtonStyle}"
+                              Width="22" 
+                              Margin="5,0,0,0">
+                    <Path Width="5" 
+                          Margin="0,0,2,0" 
+                          Height="10" 
+                          Stretch="Fill" 
+                          Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
+                          Data="{DynamicResource _ArrowLeft}"/>
                 </RepeatButton>
-                <RepeatButton Grid.Column="2" x:Name="PART_ScrollRight" Width="22">
-                    <RepeatButton.Style>
-                        <Style TargetType="{x:Type RepeatButton}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                        <Border x:Name="ButtonBorder" 
-                                                Background="Transparent" 
-                                                Margin="2,6"
-                                                CornerRadius="2" 
-                                                BorderThickness="1"
-                                                BorderBrush="Transparent"
-                                                VerticalAlignment="Stretch"
-                                                HorizontalAlignment="Stretch" >
-                                            <Path x:Name="Path" Width="5" Height="10" Stretch="Fill" Fill="{DynamicResource BorderBrush}" Data="{DynamicResource _ArrowRight}"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource TabHoverArrowBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBackgroundBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource ForegroundDisabled}" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </RepeatButton.Style>
+                <RepeatButton Grid.Column="2" 
+                              x:Name="PART_ScrollRight" 
+                              Width="22"
+                              Style="{StaticResource _NavigationTabControlButtonStyle}">
+                    <Path Width="5" 
+                          Height="10" 
+                          Stretch="Fill" 
+                          Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
+                          Data="{DynamicResource _ArrowRight}"/>
                 </RepeatButton>
-                <ToggleButton Grid.Column="3" Margin="0,0,4,0" Width="22" x:Name="PART_DropDown">
-                    <ToggleButton.Style>
-                        <Style TargetType="{x:Type ToggleButton}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                        <Border x:Name="ButtonBorder" 
-                                                            Background="Transparent" 
-                                                            Margin="2,6"
-                                                            CornerRadius="2" 
-                                                            BorderThickness="1"
-                                                            BorderBrush="Transparent"
-                                                            VerticalAlignment="Stretch"
-                                                            HorizontalAlignment="Stretch" >
-                                            <Path Width="10" x:Name="Path" Margin="0,1,0,0" Height="5" Stretch="Fill" Fill="{DynamicResource BorderBrush}" Data="{DynamicResource _ArrowDown}"/>
-                                        </Border>
-
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource TabHoverArrowBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBackgroundBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource TabArrowDisabledBrush}" />
-                                            </Trigger>
-                                            <Trigger Property="IsChecked" Value="True">
-                                                <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                                <Setter TargetName="Path" Property="Fill" Value="{DynamicResource TabHoverArrowBrush}" />
-                                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{DynamicResource TabHoverArrowBorderBrush}" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ToggleButton.Style>
+                <ToggleButton Grid.Column="3" Margin="0,0,4,0"
+                              Width="22" 
+                              x:Name="PART_DropDown"
+                              Style="{StaticResource _NavigationTabControlContextMenuButtonStyle}">
+                    <Path Width="10"
+                          Margin="0,1,0,0" 
+                          Height="5" 
+                          Stretch="Fill" 
+                          Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=Foreground}" 
+                          Data="{DynamicResource _ArrowDown}"/>
                 </ToggleButton>
 
                 <Border BorderBrush="{TemplateBinding BorderBrush}" 
