@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aronium.Wpf.Toolkit.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -39,6 +40,8 @@ namespace Aronium.Wpf.Toolkit.Demo
             this.DataContext = this;
 
             this.IntegerProperty = new Random().Next(0, 1000);
+
+            closableTabControl.ItemClosing += OnClosableTabControlItemClosing;
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -173,6 +176,17 @@ namespace Aronium.Wpf.Toolkit.Demo
             {
                 Mouse.Capture(null);
             }
+        }
+
+        private void OnAddTabItem(object sender, RoutedEventArgs e)
+        {
+            var item = new ClosableTabItem() { Header = "Added item" };
+            closableTabControl.Items.Add(item);
+        }
+
+        private void OnClosableTabControlItemClosing(object sender, ClosableItemEventArgs e)
+        {
+            e.Cancel = MessageBox.Show($"Close item {e.Item.Header.ToString()}?", "Confirm close", MessageBoxButton.YesNo) != MessageBoxResult.Yes;
         }
     }
 }

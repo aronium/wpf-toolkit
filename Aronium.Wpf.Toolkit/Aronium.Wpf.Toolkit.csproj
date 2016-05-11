@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ButtonGroup.cs" />
+    <Compile Include="Controls\ClosableTabControl.cs" />
+    <Compile Include="Controls\ClosableTabItem.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\Flyout.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
@@ -107,6 +109,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\CheckBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ClosableTabControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

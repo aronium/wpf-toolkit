@@ -380,6 +380,25 @@
                 <TabItem Header="Data grid">
                     <DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" />
                 </TabItem>
+                <TabItem Header="Closable Tab Control">
+                    <aronium:ClosableTabControl x:Name="closableTabControl" >
+                        <aronium:ClosableTabItem CanClose="False" Header="CanClose: False">
+                            <Button Content="Add tab item" Click="OnAddTabItem" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+                        </aronium:ClosableTabItem>
+                        <aronium:ClosableTabItem Header="Closable item 2" CanClose="True">
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </aronium:ClosableTabItem>
+                        <aronium:ClosableTabItem Header="Closable item 3" CanClose="True">
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </aronium:ClosableTabItem>
+                        <aronium:ClosableTabItem Header="Closable item 4" CanClose="True">
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </aronium:ClosableTabItem>
+                        <aronium:ClosableTabItem Header="Closable item 5" CanClose="True">
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </aronium:ClosableTabItem>
+                    </aronium:ClosableTabControl>
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>
