@@ -7,6 +7,7 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="26" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -14,7 +15,7 @@
                     <Border x:Name="Border" 
                             Background="{TemplateBinding Background}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
-                            Height="24"
+                            Height="{TemplateBinding Height}"
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
 
@@ -85,7 +86,7 @@
                                             BorderBrush="{DynamicResource BorderBrush}"
                                             BorderThickness="1" 
                                             Background="{DynamicResource BackgroundBrush}" 
-                                            SnapsToDevicePixels="True">
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                         <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                                         </Grid>

@@ -59,6 +59,9 @@
                                                       Height="10" Width="10" />
                                             </Border>
                                             <ControlTemplate.Triggers>
+                                                <DataTrigger  Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ClosableTabItem}}, Path=IsSelected}" Value="True">
+                                                    <Setter TargetName="xPath" Property="Stroke" Value="{DynamicResource SelectedItemForeground}" />
+                                                </DataTrigger>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ClosableTabItem}}, Path=IsSelected}" Value="True" />
