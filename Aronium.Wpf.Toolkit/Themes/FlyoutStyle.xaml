@@ -38,6 +38,7 @@
                                             VerticalAlignment="Center"
                                             Focusable="False"
                                             Height="Auto"
+                                            Visibility="{TemplateBinding ShowBackArrow, Converter={StaticResource BooleanToVisibilityConverter}}"
                                             Style="{DynamicResource FlatButtonStyle}" 
                                             Padding="10,10,15,10">
                                         <Polygon Points="280.271,73.401 231.388,122.052 328.352,219.48 50,219.48 50,292.52 328.352,292.52 231.388,389.948 280.271,438.599 462,256 "
