@@ -20,12 +20,39 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(Flyout), new UIPropertyMetadata());
 
-        public static readonly DependencyProperty FlyoutWidthProperty = DependencyProperty.Register("FlyoutWidth", typeof(double), typeof(Flyout), new UIPropertyMetadata(300.0));
+        /// <summary>
+        /// Identifies FlyoutWidth dependency property.
+        /// </summary>
+        public static readonly DependencyProperty FlyoutWidthProperty = DependencyProperty.Register("FlyoutWidth", typeof(double), typeof(Flyout), new UIPropertyMetadata(300.0, new PropertyChangedCallback(OnWidthChanged)));
 
+        /// <summary>
+        /// Identifies SlideInAnimationWidth dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SlideInAnimationWidthProperty = DependencyProperty.Register("SlideInAnimationWidth", typeof(double?), typeof(Flyout), new UIPropertyMetadata(default(double?), new PropertyChangedCallback(OnWidthChanged)));
+
+        /// <summary>
+        /// Identifies SlideOutAnimationWidth dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SlideOutAnimationWidthProperty = DependencyProperty.Register("SlideOutAnimationWidth", typeof(double?), typeof(Flyout), new UIPropertyMetadata(default(double?), new PropertyChangedCallback(OnWidthChanged)));
+
+        /// <summary>
+        /// Identifies Backdrop dependency property.
+        /// </summary>
         public static readonly DependencyProperty BackdropProperty = DependencyProperty.Register("Backdrop", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
 
+        /// <summary>
+        /// Identifies ShowBackArrow dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ShowBackArrowProperty = DependencyProperty.Register("ShowBackArrow", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
+
+        /// <summary>
+        /// Identifies Title dependency property.
+        /// </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(Flyout));
 
+        /// <summary>
+        /// Identifies Duration dependency property.
+        /// </summary>
         public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration", typeof(double), typeof(Flyout), new PropertyMetadata(200.0));
 
         #endregion
@@ -117,6 +144,13 @@ namespace Aronium.Wpf.Toolkit.Controls
             RaiseEvent(new RoutedEventArgs(ExpandedEvent));
         }
 
+        private static void OnWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // Clear animations so they can be created with current width
+            ((Flyout)d).InAnimation = null;
+            ((Flyout)d).OutAnimation = null;
+        }
+
         #endregion
 
         #region - Public methods -
@@ -162,6 +196,60 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
+        #region - Private properties -
+
+        private ThicknessAnimation InAnimation
+        {
+            get
+            {
+                if (_inAnimation == null)
+                {
+                    _inAnimation = new ThicknessAnimation()
+                    {
+                        From = new Thickness(0, 0, -(SlideInAnimationWidth ?? FlyoutWidth), 0),
+                        To = new Thickness(0)
+                    };
+
+                    // In case open animation width is set to 0, duration is ignore
+                    _inAnimation.Duration = TimeSpan.FromMilliseconds(((SlideInAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0));
+
+                    _inAnimation.Completed += OnSlideIn;
+
+                    _inAnimation.Freeze();
+                }
+
+                return _inAnimation;
+            }
+            set { _inAnimation = value; }
+        }
+
+        private ThicknessAnimation OutAnimation
+        {
+            get
+            {
+                if (_outAnimation == null)
+                {
+                    _outAnimation = new ThicknessAnimation()
+                    {
+                        From = new Thickness(0),
+                        To = new Thickness(0, 0, -(SlideOutAnimationWidth ?? FlyoutWidth), 0)
+                    };
+
+                    // In case close animation width is set to 0, duration is ignore
+                    _outAnimation.Duration = TimeSpan.FromMilliseconds(((SlideOutAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0));
+
+                    _outAnimation.Completed += OnCollapsed;
+
+                    _outAnimation.Freeze();
+                }
+
+                return _outAnimation;
+            }
+            set { _outAnimation = value; }
+        }
+
+        #endregion
+
         #region - Properties -
 
         /// <summary>
@@ -183,6 +271,26 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         /// <summary>
+        /// Gets or sets slide-in animation size. 
+        /// <para>If not set, flyout width is used.</para>
+        /// </summary>
+        public double? SlideInAnimationWidth
+        {
+            get { return (double?)GetValue(SlideInAnimationWidthProperty); }
+            set { SetValue(SlideInAnimationWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets slide-out animation size. 
+        /// <para>If not set, flyout width is used.</para>
+        /// </summary>
+        public double? SlideOutAnimationWidth
+        {
+            get { return (double?)GetValue(SlideOutAnimationWidthProperty); }
+            set { SetValue(SlideOutAnimationWidthProperty, value); }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether backdrop is visible.
         /// </summary>
         public bool Backdrop
@@ -191,6 +299,15 @@ namespace Aronium.Wpf.Toolkit.Controls
             set { SetValue(BackdropProperty, value); }
         }
 
+        /// <summary>
+        /// Indicates whether back arrow should be displayed in flyout.
+        /// </summary>
+        public bool ShowBackArrow
+        {
+            get { return (bool)GetValue(ShowBackArrowProperty); }
+            set { SetValue(ShowBackArrowProperty, value); }
+        }
+        
         /// <summary>
         /// Gets or sets title.
         /// </summary>
@@ -207,50 +324,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (double)GetValue(DurationProperty); }
             set { SetValue(DurationProperty, value); }
-        }
-
-        private ThicknessAnimation InAnimation
-        {
-            get
-            {
-                if (_inAnimation == null)
-                {
-                    _inAnimation = new ThicknessAnimation()
-                    {
-                        From = new Thickness(0, 0, -FlyoutWidth, 0),
-                        To = new Thickness(0),
-                        Duration = TimeSpan.FromMilliseconds(Duration)
-                    };
-
-                    _inAnimation.Completed += OnSlideIn;
-
-                    _inAnimation.Freeze();
-                }
-
-                return _inAnimation;
-            }
-        }
-
-        private ThicknessAnimation OutAnimation
-        {
-            get
-            {
-                if (_outAnimation == null)
-                {
-                    _outAnimation = new ThicknessAnimation()
-                    {
-                        From = new Thickness(0),
-                        To = new Thickness(0, 0, -FlyoutWidth, 0),
-                        Duration = TimeSpan.FromMilliseconds(Duration)
-                    };
-
-                    _outAnimation.Completed += OnCollapsed;
-
-                    _outAnimation.Freeze();
-                }
-
-                return _outAnimation;
-            }
         }
 
         #endregion
