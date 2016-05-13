@@ -65,12 +65,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Identifies IsVisibleWhenEmpty property.
         /// </summary>
-        public static readonly DependencyProperty IsVisibleWhenEmptyProperty = DependencyProperty.Register("IsVisibleWhenEmpty", typeof(bool), typeof(ClosableTabItem), new FrameworkPropertyMetadata(false));
-
-        /// <summary>
-        /// Identifies CornerRadiusProperty property.
-        /// </summary>
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ClosableTabControl), new FrameworkPropertyMetadata(new CornerRadius(0, 2.5, 2.5, 2.5)));
+        public static readonly DependencyProperty IsVisibleWhenEmptyProperty = DependencyProperty.Register("IsVisibleWhenEmpty", typeof(bool), typeof(ClosableTabControl), new FrameworkPropertyMetadata(false));
 
         /// <summary>
         /// Identifies IsClosableProperty property.
@@ -82,9 +77,19 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty AllowItemsReorderProperty = DependencyProperty.Register("AllowItemsReorder", typeof(bool), typeof(ClosableTabControl), new FrameworkPropertyMetadata(false));
 
+        /// <summary>
+        /// Identifies Header property.
+        /// </summary>
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(object), typeof(ClosableTabControl));
+
         #endregion
 
-        #region - Constructor -
+        #region - Constructors -
+
+        static ClosableTabControl()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ClosableTabControl), new FrameworkPropertyMetadata(typeof(ClosableTabControl)));
+        }
 
         /// <summary>
         /// Initializes new instance of ClosableTabControl class.
@@ -350,15 +355,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         /// <summary>
-        /// Gets or sets corner radius.
-        /// </summary>
-        public CornerRadius CornerRadius
-        {
-            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
-        }
-
-        /// <summary>
         /// Gets or sets a value indicating whether tab items can be closed.
         /// </summary>
         public bool IsClosable
@@ -374,6 +370,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(AllowItemsReorderProperty); }
             set { SetValue(AllowItemsReorderProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets header.
+        /// </summary>
+        public object Header
+        {
+            get { return GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
         }
 
         #endregion

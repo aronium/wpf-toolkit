@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
@@ -95,7 +92,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        #region - Constructor -
+        #region - Constructors -
+
+        static ClosableTabItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ClosableTabItem), new FrameworkPropertyMetadata(typeof(ClosableTabItem)));
+        }
 
         /// <summary>
         /// Initializes new instance of ClosableTabItem class.
