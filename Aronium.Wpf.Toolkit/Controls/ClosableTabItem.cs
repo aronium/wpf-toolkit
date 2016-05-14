@@ -34,6 +34,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly DependencyProperty CloseAllButThisTextProperty = DependencyProperty.Register("CloseAllButThisText", typeof(string), typeof(ClosableTabItem), new FrameworkPropertyMetadata("Close All But This"));
         public static readonly DependencyProperty CloseAllButActiveTextProperty = DependencyProperty.Register("CloseAllButActiveText", typeof(string), typeof(ClosableTabItem), new FrameworkPropertyMetadata("Close All But Active"));
         public static readonly DependencyProperty CloseAllTextProperty = DependencyProperty.Register("CloseAllText", typeof(string), typeof(ClosableTabItem), new FrameworkPropertyMetadata("Close All"));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(ClosableTabItem));
 
         #endregion
 
@@ -340,6 +341,18 @@ namespace Aronium.Wpf.Toolkit.Controls
             set
             {
                 SetValue(CloseAllTextProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets title used for drop down menu.
+        /// </summary>
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set
+            {
+                SetValue(TitleProperty, value);
             }
         }
 

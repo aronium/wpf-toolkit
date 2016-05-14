@@ -261,7 +261,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             _toggleButton.ContextMenu.Placement = TabStripPlacement == Dock.Bottom ? PlacementMode.Top : PlacementMode.Bottom;
 
             int index = 0;
-            foreach (TabItem tabItem in this.InternalChildren)
+            foreach (ClosableTabItem tabItem in this.InternalChildren)
             {
                 if (tabItem != null)
                 {
@@ -271,9 +271,16 @@ namespace Aronium.Wpf.Toolkit.Controls
                         continue;
                     }
 
-                    var header = tabItem.Header;
+                    string title = null;
 
-                    var mi = new MenuItem { Header = header, Tag = index++.ToString() };
+                    if (tabItem.Header is string)
+                        title = tabItem.Header as string;
+                    else if (!string.IsNullOrEmpty(tabItem.Title))
+                        title = tabItem.Title;
+                    else
+                        continue;
+
+                    var mi = new MenuItem { Header = title, Tag = index++.ToString() };
                     mi.Click += ContextMenuItem_Click;
                     if (index == this.SelectedIndex + 1)
                     {

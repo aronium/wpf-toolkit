@@ -230,6 +230,7 @@
 
                 <RepeatButton Grid.Column="2" 
                               x:Name="PART_ScrollLeft" 
+                              VerticalAlignment="Center"
                               Style="{StaticResource _NavigationTabControlButtonStyle}"
                               Width="22" 
                               Margin="5,0,0,0">
@@ -240,6 +241,7 @@
                           Data="{DynamicResource _ArrowLeft}"/>
                 </RepeatButton>
                 <RepeatButton Grid.Column="3" 
+                              VerticalAlignment="Center"
                               x:Name="PART_ScrollRight" 
                               Width="22"
                               Style="{StaticResource _NavigationTabControlButtonStyle}">
@@ -250,6 +252,7 @@
                           Data="{DynamicResource _ArrowRight}"/>
                 </RepeatButton>
                 <ToggleButton Grid.Column="4" 
+                              VerticalAlignment="Center"
                               Margin="0,-1,5,0"
                               Width="22" 
                               x:Name="PART_DropDown"

@@ -398,7 +398,10 @@
                             <aronium:ClosableTabItem CanClose="False" Header="CanClose: False">
                                 <Button Content="Add tab item" Click="OnAddTabItem" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
                             </aronium:ClosableTabItem>
-                            <aronium:ClosableTabItem Header="Closable item 2" CanClose="True">
+                            <aronium:ClosableTabItem CanClose="True" Title="Custom title">
+                                <aronium:ClosableTabItem.Header>
+                                    <TextBlock Text="TextBlock as Header" />
+                                </aronium:ClosableTabItem.Header>
                                 <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </aronium:ClosableTabItem>
                             <aronium:ClosableTabItem Header="Closable item 3" CanClose="True">
