@@ -142,7 +142,68 @@
                                     <aronium:TextSeparator FontSize="18" FontFamily="Segoe UI Light" Content="Text separator" />
 
                                     <ProgressBar Value="40" Maximum="100" Margin="0,10" />
+
+                                    <TreeView BorderThickness="0">
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                        <TreeViewItem Header="Root">
+                                            <TreeViewItem Header="Child 1">
+                                                <TreeViewItem Header="Child 1.1" />
+                                            </TreeViewItem>
+                                            <TreeViewItem Header="Child 2" />
+                                            <TreeViewItem Header="Child 3" />
+                                        </TreeViewItem>
+                                    </TreeView>
+
                                 </StackPanel>
+                                
                             </GroupBox>
 
                             <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="3" />
@@ -404,13 +465,10 @@
                                 </aronium:ClosableTabItem.Header>
                                 <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </aronium:ClosableTabItem>
+                            <aronium:ClosableTabItem Header="Closable item 2" CanClose="True">
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </aronium:ClosableTabItem>
                             <aronium:ClosableTabItem Header="Closable item 3" CanClose="True">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                            </aronium:ClosableTabItem>
-                            <aronium:ClosableTabItem Header="Closable item 4" CanClose="True">
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                            </aronium:ClosableTabItem>
-                            <aronium:ClosableTabItem Header="Closable item 5" CanClose="True">
                                 <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type aronium:ClosableTabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </aronium:ClosableTabItem>
                         </aronium:ClosableTabControl>
