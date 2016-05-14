@@ -389,7 +389,7 @@
 
                         <TextBlock Style="{DynamicResource Title}" Text="Closable tab control example" Margin="0,0,0,10"/>
 
-                        <aronium:ClosableTabControl x:Name="closableTabControl" Grid.Row="1">
+                        <aronium:ClosableTabControl AllowItemsReorder="True" x:Name="closableTabControl" Grid.Row="1">
 
                             <aronium:ClosableTabControl.Header>
                                 <TextBlock Text="Tab Control Header" Style="{StaticResource Heading1}" VerticalAlignment="Center" Margin="0,0,10,0" />
