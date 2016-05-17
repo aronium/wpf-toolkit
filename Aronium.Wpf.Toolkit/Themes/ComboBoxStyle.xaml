@@ -72,6 +72,17 @@
                                 </VisualState>
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
+                            <VisualStateGroup x:Name="ValidationStates">
+                                <VisualState x:Name="Valid" />
+                                <VisualState x:Name="InvalidUnfocused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                       Storyboard.TargetName="ValidationErrorElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
                         <Border x:Name="Border" 
@@ -138,6 +149,9 @@
                                 IsHitTestVisible="False" 
                                 Margin="1" 
                                 Opacity="0"/>
+
+                        <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="1"
+                                IsHitTestVisible="False" Margin="0" CornerRadius="0" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
