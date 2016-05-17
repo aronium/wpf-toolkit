@@ -139,7 +139,11 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnSlideIn(object sender, EventArgs e)
         {
-            Focus();
+            // Focus content, if content is framework element
+            if (this.Content != null && this.Content is FrameworkElement)
+                (this.Content as FrameworkElement).Focus();
+            else
+                Focus();
 
             RaiseEvent(new RoutedEventArgs(ExpandedEvent));
         }
