@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
@@ -195,7 +196,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public void Hide()
         {
-            contentSite.BeginAnimation(MarginProperty, OutAnimation);
+            Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() => contentSite.BeginAnimation(MarginProperty, OutAnimation)));
         }
 
         #endregion
