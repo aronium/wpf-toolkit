@@ -240,7 +240,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     };
 
                     // In case close animation width is set to 0, duration is ignore
-                    _outAnimation.Duration = TimeSpan.FromMilliseconds(((SlideOutAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0.1));
+                    _outAnimation.Duration = TimeSpan.FromMilliseconds(((SlideOutAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0));
 
                     _outAnimation.Completed += OnCollapsed;
 
