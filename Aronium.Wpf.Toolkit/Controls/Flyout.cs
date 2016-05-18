@@ -130,14 +130,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             Hide();
         }
 
-        private void OnCollapsed(object sender, EventArgs e)
-        {
-            Visibility = Visibility.Collapsed;
-
-            RaiseEvent(new RoutedEventArgs(CollapsedEvent));
-        }
-
-        private void OnSlideIn(object sender, EventArgs e)
+        private void OnExpanded(object sender, EventArgs e)
         {
             // Focus content, if content is framework element
             if (this.Content != null && this.Content is FrameworkElement)
@@ -146,6 +139,13 @@ namespace Aronium.Wpf.Toolkit.Controls
                 Focus();
 
             RaiseEvent(new RoutedEventArgs(ExpandedEvent));
+        }
+
+        private void OnCollapsed(object sender, EventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
+
+            RaiseEvent(new RoutedEventArgs(CollapsedEvent));
         }
 
         private static void OnWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -217,7 +217,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     // In case open animation width is set to 0, duration is ignore
                     _inAnimation.Duration = TimeSpan.FromMilliseconds(((SlideInAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0));
 
-                    _inAnimation.Completed += OnSlideIn;
+                    _inAnimation.Completed += OnExpanded;
 
                     _inAnimation.Freeze();
                 }
@@ -240,7 +240,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     };
 
                     // In case close animation width is set to 0, duration is ignore
-                    _outAnimation.Duration = TimeSpan.FromMilliseconds(((SlideOutAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0));
+                    _outAnimation.Duration = TimeSpan.FromMilliseconds(((SlideOutAnimationWidth ?? FlyoutWidth) > 0 ? Duration : 0.1));
 
                     _outAnimation.Completed += OnCollapsed;
 
@@ -311,7 +311,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             get { return (bool)GetValue(ShowBackArrowProperty); }
             set { SetValue(ShowBackArrowProperty, value); }
         }
-        
+
         /// <summary>
         /// Gets or sets title.
         /// </summary>
