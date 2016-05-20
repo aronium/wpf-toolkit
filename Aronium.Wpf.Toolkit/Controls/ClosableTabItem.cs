@@ -116,13 +116,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Overrides -
 
-        protected override void OnHeaderChanged(object oldHeader, object newHeader)
-        {
-            base.OnHeaderChanged(oldHeader, newHeader);
-            close.Header = string.Format("Close {0}", this.Header);
-            close.IsEnabled = this.CanClose;
-        }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
