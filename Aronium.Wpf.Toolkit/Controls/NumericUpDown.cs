@@ -73,11 +73,18 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             this.PreviewTextInput += new TextCompositionEventHandler(OnPreviewTextInput);
             this.PreviewKeyDown += new KeyEventHandler(OnPreviewKeyDown);
+
+            LostFocus += OnLostFocus;
         }
 
         #endregion
 
         #region - Private methods -
+
+        private void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            UpdateText();
+        }
 
         private static void OnDecimalPlacesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -118,7 +125,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                 if (!parsed)
                 {
-                    this.Text = Regex.Replace(this.Text, "[^0-9]+", string.Empty);
+                    this.Text = Regex.Replace(this.Text, "[^0-9.,]+", string.Empty);
 
                     UpdateText();
                 }
@@ -143,14 +150,17 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void UpdateText()
         {
-            if (string.IsNullOrEmpty(this.Text.Trim()))
+            if (!IsFocused)
             {
-                if (!AcceptEmptyValue)
-                    this.UpdateText(this.Minimum);
-            }
-            else if (decimal.TryParse(this.Text, out decimalValueParsed))
-            {
-                this.UpdateText(decimalValueParsed);
+                if (string.IsNullOrEmpty(this.Text.Trim()))
+                {
+                    if (!AcceptEmptyValue)
+                        this.UpdateText(this.Minimum);
+                }
+                else if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimalValueParsed))
+                {
+                    this.UpdateText(decimalValueParsed);
+                }
             }
         }
 

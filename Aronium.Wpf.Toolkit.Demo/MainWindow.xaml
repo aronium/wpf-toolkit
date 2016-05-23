@@ -475,7 +475,17 @@
 
                     </Grid>
                 </TabItem>
+                <TabItem Header="Flyout">
+                    <Grid>
+                        <Button Click="ShowFlyout" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="150" Content="Show Flyout" />
+                    </Grid>
+                </TabItem>
             </TabControl>
         </Grid>
+        <aronium:Flyout Grid.RowSpan="2" x:Name="flyout" Title="Flyout Title" Visibility="Collapsed">
+            <aronium:Flyout.Content>
+                <TextBlock Text="Flyout Content..." VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </aronium:Flyout.Content>
+        </aronium:Flyout>
     </Grid>
 </Window>

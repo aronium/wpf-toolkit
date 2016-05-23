@@ -188,5 +188,10 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             e.Cancel = MessageBox.Show($"Close item {e.Item.Header.ToString()}?", "Confirm close", MessageBoxButton.YesNo) != MessageBoxResult.Yes;
         }
+
+        private void ShowFlyout(object sender, RoutedEventArgs e)
+        {
+            flyout.Show();
+        }
     }
 }

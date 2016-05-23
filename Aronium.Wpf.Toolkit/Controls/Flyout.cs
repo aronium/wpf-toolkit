@@ -14,6 +14,12 @@ namespace Aronium.Wpf.Toolkit.Controls
     [ContentProperty("Content")]
     public class Flyout : Control
     {
+        #region - Fields -
+
+        private bool isOpening;
+
+        #endregion
+
         #region - Dependency properties -
 
         /// <summary>
@@ -140,6 +146,8 @@ namespace Aronium.Wpf.Toolkit.Controls
                 Focus();
 
             RaiseEvent(new RoutedEventArgs(ExpandedEvent));
+
+            isOpening = false;
         }
 
         private void OnCollapsed(object sender, EventArgs e)
@@ -183,6 +191,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public void Show()
         {
+            isOpening = true;
+
             this.Visibility = Visibility.Visible;
 
             if (contentSite != null)
@@ -196,7 +206,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public void Hide()
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(() => contentSite.BeginAnimation(MarginProperty, OutAnimation)));
+            if (isOpening) return;
+
+            contentSite.BeginAnimation(MarginProperty, OutAnimation);
         }
 
         #endregion
