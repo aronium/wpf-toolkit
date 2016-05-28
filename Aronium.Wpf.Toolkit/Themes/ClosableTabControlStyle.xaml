@@ -128,13 +128,12 @@
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <!--<Setter Property="Visibility" Value="Visible" TargetName="arrow" />-->
                             <Setter TargetName="PART_ItemBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ClosableTabControl}}, Path=BorderBrush}" />
-                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundSelected}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                         </Trigger>
 
                         <MultiTrigger>
