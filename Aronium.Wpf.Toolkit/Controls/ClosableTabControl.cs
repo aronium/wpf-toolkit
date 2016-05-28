@@ -34,7 +34,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Fields -
 
-        private ScrollDirection CurrentScrollDirection;
         private ToggleButton _toggleButton;
         private RepeatButton leftArrowButton, rightArrowButton;
 
