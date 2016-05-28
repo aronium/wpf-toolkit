@@ -149,28 +149,28 @@ namespace Aronium.Wpf.Toolkit.Controls
                     _toggleButton.Checked += DropdownButton_Checked;
                 }
 
-                if (scrollViewer != null && rightArrowButton != null)
-                {
-                    EnableRightButton(rightArrowButton, scrollViewer);
-
-                    rightArrowButton.Click += delegate
-                    {
-                        scrollViewer.LineRight();
-                    };
-
-                }
-
-                if (scrollViewer != null && leftArrowButton != null)
-                {
-                    leftArrowButton.IsEnabled = false;
-                    leftArrowButton.Click += delegate
-                    {
-                        scrollViewer.LineLeft();
-                    };
-                }
-
                 if (scrollViewer != null)
                 {
+                    if (rightArrowButton != null)
+                    {
+                        // Attach right button click event
+                        rightArrowButton.Click += delegate
+                        {
+                            scrollViewer.LineRight();
+                        };
+                    }
+
+                    // Attach left button click event
+                    if (leftArrowButton != null)
+                    {
+                        leftArrowButton.IsEnabled = false;
+                        leftArrowButton.Click += delegate
+                        {
+                            scrollViewer.LineLeft();
+                        };
+                    }
+
+                    // Attach scroll event, enable or disable left / right buttons
                     scrollViewer.ScrollChanged += delegate
                     {
                         if (leftArrowButton != null)
@@ -181,7 +181,12 @@ namespace Aronium.Wpf.Toolkit.Controls
                         {
                             EnableRightButton(rightArrowButton, scrollViewer);
                         }
+
+                        ValidateScrollArrowsVisibility();
                     };
+
+                    // Check navigation arrows visibility on load
+                    ValidateScrollArrowsVisibility();
                 }
             }
         }
@@ -226,11 +231,21 @@ namespace Aronium.Wpf.Toolkit.Controls
                     }
                 }
             }
+
+            ValidateScrollArrowsVisibility();
         }
 
         #endregion
 
         #region - Private methods -
+
+        private void ValidateScrollArrowsVisibility()
+        {
+            if (scrollViewer != null)
+            {
+                leftArrowButton.Visibility = rightArrowButton.Visibility = leftArrowButton.IsEnabled || rightArrowButton.IsEnabled ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -246,6 +261,8 @@ namespace Aronium.Wpf.Toolkit.Controls
                     }
                 }
             }
+
+            ValidateScrollArrowsVisibility();
         }
 
         /// <summary>
@@ -320,6 +337,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
+        /// <summary>
+        /// Calculates and enables right arrow button, if required.
+        /// </summary>
+        /// <param name="rightButton">Right arrow button.</param>
+        /// <param name="scrollViewer">Scroll viewer.</param>
         void EnableRightButton(RepeatButton rightButton, ScrollViewer scrollViewer)
         {
             var horizontalOffset = scrollViewer.HorizontalOffset;
