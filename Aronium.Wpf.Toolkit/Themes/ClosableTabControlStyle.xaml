@@ -6,10 +6,10 @@
     <System:Double x:Key="FocusVisualStrokeThickness">1</System:Double>
     <Thickness x:Key="FocusVisualThickness">1,1,1,1</Thickness>
 
-    <Geometry x:Key="_ArrowRight">M0,0 L4,4 L0,8</Geometry>
-    <Geometry x:Key="_ArrowLeft">M4,0 L0,4 L4,8</Geometry>
-    <Geometry x:Key="_ArrowDown">M0,0 L5,4 L10,0</Geometry>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     <Geometry x:Key="_CloseIcon">M0,0 L1,1 M0,1 L1,0</Geometry>
+    <Geometry x:Key="_Arrow">M0,0 4,4 0,8Z</Geometry>
 
     <!--Tab item template-->
     <Style TargetType="{x:Type local:ClosableTabItem}">
@@ -231,37 +231,42 @@
                               x:Name="PART_ScrollLeft" 
                               VerticalAlignment="Center"
                               Style="{StaticResource _NavigationTabControlButtonStyle}"
-                              Width="22" 
+                              Width="16"
                               Margin="5,0,0,0">
-                    <Path Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
-                          StrokeThickness="2"
+                    <Path Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
-                          Data="{DynamicResource _ArrowLeft}"/>
+                          Data="{StaticResource _Arrow}">
+                        <Path.LayoutTransform>
+                            <RotateTransform Angle="-180" />
+                        </Path.LayoutTransform>
+                    </Path>
                 </RepeatButton>
                 <RepeatButton Grid.Column="3" 
                               VerticalAlignment="Center"
                               x:Name="PART_ScrollRight" 
-                              Width="22"
+                              Width="16"
                               Style="{StaticResource _NavigationTabControlButtonStyle}">
-                    <Path Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
-                          StrokeThickness="2"
+                    <Path Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}, Path=Foreground}" 
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
-                          Data="{DynamicResource _ArrowRight}"/>
+                          Data="{StaticResource _Arrow}"/>
                 </RepeatButton>
                 <ToggleButton Grid.Column="4" 
                               VerticalAlignment="Center"
-                              Margin="0,-1,5,0"
-                              Width="22" 
+                              Margin="0,0,5,0"
+                              Width="16"
                               x:Name="PART_DropDown"
                               Style="{StaticResource _NavigationTabControlContextMenuButtonStyle}">
                     <Path Margin="0,1,0,0" 
-                          Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=Foreground}" 
-                          StrokeThickness="2"
+                          Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=Foreground}" 
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
-                          Data="{DynamicResource _ArrowDown}"/>
+                          Data="{StaticResource _Arrow}">
+                        <Path.LayoutTransform>
+                            <RotateTransform Angle="90" />
+                        </Path.LayoutTransform>
+                    </Path>
                 </ToggleButton>
 
                 <Border BorderBrush="{TemplateBinding BorderBrush}" 
