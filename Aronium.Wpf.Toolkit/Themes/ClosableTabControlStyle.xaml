@@ -282,6 +282,7 @@
                         BorderThickness="0,2,0,0" Grid.Row="1">
                     <ContentPresenter x:Name="PART_SelectedContentHost" 
                                       Margin="{TemplateBinding Padding}" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                       ContentSource="SelectedContent" />
                 </Border>
             </Grid>
@@ -292,6 +293,7 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>
             <Trigger Property="TabStripPlacement" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TabControlTemplate}" />
