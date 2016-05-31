@@ -419,7 +419,9 @@
                         <WrapPanel Grid.Column="1" Margin="5">
                             <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
                             <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                            <CheckBox Content="CheckBox" IsThreeState="True" IsEnabled="False" IsChecked="{x:Null}" Margin="5"/>
                             <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
+                            <CheckBox Content="CheckBox" IsChecked="True" IsEnabled="False" Margin="5"/>
 
                             <RadioButton Content="CheckBox" IsChecked="True" Margin="5"/>
                             <RadioButton Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>

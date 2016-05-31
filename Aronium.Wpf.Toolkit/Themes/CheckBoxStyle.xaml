@@ -102,21 +102,22 @@
                             <Setter Property="Background" TargetName="Bd" Value="{DynamicResource BackgroundHoverBrush}" />
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Accent}" />
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="True" />
-                                <Condition Property="IsEnabled" Value="True" />
-                            </MultiTrigger.Conditions>
+                        <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Stroke" TargetName="CheckIcon" Value="{DynamicResource Accent}" />
                             <Setter Property="Fill" TargetName="IndeterminateIcon" Value="{DynamicResource Accent}" />
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="True" />
-                                <Condition Property="IsEnabled" Value="False" />
-                            </MultiTrigger.Conditions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Stroke" TargetName="CheckIcon" Value="{DynamicResource ForegroundDisabled}" />
                             <Setter Property="Fill" TargetName="IndeterminateIcon" Value="{DynamicResource ForegroundDisabled}" />
+                        </Trigger>
+                        <!--Indeterminated state-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsThreeState" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Fill" TargetName="IndeterminateIcon" Value="{DynamicResource Accent}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                     
