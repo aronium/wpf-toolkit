@@ -25,11 +25,16 @@
                             </Grid.ColumnDefinitions>
                             
                             <!--Buttons in grid do not fit the layout, for that reason margin right is set to -1 and -0.5, to fit full area-->
-                            
-                            <Button Name="PART_Button" BorderThickness="0" Margin="0,0,-1,0" Content="{TemplateBinding Content}"/>
+
+                            <Button Name="PART_Button" BorderThickness="0" Margin="0,0,-1,0" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"/>
                             <Rectangle Margin="0" Fill="{TemplateBinding BorderBrush}" Width="1" Grid.Column="1" />
-                            <ToggleButton Name="PART_DropDownButton" Margin="0,0,-0.5,0" BorderThickness="0" Grid.Column="2">
-                                <Path Fill="{TemplateBinding Foreground}" x:Name="Arrow" SnapsToDevicePixels="True" Data="M 0 0 L 4 4 L 8 0 Z" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <ToggleButton Name="PART_DropDownButton" Margin="0,0,-0.5,0" Padding="5,0" VerticalContentAlignment="Center" BorderThickness="0" Grid.Column="2">
+                                <Path Fill="{Binding ElementName=PART_DropDownButton, Path=Foreground}" 
+                                      x:Name="Arrow" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                      Data="M 0 0 L 4 4 L 8 0 Z" 
+                                      VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center" />
                             </ToggleButton>
                         </Grid>
                     </Border>
@@ -40,6 +45,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" SourceName="PART_Button" Value="True">
                             <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
                         </Trigger>
                         <Trigger Property="IsFocused" SourceName="PART_Button" Value="True">
                             <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
