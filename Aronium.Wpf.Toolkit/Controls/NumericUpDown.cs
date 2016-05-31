@@ -62,6 +62,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         #endregion
 
         #region - Constructor -
+        
+        static NumericUpDown()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
+        }
 
         /// <summary>
         /// Initializes new isntance of NumericUpDown class.

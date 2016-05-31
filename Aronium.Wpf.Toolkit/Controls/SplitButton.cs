@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -48,8 +44,13 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private Button contentButton;
         private ToggleButton dropDownButton;
-        
-        #region - Constructor -
+
+        #region - Constructors -
+
+        static SplitButton()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SplitButton), new FrameworkPropertyMetadata(typeof(SplitButton)));
+        }
 
         /// <summary>
         /// Initializes new instance of SplitButton class.

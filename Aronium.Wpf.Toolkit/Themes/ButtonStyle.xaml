@@ -5,7 +5,7 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="Padding" Value="5,0,5,3" />
+        <Setter Property="Padding" Value="5,0" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -16,12 +16,12 @@
         <Border Background="{TemplateBinding Background}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 BorderBrush="{TemplateBinding BorderBrush}"
-                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                Padding="{TemplateBinding Padding}">
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                               RecognizesAccessKey="True"
+                              Margin="{TemplateBinding Padding}"
                               TextElement.Foreground="{TemplateBinding Foreground}"
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
         </Border>
@@ -124,12 +124,12 @@
         <Border Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Padding="{TemplateBinding Padding}">
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                               RecognizesAccessKey="True"
+                              Margin="{TemplateBinding Padding}"
                               TextElement.Foreground="{TemplateBinding Foreground}"
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
         </Border>
