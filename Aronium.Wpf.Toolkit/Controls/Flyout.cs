@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -62,6 +63,17 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration", typeof(double), typeof(Flyout), new PropertyMetadata(200.0));
 
+        /// <summary>
+        /// Identifies IsOpen dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register("IsOpen", typeof(bool), typeof(Flyout), 
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnIsOpenChanged)));
+
+        /// <summary>
+        /// Identifies FocusElementProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty FocusElementProperty = DependencyProperty.Register("FocusElement", typeof(UIElement), typeof(Flyout));
+
         #endregion
 
         #region - Routed events -
@@ -117,6 +129,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
+                this.Visibility = Visibility.Collapsed;
+
                 KeyDown += OnKeyDown;
             }
         }
@@ -126,28 +140,42 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Escape && this.IsVisible)
+            if (e.Key == System.Windows.Input.Key.Escape && this.IsVisible && !isOpening)
             {
-                Hide();
+                this.IsOpen = false;
             }
         }
 
         private void OnHideFlyout(object sender, RoutedEventArgs e)
         {
-            Hide();
+            if (isOpening) return;
+
+            this.IsOpen = false;
         }
 
         private void OnExpanded(object sender, EventArgs e)
         {
-            // Focus content, if content is framework element
-            if (this.Content != null && this.Content is FrameworkElement)
-                (this.Content as FrameworkElement).Focus();
+            if (FocusElement == null)
+            {
+                // Focus content, if content is framework element
+                //if (this.Content != null && this.Content is FrameworkElement)
+                //    (this.Content as FrameworkElement).Focus();
+                //else
+                //    Focus();
+                FocusManager.SetFocusedElement(this, this);
+                Keyboard.Focus(this);
+            }
             else
-                Focus();
+            {
+                FocusManager.SetFocusedElement(this, FocusElement);
+                Keyboard.Focus(FocusElement);
+            }
 
             RaiseEvent(new RoutedEventArgs(ExpandedEvent));
 
             isOpening = false;
+
+            if (!IsOpen) IsOpen = true;
         }
 
         private void OnCollapsed(object sender, EventArgs e)
@@ -155,6 +183,8 @@ namespace Aronium.Wpf.Toolkit.Controls
             Visibility = Visibility.Collapsed;
 
             RaiseEvent(new RoutedEventArgs(CollapsedEvent));
+
+            if (IsOpen) IsOpen = false;
         }
 
         private static void OnWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -162,6 +192,48 @@ namespace Aronium.Wpf.Toolkit.Controls
             // Clear animations so they can be created with current width
             ((Flyout)d).InAnimation = null;
             ((Flyout)d).OutAnimation = null;
+        }
+
+        private static void OnIsOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Flyout @this = (Flyout)d;
+            bool newValue = (bool)e.NewValue;
+
+            if (newValue)
+                @this.Show();
+            else if (!newValue)
+                @this.Hide();
+        }
+
+        /// <summary>
+        /// Shows flyout.
+        /// </summary>
+        private void Show()
+        {
+            if (isOpening) return;
+
+            isOpening = true;
+
+            this.Visibility = Visibility.Visible;
+
+            if (contentSite != null)
+            {
+                contentSite.BeginAnimation(MarginProperty, InAnimation);
+            }
+            else
+            {
+                isOpening = false;
+            }
+        }
+
+        /// <summary>
+        /// Hides flyout.
+        /// </summary>
+        private void Hide()
+        {
+            if (isOpening) return;
+
+            contentSite.BeginAnimation(MarginProperty, OutAnimation);
         }
 
         #endregion
@@ -180,35 +252,8 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             contentSite = this.Template.FindName("PART_ContentSite", this) as Border;
 
-            // Template is applied once controls becomes visible.
-            // At this point, it is collapsed, if visible for the first time, re-run slide-in animation
             if (this.IsVisible)
                 Show();
-        }
-
-        /// <summary>
-        /// Shows flyout.
-        /// </summary>
-        public void Show()
-        {
-            isOpening = true;
-
-            this.Visibility = Visibility.Visible;
-
-            if (contentSite != null)
-            {
-                contentSite.BeginAnimation(MarginProperty, InAnimation);
-            }
-        }
-
-        /// <summary>
-        /// Hides flyout.
-        /// </summary>
-        public void Hide()
-        {
-            if (isOpening) return;
-
-            contentSite.BeginAnimation(MarginProperty, OutAnimation);
         }
 
         #endregion
@@ -341,6 +386,24 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (double)GetValue(DurationProperty); }
             set { SetValue(DurationProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether flyout is open.
+        /// </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets focused element on expand.
+        /// </summary>
+        public UIElement FocusElement
+        {
+            get { return (UIElement)GetValue(FocusElementProperty); }
+            set { SetValue(FocusElementProperty, value); }
         }
 
         #endregion
