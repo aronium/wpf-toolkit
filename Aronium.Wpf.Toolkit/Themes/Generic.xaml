@@ -34,5 +34,6 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ButtonGroupStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/NotificationItemStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ClosableTabControlStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/CollapsibleTabControlStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

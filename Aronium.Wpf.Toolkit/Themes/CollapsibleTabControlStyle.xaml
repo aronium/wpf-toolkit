@@ -1,0 +1,139 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Geometry x:Key="CollapseArrow">M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z</Geometry>
+    
+    <Style TargetType="{x:Type TabItem}" x:Key="CollapsibleTabControlItemStyle">
+        <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="13,4" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid x:Name="Root">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="ContentSite"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left"
+                                                ContentSource="Header"
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                Margin="{TemplateBinding Padding}"
+                                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                                TextBlock.FontSize="{TemplateBinding FontSize}"
+                                                RecognizesAccessKey="True" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=BorderBrush}" />
+                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundSelected}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoverBrush}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:CollapsibleTabControl}">
+        <Style.Resources>
+            <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource CollapsibleTabControlItemStyle}" />
+        </Style.Resources>
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="VerticalSeparatorBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="ItemsBackgroundBrush" Value="{DynamicResource BackgroundDarkBrush}" />
+        <Setter Property="TabStripPlacement" Value="Left" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CollapsibleTabControl}">
+                    <Border x:Name="Border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            KeyboardNavigation.TabNavigation="Local"
+                            KeyboardNavigation.DirectionalNavigation="Contained"
+                            KeyboardNavigation.TabIndex="2"
+                            UseLayoutRounding="True">
+                        <Grid KeyboardNavigation.TabNavigation="Local">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border BorderBrush="{TemplateBinding VerticalSeparatorBrush}"
+                                    Background="{TemplateBinding ItemsBackgroundBrush}"
+                                    BorderThickness="0,0,1,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TabPanel x:Name="HeaderPanel"
+                                              Panel.ZIndex="1"
+                                              IsItemsHost="True"
+                                              KeyboardNavigation.TabIndex="1"/>
+                                    <!-- Collapse button -->
+                                    <Border Grid.Row="1" BorderBrush="{TemplateBinding VerticalSeparatorBrush}" BorderThickness="0,1,0,0">
+                                        <Button Style="{StaticResource FlatButtonStyle}"
+                                                VerticalAlignment="Center"
+                                                Focusable="False"
+                                                HorizontalAlignment="Right"
+                                                Name="PART_ButtonCollapse"
+                                                Padding="0,15">
+                                            <Path Data="{StaticResource CollapseArrow}"
+                                                  Height="12"
+                                                  Name="Arrow"
+                                                  Stretch="Uniform"
+                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                                            </Path>
+                                        </Button>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Column="1">
+                                <ContentPresenter x:Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}" ContentSource="SelectedContent" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsCollapsed" Value="False">
+                            <Setter TargetName="Arrow" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-180" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" Value="15" TargetName="PART_ButtonCollapse" />
+                        </Trigger>
+                        <Trigger Property="IsCollapsed" Value="True">
+                            <Setter Property="Width" Value="Auto" TargetName="PART_ButtonCollapse" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" TargetName="PART_ButtonCollapse" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

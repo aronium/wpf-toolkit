@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -51,6 +52,7 @@
     <Compile Include="Controls\ButtonGroup.cs" />
     <Compile Include="Controls\ClosableTabControl.cs" />
     <Compile Include="Controls\ClosableTabItem.cs" />
+    <Compile Include="Controls\CollapsibleTabControl.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\Flyout.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
@@ -180,6 +182,10 @@
     <Page Include="Themes\NotificationItemStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CollapsibleTabControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\ToggleSwitchStyle.xaml">
       <Generator>MSBuild:Compile</Generator>

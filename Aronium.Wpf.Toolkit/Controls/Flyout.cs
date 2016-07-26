@@ -129,7 +129,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                this.Visibility = Visibility.Collapsed;
+                //this.Visibility = Visibility.Collapsed;
 
                 KeyDown += OnKeyDown;
             }
