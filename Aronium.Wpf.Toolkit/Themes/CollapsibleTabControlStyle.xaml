@@ -57,9 +57,6 @@
     </Style>
 
     <Style TargetType="{x:Type local:CollapsibleTabControl}">
-        <Style.Resources>
-            <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource CollapsibleTabControlItemStyle}" />
-        </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />

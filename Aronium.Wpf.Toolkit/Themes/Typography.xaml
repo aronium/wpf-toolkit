@@ -13,4 +13,8 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="HugeText" BasedOn="{StaticResource Title}">
+        <Setter Property="FontSize" Value="52" />
+    </Style>
+
 </ResourceDictionary>
