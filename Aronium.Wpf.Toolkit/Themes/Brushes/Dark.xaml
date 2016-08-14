@@ -14,7 +14,7 @@
     <SolidColorBrush x:Key="BorderDisabledBrush">#FF3A3F44</SolidColorBrush>
     <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
     <SolidColorBrush x:Key="Foreground" Color="{StaticResource ForegroundColor}" />
-    <Color x:Key="ForegroundDisabledColor">#FF999999</Color>
+    <Color x:Key="ForegroundDisabledColor">#FF979797</Color>
     <SolidColorBrush x:Key="ForegroundDisabled" Color="{StaticResource ForegroundDisabledColor}" />
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
     <Color x:Key="BackgroundHoverColor">#FF484E55</Color>
