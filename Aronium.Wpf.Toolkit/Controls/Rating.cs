@@ -11,7 +11,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     {
         private Panel starsPanel;
         public static readonly DependencyProperty StarsProperty = DependencyProperty.Register("Stars", typeof(int), typeof(Rating), new FrameworkPropertyMetadata(5, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnStarsChanged)));
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(Rating), new PropertyMetadata(3, new PropertyChangedCallback(OnValueChanged)));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(Rating), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnValueChanged)));
 
         public static readonly DependencyProperty StarSizeProperty = DependencyProperty.Register("StarSize", typeof(double), typeof(Rating));
         public static readonly DependencyProperty StarBrushProperty = DependencyProperty.Register("StarBrush", typeof(Brush), typeof(Rating), new PropertyMetadata(Brushes.Gold));
@@ -89,7 +89,11 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             starsPanel = this.Template.FindName("PART_Stars", this) as Panel;
 
+            // Generate stars on load
             GenerateStars();
+
+            // Highlight results once visible
+            HighlightResult();
         }
 
         private void GenerateStars()
