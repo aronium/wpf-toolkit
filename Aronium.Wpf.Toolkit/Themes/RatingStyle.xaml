@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
+
+    <Geometry x:Key="RatingStar">M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z</Geometry>
+
+    <Style TargetType="{x:Type local:Rating}">
+        <Style.Resources>
+            <Style TargetType="{x:Type local:RatingItem}">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:RatingItem}">
+                            <Grid Background="Transparent">
+                                <Path Data="{StaticResource RatingStar}" 
+                                      Name="star"
+                                      Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Rating}}, Path=StarSize}" 
+                                      Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Rating}}, Path=StarSize}" 
+                                      Stretch="Fill"
+                                      Stroke="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Rating}}, Path=StarBrush}"
+                                      StrokeThickness="2" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="star" Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Rating}}, Path=StarBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="star" Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Rating}}, Path=StarBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>     
+        <Setter Property="StarSize" Value="30" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Rating}">
+                    <StackPanel Name="PART_Stars" Orientation="Horizontal" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

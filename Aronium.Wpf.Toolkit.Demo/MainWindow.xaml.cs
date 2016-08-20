@@ -191,7 +191,7 @@ namespace Aronium.Wpf.Toolkit.Demo
 
         private void ShowFlyout(object sender, RoutedEventArgs e)
         {
-            flyout.Show();
+            flyout.IsOpen = true;
         }
     }
 }

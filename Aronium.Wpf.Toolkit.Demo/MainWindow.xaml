@@ -416,17 +416,22 @@
 
                         </Grid>
 
-                        <WrapPanel Grid.Column="1" Margin="5">
-                            <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
-                            <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
-                            <CheckBox Content="CheckBox" IsThreeState="True" IsEnabled="False" IsChecked="{x:Null}" Margin="5"/>
-                            <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
-                            <CheckBox Content="CheckBox" IsChecked="True" IsEnabled="False" Margin="5"/>
+                        <StackPanel Grid.Column="1" Margin="5,5,5,20">
+                            <WrapPanel>
+                                <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
+                                <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                                <CheckBox Content="CheckBox" IsThreeState="True" IsEnabled="False" IsChecked="{x:Null}" Margin="5"/>
+                                <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
+                                <CheckBox Content="CheckBox" IsChecked="True" IsEnabled="False" Margin="5"/>
 
-                            <RadioButton Content="CheckBox" IsChecked="True" Margin="5"/>
-                            <RadioButton Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
-                            <RadioButton Content="CheckBox" IsEnabled="False" Margin="5"/>
-                        </WrapPanel>
+                                <RadioButton Content="CheckBox" IsChecked="True" Margin="5"/>
+                                <RadioButton Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                                <RadioButton Content="CheckBox" IsEnabled="False" Margin="5"/>
+                            </WrapPanel>
+
+                            <aronium:Rating Stars="10" Margin="0,20" StarSize="20"/>
+                            <aronium:Rating Margin="0" StarBrush="{StaticResource Accent}"/>
+                        </StackPanel>
 
                         <Viewbox Height="300" Grid.Row="1" >
                             <Calendar HorizontalAlignment="Left" Margin="5" PreviewMouseUp="OnCalendarPreviewMouseDown"/>
@@ -437,6 +442,7 @@
                             <DatePicker Width="200" />
                             <DatePicker Margin="5" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"  />
                         </StackPanel>
+
 
                     </Grid>
                 </TabItem>
