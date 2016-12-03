@@ -49,6 +49,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly DependencyProperty BackdropProperty = DependencyProperty.Register("Backdrop", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
 
         /// <summary>
+        /// Identifies BackdropOpacity dependency property.
+        /// </summary>
+        public static readonly DependencyProperty BackdropOpacityProperty = DependencyProperty.Register("BackdropOpacity", typeof(double), typeof(Flyout), new PropertyMetadata(0.3));
+
+        /// <summary>
         /// Identifies ShowBackArrow dependency property.
         /// </summary>
         public static readonly DependencyProperty ShowBackArrowProperty = DependencyProperty.Register("ShowBackArrow", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
@@ -140,7 +145,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Escape && this.IsVisible && !isOpening)
+            if (e.Key == Key.Escape && this.IsVisible && !isOpening)
             {
                 this.IsOpen = false;
             }
@@ -157,11 +162,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (FocusElement == null)
             {
-                // Focus content, if content is framework element
-                //if (this.Content != null && this.Content is FrameworkElement)
-                //    (this.Content as FrameworkElement).Focus();
-                //else
-                //    Focus();
                 FocusManager.SetFocusedElement(this, this);
                 Keyboard.Focus(this);
             }
@@ -359,6 +359,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(BackdropProperty); }
             set { SetValue(BackdropProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets backgdrop opacity. Default value is 0.3.
+        /// </summary>
+        public double BackdropOpacity
+        {
+            get { return (double)GetValue(BackdropOpacityProperty); }
+            set { SetValue(BackdropOpacityProperty, value); }
         }
 
         /// <summary>
