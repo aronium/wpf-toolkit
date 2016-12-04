@@ -3,8 +3,23 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:Double x:Key="DataGridDefaultCellHeight">30</system:Double>
-    
+
     <Style TargetType="{x:Type DataGrid}">
+        <Style.Resources>
+            <Style TargetType="Button" x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}">
+                <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource DataGridLineBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{DynamicResource Accent}" BorderThickness="0,0,0,1">
+                                <Rectangle HorizontalAlignment="Right" Width="1" Fill="{TemplateBinding BorderBrush}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource DataGridLineBrush}" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource DataGridLineBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
@@ -31,8 +46,8 @@
         <Setter Property="MinHeight" Value="{StaticResource DataGridDefaultCellHeight}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SeparatorBrush" Value="{DynamicResource DataGridLineBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Padding" Value="6,0" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
@@ -51,7 +66,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Grid.ColumnSpan="2" />
-                        
+
                         <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                             <ContentPresenter.Resources>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -106,6 +121,89 @@
                             <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="SeparatorBrush" Value="{DynamicResource DataGridLineBrush}" />
+        <Setter Property="SeparatorVisibility" Value="Visible"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridRowHeader">
+                    <Grid Name="Root">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource DataGridBackgroundHoverBrushColor}"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal_CurrentRow_Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource AccentColor}"/>
+                                        <ColorAnimation Duration="0" 
+                                                        To="{DynamicResource SelectedItemForegroundColor}" 
+                                                        Storyboard.TargetName="ContentElement" 
+                                                        Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver_CurrentRow_Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" 
+                                                        To="{DynamicResource AccentColor}"/>
+                                        <ColorAnimation Duration="0"
+                                                        To="{DynamicResource SelectedItemForegroundColor}" 
+                                                        Storyboard.TargetName="ContentElement" 
+                                                        Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver_Unfocused_Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource AccentColor}"/>
+                                        <ColorAnimation Duration="0"
+                                                        To="{DynamicResource SelectedItemForegroundColor}"
+                                                        Storyboard.TargetName="ContentElement" 
+                                                        Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unfocused_Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource AccentColor}"/>
+                                        <ColorAnimation Duration="0"
+                                                        To="{DynamicResource SelectedItemForegroundColor}"
+                                                        Storyboard.TargetName="ContentElement" 
+                                                        Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="{TemplateBinding SeparatorBrush}" BorderThickness="0,0,1,0" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                            <Grid Background="{TemplateBinding Background}">
+                                <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="Transparent" />
+                            </Grid>
+                        </Border>
+                        <Rectangle Name="HorizontalSeparator" Grid.ColumnSpan="2" Grid.Row="2" Height="1" Margin="1,0,1,0" HorizontalAlignment="Stretch" Fill="{TemplateBinding SeparatorBrush}" Visibility="{TemplateBinding SeparatorVisibility}" />
+
+                        <ContentPresenter x:Name="ContentElement" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" />
+
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

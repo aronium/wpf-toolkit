@@ -447,7 +447,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Data grid">
-                    <DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" />
+                    <DataGrid ItemsSource="{Binding Users}" LoadingRow="OnDataGridLoadingRow" CanUserResizeRows="False" RowHeaderWidth="30" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" />
                 </TabItem>
                 <TabItem Header="Closable Tab Control">
                     <Grid>

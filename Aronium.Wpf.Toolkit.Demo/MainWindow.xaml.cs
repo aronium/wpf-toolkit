@@ -193,5 +193,10 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             flyout.IsOpen = true;
         }
+
+        private void OnDataGridLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1);
+        }
     }
 }

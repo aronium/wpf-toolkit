@@ -42,8 +42,9 @@
     <SolidColorBrush x:Key="OnOffButtonThumbBackgroundChecked" Color="White" />
     
     <!--Datagrid-->
+    <Color x:Key="DataGridBackgroundHoverBrushColor">#FF1E1E1E</Color>
     <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundDarkColor}" />
-    <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="#FF1E1E1E" />
+    <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="{StaticResource DataGridBackgroundHoverBrushColor}" />
     <SolidColorBrush x:Key="DataGridLineBrush" Color="#FF373A36" />
 
     <!--Closable tab control-->
