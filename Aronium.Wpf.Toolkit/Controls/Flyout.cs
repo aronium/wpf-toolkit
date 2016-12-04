@@ -54,6 +54,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly DependencyProperty BackdropOpacityProperty = DependencyProperty.Register("BackdropOpacity", typeof(double), typeof(Flyout), new PropertyMetadata(0.3));
 
         /// <summary>
+        /// Identifies AllowBackdropCloseProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AllowBackdropCloseProperty = DependencyProperty.Register("AllowBackdropClose", typeof(bool), typeof(Flyout), new PropertyMetadata(true));
+
+        /// <summary>
         /// Identifies ShowBackArrow dependency property.
         /// </summary>
         public static readonly DependencyProperty ShowBackArrowProperty = DependencyProperty.Register("ShowBackArrow", typeof(bool), typeof(Flyout), new UIPropertyMetadata(true));
@@ -71,7 +76,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Identifies IsOpen dependency property.
         /// </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register("IsOpen", typeof(bool), typeof(Flyout), 
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register("IsOpen", typeof(bool), typeof(Flyout),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnIsOpenChanged)));
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Private methods -
 
-        private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape && this.IsVisible && !isOpening)
             {
@@ -205,6 +210,13 @@ namespace Aronium.Wpf.Toolkit.Controls
                 @this.Hide();
         }
 
+        private void OnBackdropClick(object sender, MouseButtonEventArgs e)
+        {
+            if (isOpening || !AllowBackdropClose) return;
+
+            this.IsOpen = false;
+        }
+
         /// <summary>
         /// Shows flyout.
         /// </summary>
@@ -245,13 +257,16 @@ namespace Aronium.Wpf.Toolkit.Controls
             base.OnApplyTemplate();
 
             var backdrop = this.Template.FindName("PART_Backdrop", this) as Border;
-            backdrop.MouseUp += OnHideFlyout;
+            if (backdrop != null)
+                backdrop.MouseUp += OnBackdropClick;
 
             var collapseButton = this.Template.FindName("PART_CollapseButton", this) as Button;
-            collapseButton.Click += OnHideFlyout;
+            if (collapseButton != null)
+                collapseButton.Click += OnHideFlyout;
 
             contentSite = this.Template.FindName("PART_ContentSite", this) as Border;
 
+            // Initially open, if set to Visible
             if (this.IsVisible)
                 Show();
         }
@@ -368,6 +383,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (double)GetValue(BackdropOpacityProperty); }
             set { SetValue(BackdropOpacityProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether flyout is closed once backdrop is clicked.
+        /// </summary>
+        public bool AllowBackdropClose
+        {
+            get { return (bool)GetValue(AllowBackdropCloseProperty); }
+            set { SetValue(AllowBackdropCloseProperty, value); }
         }
 
         /// <summary>
