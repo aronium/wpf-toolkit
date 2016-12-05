@@ -205,9 +205,9 @@ namespace Aronium.Wpf.Toolkit.Controls
             bool newValue = (bool)e.NewValue;
 
             if (newValue)
-                @this.Show();
+                @this.ShowInternal();
             else if (!newValue)
-                @this.Hide();
+                @this.HideInternal();
         }
 
         private void OnBackdropClick(object sender, MouseButtonEventArgs e)
@@ -220,7 +220,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Shows flyout.
         /// </summary>
-        private void Show()
+        private void ShowInternal()
         {
             if (isOpening) return;
 
@@ -241,7 +241,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Hides flyout.
         /// </summary>
-        private void Hide()
+        private void HideInternal()
         {
             if (isOpening) return;
 
@@ -268,7 +268,23 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             // Initially open, if set to Visible
             if (this.IsVisible)
-                Show();
+                ShowInternal();
+        }
+
+        /// <summary>
+        /// Opens flyout.
+        /// </summary>
+        public void Show()
+        {
+            IsOpen = true;
+        }
+
+        /// <summary>
+        /// Hides flyout.
+        /// </summary>
+        public void Hide()
+        {
+            IsOpen = false;
         }
 
         #endregion

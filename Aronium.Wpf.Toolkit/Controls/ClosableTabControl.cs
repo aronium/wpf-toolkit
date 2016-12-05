@@ -102,7 +102,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 {
                     if (this.SelectedItem != null && e.Key == Key.W && this.SelectedItem is ClosableTabItem && ((ClosableTabItem)this.SelectedItem).CanClose)
                     {
-                        this.Items.Remove(this.SelectedItem);
+                        RemoveItem(this.SelectedItem as ClosableTabItem);
                         return;
                     }
                 }
@@ -297,7 +297,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                         continue;
 
                     var mi = new MenuItem { Header = title, Tag = index++.ToString() };
-                    mi.Click += ContextMenuItem_Click;
+                    mi.Click += OnContextMenuItemClick;
                     if (index == this.SelectedIndex + 1)
                     {
                         mi.IsCheckable = true;
@@ -314,7 +314,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        void OnContextMenuItemClick(object sender, RoutedEventArgs e)
         {
             MenuItem mi = sender as MenuItem;
             if (mi == null) return;
