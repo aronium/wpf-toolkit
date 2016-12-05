@@ -165,12 +165,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnExpanded(object sender, EventArgs e)
         {
-            if (FocusElement == null)
-            {
-                FocusManager.SetFocusedElement(this, this);
-                Keyboard.Focus(this);
-            }
-            else
+            if(FocusElement != null)
             {
                 FocusManager.SetFocusedElement(this, FocusElement);
                 Keyboard.Focus(FocusElement);
