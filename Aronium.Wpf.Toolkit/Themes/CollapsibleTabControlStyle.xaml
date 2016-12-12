@@ -82,15 +82,17 @@
                             <Border BorderBrush="{TemplateBinding VerticalSeparatorBrush}"
                                     Background="{TemplateBinding ItemsBackgroundBrush}"
                                     BorderThickness="0,0,1,0">
-                                <Grid>
+                                    <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <TabPanel x:Name="HeaderPanel"
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                        <TabPanel x:Name="HeaderPanel"
                                               Panel.ZIndex="1"
                                               IsItemsHost="True"
                                               KeyboardNavigation.TabIndex="1"/>
+                                    </ScrollViewer>
                                     <!-- Collapse button -->
                                     <Border Grid.Row="1" BorderBrush="{TemplateBinding VerticalSeparatorBrush}" BorderThickness="0,1,0,0">
                                         <Button Style="{StaticResource FlatButtonStyle}"
