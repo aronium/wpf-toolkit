@@ -144,6 +144,15 @@
                                         <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource DataGridBackgroundHoverBrushColor}"/>
                                     </Storyboard>
                                 </VisualState>
+                                <VisualState x:Name="Normal_Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource AccentColor}"/>
+                                        <ColorAnimation Duration="0" 
+                                                        To="{DynamicResource SelectedItemForegroundColor}" 
+                                                        Storyboard.TargetName="ContentElement" 
+                                                        Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"/>
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="Normal_CurrentRow_Selected">
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Fill).Color" Duration="0" To="{DynamicResource AccentColor}"/>
