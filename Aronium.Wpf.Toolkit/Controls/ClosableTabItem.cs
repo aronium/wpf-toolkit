@@ -123,8 +123,20 @@ namespace Aronium.Wpf.Toolkit.Controls
             var headerBorder = this.Template.FindName("PART_ItemBorder", this) as Border;
             if (headerBorder != null)
             {
-                headerBorder.MouseDown += new MouseButtonEventHandler(OnTabHeaderMouseDown);
-                headerBorder.MouseMove += new MouseEventHandler(OnTabHeaderMouseMove);
+                headerBorder.MouseDown += OnTabHeaderMouseDown;
+                headerBorder.MouseMove += OnTabHeaderMouseMove;
+                headerBorder.MouseUp += OnTabHeaderMouseUp;
+            }
+        }
+
+        private void OnTabHeaderMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!_isDragging && e.ChangedButton == MouseButton.Middle && this.CanClose)
+            {
+                if ((this.Parent as ClosableTabControl) != null)
+                {
+                    ((ClosableTabControl)this.Parent).RemoveItem(this);
+                }
             }
         }
 
@@ -182,14 +194,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
-            if (!_isDragging && e.ChangedButton == MouseButton.Middle && this.CanClose)
-            {
-                if ((this.Parent as ClosableTabControl) != null)
-                {
-                    ((ClosableTabControl)this.Parent).RemoveItem(this);
-                }
-            }
-
             if (_isDragging)
             {
                 Mouse.Capture(null);
@@ -358,10 +362,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         internal void NotifyClosed()
         {
-            if (Closed != null)
-            {
-                Closed(this, EventArgs.Empty);
-            }
+            Closed?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion
