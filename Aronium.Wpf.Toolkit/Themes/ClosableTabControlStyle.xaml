@@ -82,6 +82,10 @@
                                                 <Trigger Property="IsPressed" Value="True">
                                                     <Setter TargetName="xPath" Property="Opacity" Value="0.7" />
                                                 </Trigger>
+
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter TargetName="xPath" Property="Stroke" Value="{StaticResource ForegroundDisabled}" />
+                                                </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Button.Template>
