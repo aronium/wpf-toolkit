@@ -7,7 +7,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            <Border SnapsToDevicePixels="True" x:Name="Border" Grid.ColumnSpan="2" Background="{DynamicResource BackgroundBrush}" />
+            <Border SnapsToDevicePixels="True" x:Name="Border" Grid.ColumnSpan="2" Background="Transparent" />
             <Path x:Name="Arrow" 
                   Grid.Column="1" 
                   Opacity="0.6" 
@@ -201,6 +201,7 @@
                                     <Polygon Name="check" Points="398.218,92.985 199.729,291.475 113.754,205.476 50,269.242 199.733,419.015 462,156.726"
                                              Stretch="Uniform"
                                              Height="8"
+                                             Grid.Column="1"
                                              Margin="4,0,2,0"
                                              VerticalAlignment="Center"
                                              HorizontalAlignment="Right"
