@@ -2,69 +2,134 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
 
-    <Style TargetType="{x:Type local:SplitButton}">
-        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:SplitButton">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            Padding="0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="1" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <!--Buttons in grid do not fit the layout, for that reason margin right is set to -1 and -0.5, to fit full area-->
+    <ControlTemplate x:Key="HorizontalSplitButtonOrientationTemplate" TargetType="local:SplitButton">
+        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                Background="{TemplateBinding Background}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                Padding="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                            <Button Name="PART_Button" BorderThickness="0" Margin="0,0,-1,0" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"/>
-                            <Rectangle Margin="0" Fill="{TemplateBinding BorderBrush}" Width="1" Grid.Column="1" />
-                            <ToggleButton Name="PART_DropDownButton" Margin="0,0,-0.5,0" Padding="5,0" VerticalContentAlignment="Center" BorderThickness="0" Grid.Column="2">
-                                <Path Fill="{Binding ElementName=PART_DropDownButton, Path=Foreground}" 
+                <!--Buttons in grid do not fit the layout, for that reason margin right is set to -1 and -0.5, to fit full area-->
+
+                <Button Name="PART_Button" BorderThickness="0" Margin="0,0,-1,0" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"/>
+                <Rectangle Margin="0" Fill="{TemplateBinding BorderBrush}" Width="1" Grid.Column="1" />
+                <ToggleButton Name="PART_DropDownButton" Margin="0,0,-0.5,0" Padding="5,0" VerticalContentAlignment="Center" BorderThickness="0" Grid.Column="2">
+                    <Path Fill="{Binding ElementName=PART_DropDownButton, Path=Foreground}" 
                                       x:Name="Arrow" 
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                       Data="M 0 0 L 4 4 L 8 0 Z" 
                                       VerticalAlignment="Center" 
                                       HorizontalAlignment="Center" />
-                            </ToggleButton>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsPressed" SourceName="PART_DropDownButton" Value="True">
-                            <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource SelectedItemForeground}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" SourceName="PART_Button" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                            <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" SourceName="PART_Button" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" SourceName="PART_DropDownButton" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" SourceName="PART_DropDownButton" Value="True">
-                            <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource SelectedItemForeground}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                            <Setter Property="Background" TargetName="PART_DropDownButton" Value="{DynamicResource Accent}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+                </ToggleButton>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPressed" SourceName="PART_DropDownButton" Value="True">
+                <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource SelectedItemForeground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsPressed" SourceName="PART_Button" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" SourceName="PART_Button" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsFocused" SourceName="PART_DropDownButton" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsChecked" SourceName="PART_DropDownButton" Value="True">
+                <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource SelectedItemForeground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="Background" TargetName="PART_DropDownButton" Value="{DynamicResource Accent}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="VerticalSplitButtonOrientationTemplate" TargetType="local:SplitButton">
+        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                Background="{TemplateBinding Background}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                Padding="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Button Name="PART_Button" BorderThickness="0" Margin="0,0,0,-1" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}"/>
+                
+                <Rectangle Margin="0" Fill="{TemplateBinding BorderBrush}" Height="1" Grid.Row="1" />
+                
+                <ToggleButton Name="PART_DropDownButton" 
+                              Height="Auto"
+                              Margin="0,-0.5,0,0" 
+                              VerticalContentAlignment="Center" 
+                              BorderThickness="0" 
+                              Grid.Row="2">
+                    <Path Fill="{Binding ElementName=PART_DropDownButton, Path=Foreground}" 
+                          x:Name="Arrow" 
+                          Margin="0,4"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                          Data="M 0 0 L 4 4 L 8 0 Z" 
+                          VerticalAlignment="Center" 
+                          HorizontalAlignment="Center" />
+                </ToggleButton>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPressed" SourceName="PART_DropDownButton" Value="True">
+                <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource SelectedItemForeground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsPressed" SourceName="PART_Button" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" SourceName="PART_Button" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsFocused" SourceName="PART_DropDownButton" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
+            <Trigger Property="IsChecked" SourceName="PART_DropDownButton" Value="True">
+                <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource SelectedItemForeground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="Background" TargetName="PART_DropDownButton" Value="{DynamicResource Accent}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type local:SplitButton}">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="4,2" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Template" Value="{StaticResource HorizontalSplitButtonOrientationTemplate}" />
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Template" Value="{StaticResource VerticalSplitButtonOrientationTemplate}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

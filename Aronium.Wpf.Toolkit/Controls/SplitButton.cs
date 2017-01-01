@@ -34,6 +34,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(SplitButton));
 
+        /// <summary>
+        /// Identifies OrientationProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register("Orientation", typeof(Orientation), typeof(SplitButton));
+
         #endregion
 
         #region - Routed Events -
@@ -197,6 +202,21 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (object)GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
+        }
+        
+        /// <summary>
+        /// Gets or sets drop down arrow orientation.
+        /// </summary>
+        public Orientation Orientation
+        {
+            get
+            {
+                return (Orientation)GetValue(OrientationProperty);
+            }
+            set
+            {
+                SetValue(OrientationProperty, value);
+            }
         }
 
         #endregion
