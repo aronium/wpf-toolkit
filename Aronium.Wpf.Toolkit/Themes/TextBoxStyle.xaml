@@ -8,6 +8,8 @@
         <Setter Property="CaretBrush" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="2" />
+        <!--Remove default error template as we are using custom border for error notification on Invalid state-->
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Height" Value="24" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">

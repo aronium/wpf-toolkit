@@ -166,10 +166,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnExpanded(object sender, EventArgs e)
         {
-            // Try get currently focused element, use it to restore focus once flyout is closed
-            var window = Window.GetWindow(this);
-            previouslyFocusedElement = window != null ? FocusManager.GetFocusedElement(window) : null;
-
             // If explicit focus element is set, focus specified element on load
             if (FocusElement != null)
             {
@@ -226,6 +222,10 @@ namespace Aronium.Wpf.Toolkit.Controls
         private void ShowInternal()
         {
             if (isOpening) return;
+
+            // Try get currently focused element, use it to restore focus once flyout is closed
+            var window = Window.GetWindow(this);
+            previouslyFocusedElement = window != null ? FocusManager.GetFocusedElement(window) : null;
 
             isOpening = true;
 
