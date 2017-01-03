@@ -18,6 +18,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Fields -
 
         private bool isOpening;
+        private IInputElement previouslyFocusedElement;
 
         #endregion
 
@@ -165,7 +166,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnExpanded(object sender, EventArgs e)
         {
-            if(FocusElement != null)
+            // Try get currently focused element, use it to restore focus once flyout is closed
+            var window = Window.GetWindow(this);
+            previouslyFocusedElement = window != null ? FocusManager.GetFocusedElement(window) : null;
+
+            // If explicit focus element is set, focus specified element on load
+            if (FocusElement != null)
             {
                 FocusManager.SetFocusedElement(this, FocusElement);
                 Keyboard.Focus(FocusElement);
@@ -185,6 +191,8 @@ namespace Aronium.Wpf.Toolkit.Controls
             RaiseEvent(new RoutedEventArgs(CollapsedEvent));
 
             if (IsOpen) IsOpen = false;
+
+            Dispatcher.BeginInvoke(((Action)(() => previouslyFocusedElement?.Focus())), DispatcherPriority.Input);
         }
 
         private static void OnWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -221,7 +229,11 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             isOpening = true;
 
-            this.Visibility = Visibility.Visible;
+            Visibility = Visibility.Visible;
+
+            // Automatically focus flyout. Do not set focus once expanded, as it will override custom focus from within content control, if set
+            // If flyout is not focused, escape key will not work.
+            Focus();
 
             if (contentSite != null)
             {
