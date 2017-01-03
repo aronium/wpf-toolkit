@@ -42,6 +42,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="Height" Value="24" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -151,7 +152,7 @@
                                 Margin="1" 
                                 Opacity="0"/>
 
-                        <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="1"
+                        <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="{TemplateBinding BorderThickness}"
                                 IsHitTestVisible="False" Margin="0" CornerRadius="0" />
                     </Grid>
 

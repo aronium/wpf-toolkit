@@ -50,7 +50,7 @@
                                     </Button>
                                 </Grid>
 
-                                <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" TextElement.Foreground="{TemplateBinding Foreground}" />
+                                <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
                     </Grid>
