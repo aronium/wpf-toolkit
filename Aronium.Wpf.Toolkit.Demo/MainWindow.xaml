@@ -368,7 +368,11 @@
                                             </aronium:SplitButton.DropDown>
                                         </aronium:SplitButton>
                                     </WrapPanel>
+
+                                    <aronium:TagsInput />
+
                                 </StackPanel>
+
                             </GroupBox>
 
                             <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="5" />
