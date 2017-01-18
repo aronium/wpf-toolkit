@@ -31,6 +31,48 @@
         <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" IsTabStop="False" Foreground="{TemplateBinding Foreground}" />
     </ControlTemplate>
 
+    <Style TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border Name="Border" 
+                            Padding="4,2"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            <Polygon Name="check" Points="398.218,92.985 199.729,291.475 113.754,205.476 50,269.242 199.733,419.015 462,156.726"
+                                             Stretch="Uniform"
+                                             Height="8"
+                                             Grid.Column="1"
+                                             Margin="4,0,2,0"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Right"
+                                             Visibility="Collapsed"
+                                             Fill="{TemplateBinding Foreground}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Accent}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="check" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="ComboBox">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
@@ -45,6 +87,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="5,3,23,3" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -112,20 +155,20 @@
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
                                           Margin="{TemplateBinding Padding}" 
                                           TextElement.Foreground="{TemplateBinding Foreground}"
-                                          VerticalAlignment="Center" 
-                                          HorizontalAlignment="Left"/>
-                        
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
                         <TextBox x:Name="PART_EditableTextBox" 
                                  Template="{StaticResource ComboBoxTextBox}" 
                                  HorizontalAlignment="Stretch" 
-                                 HorizontalContentAlignment="Stretch"
+                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                  VerticalAlignment="Center" 
                                  Margin="2,0,16,0"
                                  Focusable="True" 
                                  Background="Transparent"
                                  Visibility="Hidden" 
                                  IsReadOnly="{TemplateBinding IsReadOnly}"/>
-                        
+
                         <Popup VerticalOffset="-1" 
                                Name="Popup" 
                                Placement="Bottom" 
@@ -145,7 +188,7 @@
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
-                        
+
                         <Border x:Name="DisabledVisualElement" 
                                 Background="{DynamicResource BackgroundDisabledBrush}" 
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -185,46 +228,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Resources>
-            <Style TargetType="ComboBoxItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ComboBoxItem">
-                            <Border Name="Border" 
-                                    Padding="4,2"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" >
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <ContentPresenter/>
-                                    <Polygon Name="check" Points="398.218,92.985 199.729,291.475 113.754,205.476 50,269.242 199.733,419.015 462,156.726"
-                                             Stretch="Uniform"
-                                             Height="8"
-                                             Grid.Column="1"
-                                             Margin="4,0,2,0"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Right"
-                                             Visibility="Collapsed"
-                                             Fill="{TemplateBinding Foreground}" />
-                                </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsHighlighted" Value="true">
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource Accent}"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="check" Property="Visibility" Value="Visible"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </Style.Resources>
     </Style>
     
 </ResourceDictionary>
