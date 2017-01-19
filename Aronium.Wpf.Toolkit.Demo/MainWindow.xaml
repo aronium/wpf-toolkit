@@ -438,20 +438,23 @@
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
+
+                                    <TextBlock Margin="5" Text="TagControl - Bounded tag items" Style="{StaticResource Heading1}" />
 
                                     <aronium:TagControl VerticalAlignment="Top" 
                                                        Margin="5" 
                                                        SelectedItem="{Binding SelectedTag}"
                                                        InputBoxWidth="50"
                                                        ItemsSource="{Binding Tags}"
-                                                       Name="tagsControl" />
+                                                       Name="tagsControl" Grid.Row="1" />
 
                                     <ListBox ItemsSource="{Binding Tags}" 
                                              Margin="5,0,5,5" 
                                              SelectedItem="{Binding SelectedTag}"
-                                             Grid.Row="1"/>
+                                             Grid.Row="2"/>
                                 </Grid>
                             </Border>
                             <GridSplitter Grid.Row="0" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
