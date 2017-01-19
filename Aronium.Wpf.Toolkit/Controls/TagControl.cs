@@ -12,7 +12,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     [TemplatePart(Name = "PART_TextInput", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ItemsHost", Type = typeof(WrapPanel))]
     [TemplatePart(Name = "PART_InputCanvas", Type = typeof(Canvas))]
-    public class TagsInput : ItemsControl
+    public class TagControl : ItemsControl
     {
         #region - Fields -
 
@@ -24,10 +24,17 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Dependency Properties -
 
-        public static readonly DependencyProperty InputBoxWidthProperty = DependencyProperty.Register("InputBoxWidth", typeof(double), typeof(TagsInput), new PropertyMetadata(50.0));
+        /// <summary>
+        /// Identifies InputBoxWidthProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty InputBoxWidthProperty = DependencyProperty.Register("InputBoxWidth", typeof(double), typeof(TagControl), new PropertyMetadata(50.0));
+
+        /// <summary>
+        /// Identifies SelectedItemProperty dependency property.
+        /// </summary>
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem",
             typeof(object),
-            typeof(TagsInput),
+            typeof(TagControl),
             new FrameworkPropertyMetadata
             {
                 BindsTwoWayByDefault = true,
@@ -38,24 +45,19 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Constructors -
 
-        static TagsInput()
+        static TagControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TagsInput), new FrameworkPropertyMetadata(typeof(TagsInput)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TagControl), new FrameworkPropertyMetadata(typeof(TagControl)));
         }
 
         /// <summary>
         /// Initializes new instance of TagsInput class.
         /// </summary>
-        public TagsInput()
+        public TagControl()
         {
             Focusable = false;
 
-            this.LostFocus += OnLostFocus;
-        }
-
-        private void OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            AddTag();
+            LostFocus += OnLostFocus;
         }
 
         #endregion
@@ -73,22 +75,13 @@ namespace Aronium.Wpf.Toolkit.Controls
             inputBox.PreviewKeyDown += OnInputBoxKeyDown;
         }
 
-        protected override Size MeasureOverride(Size constraint)
-        {
-            var size = base.MeasureOverride(constraint);
-
-            SetInputBoxPosition();
-
-            return size;
-        }
-
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             base.OnItemsChanged(e);
 
             Dispatcher.BeginInvoke((Action)(() =>
             {
-                SetInputBoxPosition();
+                CalculateSizeAndInputBoxPosition();
             }), DispatcherPriority.Input);
         }
 
@@ -122,9 +115,21 @@ namespace Aronium.Wpf.Toolkit.Controls
             return item is TagItem;
         }
 
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo);
+
+            CalculateSizeAndInputBoxPosition();
+        }
+
         #endregion
 
         #region - Private methods -
+
+        private void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            AddTag();
+        }
 
         internal void Remove(object item)
         {
@@ -160,7 +165,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
-        private void SetInputBoxPosition()
+        private void CalculateSizeAndInputBoxPosition()
         {
             if (Items.Count > 0)
             {
@@ -185,7 +190,8 @@ namespace Aronium.Wpf.Toolkit.Controls
                         Canvas.SetLeft(inputBox, left);
                         Canvas.SetTop(inputBox, point.Y + container.ActualHeight + 1);
 
-                        // Set height based on
+                        // Canvas height will set actual control height
+                        // Set canvas height based on the following:
                         // 1. Last item's Y position
                         // 2. Last item's height (container)
                         // 3. Container margins
@@ -260,5 +266,4 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
     }
-
 }

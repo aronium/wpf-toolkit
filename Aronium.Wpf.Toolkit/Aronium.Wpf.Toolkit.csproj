@@ -60,7 +60,7 @@
     <Compile Include="Controls\NotificationItem.cs" />
     <Compile Include="Controls\Rating.cs" />
     <Compile Include="Controls\TagItem.cs" />
-    <Compile Include="Controls\TagsInput.cs" />
+    <Compile Include="Controls\TagControl.cs" />
     <Compile Include="Controls\ToggleSwitch.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\TextSeparator.cs" />
@@ -195,7 +195,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\TagsInputStyle.xaml">
+    <Page Include="Themes\TagControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

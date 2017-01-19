@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource Window}"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
-        Title="MainWindow" Height="850" Width="950">
+        Title="MainWindow" Height="750" Width="950">
 
     <Window.Resources>
 
@@ -394,7 +394,7 @@
 
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Tab item 2" IsSelected="True">
+                <TabItem Header="Tab item 2">
                     <Grid>
                         <!--GridSplitter demo-->
                         <Grid>
@@ -441,7 +441,7 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
-                                    <aronium:TagsInput VerticalAlignment="Top" 
+                                    <aronium:TagControl VerticalAlignment="Top" 
                                                        Margin="5" 
                                                        SelectedItem="{Binding SelectedTag}"
                                                        InputBoxWidth="50"

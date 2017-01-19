@@ -36,6 +36,6 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/ClosableTabControlStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/CollapsibleTabControlStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/RatingStyle.xaml"/>
-        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TagsInputStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TagControlStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

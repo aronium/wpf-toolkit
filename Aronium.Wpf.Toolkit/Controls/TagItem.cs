@@ -28,7 +28,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnGotFocus(e);
 
-            var parent = this.FindVisualParent<TagsInput>();
+            var parent = this.FindVisualParent<TagControl>();
 
             if(parent != null)
             {
@@ -45,7 +45,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 closeButtn.Click += (sender, e) =>
                 {
-                    var parent = this.FindVisualParent<TagsInput>();
+                    var parent = this.FindVisualParent<TagControl>();
 
                     if (parent != null)
                     {
@@ -61,7 +61,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (e.Key == Key.Delete || e.Key == Key.Back)
             {
-                var parent = this.FindVisualParent<TagsInput>();
+                var parent = this.FindVisualParent<TagControl>();
 
                 if (parent != null)
                 {

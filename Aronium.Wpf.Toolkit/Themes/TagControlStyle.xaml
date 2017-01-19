@@ -47,7 +47,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type local:TagsInput}">
+    <Style TargetType="{x:Type local:TagControl}">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
@@ -55,16 +55,13 @@
         <Setter Property="MinHeight" Value="18" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TagsInput}">
+                <ControlTemplate TargetType="{x:Type local:TagControl}">
                     <Border Width="{TemplateBinding Width}"
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
-                            <WrapPanel IsItemsHost="True" 
-                                       Name="PART_ItemsHost" 
-                                       MinHeight="{TemplateBinding MinHeight}" />
                             <Canvas VerticalAlignment="Top"
                                     Background="#000000FF"
                                     Name="PART_InputCanvas"
@@ -79,6 +76,9 @@
                                          Margin="0,1,0,0"
                                          Padding="0" />
                             </Canvas>
+                            <WrapPanel IsItemsHost="True" 
+                                       Name="PART_ItemsHost" 
+                                       MinHeight="{TemplateBinding MinHeight}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
