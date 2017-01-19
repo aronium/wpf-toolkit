@@ -396,17 +396,8 @@
                 </TabItem>
                 <TabItem Header="Tab item 2" IsSelected="True">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
                         <!--GridSplitter demo-->
-                        <Grid Width="120" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
@@ -444,53 +435,64 @@
                             </Grid.Resources>
 
                             <Border BorderThickness="1" SnapsToDevicePixels="True" BorderBrush="{StaticResource DottedBrush}">
-                                <TextBlock Text="1"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <aronium:TagsInput VerticalAlignment="Top" 
+                                                       Margin="5" 
+                                                       SelectedItem="{Binding SelectedTag}"
+                                                       InputBoxWidth="10"
+                                                       ItemsSource="{Binding Tags}"
+                                                       Name="tagsControl" />
+
+                                    <ListBox ItemsSource="{Binding Tags}" 
+                                             Margin="5,0,5,5" 
+                                             SelectedItem="{Binding SelectedTag}"
+                                             Grid.Row="1"/>
+                                </Grid>
                             </Border>
                             <GridSplitter Grid.Row="0" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
-                            <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"/>
+
                             <Border BorderThickness="1" SnapsToDevicePixels="True" BorderBrush="{StaticResource DottedBrush}" Grid.Row="2">
-                                <TextBlock Text="3"/>
+                                <Viewbox Height="300" Grid.Row="1" >
+                                    <Calendar HorizontalAlignment="Left" Margin="5" PreviewMouseUp="OnCalendarPreviewMouseDown"/>
+                                </Viewbox>
                             </Border>
+                            <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"/>
 
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
-                                <TextBlock Text="2"/>
+                                <StackPanel Grid.Column="1" Margin="5,5,5,20">
+                                    <WrapPanel>
+                                        <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
+                                        <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                                        <CheckBox Content="CheckBox" IsThreeState="True" IsEnabled="False" IsChecked="{x:Null}" Margin="5"/>
+                                        <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
+                                        <CheckBox Content="CheckBox" IsChecked="True" IsEnabled="False" Margin="5"/>
+
+                                        <RadioButton Content="CheckBox" IsChecked="True" Margin="5"/>
+                                        <RadioButton Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
+                                        <RadioButton Content="CheckBox" IsEnabled="False" Margin="5"/>
+                                    </WrapPanel>
+
+                                    <aronium:Rating Stars="10" Margin="0,20" StarSize="20"/>
+                                    <aronium:Rating Margin="0" StarBrush="{StaticResource Accent}"/>
+                                </StackPanel>
                             </Border>
                             <GridSplitter Grid.Row="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Row="2" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
-                                <TextBlock Text="4"/>
+                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Orientation="Vertical" Grid.Column="1">
+                                    <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBox Width="200" Margin="5"/>
+                                        <DatePicker Width="200" />
+                                        <DatePicker Margin="5" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"  />
+                                    </StackPanel>
+                                </StackPanel>
                             </Border>
 
                         </Grid>
-
-                        <StackPanel Grid.Column="1" Margin="5,5,5,20">
-                            <WrapPanel>
-                                <CheckBox Content="CheckBox" IsChecked="True" Margin="5"/>
-                                <CheckBox Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
-                                <CheckBox Content="CheckBox" IsThreeState="True" IsEnabled="False" IsChecked="{x:Null}" Margin="5"/>
-                                <CheckBox Content="CheckBox" IsEnabled="False" Margin="5"/>
-                                <CheckBox Content="CheckBox" IsChecked="True" IsEnabled="False" Margin="5"/>
-
-                                <RadioButton Content="CheckBox" IsChecked="True" Margin="5"/>
-                                <RadioButton Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}" Margin="5"/>
-                                <RadioButton Content="CheckBox" IsEnabled="False" Margin="5"/>
-                            </WrapPanel>
-
-                            <aronium:Rating Stars="10" Margin="0,20" StarSize="20"/>
-                            <aronium:Rating Margin="0" StarBrush="{StaticResource Accent}"/>
-                        </StackPanel>
-
-                        <Viewbox Height="300" Grid.Row="1" >
-                            <Calendar HorizontalAlignment="Left" Margin="5" PreviewMouseUp="OnCalendarPreviewMouseDown"/>
-                        </Viewbox>
-
-                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Orientation="Vertical" Grid.Column="1">
-                            <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
-                                <TextBox Width="200" Margin="5"/>
-                                <DatePicker Width="200" />
-                                <DatePicker Margin="5" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"  />
-                            </StackPanel>
-                            <aronium:TagsInput Margin="10" Name="tagsControl" />
-                        </StackPanel>
 
                     </Grid>
                 </TabItem>

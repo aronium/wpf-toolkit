@@ -20,8 +20,9 @@
                             CornerRadius="0"
                             Padding="{TemplateBinding Padding}">
                         <StackPanel Orientation="Horizontal">
-                            <ContentPresenter Content="{Binding}" />
+                            <ContentPresenter Content="{Binding}" Margin="0,0,0,1" VerticalAlignment="Center" />
                             <Button Height="Auto" 
+                                    Name="PART_CloseButton"
                                     Style="{DynamicResource FlatButtonStyle}" 
                                     IsTabStop="False" 
                                     Padding="0"
@@ -30,7 +31,7 @@
                                       Height="8"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Center"
-                                      Margin="0,1,0,0"
+                                      Margin="0,2,0,0"
                                       Stretch="Uniform"
                                       Fill="White" />
                             </Button>
@@ -52,13 +53,6 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="MinHeight" Value="18" />
-        <!--<Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TagsInput}">
@@ -68,7 +62,8 @@
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
-                            <WrapPanel IsItemsHost="True" Name="PART_ItemsHost" MinHeight="{TemplateBinding MinHeight}" />
+                            <WrapPanel IsItemsHost="True" 
+                                       Name="PART_ItemsHost" MinHeight="{TemplateBinding MinHeight}" />
                             <Canvas VerticalAlignment="Top"
                                     Height="{Binding ElementName=PART_ItemsHost, Path=ActualHeight}">
                                 <TextBox Name="PART_TextInput" 
@@ -78,6 +73,7 @@
                                          BorderThickness="0" 
                                          Width="Auto" 
                                          Height="Auto"
+                                         Margin="0,1,0,0"
                                          Padding="0" />
                             </Canvas>
                         </Grid>

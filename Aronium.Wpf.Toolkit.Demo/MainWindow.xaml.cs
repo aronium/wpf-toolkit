@@ -30,6 +30,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         private string _themeName = "Dark";
         private List<string> _themes;
         private bool _showTabControlBorder;
+        private string _selectedTag;
         List<User> _users;
 
         public MainWindow()
@@ -44,7 +45,7 @@ namespace Aronium.Wpf.Toolkit.Demo
 
             closableTabControl.ItemClosing += OnClosableTabControlItemClosing;
 
-            tagsControl.ItemsSource = new ObservableCollection<string>(new[] { "5006240969368", "7326550821534", "5201846153386", "9689963559748", "7323970149047" });
+            Tags = new ObservableCollection<string>(new[] { "New York", "Los Angeles", "Seattle", "San Francisco", "Belgrade" });
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -169,6 +170,22 @@ namespace Aronium.Wpf.Toolkit.Demo
             set
             {
                 _decimalProperty = value; OnPropertyChanged("DecimalProperty");
+            }
+        }
+
+        public ObservableCollection<string> Tags { get; private set; }
+
+        public string SelectedTag
+        {
+            get
+            {
+                return _selectedTag;
+            }
+            set
+            {
+                _selectedTag = value;
+
+                OnPropertyChanged("SelectedTag");
             }
         }
 
