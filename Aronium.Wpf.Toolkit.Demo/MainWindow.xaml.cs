@@ -1,6 +1,7 @@
 ﻿using Aronium.Wpf.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,8 @@ namespace Aronium.Wpf.Toolkit.Demo
             this.IntegerProperty = new Random().Next(0, 1000);
 
             closableTabControl.ItemClosing += OnClosableTabControlItemClosing;
+
+            tagsControl.ItemsSource = new ObservableCollection<string>(new[] { "5006240969368", "7326550821534", "5201846153386", "9689963559748", "7323970149047" });
         }
 
         private void OnPropertyChanged(string propertyName)

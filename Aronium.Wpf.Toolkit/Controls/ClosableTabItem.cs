@@ -214,7 +214,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             // ContextMenu.PlacementTarget is passed as command parameter
             // Border is placement target for context menu. 
-            var item = FindVisualParent<ClosableTabItem>(e.Parameter as Border); 
+            var item = (e.Parameter as Border).FindVisualParent<ClosableTabItem>(); 
 
             ((ClosableTabControl)item.Parent).CloseAllButThis(item);
 
@@ -231,7 +231,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 // ContextMenu.PlacementTarget is passed as command parameter
                 // Border is placement target for context menu. 
-                item = FindVisualParent<ClosableTabItem>(e.Parameter as Border);
+                item = (e.Parameter as Border).FindVisualParent<ClosableTabItem>();
             }
 
             if (item != null && ((ClosableTabItem)item).Parent != null)
@@ -251,31 +251,6 @@ namespace Aronium.Wpf.Toolkit.Controls
             ((ClosableTabControl)sender).CloseAllButActive();
             e.Handled = true;
         }
-
-        #region - Helper methods -
-
-        private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
-        {
-            // get parent item
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-
-            // we’ve reached the end of the tree
-            if (parentObject == null) return null;
-
-            // check if the parent matches the type we’re looking for
-            T parent = parentObject as T;
-            if (parent != null)
-            {
-                return parent;
-            }
-            else
-            {
-                // use recursion to proceed with next level
-                return FindVisualParent<T>(parentObject);
-            }
-        }
-
-        #endregion
 
         #endregion
 

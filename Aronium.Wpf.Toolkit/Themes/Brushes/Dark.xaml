@@ -49,5 +49,9 @@
 
     <!--Closable tab control-->
     <SolidColorBrush x:Key="CloseTabItemBackgroundHover" Color="#036797" />
+    
+    <!--Tags-->
+    <SolidColorBrush x:Key="TagItemBackground" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="TagItemBackgroundSelected" Color="#FF036797" />
 
 </ResourceDictionary>

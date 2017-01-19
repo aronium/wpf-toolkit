@@ -9,9 +9,9 @@
         Title="MainWindow" Height="850" Width="950">
 
     <Window.Resources>
-        
+
         <core:Double x:Key="ButtonHeightGlobal">32</core:Double>
-        
+
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Height" Value="{StaticResource ButtonHeightGlobal}" />
         </Style>
@@ -25,7 +25,7 @@
             <Setter Property="Height" Value="{StaticResource ButtonHeightGlobal}" />
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -203,7 +203,7 @@
                                     </TreeView>
 
                                 </StackPanel>
-                                
+
                             </GroupBox>
 
                             <GridSplitter ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" Grid.Column="3" />
@@ -369,8 +369,6 @@
                                         </aronium:SplitButton>
                                     </WrapPanel>
 
-                                    <aronium:TagsInput />
-
                                 </StackPanel>
 
                             </GroupBox>
@@ -396,7 +394,7 @@
 
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Tab item 2">
+                <TabItem Header="Tab item 2" IsSelected="True">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -485,12 +483,14 @@
                             <Calendar HorizontalAlignment="Left" Margin="5" PreviewMouseUp="OnCalendarPreviewMouseDown"/>
                         </Viewbox>
 
-                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Orientation="Horizontal" Grid.Column="1">
-                            <TextBox Width="200" Margin="5"/>
-                            <DatePicker Width="200" />
-                            <DatePicker Margin="5" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"  />
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Orientation="Vertical" Grid.Column="1">
+                            <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                                <TextBox Width="200" Margin="5"/>
+                                <DatePicker Width="200" />
+                                <DatePicker Margin="5" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"  />
+                            </StackPanel>
+                            <aronium:TagsInput Margin="10" Name="tagsControl" />
                         </StackPanel>
-
 
                     </Grid>
                 </TabItem>
@@ -511,7 +511,7 @@
                             <aronium:ClosableTabControl.Header>
                                 <TextBlock Text="Tab Control Header" Style="{StaticResource Heading1}" VerticalAlignment="Center" Margin="0,0,10,0" />
                             </aronium:ClosableTabControl.Header>
-                            
+
                             <aronium:ClosableTabItem CanClose="False" Header="CanClose: False">
                                 <Button Content="Add tab item" Click="OnAddTabItem" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
                             </aronium:ClosableTabItem>
