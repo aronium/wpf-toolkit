@@ -63,8 +63,11 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <WrapPanel IsItemsHost="True" 
-                                       Name="PART_ItemsHost" MinHeight="{TemplateBinding MinHeight}" />
+                                       Name="PART_ItemsHost" 
+                                       MinHeight="{TemplateBinding MinHeight}" />
                             <Canvas VerticalAlignment="Top"
+                                    Background="#000000FF"
+                                    Name="PART_InputCanvas"
                                     Height="{Binding ElementName=PART_ItemsHost, Path=ActualHeight}">
                                 <TextBox Name="PART_TextInput" 
                                          Background="Transparent" 
@@ -82,8 +85,8 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="{DynamicResource Accent}" />
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
             </Trigger>
         </Style.Triggers>
     </Style>

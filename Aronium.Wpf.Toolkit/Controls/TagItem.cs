@@ -13,16 +13,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
         }
 
-        public TagItem(string value)
-        {
-            this.Value = value;
-
-            //Focusable = true;
-            //IsTabStop = true;
-
-            this.MouseDown += OnMouseDown;
-        }
-
         private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
@@ -50,7 +40,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnApplyTemplate();
 
-            var closeButtn = this.Template.FindName("PART_CloseButton", this) as Button;
+            var closeButtn = Template.FindName("PART_CloseButton", this) as Button;
             if(closeButtn != null)
             {
                 closeButtn.Click += (sender, e) =>
@@ -65,11 +55,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
-        protected override void OnKeyUp(KeyEventArgs e)
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            base.OnKeyUp(e);
+            base.OnPreviewKeyDown(e);
 
-            if (e.Key == Key.Delete)
+            if (e.Key == Key.Delete || e.Key == Key.Back)
             {
                 var parent = this.FindVisualParent<TagsInput>();
 

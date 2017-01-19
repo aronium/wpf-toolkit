@@ -11,12 +11,14 @@ namespace Aronium.Wpf.Toolkit.Controls
 {
     [TemplatePart(Name = "PART_TextInput", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ItemsHost", Type = typeof(WrapPanel))]
+    [TemplatePart(Name = "PART_InputCanvas", Type = typeof(Canvas))]
     public class TagsInput : ItemsControl
     {
         #region - Fields -
 
         private TextBox inputBox;
         private WrapPanel itemsPresenter;
+        private Canvas canvas;
 
         #endregion
 
@@ -66,8 +68,9 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             inputBox = this.Template.FindName("PART_TextInput", this) as TextBox;
             itemsPresenter = this.Template.FindName("PART_ItemsHost", this) as WrapPanel;
+            canvas = this.Template.FindName("PART_InputCanvas", this) as Canvas;
 
-            inputBox.KeyDown += OnInputBoxKeyDown;
+            inputBox.PreviewKeyDown += OnInputBoxKeyDown;
         }
 
         protected override Size MeasureOverride(Size constraint)
@@ -135,14 +138,25 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnInputBoxKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter || e.Key == Key.Tab)
+            switch (e.Key)
             {
-                if (!string.IsNullOrWhiteSpace(inputBox.Text))
-                {
-                    AddTag();
+                case Key.Enter:
+                case Key.Tab:
+                    if (!string.IsNullOrWhiteSpace(inputBox.Text))
+                    {
+                        AddTag();
+                        e.Handled = true;
+                    }
+                    break;
+                case Key.Back:
+                    if (string.IsNullOrEmpty(inputBox.Text) && Items.Count > 0)
+                    {
+                        var tag = ItemContainerGenerator.ContainerFromIndex(Items.Count - 1) as TagItem;
 
-                    e.Handled = true;
-                }
+                        if (tag != null)
+                            tag.Focus();
+                    }
+                    break;
             }
         }
 
@@ -150,36 +164,54 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (Items.Count > 0)
             {
+                // Find last item container
                 var container = this.ItemContainerGenerator.ContainerFromIndex(Items.Count - 1) as TagItem;
 
+                // Make sure container is found
                 if (container != null)
                 {
+                    // Get absolute position of last item container within wrap panel
                     var point = container.TranslatePoint(new Point(0, 0), itemsPresenter);
 
+                    // Calculate right point based on container actual with and X point
                     var left = point.X + container.ActualWidth - 1;
+
+                    // Check if default input box width can fit current width
                     if (left + InputBoxWidth > this.ActualWidth)
                     {
-                        left = 0;
+                        // If input box do not fit current width, move it one row down and left to 0
+                        left = -1;
 
-                        Canvas.SetLeft(inputBox, -1);
+                        Canvas.SetLeft(inputBox, left);
                         Canvas.SetTop(inputBox, point.Y + container.ActualHeight + 1);
 
-                        this.Height = point.Y + container.ActualHeight + container.Margin.Bottom + container.Margin.Top + this.Padding.Bottom + inputBox.ActualHeight;
+                        // Set height based on
+                        // 1. Last item's Y position
+                        // 2. Last item's height (container)
+                        // 3. Container margins
+                        // 4. Bottom padding
+                        // 5. Input box height
+                        canvas.Height = point.Y + container.ActualHeight + container.Margin.Bottom + container.Margin.Top + this.Padding.Bottom + inputBox.ActualHeight + 2;
                     }
                     else
                     {
+                        // Moving input box to a new row
                         Canvas.SetLeft(inputBox, left);
                         Canvas.SetTop(inputBox, point.Y);
 
-                        this.Height = double.NaN;
+                        canvas.Height = double.NaN;
                     }
 
                     if (ActualWidth > 0)
                     {
-                        var inputWidth = this.ActualWidth - (left + this.Padding.Left + this.Padding.Right);
+                        // Use dispatcher as it will not work until control is fully resized
+                        Dispatcher.BeginInvoke((Action)(() =>
+                        {
+                            var inputWidth = this.ActualWidth - (left + this.Padding.Left + this.Padding.Right);
 
-                        if (ActualWidth >= inputWidth)
-                            inputBox.Width = inputWidth;
+                            if (ActualWidth >= inputWidth)
+                                inputBox.Width = inputWidth;
+                        }), DispatcherPriority.Input);
                     }
                 }
             }
@@ -188,7 +220,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 Canvas.SetLeft(inputBox, -1);
                 Canvas.SetTop(inputBox, 0);
 
-                this.Height = double.NaN;
+                canvas.Height = double.NaN;
             }
         }
 

@@ -444,7 +444,7 @@
                                     <aronium:TagsInput VerticalAlignment="Top" 
                                                        Margin="5" 
                                                        SelectedItem="{Binding SelectedTag}"
-                                                       InputBoxWidth="10"
+                                                       InputBoxWidth="50"
                                                        ItemsSource="{Binding Tags}"
                                                        Name="tagsControl" />
 
