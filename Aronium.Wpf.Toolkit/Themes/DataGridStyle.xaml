@@ -238,19 +238,30 @@
 
     <!-- Cell -->
     <Style TargetType="DataGridCell" x:Key="DefaultCellStyle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="4,0" />
         <Setter Property="ToolTip" Value="{Binding Column.(ToolTipService.ToolTip), RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Label SnapsToDevicePixels="True" 
-                           Foreground="{TemplateBinding Foreground}"
-                           Margin="0" 
-                           Padding="4,0" 
-                           HorizontalAlignment="Stretch"
-                           VerticalAlignment="Stretch"
-                           VerticalContentAlignment="Center"
-                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                           Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>
+                    <Grid Name="Root" Background="{TemplateBinding Background}">
+                        <!--<Label SnapsToDevicePixels="True" 
+                               Foreground="{TemplateBinding Foreground}"
+                               Margin="0" 
+                               Padding="4,0" 
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>-->
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
