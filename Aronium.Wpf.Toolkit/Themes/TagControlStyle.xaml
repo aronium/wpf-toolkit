@@ -63,7 +63,6 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <Canvas VerticalAlignment="Top"
-                                    Background="#000000FF"
                                     Name="PART_InputCanvas"
                                     Height="{Binding ElementName=PART_ItemsHost, Path=ActualHeight}">
                                 <TextBox Name="PART_TextInput" 

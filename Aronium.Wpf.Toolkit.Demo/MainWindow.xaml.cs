@@ -218,5 +218,15 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             e.Row.Header = (e.Row.GetIndex() + 1);
         }
+
+        private void OnTagRemoved(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Tag removed");
+        }
+
+        private void OnTagAdded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Tag added");
+        }
     }
 }

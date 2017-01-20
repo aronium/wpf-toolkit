@@ -41,6 +41,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             base.OnApplyTemplate();
 
             var closeButtn = Template.FindName("PART_CloseButton", this) as Button;
+
             if(closeButtn != null)
             {
                 closeButtn.Click += (sender, e) =>

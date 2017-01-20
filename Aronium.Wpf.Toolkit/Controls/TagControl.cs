@@ -10,15 +10,34 @@ using System.Windows.Threading;
 namespace Aronium.Wpf.Toolkit.Controls
 {
     [TemplatePart(Name = "PART_TextInput", Type = typeof(TextBox))]
-    [TemplatePart(Name = "PART_ItemsHost", Type = typeof(WrapPanel))]
+    [TemplatePart(Name = "PART_ItemsHost", Type = typeof(Panel))]
     [TemplatePart(Name = "PART_InputCanvas", Type = typeof(Canvas))]
     public class TagControl : ItemsControl
     {
         #region - Fields -
 
         private TextBox inputBox;
-        private WrapPanel itemsPresenter;
+        private Panel itemsHostPanel;
         private Canvas canvas;
+
+        #endregion
+
+        #region - Events -
+
+        public static readonly RoutedEvent ItemAddedEvent = EventManager.RegisterRoutedEvent("ItemAdded", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TagControl));
+        public static readonly RoutedEvent ItemRemovedEvent = EventManager.RegisterRoutedEvent("ItemRemoved", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TagControl));
+
+        public event RoutedEventHandler ItemAdded
+        {
+            add { AddHandler(ItemAddedEvent, value); }
+            remove { RemoveHandler(ItemAddedEvent, value); }
+        }
+
+        public event RoutedEventHandler ItemRemoved
+        {
+            add { AddHandler(ItemRemovedEvent, value); }
+            remove { RemoveHandler(ItemRemovedEvent, value); }
+        }
 
         #endregion
 
@@ -62,68 +81,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        #region - Overrides -
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            inputBox = this.Template.FindName("PART_TextInput", this) as TextBox;
-            itemsPresenter = this.Template.FindName("PART_ItemsHost", this) as WrapPanel;
-            canvas = this.Template.FindName("PART_InputCanvas", this) as Canvas;
-
-            inputBox.PreviewKeyDown += OnInputBoxKeyDown;
-        }
-
-        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
-        {
-            base.OnItemsChanged(e);
-
-            Dispatcher.BeginInvoke((Action)(() =>
-            {
-                CalculateSizeAndInputBoxPosition();
-            }), DispatcherPriority.Input);
-        }
-
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseDown(e);
-
-            if (e.OriginalSource is UIElement)
-            {
-                var tagItem = (e.OriginalSource as DependencyObject).FindVisualParent<TagItem>();
-
-                if (tagItem == null)
-                {
-                    inputBox.Focus();
-                    inputBox.SelectAll();
-                }
-                else
-                {
-                    tagItem.Focus();
-                }
-            }
-        }
-
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new TagItem();
-        }
-
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is TagItem;
-        }
-
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
-            base.OnRenderSizeChanged(sizeInfo);
-
-            CalculateSizeAndInputBoxPosition();
-        }
-
-        #endregion
-
         #region - Private methods -
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
@@ -138,7 +95,10 @@ namespace Aronium.Wpf.Toolkit.Controls
             else if (ItemsSource is IList)
                 (ItemsSource as IList).Remove(item);
 
-            inputBox.Focus(); inputBox.SelectAll();
+            inputBox.Focus();
+            inputBox.SelectAll();
+
+            RaiseEvent(new RoutedEventArgs(ItemRemovedEvent));
         }
 
         private void OnInputBoxKeyDown(object sender, KeyEventArgs e)
@@ -176,7 +136,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 if (container != null)
                 {
                     // Get absolute position of last item container within wrap panel
-                    var point = container.TranslatePoint(new Point(0, 0), itemsPresenter);
+                    var point = container.TranslatePoint(new Point(0, 0), itemsHostPanel);
 
                     // Calculate right point based on container actual with and X point
                     var left = point.X + container.ActualWidth - 1;
@@ -240,6 +200,70 @@ namespace Aronium.Wpf.Toolkit.Controls
                 (ItemsSource as IList).Add(inputBox.Text);
 
             inputBox.Clear();
+
+            RaiseEvent(new RoutedEventArgs(ItemAddedEvent));
+        }
+
+        #endregion
+
+        #region - Overrides -
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            inputBox = Template.FindName("PART_TextInput", this) as TextBox;
+            itemsHostPanel = Template.FindName("PART_ItemsHost", this) as Panel;
+            canvas = Template.FindName("PART_InputCanvas", this) as Canvas;
+
+            inputBox.PreviewKeyDown += OnInputBoxKeyDown;
+        }
+
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.OnItemsChanged(e);
+
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                CalculateSizeAndInputBoxPosition();
+            }), DispatcherPriority.Input);
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (e.OriginalSource is UIElement)
+            {
+                var tagItem = (e.OriginalSource as DependencyObject).FindVisualParent<TagItem>();
+
+                if (tagItem == null)
+                {
+                    inputBox.Focus();
+                    inputBox.SelectAll();
+                }
+                else
+                {
+                    tagItem.Focus();
+                }
+            }
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new TagItem();
+        }
+
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is TagItem;
+        }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo);
+
+            CalculateSizeAndInputBoxPosition();
         }
 
         #endregion
