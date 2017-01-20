@@ -70,7 +70,6 @@
                             <!--Input box canvas must be after items host, so tab order is used to focus input box after last item-->
                             <Canvas VerticalAlignment="Top"
                                     Name="PART_InputCanvas"
-                                    IsHitTestVisible="False"
                                     Height="{Binding ElementName=PART_ItemsHost, Path=ActualHeight}">
                                 <TextBox Name="PART_TextInput" 
                                          Background="Transparent" 

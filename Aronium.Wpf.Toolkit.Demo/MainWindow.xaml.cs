@@ -45,7 +45,7 @@ namespace Aronium.Wpf.Toolkit.Demo
 
             closableTabControl.ItemClosing += OnClosableTabControlItemClosing;
 
-            Tags = new ObservableCollection<string>(new[] { "New York", "Los Angeles", "Seattle", "San Francisco", "Belgrade" });
+            Tags = new ObservableCollection<string>(); // (new[] { "New York", "Los Angeles", "Seattle", "San Francisco", "Belgrade" });
         }
 
         private void OnPropertyChanged(string propertyName)

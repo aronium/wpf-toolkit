@@ -172,10 +172,12 @@ namespace Aronium.Wpf.Toolkit.Controls
                     }
                 }
             }
-            else
+            else if(inputBox != null)
             {
                 Canvas.SetLeft(inputBox, -1);
                 Canvas.SetTop(inputBox, 0);
+
+                inputBox.Width = this.ActualWidth;
 
                 canvas.Height = double.NaN;
             }
