@@ -103,12 +103,16 @@ namespace Aronium.Wpf.Toolkit.Controls
                     break;
                 case Key.Back:
                 case Key.Left:
+                case Key.Up:
                     if (string.IsNullOrEmpty(inputBox.Text) && Items.Count > 0)
                     {
                         var tag = ItemContainerGenerator.ContainerFromIndex(Items.Count - 1) as TagItem;
 
                         if (tag != null)
+                        {
                             tag.Focus();
+                            Keyboard.Focus(tag);
+                        }
 
                         e.Handled = true;
                     }
@@ -172,7 +176,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     }
                 }
             }
-            else if(inputBox != null)
+            else if (inputBox != null)
             {
                 Canvas.SetLeft(inputBox, -1);
                 Canvas.SetTop(inputBox, 0);
@@ -215,6 +219,44 @@ namespace Aronium.Wpf.Toolkit.Controls
             Keyboard.Focus(inputBox);
 
             inputBox.SelectAll();
+        }
+
+        internal void SelectNext()
+        {
+            if (Items.Count == 0) return;
+
+            var index = this.Items.IndexOf(this.SelectedItem);
+
+            if (index < Items.Count - 1)
+            {
+                this.SelectedItem = this.Items[index + 1];
+
+                var tag = this.ItemContainerGenerator.ContainerFromIndex(index + 1) as TagItem;
+
+                tag.Focus();
+                Keyboard.Focus(tag);
+            }
+            else
+            {
+                FocusInputBox();
+            }
+        }
+
+        internal void SelectPrevious()
+        {
+            if (Items.Count == 0) return;
+
+            var index = this.Items.IndexOf(this.SelectedItem);
+
+            if (index > 0)
+            {
+                this.SelectedItem = this.Items[index - 1];
+
+                var tag = this.ItemContainerGenerator.ContainerFromIndex(index - 1) as TagItem;
+
+                tag.Focus();
+                Keyboard.Focus(tag);
+            }
         }
 
         #endregion
@@ -262,6 +304,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 else
                 {
                     tagItem.Focus();
+                    Keyboard.Focus(tagItem);
                 }
             }
         }

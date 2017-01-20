@@ -444,14 +444,13 @@
 
                                     <TextBlock Margin="5" Text="TagControl - Bounded tag items" Style="{StaticResource Heading1}" />
 
+                                    <ScrollViewer Grid.Row="1">
                                     <aronium:TagControl VerticalAlignment="Top"
                                                         Margin="5" 
                                                         SelectedItem="{Binding SelectedTag}"
-                                                        InputBoxWidth="50"
                                                         ItemsSource="{Binding Tags}"
-                                                        Name="tagsControl" 
                                                         Grid.Row="1" />
-
+                                    </ScrollViewer>
                                     <ListBox ItemsSource="{Binding Tags}" 
                                              Margin="5,0,5,5" 
                                              SelectedItem="{Binding SelectedTag}"

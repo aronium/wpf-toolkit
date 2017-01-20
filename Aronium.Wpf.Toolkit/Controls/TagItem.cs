@@ -1,27 +1,24 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
     public class TagItem : Control
     {
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(TagItem));
-
         public TagItem()
         {
         }
 
-        private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
+            base.OnPreviewMouseDown(e);
+
             Keyboard.Focus(this);
             Focus();
-        }
 
-        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
-        {
-            throw new System.NotImplementedException();
+            // In case control is wrapped in ScrolViewer, prevent ScrollViewer from stealing focus
+            e.Handled = true;
         }
 
         protected override void OnGotFocus(RoutedEventArgs e)
@@ -30,7 +27,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             var parent = this.FindVisualParent<TagControl>();
 
-            if(parent != null)
+            if (parent != null)
             {
                 parent.SelectedItem = this.DataContext;
             }
@@ -42,7 +39,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             var closeButtn = Template.FindName("PART_CloseButton", this) as Button;
 
-            if(closeButtn != null)
+            if (closeButtn != null)
             {
                 closeButtn.Click += (sender, e) =>
                 {
@@ -60,32 +57,35 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnPreviewKeyDown(e);
 
-            if (e.Key == Key.Delete || e.Key == Key.Back)
-            {
-                var parent = this.FindVisualParent<TagControl>();
+            var parent = GetParent();
 
-                if (parent != null)
-                {
-                    parent.Remove(this.DataContext);
-                }
+            switch (e.Key)
+            {
+                case Key.Delete:
+                case Key.Back:
+                    if (parent != null)
+                        parent.Remove(this.DataContext);
+                    break;
+                case Key.Left:
+                case Key.Up:
+                    // In case control is wrapped in ScrollViewer, arrows will not work.
+                    // Manually force navigateion using arrows
+                    if (parent != null)
+                        parent.SelectPrevious();
+                    e.Handled = true;
+                    break;
+                case Key.Right:
+                case Key.Down:
+                    if (parent != null)
+                        parent.SelectNext();
+                    e.Handled = true;
+                    break;
             }
         }
 
-        public string Value
+        private TagControl GetParent()
         {
-            get
-            {
-                return (string)GetValue(ValueProperty);
-            }
-            set
-            {
-                SetValue(ValueProperty, value);
-            }
-        }
-
-        public override string ToString()
-        {
-            return Value;
+            return this.FindVisualParent<TagControl>();
         }
     }
 }
