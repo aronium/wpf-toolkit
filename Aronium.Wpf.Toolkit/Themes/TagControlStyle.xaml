@@ -51,6 +51,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="MinHeight" Value="18" />
         <Setter Property="Template">
