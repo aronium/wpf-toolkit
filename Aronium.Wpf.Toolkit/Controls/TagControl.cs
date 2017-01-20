@@ -106,17 +106,26 @@ namespace Aronium.Wpf.Toolkit.Controls
                 case Key.Up:
                     if (string.IsNullOrEmpty(inputBox.Text) && Items.Count > 0)
                     {
-                        var tag = ItemContainerGenerator.ContainerFromIndex(Items.Count - 1) as TagItem;
-
-                        if (tag != null)
-                        {
-                            tag.Focus();
-                            Keyboard.Focus(tag);
-                        }
+                        SelectItemAt(Items.Count - 1);
 
                         e.Handled = true;
                     }
                     break;
+            }
+        }
+
+        private void SelectItemAt(int index)
+        {
+            if (index < 0 || index > Items.Count - 1) return;
+
+            var tag = ItemContainerGenerator.ContainerFromIndex(index) as TagItem;
+
+            if (tag != null)
+            {
+                tag.Focus();
+                Keyboard.Focus(tag);
+
+                this.SelectedItem = tag.DataContext;
             }
         }
 
@@ -229,12 +238,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (index < Items.Count - 1)
             {
-                this.SelectedItem = this.Items[index + 1];
-
-                var tag = this.ItemContainerGenerator.ContainerFromIndex(index + 1) as TagItem;
-
-                tag.Focus();
-                Keyboard.Focus(tag);
+                SelectItemAt(index + 1);
             }
             else
             {
@@ -250,12 +254,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (index > 0)
             {
-                this.SelectedItem = this.Items[index - 1];
-
-                var tag = this.ItemContainerGenerator.ContainerFromIndex(index - 1) as TagItem;
-
-                tag.Focus();
-                Keyboard.Focus(tag);
+                SelectItemAt(index - 1);
             }
         }
 
@@ -324,6 +323,21 @@ namespace Aronium.Wpf.Toolkit.Controls
             base.OnRenderSizeChanged(sizeInfo);
 
             CalculateSizeAndInputBoxPosition();
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            base.OnPreviewKeyDown(e);
+
+            switch (e.Key)
+            {
+                case Key.Home:
+                    SelectItemAt(0);
+                    break;
+                case Key.End:
+                    SelectItemAt(Items.Count - 1);
+                    break;
+            }
         }
 
         #endregion
