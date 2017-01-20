@@ -444,13 +444,13 @@
 
                                     <TextBlock Margin="5" Text="TagControl - Bounded tag items" Style="{StaticResource Heading1}" />
 
-                                    <ScrollViewer Grid.Row="1">
+                                    <!--<ScrollViewer Grid.Row="1">-->
                                     <aronium:TagControl VerticalAlignment="Top"
                                                         Margin="5" 
                                                         SelectedItem="{Binding SelectedTag}"
                                                         ItemsSource="{Binding Tags}"
                                                         Grid.Row="1" />
-                                    </ScrollViewer>
+                                    <!--</ScrollViewer>-->
                                     <ListBox ItemsSource="{Binding Tags}" 
                                              Margin="5,0,5,5" 
                                              SelectedItem="{Binding SelectedTag}"
@@ -468,7 +468,7 @@
 
                                 </StackPanel>
                             </Border>
-                            <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"/>
+                            <GridSplitter Focusable="False" Grid.Row="1" Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"/>
 
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
                                 <StackPanel Grid.Column="1" Margin="5,5,5,20">
@@ -491,7 +491,9 @@
                                     <aronium:Rating Margin="0" StarBrush="{StaticResource Accent}"/>
                                 </StackPanel>
                             </Border>
-                            <GridSplitter Grid.Row="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
+                            
+                            <GridSplitter Focusable="False" Grid.Row="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
+                            
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Row="2" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
                                 <StackPanel Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Orientation="Vertical" Grid.Column="1">
                                     <TextBlock Margin="0,5" Text="DatePicker - Standard and disabled styles" Style="{StaticResource Heading1}" />

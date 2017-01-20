@@ -6,15 +6,10 @@ namespace Aronium.Wpf.Toolkit.Controls
 {
     public class TagItem : Control
     {
-        public TagItem()
+        protected override void OnMouseDown(MouseButtonEventArgs e)
         {
-        }
+            base.OnMouseDown(e);
 
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnPreviewMouseDown(e);
-
-            Keyboard.Focus(this);
             Focus();
 
             // In case control is wrapped in ScrolViewer, prevent ScrollViewer from stealing focus
@@ -46,9 +41,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     var parent = this.FindVisualParent<TagControl>();
 
                     if (parent != null)
-                    {
                         parent.Remove(this.DataContext);
-                    }
                 };
             }
         }

@@ -299,6 +299,8 @@ namespace Aronium.Wpf.Toolkit.Controls
                 if (tagItem == null)
                 {
                     FocusInputBox();
+
+                    e.Handled = true;
                 }
                 else
                 {

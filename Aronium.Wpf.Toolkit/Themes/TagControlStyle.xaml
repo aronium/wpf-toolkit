@@ -23,6 +23,7 @@
                             <ContentPresenter Content="{Binding}" Margin="0,0,0,1" VerticalAlignment="Center" />
                             <Button Height="Auto" 
                                     Name="PART_CloseButton"
+                                    Background="Transparent"
                                     Style="{DynamicResource FlatButtonStyle}" 
                                     IsTabStop="False" 
                                     Padding="0"
