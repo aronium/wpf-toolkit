@@ -88,19 +88,6 @@ namespace Aronium.Wpf.Toolkit.Controls
             AddTag();
         }
 
-        internal void Remove(object item)
-        {
-            if (ItemsSource == null)
-                this.Items.Remove(item);
-            else if (ItemsSource is IList)
-                (ItemsSource as IList).Remove(item);
-
-            inputBox.Focus();
-            inputBox.SelectAll();
-
-            RaiseEvent(new RoutedEventArgs(ItemRemovedEvent));
-        }
-
         private void OnInputBoxKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -208,6 +195,26 @@ namespace Aronium.Wpf.Toolkit.Controls
             RaiseEvent(new RoutedEventArgs(ItemAddedEvent));
         }
 
+        internal void Remove(object item)
+        {
+            if (ItemsSource == null)
+                this.Items.Remove(item);
+            else if (ItemsSource is IList)
+                (ItemsSource as IList).Remove(item);
+
+            FocusInputBox();
+
+            RaiseEvent(new RoutedEventArgs(ItemRemovedEvent));
+        }
+
+        private void FocusInputBox()
+        {
+            inputBox.Focus();
+            Keyboard.Focus(inputBox);
+
+            inputBox.SelectAll();
+        }
+
         #endregion
 
         #region - Overrides -
@@ -221,6 +228,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             canvas = Template.FindName("PART_InputCanvas", this) as Canvas;
 
             inputBox.PreviewKeyDown += OnInputBoxKeyDown;
+
+            if (this.IsFocused)
+            {
+                FocusInputBox();
+            }
         }
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
@@ -243,8 +255,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                 if (tagItem == null)
                 {
-                    inputBox.Focus();
-                    inputBox.SelectAll();
+                    FocusInputBox();
                 }
                 else
                 {

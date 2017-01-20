@@ -63,8 +63,14 @@
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
+                            <WrapPanel IsItemsHost="True" 
+                                       Name="PART_ItemsHost" 
+                                       MinHeight="{TemplateBinding MinHeight}" />
+                            
+                            <!--Input box canvas must be after items host, so tab order is used to focus input box after last item-->
                             <Canvas VerticalAlignment="Top"
                                     Name="PART_InputCanvas"
+                                    IsHitTestVisible="False"
                                     Height="{Binding ElementName=PART_ItemsHost, Path=ActualHeight}">
                                 <TextBox Name="PART_TextInput" 
                                          Background="Transparent" 
@@ -76,9 +82,6 @@
                                          Margin="0,1,0,0"
                                          Padding="0" />
                             </Canvas>
-                            <WrapPanel IsItemsHost="True" 
-                                       Name="PART_ItemsHost" 
-                                       MinHeight="{TemplateBinding MinHeight}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
