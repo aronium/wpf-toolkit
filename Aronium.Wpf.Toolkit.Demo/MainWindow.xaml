@@ -450,8 +450,6 @@
                                                         InputBoxWidth="50"
                                                         ItemsSource="{Binding Tags}"
                                                         Name="tagsControl" 
-                                                        ItemAdded="OnTagAdded"
-                                                        ItemRemoved="OnTagRemoved"
                                                         Grid.Row="1" />
 
                                     <ListBox ItemsSource="{Binding Tags}" 
