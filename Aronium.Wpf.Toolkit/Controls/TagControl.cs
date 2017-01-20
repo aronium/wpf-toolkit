@@ -110,16 +110,20 @@ namespace Aronium.Wpf.Toolkit.Controls
                     if (!string.IsNullOrWhiteSpace(inputBox.Text))
                     {
                         AddTag();
+
                         e.Handled = true;
                     }
                     break;
                 case Key.Back:
+                case Key.Left:
                     if (string.IsNullOrEmpty(inputBox.Text) && Items.Count > 0)
                     {
                         var tag = ItemContainerGenerator.ContainerFromIndex(Items.Count - 1) as TagItem;
 
                         if (tag != null)
                             tag.Focus();
+
+                        e.Handled = true;
                     }
                     break;
             }
