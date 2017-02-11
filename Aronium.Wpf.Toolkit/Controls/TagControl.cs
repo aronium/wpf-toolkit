@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Linq;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
@@ -47,6 +48,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// Identifies InputBoxWidthProperty dependency property.
         /// </summary>
         public static readonly DependencyProperty InputBoxWidthProperty = DependencyProperty.Register("InputBoxWidth", typeof(double), typeof(TagControl), new PropertyMetadata(50.0));
+
+        /// <summary>
+        /// Idenftifies AllowDuplicatesProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AllowDuplicatesProperty = DependencyProperty.Register("AllowDuplicates", typeof(bool), typeof(TagControl), new PropertyMetadata(false));
 
         /// <summary>
         /// Identifies SelectedItemProperty dependency property.
@@ -199,6 +205,16 @@ namespace Aronium.Wpf.Toolkit.Controls
         private void AddTag()
         {
             if (string.IsNullOrEmpty(inputBox.Text)) return;
+
+            if (!AllowDuplicates)
+            {
+                if (Items.IndexOf(inputBox.Text) >= 0)
+                {
+                    inputBox.Clear();
+
+                    return;
+                }
+            }
 
             if (ItemsSource == null)
                 Items.Add(inputBox.Text);
@@ -362,6 +378,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether listshould accept duplicates.
+        /// </summary>
+        public bool AllowDuplicates
+        {
+            get { return (bool)GetValue(AllowDuplicatesProperty); }
+            set { SetValue(AllowDuplicatesProperty, value); }
         }
 
         #endregion

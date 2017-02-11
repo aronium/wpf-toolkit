@@ -19,6 +19,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private bool isOpening;
         private IInputElement previouslyFocusedElement;
+        private bool isBackdropMouseDown;
 
         #endregion
 
@@ -209,11 +210,26 @@ namespace Aronium.Wpf.Toolkit.Controls
                 @this.HideInternal();
         }
 
-        private void OnBackdropClick(object sender, MouseButtonEventArgs e)
+        private void OnBackdropMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (isOpening || !AllowBackdropClose) return;
+            isBackdropMouseDown = true;
+        }
+
+        private void OnBackdropMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!isBackdropMouseDown || isOpening || !AllowBackdropClose)
+            {
+                return;
+            }
+
+            isBackdropMouseDown = false;
 
             this.IsOpen = false;
+        }
+
+        private void OnBackdropLostFocus(object sender, RoutedEventArgs e)
+        {
+            isBackdropMouseDown = false;
         }
 
         /// <summary>
@@ -265,7 +281,11 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             var backdrop = this.Template.FindName("PART_Backdrop", this) as Border;
             if (backdrop != null)
-                backdrop.MouseUp += OnBackdropClick;
+            {
+                backdrop.MouseUp += OnBackdropMouseUp;
+                backdrop.MouseDown += OnBackdropMouseDown;
+                backdrop.LostFocus += OnBackdropLostFocus;
+            }
 
             var collapseButton = this.Template.FindName("PART_CollapseButton", this) as Button;
             if (collapseButton != null)

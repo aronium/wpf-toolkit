@@ -10,6 +10,7 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="Height" Value="24" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
@@ -68,8 +69,8 @@
                                         Background="{DynamicResource BackgroundDisabledBrush}"
                                         CornerRadius="0" Opacity="0" />
                                 <TextBlock Margin="{TemplateBinding Padding}" 
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Left" 
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                            Name="PART_Watermark" 
                                            Opacity=".5" 
                                            Text="{TemplateBinding Watermark}"/>
