@@ -351,9 +351,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 case Key.Home:
                     SelectItemAt(0);
+                    e.Handled = true;
                     break;
                 case Key.End:
                     SelectItemAt(Items.Count - 1);
+                    e.Handled = true;
                     break;
             }
         }
