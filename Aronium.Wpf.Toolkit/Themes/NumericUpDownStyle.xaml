@@ -148,7 +148,7 @@
 
                         <Border x:Name="DisabledVisualElement" Background="{DynamicResource BackgroundDisabledBrush}"
                                 IsHitTestVisible="False" Margin="1" Opacity="0" />
-                        <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="1"
+                        <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="{TemplateBinding BorderThickness}"
                                 IsHitTestVisible="False" Margin="0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
