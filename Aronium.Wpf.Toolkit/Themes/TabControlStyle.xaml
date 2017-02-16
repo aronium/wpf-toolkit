@@ -225,8 +225,109 @@
             <Trigger Property="TabStripPlacement" Value="Bottom">
                 <Setter Property="Template" Value="{StaticResource TabControlTemplateBottom}" />
             </Trigger>
-
         </Style.Triggers>
+    </Style>
+
+    <!--Material tab control style and templates-->
+
+    <ControlTemplate x:Key="MaterialTabControlTemplate" TargetType="{x:Type TabControl}">
+        <Border x:Name="Border"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="0"
+                KeyboardNavigation.TabNavigation="Local"
+                KeyboardNavigation.DirectionalNavigation="Contained"
+                KeyboardNavigation.TabIndex="2">
+            <Grid KeyboardNavigation.TabNavigation="Local">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TabPanel x:Name="HeaderPanel"
+                          Panel.ZIndex="1"
+                          IsItemsHost="True"
+                          KeyboardNavigation.TabIndex="1"
+                          Background="{TemplateBinding Background}"/>
+                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1">
+                    <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
+                </Border>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    
+    <Style TargetType="{x:Type TabItem}" x:Key="MaterialTabItemStyle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="14,7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="Root">
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0,0,0,3"
+                                Margin="0,0,0,-2">
+                            <Grid>
+                                <ContentPresenter x:Name="ContentSite"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  ContentSource="Header"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  TextElement.Foreground="{TemplateBinding Foreground}"
+                                                  TextBlock.FontSize="{TemplateBinding FontSize}"
+                                                  RecognizesAccessKey="True" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{StaticResource Accent}" />
+                            <!--<Setter Property="BorderBrush" TargetName="Border" Value="{StaticResource Accent}" />-->
+                            <Trigger.EnterActions>
+                                <BeginStoryboard HandoffBehavior="SnapshotAndReplace">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.1" From="Transparent" To="{StaticResource AccentColor}" Storyboard.TargetProperty="BorderBrush.Color" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard HandoffBehavior="SnapshotAndReplace">
+                                    <Storyboard BeginTime="0:0:0.1">
+                                        <ColorAnimation Duration="0:0:0.1" From="{StaticResource AccentColor}" To="Transparent" Storyboard.TargetProperty="BorderBrush.Color" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="TextBlock.Foreground" TargetName="ContentSite" Value="{DynamicResource Accent}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabControl}" x:Key="MaterialTabControlStyle">
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
+        <Setter Property="BorderThickness" Value="0,1,0,0" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template" Value="{StaticResource MaterialTabControlTemplate}" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialTabItemStyle}" />
     </Style>
 
 </ResourceDictionary>
