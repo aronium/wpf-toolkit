@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -7,7 +8,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     [TemplatePart(Name = "PART_ButtonCollapse", Type = typeof(Button))]
     public class CollapsibleTabControl : TabControl
     {
-        public static readonly DependencyProperty IsCollapsedProperty = DependencyProperty.Register("IsCollapsed", typeof(bool), typeof(CollapsibleTabControl), new FrameworkPropertyMetadata(true));
+        public static readonly DependencyProperty IsCollapsedProperty = DependencyProperty.Register("IsCollapsed", typeof(bool), typeof(CollapsibleTabControl), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public static readonly DependencyProperty VerticalSeparatorBrushProperty = DependencyProperty.Register("VerticalSeparatorBrush", typeof(Brush), typeof(CollapsibleTabControl));
         public static readonly DependencyProperty ItemsBackgroundBrushProperty = DependencyProperty.Register("ItemsBackgroundBrush", typeof(Brush), typeof(CollapsibleTabControl));
 

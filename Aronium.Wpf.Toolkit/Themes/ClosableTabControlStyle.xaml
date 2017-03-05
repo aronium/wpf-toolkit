@@ -84,7 +84,7 @@
                                                 </Trigger>
 
                                                 <Trigger Property="IsEnabled" Value="False">
-                                                    <Setter TargetName="xPath" Property="Stroke" Value="{StaticResource ForegroundDisabled}" />
+                                                    <Setter TargetName="xPath" Property="Stroke" Value="{DynamicResource ForegroundDisabled}" />
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
