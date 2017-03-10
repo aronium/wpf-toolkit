@@ -289,12 +289,22 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                     string title = null;
 
-                    if (tabItem.Header is string)
-                        title = tabItem.Header as string;
-                    else if (!string.IsNullOrEmpty(tabItem.Title))
+                    if (!string.IsNullOrEmpty(tabItem.Title))
+                    {
                         title = tabItem.Title;
+                    }
+                    else if (tabItem.Header is string)
+                    {
+                        title = tabItem.Header as string;
+                    }
                     else
+                    {
+                        // In case current tab item can not be represented as simple string, 
+                        // skip it, and increment index value by one
+
+                        index++;
                         continue;
+                    }
 
                     var mi = new MenuItem { Header = title, Tag = index++.ToString() };
                     mi.Click += OnContextMenuItemClick;
