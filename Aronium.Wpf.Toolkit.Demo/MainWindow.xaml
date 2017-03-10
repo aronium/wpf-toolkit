@@ -202,6 +202,13 @@
                                         </TreeViewItem>
                                     </TreeView>
 
+
+                                    <StackPanel>
+                                        <Slider Orientation="Horizontal" Maximum="100" Minimum="0" TickPlacement="BottomRight" TickFrequency="10" Margin="10"/>
+                                        <Slider Orientation="Horizontal" IsEnabled="False" Maximum="100" Minimum="0" TickPlacement="BottomRight" TickFrequency="10" Margin="10"/>
+                                        <Slider Orientation="Vertical" Maximum="10" Minimum="0" Margin="10" TickPlacement="BottomRight" TickFrequency="5" />
+                                    </StackPanel>
+                                    
                                 </StackPanel>
 
                             </GroupBox>
