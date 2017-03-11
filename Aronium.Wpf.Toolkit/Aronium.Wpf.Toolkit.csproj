@@ -64,6 +64,7 @@
     <Compile Include="Controls\ToggleSwitch.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\TextSeparator.cs" />
+    <Compile Include="Controls\ToolTipPointer.cs" />
     <Compile Include="Controls\WatermarkTextBox.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\InvertBooleanToVisibilityConverter.cs" />
@@ -232,6 +233,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\TextSeparatorStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ToolTipPointerStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
