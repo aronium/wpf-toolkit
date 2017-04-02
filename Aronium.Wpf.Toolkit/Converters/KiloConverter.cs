@@ -13,10 +13,10 @@ namespace Aronium.Wpf.Toolkit.Converters
 
                 if (val > 1000)
                 {
-                    return (val / 1000).ToString("0.0#K");
+                    return (val / 1000).ToString("0.##K");
                 }
 
-                return val.ToString("0.00");
+                return val.ToString("0.##");
             }
             catch
             {

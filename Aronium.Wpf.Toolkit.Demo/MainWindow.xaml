@@ -220,11 +220,15 @@
                                     <WrapPanel Margin="0,10">
                                         <Button Content="Standard button" HorizontalAlignment="Center" Margin="0,5,5,5">
                                             <Button.ToolTip>
-                                                <aronium:ToolTipPointer Placement="Right" Content="Button tooltip" />
+                                                <aronium:ToolTipPointer Placement="Right" Content="Button tooltip right" />
                                             </Button.ToolTip>
                                         </Button>
                                         <Button Content="Disabled button" IsEnabled="False" HorizontalAlignment="Center" Margin="0,5,5,5"/>
-                                        <ToggleButton Content="Toggle button" IsChecked="True" Margin="0,5,5,5" />
+                                        <ToggleButton Content="Toggle button" IsChecked="True" Margin="0,5,5,5">
+                                            <ToggleButton.ToolTip>
+                                                <aronium:ToolTipPointer Placement="Left" Content="Toggle button tooltip left" />
+                                            </ToggleButton.ToolTip>
+                                        </ToggleButton>
                                     </WrapPanel>
 
                                     <WrapPanel Margin="0,10">
