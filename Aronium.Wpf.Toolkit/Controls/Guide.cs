@@ -97,17 +97,33 @@ namespace Aronium.Wpf.Toolkit.Controls
             else
                 animateGuideStoryboard = new Storyboard();
 
+            double from = 0, to = 0;
+            DoubleAnimation doubleAnimation;
+
             switch (item.Placement)
             {
                 case PlacementMode.Left:
                 case PlacementMode.Right:
-                    var from = item.Placement == PlacementMode.Right ? item.Position.X + 10 : item.Position.X - 10;
-                    var to = item.Position.X;
+                    from = item.Placement == PlacementMode.Right ? item.Position.X + 10 : item.Position.X - 10;
+                    to = item.Position.X;
 
-                    DoubleAnimation doubleAnimation = new DoubleAnimation(from, to, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+                    doubleAnimation = new DoubleAnimation(from, to, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                     doubleAnimation.AutoReverse = true;
                     Storyboard.SetTarget(doubleAnimation, item);
                     Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("(Canvas.Left)"));
+                    animateGuideStoryboard.Children.Add(doubleAnimation);
+                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                    animateGuideStoryboard.Begin();
+                    break;
+                case PlacementMode.Top:
+                case PlacementMode.Bottom:
+                    from = item.Placement == PlacementMode.Top ? item.Position.Y - 10 : item.Position.Y + 10;
+                    to = item.Position.Y;
+
+                    doubleAnimation = new DoubleAnimation(from, to, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+                    doubleAnimation.AutoReverse = true;
+                    Storyboard.SetTarget(doubleAnimation, item);
+                    Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("(Canvas.Top)"));
                     animateGuideStoryboard.Children.Add(doubleAnimation);
                     doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
                     animateGuideStoryboard.Begin();
@@ -149,6 +165,10 @@ namespace Aronium.Wpf.Toolkit.Controls
                 case PlacementMode.Bottom:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
                        targetPoint.Y - thisPoint.Y + (item.Target.ActualHeight + MARGIN));
+                    break;
+                case PlacementMode.Top:
+                    item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
+                       targetPoint.Y - thisPoint.Y - (item.ActualHeight + MARGIN));
                     break;
                 default:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)), targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));

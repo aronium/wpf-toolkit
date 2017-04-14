@@ -54,7 +54,7 @@ namespace Aronium.Wpf.Toolkit.Demo
                 new GuideItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = PlacementMode.Bottom },
                 new GuideItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = PlacementMode.Left},
                 new GuideItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = PlacementMode.Right },
-                new GuideItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = PlacementMode.Left},
+                new GuideItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = PlacementMode.Top},
             };
         }
 

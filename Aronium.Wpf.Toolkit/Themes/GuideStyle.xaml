@@ -25,27 +25,35 @@
 
                         <!--<TextBlock Text="CLOSE" HorizontalAlignment="Right" />-->
 
-                        <Path Fill="{TemplateBinding Background}" 
-                              Stretch="Fill" 
+                        <Rectangle Fill="{TemplateBinding Background}" 
                               Grid.RowSpan="2"
                               x:Name="PART_Arrow"
-                              HorizontalAlignment="Left" 
-                              VerticalAlignment="Center"
-                              Width="10"
-                              Height="16" 
-                              Data="M 0,21 L 10,0 20,21" />
+                              Width="16"
+                              Height="16">
+                            <Rectangle.LayoutTransform>
+                                <RotateTransform Angle="45" />
+                            </Rectangle.LayoutTransform>
+                        </Rectangle>
                         <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" Margin="10" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Placement" Value="Left">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="0,0,-8,0" />
-                            <Setter TargetName="PART_Arrow" Property="Data" Value="M 0,0 L 20,10 0,20" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Right">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="-8,0,0,0" />
-                            <Setter TargetName="PART_Arrow" Property="Data" Value="M 10,0 L 0,10 10,20" />
+                        </Trigger>
+                        <Trigger Property="Placement" Value="Bottom">
+                            <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="PART_Arrow" Property="VerticalAlignment" Value="Top" />
+                            <Setter TargetName="PART_Arrow" Property="Margin" Value="0,-8,0,0" />
+                        </Trigger>
+                        <Trigger Property="Placement" Value="Top">
+                            <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="PART_Arrow" Property="VerticalAlignment" Value="Bottom" />
+                            <Setter TargetName="PART_Arrow" Property="Margin" Value="0,0,0,-8" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
