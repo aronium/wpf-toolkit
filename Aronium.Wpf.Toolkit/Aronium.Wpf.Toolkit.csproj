@@ -55,6 +55,8 @@
     <Compile Include="Controls\CollapsibleTabControl.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\Flyout.cs" />
+    <Compile Include="Controls\Guide.cs" />
+    <Compile Include="Controls\GuideItem.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\NotificationsControl.cs" />
     <Compile Include="Controls\NotificationItem.cs" />
@@ -157,6 +159,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\GroupBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\GuideStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
