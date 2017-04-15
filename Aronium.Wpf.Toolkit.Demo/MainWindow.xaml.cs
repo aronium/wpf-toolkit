@@ -221,5 +221,10 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             guide.Reset();
         }
+
+        private void OnGuidedTourClosed(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Guided tour closed!");
+        }
     }
 }

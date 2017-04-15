@@ -46,7 +46,7 @@
                                 <RotateTransform Angle="45" />
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" Margin="10" />
+                        <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" Margin="10,5,10,10" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Placement" Value="Left">
