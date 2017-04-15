@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -15,10 +15,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         private const double MARGIN = 12;
 
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items", typeof(IEnumerable<GuideItem>), typeof(Guide), new PropertyMetadata(new PropertyChangedCallback(OnItemsChanged)));
+        public static readonly DependencyProperty AnimateProperty = DependencyProperty.Register("Animate", typeof(bool), typeof(Guide), new PropertyMetadata(true));
 
         private int currentIndex = 0;
         private GuideItem currentItem;
-        Storyboard animateGuideStoryboard = new Storyboard();
+        private Storyboard animateGuideStoryboard = new Storyboard();
 
         private static void OnItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -32,9 +33,14 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         public Guide()
         {
-            this.Loaded += OnLoaded;
-            this.SizeChanged += OnSizeChanged;
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                Loaded += OnLoaded;
+                SizeChanged += OnSizeChanged;
+            }
         }
+
+        public bool IsCanceled { get; set; }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -42,7 +48,8 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 SetElementGuidePosition(currentItem);
 
-                Animate(currentItem);
+                if (Animate)
+                    CreateAnimation(currentItem);
             }
         }
 
@@ -65,7 +72,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                     currentItem = item;
 
-                    this.Children.Add(item);
+                    Children.Add(item);
 
                     Dispatcher.BeginInvoke((Action)(() =>
                     {
@@ -73,9 +80,24 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                         item.Show();
 
-                        item.Target.PreviewMouseDown += OnElementMouseDown;
+                        if (item.Target is Button)
+                            ((Button)item.Target).Click += OnTargetButtonClick;
+                        else
+                            item.Target.PreviewMouseDown += OnElementMouseDown;
 
-                        Animate(item);
+                        item.Target.SizeChanged += OnTargetSizeChanged;
+
+                        var closeButton = item.Template.FindName("PART_ButtonClose", item) as Button;
+                        if(closeButton != null)
+                            closeButton.Click += OnCloseGuidedTourClick; 
+
+                        if (Animate)
+                        {
+                            CreateAnimation(item);
+
+                            item.MouseEnter += OnItemMouseEnter;
+                            item.MouseLeave += OnItemMouseLeave;
+                        }
 
                     }), DispatcherPriority.ContextIdle);
                 }
@@ -83,65 +105,123 @@ namespace Aronium.Wpf.Toolkit.Controls
             else
             {
                 currentItem = null;
+                ClearAnimations();
             }
         }
 
-        private void Animate(GuideItem item)
+        private void OnCloseGuidedTourClick(object sender, RoutedEventArgs e)
+        {
+            IsCanceled = true;
+            animateGuideStoryboard.Stop();
+            animateGuideStoryboard = null;
+            RemoveGuideItem(currentItem.Target);
+        }
+
+        private void OnItemMouseLeave(object sender, MouseEventArgs e)
+        {
+            animateGuideStoryboard.Resume();
+        }
+
+        private void OnItemMouseEnter(object sender, MouseEventArgs e)
+        {
+            animateGuideStoryboard.Pause();
+        }
+
+        private void OnTargetButtonClick(object sender, RoutedEventArgs e)
+        {
+            SelectGuideAction(sender);
+        }
+
+        private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (currentItem != null)
+                SetElementGuidePosition(currentItem);
+        }
+
+        private void CreateAnimation(GuideItem item)
         {
             if (animateGuideStoryboard != null)
             {
-                animateGuideStoryboard.Stop();
-                animateGuideStoryboard.Remove();
-                animateGuideStoryboard.Children.Clear();
+                ClearAnimations();
             }
             else
                 animateGuideStoryboard = new Storyboard();
 
             double from = 0, to = 0;
-            DoubleAnimation doubleAnimation;
+            DoubleAnimation doubleAnimation = new DoubleAnimation();
+            IEasingFunction easing = null;// new BackEase() { EasingMode = EasingMode.EaseIn };
+            int millis = 400;
 
             switch (item.Placement)
             {
-                case PlacementMode.Left:
-                case PlacementMode.Right:
-                    from = item.Placement == PlacementMode.Right ? item.Position.X + 10 : item.Position.X - 10;
-                    to = item.Position.X;
-
-                    doubleAnimation = new DoubleAnimation(from, to, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-                    doubleAnimation.AutoReverse = true;
-                    Storyboard.SetTarget(doubleAnimation, item);
+                case GuideItem.ItemPlacement.Left:
+                case GuideItem.ItemPlacement.Right:
+                    to = item.Placement == GuideItem.ItemPlacement.Right ? item.Position.X + 10 : item.Position.X - 10;
+                    from = item.Position.X;
                     Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("(Canvas.Left)"));
-                    animateGuideStoryboard.Children.Add(doubleAnimation);
-                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    animateGuideStoryboard.Begin();
                     break;
-                case PlacementMode.Top:
-                case PlacementMode.Bottom:
-                    from = item.Placement == PlacementMode.Top ? item.Position.Y - 10 : item.Position.Y + 10;
-                    to = item.Position.Y;
-
-                    doubleAnimation = new DoubleAnimation(from, to, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-                    doubleAnimation.AutoReverse = true;
-                    Storyboard.SetTarget(doubleAnimation, item);
+                case GuideItem.ItemPlacement.Top:
+                case GuideItem.ItemPlacement.Bottom:
+                    to = item.Placement == GuideItem.ItemPlacement.Top ? item.Position.Y - 10 : item.Position.Y + 10;
+                    from = item.Position.Y;
                     Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("(Canvas.Top)"));
-                    animateGuideStoryboard.Children.Add(doubleAnimation);
-                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    animateGuideStoryboard.Begin();
                     break;
             }
+
+            doubleAnimation.From = from;
+            doubleAnimation.To = to;
+            doubleAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, millis));
+            doubleAnimation.BeginTime = TimeSpan.FromSeconds(0.3);
+            doubleAnimation.AutoReverse = true;
+            Storyboard.SetTarget(doubleAnimation, item);
+            animateGuideStoryboard.Children.Add(doubleAnimation);
+            doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+            doubleAnimation.EasingFunction = easing;
+            animateGuideStoryboard.Begin();
+        }
+
+        private void ClearAnimations()
+        {
+            if (animateGuideStoryboard == null) return;
+
+            animateGuideStoryboard.Stop();
+            animateGuideStoryboard.Remove();
+            animateGuideStoryboard.Children.Clear();
+            animateGuideStoryboard.Remove();
         }
 
         private void OnElementMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var currentGuideItem = GetGuideItem(sender as FrameworkElement);
+            SelectGuideAction(sender);
+        }
+
+        private void SelectGuideAction(object sender)
+        {
+            RemoveGuideItem(sender);
 
             currentIndex++;
 
-            ((FrameworkElement)sender).PreviewMouseDown -= OnElementMouseDown;
-
-            this.Children.Remove(currentGuideItem);
-
             ShowNextGuide(currentIndex);
+        }
+
+        private void RemoveGuideItem(object targetElement)
+        {
+            var guideItem = GetGuideItem(targetElement as FrameworkElement);
+
+            guideItem.Visibility = Visibility.Hidden;
+
+            var target = ((FrameworkElement)targetElement);
+
+            if (target is Button)
+                ((Button)target).Click -= OnTargetButtonClick;
+            else
+                target.PreviewMouseDown -= OnElementMouseDown;
+
+            guideItem.MouseEnter -= OnItemMouseEnter;
+            guideItem.MouseLeave -= OnItemMouseLeave;
+            target.SizeChanged -= OnTargetSizeChanged;
+
+            Children.Remove(guideItem);
         }
 
         private GuideItem GetGuideItem(FrameworkElement target)
@@ -151,22 +231,24 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void SetElementGuidePosition(GuideItem item)
         {
+            if (!IsLoaded) return;
+
             var targetPoint = item.Target.PointToScreen(new Point(0, 0));
             var thisPoint = this.PointToScreen(new Point(0, 0));
 
             switch (item.Placement)
             {
-                case PlacementMode.Left:
+                case GuideItem.ItemPlacement.Left:
                     item.Position = new Point((targetPoint.X - thisPoint.X) - item.ActualWidth - MARGIN, targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
-                case PlacementMode.Right:
+                case GuideItem.ItemPlacement.Right:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + item.Target.ActualWidth + MARGIN, targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
-                case PlacementMode.Bottom:
+                case GuideItem.ItemPlacement.Bottom:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
                        targetPoint.Y - thisPoint.Y + (item.Target.ActualHeight + MARGIN));
                     break;
-                case PlacementMode.Top:
+                case GuideItem.ItemPlacement.Top:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
                        targetPoint.Y - thisPoint.Y - (item.ActualHeight + MARGIN));
                     break;
@@ -183,6 +265,22 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (IEnumerable<GuideItem>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
+        }
+
+        public bool Animate
+        {
+            get { return (bool)GetValue(AnimateProperty); }
+            set { SetValue(AnimateProperty, value); }
+        }
+
+        public void Reset()
+        {
+            IsCanceled = false;
+
+            if (currentItem != null)
+                RemoveGuideItem(currentItem.Target);
+
+            ShowNextGuide();
         }
     }
 }

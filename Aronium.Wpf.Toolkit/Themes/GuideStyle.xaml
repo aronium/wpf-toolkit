@@ -2,34 +2,46 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
 
+    <Geometry x:Key="iconCloseGuide">M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z</Geometry>
 
     <Style TargetType="{x:Type local:Guide}">
-        <Setter Property="IsHitTestVisible" Value="False" />
+        <!--<Setter Property="IsHitTestVisible" Value="False" />-->
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
     <Style TargetType="{x:Type local:GuideItem}">
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+        <!--<Setter Property="Focusable" Value="False" />-->
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Background" Value="{DynamicResource Accent}" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundSelected}" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:GuideItem}">
                     <Grid Background="{TemplateBinding Background}">
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <!--<TextBlock Text="CLOSE" HorizontalAlignment="Right" />-->
-
+                        <Button Style="{DynamicResource FlatButtonStyle}" Name="PART_ButtonClose" HorizontalAlignment="Right" Margin="0,2,5,2">
+                            <Path Data="{DynamicResource iconCloseGuide}"
+                                  Fill="White"
+                                  Stretch="Uniform"
+                                  Height="12"
+                                  Width="12"
+                                  Margin="0,4,4,0" />
+                        </Button>
+                        
                         <Rectangle Fill="{TemplateBinding Background}" 
-                              Grid.RowSpan="2"
-                              x:Name="PART_Arrow"
-                              Width="16"
-                              Height="16">
+                                   Grid.RowSpan="2"
+                                   x:Name="PART_Arrow"
+                                   Width="17"
+                                   Height="17">
                             <Rectangle.LayoutTransform>
                                 <RotateTransform Angle="45" />
                             </Rectangle.LayoutTransform>
@@ -40,20 +52,37 @@
                         <Trigger Property="Placement" Value="Left">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="0,0,-8,0" />
+                            <Setter Property="Margin" Value="-30,0,0,0" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Right">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="-8,0,0,0" />
+                            <Setter Property="Margin" Value="30,0,0,0" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Bottom">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="PART_Arrow" Property="VerticalAlignment" Value="Top" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="0,-8,0,0" />
+                            <Setter Property="Margin" Value="0,30,0,0" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Top">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="PART_Arrow" Property="VerticalAlignment" Value="Bottom" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="0,0,0,-8" />
+                            <Setter Property="Margin" Value="0,-30,0,0" />
+                        </Trigger>
+                        <Trigger Property="Visibility" Value="Visible">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <Storyboard >
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:0">
+                                                <SplineThicknessKeyFrame KeyTime="00:00:0.3" Value="0" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

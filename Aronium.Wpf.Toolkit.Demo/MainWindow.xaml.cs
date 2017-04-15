@@ -3,20 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Aronium.Wpf.Toolkit.Demo
 {
@@ -38,11 +29,11 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             InitializeComponent();
 
-            this.Themes = new List<string>(new[] { "Light", "Dark" });
+            Themes = new List<string>(new[] { "Light", "Dark" });
 
-            this.DataContext = this;
+            DataContext = this;
 
-            this.IntegerProperty = new Random().Next(0, 1000);
+            IntegerProperty = new Random().Next(0, 1000);
 
             closableTabControl.ItemClosing += OnClosableTabControlItemClosing;
 
@@ -50,11 +41,11 @@ namespace Aronium.Wpf.Toolkit.Demo
 
             guide.Items = new[]
             {
-                new GuideItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = PlacementMode.Bottom },
-                new GuideItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = PlacementMode.Bottom },
-                new GuideItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = PlacementMode.Left},
-                new GuideItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = PlacementMode.Right },
-                new GuideItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = PlacementMode.Top},
+                new GuideItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuideItem.ItemPlacement.Right },
+                new GuideItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = GuideItem.ItemPlacement.Bottom },
+                new GuideItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = GuideItem.ItemPlacement.Left},
+                new GuideItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = GuideItem.ItemPlacement.Right },
+                new GuideItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = GuideItem.ItemPlacement.Top}
             };
         }
 
@@ -224,6 +215,11 @@ namespace Aronium.Wpf.Toolkit.Demo
         private void OnDataGridLoadingRow(object sender, DataGridRowEventArgs e)
         {
             e.Row.Header = (e.Row.GetIndex() + 1);
+        }
+
+        private void OnResetGuide(object sender, RoutedEventArgs e)
+        {
+            guide.Reset();
         }
     }
 }

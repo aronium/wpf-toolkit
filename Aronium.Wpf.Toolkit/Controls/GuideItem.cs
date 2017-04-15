@@ -1,13 +1,17 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
     public class GuideItem : Control
     {
+        public enum ItemPlacement
+        {
+            Left, Top, Right, Bottom
+        }
+
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(GuideItem));
-        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register("Placement", typeof(PlacementMode), typeof(GuideItem));
+        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register("Placement", typeof(ItemPlacement), typeof(GuideItem));
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position", typeof(Point), typeof(GuideItem));
 
         static GuideItem()
@@ -23,9 +27,9 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         public FrameworkElement Target { get; set; }
 
-        public PlacementMode Placement
+        public ItemPlacement Placement
         {
-            get { return (PlacementMode)GetValue(PlacementProperty); }
+            get { return (ItemPlacement)GetValue(PlacementProperty); }
             set { SetValue(PlacementProperty, value); }
         }
 
