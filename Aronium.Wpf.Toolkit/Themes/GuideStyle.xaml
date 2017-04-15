@@ -28,7 +28,16 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Button Style="{DynamicResource FlatButtonStyle}" Name="PART_ButtonClose" HorizontalAlignment="Right" Margin="0,2,5,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Close button-->
+                        <Button Style="{DynamicResource FlatButtonStyle}"
+                                Grid.Column="1"
+                                Name="PART_ButtonClose" 
+                                HorizontalAlignment="Right" Margin="10,2,5,2">
                             <Path Data="{DynamicResource iconCloseGuide}"
                                   Fill="White"
                                   Stretch="Uniform"
@@ -36,9 +45,11 @@
                                   Width="12"
                                   Margin="0,4,4,0" />
                         </Button>
-                        
+
+                        <!--Arrow must be under all other elements-->
                         <Rectangle Fill="{TemplateBinding Background}" 
                                    Grid.RowSpan="2"
+                                   Grid.ColumnSpan="2"
                                    x:Name="PART_Arrow"
                                    Width="17"
                                    Height="17">
@@ -46,7 +57,15 @@
                                 <RotateTransform Angle="45" />
                             </Rectangle.LayoutTransform>
                         </Rectangle>
-                        <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" Margin="10,5,10,10" />
+
+                        <!--Title-->
+                        <ContentPresenter Margin="10,3,5,3" TextBlock.FontSize="15" Content="{TemplateBinding Title}" TextBlock.FontWeight="Bold" VerticalAlignment="Center"/>
+
+                        <!--Content-->
+                        <ContentPresenter Grid.Row="1"
+                                          Grid.ColumnSpan="2"
+                                          Content="{TemplateBinding Content}"
+                                          Margin="10,5,10,10" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Placement" Value="Left">
