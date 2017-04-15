@@ -5,7 +5,7 @@
     <Geometry x:Key="iconCloseGuide">M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z</Geometry>
 
     <Style TargetType="{x:Type local:Guide}">
-        <!--<Setter Property="IsHitTestVisible" Value="False" />-->
+        <Setter Property="IsHitTestVisible" Value="True" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
@@ -59,7 +59,7 @@
                         </Rectangle>
 
                         <!--Title-->
-                        <ContentPresenter Margin="10,3,5,3" TextBlock.FontSize="15" Content="{TemplateBinding Title}" TextBlock.FontWeight="Bold" VerticalAlignment="Center"/>
+                        <ContentPresenter Margin="10,3,5,3" TextBlock.FontSize="14" Content="{TemplateBinding Title}" TextBlock.FontWeight="Bold" VerticalAlignment="Center"/>
 
                         <!--Content-->
                         <ContentPresenter Grid.Row="1"
