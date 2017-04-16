@@ -6,6 +6,7 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource Window}"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
+        xmlns:system="clr-namespace:System.Collections;assembly=mscorlib"
         Title="MainWindow" Height="750" Width="950">
 
     <Window.Resources>
@@ -82,7 +83,7 @@
                 </DockPanel>
                 <DockPanel Grid.Column="1" HorizontalAlignment="Right">
                     <TextBlock Text="Change theme" VerticalAlignment="Center" Margin="5,0" />
-                    <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" />
+                    <ComboBox ItemsSource="{Binding Themes}" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding ThemeName}" Name="cbSkin" />
                 </DockPanel>
             </Grid>
 
@@ -208,7 +209,7 @@
                                         <Slider Orientation="Horizontal" IsEnabled="False" Maximum="100" Minimum="0" TickPlacement="BottomRight" TickFrequency="10" Margin="10"/>
                                         <Slider Orientation="Vertical" Maximum="10" Minimum="0" Margin="10" TickPlacement="BottomRight" TickFrequency="5" />
                                     </StackPanel>
-                                    
+
                                 </StackPanel>
 
                             </GroupBox>
@@ -506,9 +507,9 @@
                                     <aronium:Rating Margin="0" StarBrush="{StaticResource Accent}"/>
                                 </StackPanel>
                             </Border>
-                            
+
                             <GridSplitter Focusable="False" Grid.Row="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
-                            
+
                             <Border BorderThickness="1" SnapsToDevicePixels="True" Grid.Row="2" Grid.Column="2" BorderBrush="{StaticResource DottedBrush}">
                                 <StackPanel Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Orientation="Vertical" Grid.Column="1">
                                     <TextBlock Margin="0,5" Text="DatePicker - Standard and disabled styles" Style="{StaticResource Heading1}" />
@@ -577,7 +578,19 @@
                         <TabItem Header="Security groups" />
                     </TabControl>
                 </TabItem>
+                <TabItem Header="Guided tour" Name="tabItemGuidedTour">
+                    <Grid>
+                        <Button Name="guideElement1" Margin="20" Content="Button 1 with some long text" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <TextBox Name="guideElement2" Margin="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="300" />
+                        <Button Name="guideElement3" Margin="20" Content="Button 3 with some long text, too" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        <Button Name="guideElement4" Margin="20" Content="Button 4 is a normal button" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                        <Button Click="OnResetGuide" Padding="20" Content="Restart guided tour" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Grid>
+                </TabItem>
             </TabControl>
+
+            <!--Guided tour-->
+            <aronium:GuidedTour Name="guide" Animate="True" Grid.RowSpan="2" Closed="OnGuidedTourClosed" Finished="OnGuidedTourFinished" />
         </Grid>
         <aronium:Flyout Grid.RowSpan="2" x:Name="flyout" Title="Flyout Title" Visibility="Collapsed">
             <aronium:Flyout.Content>

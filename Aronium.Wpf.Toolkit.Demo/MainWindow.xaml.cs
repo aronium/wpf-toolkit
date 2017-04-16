@@ -4,18 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Aronium.Wpf.Toolkit.Demo
 {
@@ -37,15 +29,17 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             InitializeComponent();
 
-            this.Themes = new List<string>(new[] { "Light", "Dark" });
+            Themes = new List<string>(new[] { "Light", "Dark" });
 
-            this.DataContext = this;
+            DataContext = this;
 
-            this.IntegerProperty = new Random().Next(0, 1000);
+            IntegerProperty = new Random().Next(0, 1000);
 
             closableTabControl.ItemClosing += OnClosableTabControlItemClosing;
 
             Tags = new ObservableCollection<string>(new[] { "New York", "Los Angeles", "Seattle", "San Francisco", "Belgrade" });
+
+            CreateGuidedTour();
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -215,5 +209,36 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             e.Row.Header = (e.Row.GetIndex() + 1);
         }
+
+        #region - Guided Tour -
+
+        private void CreateGuidedTour()
+        {
+            guide.Items = new[]
+            {
+                new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour" },
+                new GuidedTourItem() {Target = guideElement1, Content = "Click the button to move to next guide...", Placement = GuidedTourItem.ItemPlacement.Right , Title = "Click first item"},
+                new GuidedTourItem() {Target = guideElement2, Content = "Write some text to this text box to move to next guide...", Title="Text box guide", Placement = GuidedTourItem.ItemPlacement.Left},
+                new GuidedTourItem() {Target = guideElement3, Content = "Click the button to move to next guide...", Title = "Guide item title", Placement = GuidedTourItem.ItemPlacement.Right },
+                new GuidedTourItem() {Target = guideElement4, Content = "Click the button to complete the tour", Title = "Last element", Placement = GuidedTourItem.ItemPlacement.Top}
+            };
+        }
+
+        private void OnResetGuide(object sender, RoutedEventArgs e)
+        {
+            guide.Reset();
+        }
+
+        private void OnGuidedTourClosed(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Guided tour closed!");
+        }
+
+        private void OnGuidedTourFinished(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Guided tour finished!");
+        } 
+
+        #endregion
     }
 }
