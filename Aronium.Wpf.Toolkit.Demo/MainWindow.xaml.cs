@@ -39,14 +39,7 @@ namespace Aronium.Wpf.Toolkit.Demo
 
             Tags = new ObservableCollection<string>(new[] { "New York", "Los Angeles", "Seattle", "San Francisco", "Belgrade" });
 
-            guide.Items = new[]
-            {
-                new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour" },
-                new GuidedTourItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = GuidedTourItem.ItemPlacement.Bottom , Title = "Click tour items"},
-                new GuidedTourItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = GuidedTourItem.ItemPlacement.Left},
-                new GuidedTourItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = GuidedTourItem.ItemPlacement.Right },
-                new GuidedTourItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = GuidedTourItem.ItemPlacement.Top}
-            };
+            CreateGuidedTour();
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -217,6 +210,20 @@ namespace Aronium.Wpf.Toolkit.Demo
             e.Row.Header = (e.Row.GetIndex() + 1);
         }
 
+        #region - Guided Tour -
+
+        private void CreateGuidedTour()
+        {
+            guide.Items = new[]
+            {
+                new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour" },
+                new GuidedTourItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = GuidedTourItem.ItemPlacement.Bottom , Title = "Click tour items"},
+                new GuidedTourItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = GuidedTourItem.ItemPlacement.Left},
+                new GuidedTourItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = GuidedTourItem.ItemPlacement.Right },
+                new GuidedTourItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = GuidedTourItem.ItemPlacement.Top}
+            };
+        }
+
         private void OnResetGuide(object sender, RoutedEventArgs e)
         {
             guide.Reset();
@@ -230,6 +237,8 @@ namespace Aronium.Wpf.Toolkit.Demo
         private void OnGuidedTourFinished(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Guided tour finished!");
-        }
+        } 
+
+        #endregion
     }
 }
