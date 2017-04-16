@@ -581,7 +581,7 @@
                 <TabItem Header="Guided tour" Name="tabItemGuidedTour">
                     <Grid>
                         <Button Name="guideElement1" Margin="20" Content="Button 1 with some long text" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                        <Button Name="guideElement2" Margin="20" Content="Button 2" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                        <TextBox Name="guideElement2" Margin="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="300" />
                         <Button Name="guideElement3" Margin="20" Content="Button 3 with some long text, too" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
                         <Button Name="guideElement4" Margin="20" Content="Button 4 is a normal button" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
                         <Button Click="OnResetGuide" Padding="20" Content="Restart guided tour" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" />

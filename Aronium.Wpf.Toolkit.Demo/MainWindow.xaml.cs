@@ -217,10 +217,10 @@ namespace Aronium.Wpf.Toolkit.Demo
             guide.Items = new[]
             {
                 new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour" },
-                new GuidedTourItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = GuidedTourItem.ItemPlacement.Bottom , Title = "Click tour items"},
-                new GuidedTourItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = GuidedTourItem.ItemPlacement.Left},
-                new GuidedTourItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = GuidedTourItem.ItemPlacement.Right },
-                new GuidedTourItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = GuidedTourItem.ItemPlacement.Top}
+                new GuidedTourItem() {Target = guideElement1, Content = "Click the button to move to next guide...", Placement = GuidedTourItem.ItemPlacement.Right , Title = "Click first item"},
+                new GuidedTourItem() {Target = guideElement2, Content = "Write some text to this text box to move to next guide...", Title="Text box guide", Placement = GuidedTourItem.ItemPlacement.Left},
+                new GuidedTourItem() {Target = guideElement3, Content = "Click the button to move to next guide...", Title = "Guide item title", Placement = GuidedTourItem.ItemPlacement.Right },
+                new GuidedTourItem() {Target = guideElement4, Content = "Click the button to complete the tour", Title = "Last element", Placement = GuidedTourItem.ItemPlacement.Top}
             };
         }
 
