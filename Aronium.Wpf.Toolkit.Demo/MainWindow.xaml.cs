@@ -41,11 +41,11 @@ namespace Aronium.Wpf.Toolkit.Demo
 
             guide.Items = new[]
             {
-                new GuideItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuideItem.ItemPlacement.Right, Title = "Start guided tour" },
-                new GuideItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = GuideItem.ItemPlacement.Bottom , Title = "Click tour items"},
-                new GuideItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = GuideItem.ItemPlacement.Left},
-                new GuideItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = GuideItem.ItemPlacement.Right },
-                new GuideItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = GuideItem.ItemPlacement.Top}
+                new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour" },
+                new GuidedTourItem() {Target = guideElement1, Content = "Text for guide element 1", Placement = GuidedTourItem.ItemPlacement.Bottom , Title = "Click tour items"},
+                new GuidedTourItem() {Target = guideElement2, Content = "Text for guide element 2", Placement = GuidedTourItem.ItemPlacement.Left},
+                new GuidedTourItem() {Target = guideElement3, Content = "Text for guide element 3", Placement = GuidedTourItem.ItemPlacement.Right },
+                new GuidedTourItem() {Target = guideElement4, Content = "Text for guide element 4", Placement = GuidedTourItem.ItemPlacement.Top}
             };
         }
 
@@ -225,6 +225,11 @@ namespace Aronium.Wpf.Toolkit.Demo
         private void OnGuidedTourClosed(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Guided tour closed!");
+        }
+
+        private void OnGuidedTourFinished(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Guided tour finished!");
         }
     }
 }

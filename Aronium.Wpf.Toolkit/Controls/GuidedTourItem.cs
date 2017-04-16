@@ -3,21 +3,21 @@ using System.Windows.Controls;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
-    public class GuideItem : Control
+    public class GuidedTourItem : Control
     {
         public enum ItemPlacement
         {
             Left, Top, Right, Bottom
         }
 
-        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(GuideItem));
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(GuideItem));
-        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register("Placement", typeof(ItemPlacement), typeof(GuideItem));
-        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position", typeof(Point), typeof(GuideItem));
+        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(object), typeof(GuidedTourItem));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(GuidedTourItem));
+        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register("Placement", typeof(ItemPlacement), typeof(GuidedTourItem));
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position", typeof(Point), typeof(GuidedTourItem));
 
-        static GuideItem()
+        static GuidedTourItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(GuideItem), new FrameworkPropertyMetadata(typeof(GuideItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(GuidedTourItem), new FrameworkPropertyMetadata(typeof(GuidedTourItem)));
         }
 
         public object Content

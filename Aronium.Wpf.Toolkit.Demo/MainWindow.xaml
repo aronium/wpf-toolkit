@@ -6,6 +6,7 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource Window}"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
+        xmlns:system="clr-namespace:System.Collections;assembly=mscorlib"
         Title="MainWindow" Height="750" Width="950">
 
     <Window.Resources>
@@ -589,8 +590,7 @@
             </TabControl>
 
             <!--Guided tour-->
-            <aronium:Guide Name="guide" Animate="True" Grid.RowSpan="2" Closed="OnGuidedTourClosed" />
-
+            <aronium:GuidedTour Name="guide" Animate="True" Grid.RowSpan="2" Closed="OnGuidedTourClosed" Finished="OnGuidedTourFinished" />
         </Grid>
         <aronium:Flyout Grid.RowSpan="2" x:Name="flyout" Title="Flyout Title" Visibility="Collapsed">
             <aronium:Flyout.Content>

@@ -5,19 +5,20 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
-    public class Guide : Canvas
+    public class GuidedTour : Canvas
     {
         #region - Fields -
 
-        private const double MARGIN = 12;
+        private const double MARGIN = 0;
 
         private int currentIndex = 0;
-        private GuideItem currentItem;
+        private GuidedTourItem _currentItem;
         private Storyboard animateGuideStoryboard = new Storyboard();
 
         #endregion
@@ -27,12 +28,12 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Identifies ItemsProperty dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items", typeof(IEnumerable<GuideItem>), typeof(Guide));
+        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items", typeof(IList<GuidedTourItem>), typeof(GuidedTour));
 
         /// <summary>
         /// Identifies AnimateProperty dependency property.
         /// </summary>
-        public static readonly DependencyProperty AnimateProperty = DependencyProperty.Register("Animate", typeof(bool), typeof(Guide), new PropertyMetadata(true));
+        public static readonly DependencyProperty AnimateProperty = DependencyProperty.Register("Animate", typeof(bool), typeof(GuidedTour), new PropertyMetadata(true));
 
         #endregion
 
@@ -41,7 +42,12 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Identifies ClosedEvent routed event.
         /// </summary>
-        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Guide));
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidedTour));
+
+        /// <summary>
+        /// Identifies FinishedEvent routed event.
+        /// </summary>
+        public static readonly RoutedEvent FinishedEvent = EventManager.RegisterRoutedEvent("Finished", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidedTour));
 
         #endregion
 
@@ -50,22 +56,22 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Guide class static constructor.
         /// </summary>
-        static Guide()
+        static GuidedTour()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Guide), new FrameworkPropertyMetadata(typeof(Guide)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(GuidedTour), new FrameworkPropertyMetadata(typeof(GuidedTour)));
         }
 
         /// <summary>
         /// Initializes new instance of Guide class.
         /// </summary>
-        public Guide()
+        public GuidedTour()
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 Loaded += OnLoaded;
                 SizeChanged += OnSizeChanged;
             }
-        } 
+        }
 
         #endregion
 
@@ -73,12 +79,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (currentItem != null)
+            if (CurrentItem != null)
             {
-                SetElementGuidePosition(currentItem);
+                SetElementGuidePosition(CurrentItem);
 
                 if (Animate)
-                    CreateAnimation(currentItem);
+                    CreateAnimation(CurrentItem);
             }
         }
 
@@ -99,7 +105,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 {
                     var item = Items.ElementAt(index);
 
-                    currentItem = item;
+                    CurrentItem = item;
 
                     Children.Add(item);
 
@@ -118,7 +124,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                         var closeButton = item.Template.FindName("PART_ButtonClose", item) as Button;
                         if (closeButton != null)
-                            closeButton.Click += OnCloseGuidedTourClick;
+                            closeButton.Click += OnCloseItemClick;
 
                         if (Animate)
                         {
@@ -133,12 +139,15 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
             else
             {
-                currentItem = null;
+                CurrentItem = null;
+
                 RemoveAnimation();
+
+                RaiseEvent(new RoutedEventArgs(FinishedEvent));
             }
         }
 
-        private void CreateAnimation(GuideItem item)
+        private void CreateAnimation(GuidedTourItem item)
         {
             if (animateGuideStoryboard != null)
             {
@@ -154,15 +163,15 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             switch (item.Placement)
             {
-                case GuideItem.ItemPlacement.Left:
-                case GuideItem.ItemPlacement.Right:
-                    to = item.Placement == GuideItem.ItemPlacement.Right ? item.Position.X + 10 : item.Position.X - 10;
+                case GuidedTourItem.ItemPlacement.Left:
+                case GuidedTourItem.ItemPlacement.Right:
+                    to = item.Placement == GuidedTourItem.ItemPlacement.Right ? item.Position.X + 10 : item.Position.X - 10;
                     from = item.Position.X;
                     Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("(Canvas.Left)"));
                     break;
-                case GuideItem.ItemPlacement.Top:
-                case GuideItem.ItemPlacement.Bottom:
-                    to = item.Placement == GuideItem.ItemPlacement.Top ? item.Position.Y - 10 : item.Position.Y + 10;
+                case GuidedTourItem.ItemPlacement.Top:
+                case GuidedTourItem.ItemPlacement.Bottom:
+                    to = item.Placement == GuidedTourItem.ItemPlacement.Top ? item.Position.Y - 10 : item.Position.Y + 10;
                     from = item.Position.Y;
                     Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath("(Canvas.Top)"));
                     break;
@@ -190,19 +199,22 @@ namespace Aronium.Wpf.Toolkit.Controls
             animateGuideStoryboard.Remove();
         }
 
-        private void OnCloseGuidedTourClick(object sender, RoutedEventArgs e)
+        private void OnCloseItemClick(object sender, RoutedEventArgs e)
         {
             IsCanceled = true;
+
             animateGuideStoryboard.Stop();
             animateGuideStoryboard = null;
-            RemoveGuideItem(currentItem.Target);
 
-            RaiseEvent(new RoutedEventArgs(ClosedEvent));
+            RemoveGuideItem(CurrentItem.Target);
+
+            RaiseEvent(new RoutedEventArgs(ClosedEvent, CurrentItem));
         }
 
         private void OnItemMouseLeave(object sender, MouseEventArgs e)
         {
-            animateGuideStoryboard.Resume();
+            if (animateGuideStoryboard != null)
+                animateGuideStoryboard.Resume();
         }
 
         private void OnItemMouseEnter(object sender, MouseEventArgs e)
@@ -212,21 +224,21 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnTargetButtonClick(object sender, RoutedEventArgs e)
         {
-            SelectGuideAction(sender);
+            OnGuideItemTargetSelected(sender);
         }
 
         private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (currentItem != null)
-                SetElementGuidePosition(currentItem);
+            if (CurrentItem != null)
+                SetElementGuidePosition(CurrentItem);
         }
 
         private void OnElementMouseDown(object sender, MouseButtonEventArgs e)
         {
-            SelectGuideAction(sender);
+            OnGuideItemTargetSelected(sender);
         }
 
-        private void SelectGuideAction(object sender)
+        private void OnGuideItemTargetSelected(object sender)
         {
             RemoveGuideItem(sender);
 
@@ -255,12 +267,12 @@ namespace Aronium.Wpf.Toolkit.Controls
             Children.Remove(guideItem);
         }
 
-        private GuideItem GetGuideItem(FrameworkElement target)
+        private GuidedTourItem GetGuideItem(FrameworkElement target)
         {
             return Items.First(x => x.Target == target);
         }
 
-        private void SetElementGuidePosition(GuideItem item)
+        private void SetElementGuidePosition(GuidedTourItem item)
         {
             if (!IsLoaded) return;
 
@@ -269,17 +281,17 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             switch (item.Placement)
             {
-                case GuideItem.ItemPlacement.Left:
+                case GuidedTourItem.ItemPlacement.Left:
                     item.Position = new Point((targetPoint.X - thisPoint.X) - item.ActualWidth - MARGIN, targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
-                case GuideItem.ItemPlacement.Right:
+                case GuidedTourItem.ItemPlacement.Right:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + item.Target.ActualWidth + MARGIN, targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
-                case GuideItem.ItemPlacement.Bottom:
+                case GuidedTourItem.ItemPlacement.Bottom:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
                        targetPoint.Y - thisPoint.Y + (item.Target.ActualHeight + MARGIN));
                     break;
-                case GuideItem.ItemPlacement.Top:
+                case GuidedTourItem.ItemPlacement.Top:
                     item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
                        targetPoint.Y - thisPoint.Y - (item.ActualHeight + MARGIN));
                     break;
@@ -297,12 +309,21 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Properties -
 
         /// <summary>
-        /// Occurs when this instance is expanded.
+        /// Occurs when active guide item is closed.
         /// </summary>
         public event RoutedEventHandler Closed
         {
             add { AddHandler(ClosedEvent, value); }
             remove { RemoveHandler(ClosedEvent, value); }
+        }
+
+        /// <summary>
+        /// Occurs when guided tour is finished.
+        /// </summary>
+        public event RoutedEventHandler Finished
+        {
+            add { AddHandler(FinishedEvent, value); }
+            remove { RemoveHandler(FinishedEvent, value); }
         }
 
         /// <summary>
@@ -313,9 +334,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// <summary>
         /// Gets or sets guide items.
         /// </summary>
-        public IEnumerable<GuideItem> Items
+        public IList<GuidedTourItem> Items
         {
-            get { return (IEnumerable<GuideItem>)GetValue(ItemsProperty); }
+            get { return (IList<GuidedTourItem>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
 
@@ -326,6 +347,21 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(AnimateProperty); }
             set { SetValue(AnimateProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets current guide item.
+        /// </summary>
+        public GuidedTourItem CurrentItem
+        {
+            get
+            {
+                return _currentItem;
+            }
+            private set
+            {
+                _currentItem = value;
+            }
         }
 
         #endregion
@@ -339,13 +375,12 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             IsCanceled = false;
 
-            if (currentItem != null)
-                RemoveGuideItem(currentItem.Target);
+            if (CurrentItem != null)
+                RemoveGuideItem(CurrentItem.Target);
 
             ShowNextGuide();
         }
 
         #endregion
-
     }
 }
