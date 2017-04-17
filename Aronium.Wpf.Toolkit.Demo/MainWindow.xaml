@@ -590,7 +590,7 @@
             </TabControl>
 
             <!--Guided tour-->
-            <aronium:GuidedTour Name="guide" Animate="True" Grid.RowSpan="2" Closed="OnGuidedTourClosed" Finished="OnGuidedTourFinished" />
+            <aronium:GuidedTour Name="guide" Animate="True" Grid.RowSpan="2" Closing="OnClosingGuidedTour" Closed="OnGuidedTourClosed" Finished="OnGuidedTourFinished" />
         </Grid>
         <aronium:Flyout Grid.RowSpan="2" x:Name="flyout" Title="Flyout Title" Visibility="Collapsed">
             <aronium:Flyout.Content>

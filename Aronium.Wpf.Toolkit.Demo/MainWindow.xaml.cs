@@ -237,8 +237,13 @@ namespace Aronium.Wpf.Toolkit.Demo
         private void OnGuidedTourFinished(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Guided tour finished!");
-        } 
+        }
 
         #endregion
+
+        private void OnClosingGuidedTour(object sender, RoutedEventArgs e)
+        {
+            ((ClosingGuidedTourEventArgs)e).Cancel = MessageBox.Show("Are your sure you wish to dismiss this tour?", "Closing tour", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes;
+        }
     }
 }

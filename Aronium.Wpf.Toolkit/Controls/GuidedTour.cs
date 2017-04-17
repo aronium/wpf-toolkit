@@ -37,9 +37,24 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty AnimateProperty = DependencyProperty.Register("Animate", typeof(bool), typeof(GuidedTour), new PropertyMetadata(true));
 
+        /// <summary>
+        /// Identifies ContextProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ContextProperty = DependencyProperty.Register("Context", typeof(string), typeof(GuidedTour));
+
         #endregion
 
         #region - Events -
+
+        /// <summary>
+        /// Identifies BeginEvent routed event.
+        /// </summary>
+        public static readonly RoutedEvent BeginEvent = EventManager.RegisterRoutedEvent("Begin", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidedTour));
+
+        /// <summary>
+        /// Identifies ClosingEvent routed event.
+        /// </summary>
+        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidedTour));
 
         /// <summary>
         /// Identifies ClosedEvent routed event.
@@ -81,7 +96,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.Loaded -= OnLoaded;
+            Loaded -= OnLoaded;
 
             ShowGuideItem();
         }
@@ -111,6 +126,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                 if (Items.Any())
                 {
+                    // On first item, raise begin event notifying that guided tour has started
+                    if (index == 0)
+                    {
+                        RaiseEvent(new RoutedEventArgs(BeginEvent));
+                    }
+
                     var item = Items.ElementAt(index);
 
                     CurrentItem = item;
@@ -126,7 +147,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                         // Assign item completition eveents
                         if (item.Target is Button)
                             ((Button)item.Target).Click += OnGuideStepComplete;
-                        if (item.Target is TextBoxBase)
+                        else if (item.Target is TextBoxBase)
                         {
                             item.Target.KeyDown += OnGuideStepComplete;
                             ((TextBoxBase)item.Target).Focus();
@@ -261,7 +282,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (target is Button)
                 ((Button)target).Click -= OnGuideStepComplete;
-            if (target is TextBoxBase)
+            else if (target is TextBoxBase)
                 target.KeyDown -= OnGuideStepComplete;
             else
                 target.PreviewMouseDown -= OnElementMouseDown;
@@ -285,6 +306,16 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
+            // Create new closing event args instance
+            var ea = new ClosingGuidedTourEventArgs(ClosingEvent);
+
+            // Raise closing event
+            RaiseEvent(ea);
+
+            // If closing was canceled, return
+            if (ea.Cancel)
+                return;
+
             IsCanceled = true;
 
             animateGuideStoryboard.Stop();
@@ -334,8 +365,28 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #region - Properties -
 
+        #region " Events "
+
         /// <summary>
-        /// Occurs when active guide item is closed.
+        /// Occurs when guided tour has started.
+        /// </summary>
+        public event RoutedEventHandler Begin
+        {
+            add { AddHandler(BeginEvent, value); }
+            remove { RemoveHandler(BeginEvent, value); }
+        }
+
+        /// <summary>
+        /// Occurs before guided tour is closed.
+        /// </summary>
+        public event RoutedEventHandler Closing
+        {
+            add { AddHandler(ClosingEvent, value); }
+            remove { RemoveHandler(ClosingEvent, value); }
+        }
+
+        /// <summary>
+        /// Occurs when guided tour is closed.
         /// </summary>
         public event RoutedEventHandler Closed
         {
@@ -350,7 +401,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             add { AddHandler(FinishedEvent, value); }
             remove { RemoveHandler(FinishedEvent, value); }
-        }
+        } 
+
+        #endregion
 
         /// <summary>
         /// Gets or sets a value indicating whether guided tour was canceled.
@@ -373,6 +426,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(AnimateProperty); }
             set { SetValue(AnimateProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets distinctive context used for this guided tour.
+        /// </summary>
+        public string Context
+        {
+            get { return (string)GetValue(ContextProperty); }
+            set { SetValue(ContextProperty, value); }
         }
 
         /// <summary>
@@ -417,5 +479,19 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         #endregion
+    }
+
+    public class ClosingGuidedTourEventArgs : RoutedEventArgs
+    {
+        /// <summary>
+        /// Initializes new instance of ClosingGuidedTourEventArgs with specified routed event.
+        /// </summary>
+        /// <param name="routedEvent">Routed event.</param>
+        public ClosingGuidedTourEventArgs(RoutedEvent routedEvent) : base(routedEvent) { }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether closing action was canceled.
+        /// </summary>
+        public bool Cancel { get; set; }
     }
 }
