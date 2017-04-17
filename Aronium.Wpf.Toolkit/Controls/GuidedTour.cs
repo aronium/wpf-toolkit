@@ -144,16 +144,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                         item.Show();
 
-                        // Assign item completition eveents
-                        if (item.Target is Button)
-                            ((Button)item.Target).Click += OnGuideStepComplete;
-                        else if (item.Target is TextBoxBase)
+                        AttachActionEvents(item.Target);
+                        if(item.AlternateTargets != null)
                         {
-                            item.Target.KeyDown += OnGuideStepComplete;
-                            ((TextBoxBase)item.Target).Focus();
+                            foreach (var el in item.AlternateTargets)
+                                AttachActionEvents(el);
                         }
-                        else
-                            item.Target.PreviewMouseDown += OnElementMouseDown;
 
                         item.Target.SizeChanged += OnTargetSizeChanged;
                         item.Target.IsVisibleChanged += OnTargetIsVisibleChanged;
@@ -187,6 +183,20 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                 RaiseEvent(new RoutedEventArgs(FinishedEvent));
             }
+        }
+
+        private void AttachActionEvents(FrameworkElement target)
+        {
+            // Assign item completition eveents
+            if (target is Button)
+                ((Button)target).Click += OnGuideStepComplete;
+            else if (target is TextBoxBase)
+            {
+                target.KeyDown += OnGuideStepComplete;
+                ((TextBoxBase)target).Focus();
+            }
+            else
+                target.PreviewMouseDown += OnElementMouseDown;
         }
 
         private void OnTargetIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -274,24 +284,36 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void RemoveGuideItem(object targetElement)
         {
-            var guideItem = GetGuideItem(targetElement as FrameworkElement);
+            var item = GetGuideItem(targetElement as FrameworkElement);
 
-            guideItem.Visibility = Visibility.Hidden;
+            item.Visibility = Visibility.Hidden;
 
             var target = ((FrameworkElement)targetElement);
 
+            DetachActionEvents(target);
+
+            if (item.AlternateTargets != null)
+            {
+                foreach (var el in item.AlternateTargets)
+                    DetachActionEvents(el);
+            }
+
+            target.SizeChanged -= OnTargetSizeChanged;
+
+            item.MouseEnter -= OnItemMouseEnter;
+            item.MouseLeave -= OnItemMouseLeave;
+
+            Children.Remove(item);
+        }
+
+        private void DetachActionEvents(FrameworkElement target)
+        {
             if (target is Button)
                 ((Button)target).Click -= OnGuideStepComplete;
             else if (target is TextBoxBase)
                 target.KeyDown -= OnGuideStepComplete;
             else
                 target.PreviewMouseDown -= OnElementMouseDown;
-            target.SizeChanged -= OnTargetSizeChanged;
-
-            guideItem.MouseEnter -= OnItemMouseEnter;
-            guideItem.MouseLeave -= OnItemMouseLeave;
-
-            Children.Remove(guideItem);
         }
 
         private void RemoveAnimation()
@@ -358,7 +380,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private GuidedTourItem GetGuideItem(FrameworkElement target)
         {
-            return Items.First(x => x.Target == target);
+            var item = Items.FirstOrDefault(x => x.Target == target);
+
+            if (item == null)
+                return CurrentItem;
+            else
+                return item;
         }
 
         #endregion
@@ -401,7 +428,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             add { AddHandler(FinishedEvent, value); }
             remove { RemoveHandler(FinishedEvent, value); }
-        } 
+        }
 
         #endregion
 
