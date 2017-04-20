@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -42,6 +43,16 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty ContextProperty = DependencyProperty.Register("Context", typeof(string), typeof(GuidedTour));
 
+        /// <summary>
+        /// Identifies AllowDismissProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AllowDismissProperty = DependencyProperty.Register("AllowDismiss", typeof(bool), typeof(GuidedTour));
+
+        /// <summary>
+        /// Identifies DismissButtonTextProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty DismissButtonTextProperty = DependencyProperty.Register("DismissButtonText", typeof(string), typeof(GuidedTour), new PropertyMetadata("(don't show this again)"));
+
         #endregion
 
         #region - Events -
@@ -65,6 +76,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// Identifies FinishedEvent routed event.
         /// </summary>
         public static readonly RoutedEvent FinishedEvent = EventManager.RegisterRoutedEvent("Finished", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidedTour));
+
+        /// <summary>
+        /// Identifies DismissedEvent routed event.
+        /// </summary>
+        public static readonly RoutedEvent DismissedEvent = EventManager.RegisterRoutedEvent("Dismissed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(GuidedTour));
 
         #endregion
 
@@ -145,7 +161,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                         item.Show();
 
                         AttachActionEvents(item.Target);
-                        if(item.AlternateTargets != null)
+                        if (item.AlternateTargets != null)
                         {
                             foreach (var el in item.AlternateTargets)
                                 AttachActionEvents(el);
@@ -162,6 +178,19 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                             // Add close button click listener
                             closeButton.Click += OnCloseButtonClick;
+                        }
+
+                        if (AllowDismiss)
+                        {
+                            var tbDismiss = item.Template.FindName("PART_DismissButton", item) as TextBlock;
+
+                            if (tbDismiss != null)
+                            {
+                                var link = tbDismiss.Inlines.FirstInline as Hyperlink;
+
+                                if (link != null)
+                                    link.Click += OnDismissClick;
+                            }
                         }
 
                         if (Animate)
@@ -183,6 +212,13 @@ namespace Aronium.Wpf.Toolkit.Controls
 
                 RaiseEvent(new RoutedEventArgs(FinishedEvent));
             }
+        }
+
+        private void OnDismissClick(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(DismissedEvent));
+
+            CloseGuidedTour();
         }
 
         private void AttachActionEvents(FrameworkElement target)
@@ -252,7 +288,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             double from = 0, to = 0;
             DoubleAnimation doubleAnimation = new DoubleAnimation();
-            IEasingFunction easing = null; // new BackEase() { EasingMode = EasingMode.EaseIn };
+            IEasingFunction easing = null; // new CircleEase() { EasingMode = EasingMode.EaseOut };
 
             switch (item.Placement)
             {
@@ -303,6 +339,29 @@ namespace Aronium.Wpf.Toolkit.Controls
             item.MouseEnter -= OnItemMouseEnter;
             item.MouseLeave -= OnItemMouseLeave;
 
+            #region " Remove buttons listeners "
+
+            var closeButton = item.Template.FindName("PART_ButtonClose", item) as Button;
+            if (closeButton != null)
+            {
+                closeButton.Click -= OnCloseButtonClick;
+            }
+
+            if (AllowDismiss)
+            {
+                var tbDismiss = item.Template.FindName("PART_DismissButton", item) as TextBlock;
+
+                if (tbDismiss != null)
+                {
+                    var link = tbDismiss.Inlines.FirstInline as Hyperlink;
+
+                    if (link != null)
+                        link.Click -= OnDismissClick;
+                }
+            }
+
+            #endregion
+
             Children.Remove(item);
         }
 
@@ -338,14 +397,19 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (ea.Cancel)
                 return;
 
+            CloseGuidedTour();
+
+            RaiseEvent(new RoutedEventArgs(ClosedEvent, CurrentItem));
+        }
+
+        private void CloseGuidedTour()
+        {
             IsCanceled = true;
 
             animateGuideStoryboard.Stop();
             animateGuideStoryboard = null;
 
             RemoveGuideItem(CurrentItem.Target);
-
-            RaiseEvent(new RoutedEventArgs(ClosedEvent, CurrentItem));
         }
 
         private void OnGuideStepComplete(object sender, RoutedEventArgs e)
@@ -390,8 +454,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        #region - Properties -
-
         #region " Events "
 
         /// <summary>
@@ -422,6 +484,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         /// <summary>
+        /// Occurs when guided tour is dismissed.
+        /// </summary>
+        public event RoutedEventHandler Dismissed
+        {
+            add { AddHandler(DismissedEvent, value); }
+            remove { RemoveHandler(DismissedEvent, value); }
+        }
+
+        /// <summary>
         /// Occurs when guided tour is finished.
         /// </summary>
         public event RoutedEventHandler Finished
@@ -431,6 +502,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         #endregion
+
+        #region - Properties -
 
         /// <summary>
         /// Gets or sets a value indicating whether guided tour was canceled.
@@ -462,6 +535,24 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (string)GetValue(ContextProperty); }
             set { SetValue(ContextProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether dismiss is allowed and dismiss button displayed.
+        /// </summary>
+        public bool AllowDismiss
+        {
+            get { return (bool)GetValue(AllowDismissProperty); }
+            set { SetValue(AllowDismissProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether dismiss is allowed and dismiss button displayed.
+        /// </summary>
+        public string DismissButtonText
+        {
+            get { return (string)GetValue(DismissButtonTextProperty); }
+            set { SetValue(DismissButtonTextProperty, value); }
         }
 
         /// <summary>

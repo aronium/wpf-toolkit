@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
 
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     <Geometry x:Key="iconCloseGuide">M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z</Geometry>
 
     <Style TargetType="{x:Type local:GuidedTour}">
@@ -9,6 +11,15 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
+    <Style TargetType="{x:Type Hyperlink}" x:Key="dismissHyperlinkStyle">
+        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style TargetType="{x:Type local:GuidedTourItem}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Visibility" Value="Hidden" />
@@ -23,6 +34,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -46,7 +58,7 @@
 
                         <!--Arrow must be under all other elements-->
                         <Rectangle Fill="{TemplateBinding Background}" 
-                                   Grid.RowSpan="2"
+                                   Grid.RowSpan="3"
                                    Grid.ColumnSpan="2"
                                    x:Name="PART_Arrow"
                                    Width="17"
@@ -63,9 +75,22 @@
                         <ContentPresenter Grid.Row="1"
                                           Grid.ColumnSpan="2"
                                           Content="{TemplateBinding Content}"
-                                          Margin="10,5,10,10" />
+                                          Margin="10,5" />
+
+                        <TextBlock Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:GuidedTour}}, Path=AllowDismiss, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                   TextDecorations="{x:Null}" 
+                                   Margin="10,0,10,5" 
+                                   Opacity="0.5" Grid.ColumnSpan="2" HorizontalAlignment="Right" Foreground="White" Grid.Row="2" Name="PART_DismissButton">
+                            <Hyperlink Style="{StaticResource dismissHyperlinkStyle}">
+                                <Run Foreground="White" FontSize="12" Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:GuidedTour}}, Path=DismissButtonText}" />
+                            </Hyperlink>
+                        </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="PART_DismissButton">
+                            <Setter TargetName="PART_DismissButton" Property="Opacity" Value="1" />
+                            <Setter TargetName="PART_DismissButton" Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                        </Trigger>
                         <Trigger Property="Placement" Value="Left">
                             <Setter TargetName="PART_Arrow" Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="PART_Arrow" Property="Margin" Value="0,0,-8,0" />
