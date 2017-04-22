@@ -23,7 +23,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         private int currentIndex = 0;
         private GuidedTourItem _currentItem;
         private Storyboard animateGuideStoryboard = new Storyboard();
-
+        private bool _isCompleted;
         #endregion
 
         #region - Dependency properties -
@@ -209,6 +209,8 @@ namespace Aronium.Wpf.Toolkit.Controls
                 CurrentItem = null;
 
                 RemoveAnimation();
+
+                IsCompleted = true;
 
                 RaiseEvent(new RoutedEventArgs(FinishedEvent));
             }
@@ -506,11 +508,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Properties -
 
         /// <summary>
-        /// Gets or sets a value indicating whether guided tour was canceled.
-        /// </summary>
-        public bool IsCanceled { get; set; }
-
-        /// <summary>
         /// Gets or sets guide items.
         /// </summary>
         public IList<GuidedTourItem> Items
@@ -556,6 +553,26 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         /// <summary>
+        /// Gets a value indicating whether guided tour was canceled.
+        /// </summary>
+        public bool IsCanceled
+        {
+            get; private set;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this tour is completed or canceled.
+        /// </summary>
+        public bool IsCompleted
+        {
+            get
+            {
+                return _isCompleted || IsCanceled;
+            }
+            private set { _isCompleted = value; }
+        }
+
+        /// <summary>
         /// Gets current guide item.
         /// </summary>
         public GuidedTourItem CurrentItem
@@ -575,11 +592,26 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Public methods -
 
         /// <summary>
+        /// Cancel this tour.
+        /// </summary>
+        public void Cancel()
+        {
+            IsCanceled = true;
+
+            if (CurrentItem != null)
+            {
+                RemoveGuideItem(CurrentItem.Target);
+            }
+        }
+
+        /// <summary>
         /// Restarts guided tour.
         /// </summary>
         public void Reset()
         {
             IsCanceled = false;
+
+            IsCompleted = false;
 
             if (CurrentItem != null)
                 RemoveGuideItem(CurrentItem.Target);
@@ -593,6 +625,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         public void Dispose()
         {
             CurrentItem = null;
+
             RemoveAnimation();
         }
 
