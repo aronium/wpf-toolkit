@@ -202,6 +202,11 @@ namespace Aronium.Wpf.Toolkit.Controls
                             item.MouseLeave += OnItemMouseLeave;
                         }
 
+                        if (item.AutoFocus)
+                        {
+                            item.Target.Focus();
+                        }
+
                     }), DispatcherPriority.ContextIdle);
                 }
             }

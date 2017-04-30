@@ -46,6 +46,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position", typeof(Point), typeof(GuidedTourItem));
 
         /// <summary>
+        /// Identifies AutoFocusProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AutoFocusProperty = DependencyProperty.Register("AutoFocus", typeof(bool), typeof(GuidedTourItem));
+
+        /// <summary>
         /// Static constructor for GuidedTourItem class.
         /// </summary>
         static GuidedTourItem()
@@ -97,6 +102,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (Point)GetValue(PositionProperty); }
             set { SetValue(PositionProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether item should automatically focus target element.
+        /// </summary>
+        public bool AutoFocus
+        {
+            get { return (bool)GetValue(AutoFocusProperty); }
+            set { SetValue(AutoFocusProperty, value); }
         }
 
         /// <summary>
