@@ -161,6 +161,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                         item.Show();
 
                         AttachActionEvents(item.Target);
+
                         if (item.AlternateTargets != null)
                         {
                             foreach (var el in item.AlternateTargets)
@@ -229,10 +230,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (target is Button)
                 ((Button)target).Click += OnGuideStepComplete;
             else if (target is TextBoxBase)
-            {
-                target.KeyDown += OnGuideStepComplete;
-                ((TextBoxBase)target).Focus();
-            }
+                ((TextBoxBase)target).TextChanged += OnGuideStepComplete;
             else
                 target.PreviewMouseDown += OnElementMouseDown;
         }
@@ -372,7 +370,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (target is Button)
                 ((Button)target).Click -= OnGuideStepComplete;
             else if (target is TextBoxBase)
-                target.KeyDown -= OnGuideStepComplete;
+                ((TextBoxBase)target).TextChanged -= OnGuideStepComplete;
             else
                 target.PreviewMouseDown -= OnElementMouseDown;
         }
@@ -456,7 +454,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        #region " Events "
+        #region - Events -
 
         /// <summary>
         /// Occurs when guided tour has started.
