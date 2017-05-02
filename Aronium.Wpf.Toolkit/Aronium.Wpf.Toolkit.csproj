@@ -89,7 +89,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Validators\NumericValidationRule.cs" />
-    <Compile Include="VisualHelper.cs" />
+    <Compile Include="Helpers\VisualHelper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
