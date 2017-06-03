@@ -245,6 +245,7 @@
                 <TabPanel x:Name="HeaderPanel"
                           Panel.ZIndex="1"
                           IsItemsHost="True"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           KeyboardNavigation.TabIndex="1"
                           Background="{TemplateBinding Background}"/>
                 <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1">
@@ -327,6 +328,7 @@
         <Setter Property="BorderThickness" Value="0,1,0,0" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template" Value="{StaticResource MaterialTabControlTemplate}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialTabItemStyle}" />
     </Style>
 
