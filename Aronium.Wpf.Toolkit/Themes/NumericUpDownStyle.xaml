@@ -53,8 +53,6 @@
                                 <VisualState x:Name="MouseOver" />
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <DoubleAnimation Duration="0" To="0.55" Storyboard.TargetProperty="Opacity"
-                                                Storyboard.TargetName="DisabledVisualElement" />
                                         <DoubleAnimation Duration="0" To="0.5"
                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
                                                 Storyboard.TargetName="PART_ContentHost" />
@@ -146,8 +144,6 @@
                             </Grid>
                         </Border>
 
-                        <Border x:Name="DisabledVisualElement" Background="{DynamicResource BackgroundDisabledBrush}"
-                                IsHitTestVisible="False" Margin="1" Opacity="0" />
                         <Border x:Name="ValidationErrorElement" Visibility="Collapsed" BorderBrush="Red" BorderThickness="{TemplateBinding BorderThickness}"
                                 IsHitTestVisible="False" Margin="0"/>
                     </Grid>
@@ -163,6 +159,9 @@
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="ValidationErrorElement" />
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource BackgroundDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -11,7 +11,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     public class ButtonGroup : StackPanel
     {
         private static Thickness horizontalOffset = new Thickness(-1, 0, 0, 0);
-        private static Thickness verticalOffset = new Thickness(0, -1, 0, 0);
+        private static Thickness verticalOffset = new Thickness(0, -1, 0, 0); 
 
         #region - Private methods -
 

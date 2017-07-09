@@ -45,7 +45,7 @@ namespace Aronium.Wpf.Toolkit.Validators
             else
             {
                 isNumberInRange = false;
-                ErrorMessage = "Value must be number.";
+                ErrorMessage = "Invalid value.";
             }
 
             if (!isNumberInRange)
