@@ -14,6 +14,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ListBox", Type = typeof(ListBox))]
+    [TemplatePart(Name = "PART_Watermark", Type = typeof(TextBlock))]
     public class LiveSearchTextBox : Control
     {
         #region - Fields -
@@ -21,6 +22,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         private Popup popup;
         private TextBox textBox;
         private ListBox listBox;
+        private TextBlock watermarkTextBlock;
 
         #endregion
 
@@ -29,6 +31,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty MaxResultsHeightProperty = DependencyProperty.Register("MaxResultsHeight", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
+        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", 
             typeof(string), 
             typeof(LiveSearchTextBox),
@@ -74,6 +77,8 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             listBox = Template.FindName("PART_ListBox", this) as ListBox;
             listBox.PreviewMouseUp += OnListBoxPreviewMouseUp;
+
+            watermarkTextBlock = Template.FindName("PART_Watermark", this) as TextBlock;
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
@@ -82,6 +87,8 @@ namespace Aronium.Wpf.Toolkit.Controls
                 ShowPopup();
             else
                 popup.IsOpen = false;
+
+            watermarkTextBlock.Visibility = string.IsNullOrEmpty(textBox.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ShowPopup()
@@ -206,6 +213,16 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets search text.
+        /// </summary>
+        [Bindable(true, BindingDirection.TwoWay)]
+        public string Watermark
+        {
+            get { return (string)GetValue(WatermarkProperty); }
+            set { SetValue(WatermarkProperty, value); }
         }
 
         /// <summary>

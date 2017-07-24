@@ -115,6 +115,7 @@
                                     <TextBlock Text="Title - Live Search" Style="{DynamicResource Title}" />
                                     <aronium:LiveSearchTextBox ItemsSource="{Binding SelectedCountries}" 
                                                                MaxResultsHeight="300"
+                                                               Watermark="Live search..."
                                                                Text="{Binding SearchText}"
                                                                Margin="0,5">
                                         <aronium:LiveSearchTextBox.ItemTemplate>

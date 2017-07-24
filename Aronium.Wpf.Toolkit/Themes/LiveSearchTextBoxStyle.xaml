@@ -23,6 +23,14 @@
                                  Width="{TemplateBinding Width}"
                                  MinWidth="{TemplateBinding MinWidth}"
                                  Padding="{TemplateBinding Padding}"/>
+                        <TextBlock Text="{TemplateBinding Watermark}" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" 
+                                   Padding="3,2,3,3" 
+                                   Margin="{TemplateBinding Padding}"
+                                   IsHitTestVisible="False"
+                                   Opacity=".5"
+                                   Name="PART_Watermark" />
                         <Popup Name="PART_Popup"
                                Focusable="False"
                                Placement="Bottom"
