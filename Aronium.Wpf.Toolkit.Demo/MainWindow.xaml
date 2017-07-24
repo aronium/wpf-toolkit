@@ -113,8 +113,9 @@
                                     <aronium:NumericUpDown Width="80" HorizontalAlignment="Left" Margin="0,5" IsEnabled="False" Text="{Binding IntegerProperty}"/>
                                     <aronium:WatermarkTextBox Margin="0,5" Watermark="Watermarked TextBox" />
                                     <TextBlock Text="Title - Live Search" Style="{DynamicResource Title}" />
-                                    <aronium:LiveSearchTextBox ItemsSource="{Binding Users}" 
+                                    <aronium:LiveSearchTextBox ItemsSource="{Binding SelectedCountries}" 
                                                                MaxResultsHeight="300"
+                                                               Text="{Binding SearchText}"
                                                                Margin="0,5">
                                         <aronium:LiveSearchTextBox.ItemTemplate>
                                             <DataTemplate>
@@ -123,8 +124,7 @@
                                                         <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="{Binding FirstName}" />
-                                                    <TextBlock Text="{Binding LastName}" Grid.Column="1" />
+                                                    <TextBlock Text="{Binding}" />
                                                 </Grid>
                                             </DataTemplate>
                                         </aronium:LiveSearchTextBox.ItemTemplate>

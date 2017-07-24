@@ -10,11 +10,13 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="Height" Value="24" />
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}" />-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:LiveSearchTextBox">
                     <Grid>
                         <TextBox Name="PART_TextBox" 
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                  VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                  Height="{TemplateBinding Height}"
@@ -22,14 +24,16 @@
                                  MinWidth="{TemplateBinding MinWidth}"
                                  Padding="{TemplateBinding Padding}"/>
                         <Popup Name="PART_Popup"
+                               Focusable="False"
                                Placement="Bottom"
                                StaysOpen="False"
+                               VerticalOffset="1"
                                PopupAnimation="Fade"
                                Width="{Binding ElementName=PART_TextBox, Path=ActualWidth}">
                             <ListBox ItemsSource="{TemplateBinding ItemsSource}"
                                      ItemTemplate="{TemplateBinding ItemTemplate}"
                                      MaxHeight="{TemplateBinding MaxResultsHeight}"
-                                     Name="PART_ListBox"/>
+                                     Name="PART_ListBox" />
                         </Popup>
                     </Grid>
                 </ControlTemplate>
