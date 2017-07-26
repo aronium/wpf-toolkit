@@ -14,7 +14,6 @@ namespace Aronium.Wpf.Toolkit.Controls
     [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
     [TemplatePart(Name = "PART_ListBox", Type = typeof(ListBox))]
-    [TemplatePart(Name = "PART_Watermark", Type = typeof(TextBlock))]
     public class LiveSearchTextBox : Control
     {
         #region - Fields -
@@ -22,7 +21,6 @@ namespace Aronium.Wpf.Toolkit.Controls
         private Popup popup;
         private TextBox textBox;
         private ListBox listBox;
-        private TextBlock watermarkTextBlock;
 
         #endregion
 
@@ -69,6 +67,14 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            base.OnGotFocus(e);
+
+            if (!textBox.IsFocused)
+                FocusTextBox();
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -84,8 +90,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             listBox = Template.FindName("PART_ListBox", this) as ListBox;
             listBox.PreviewMouseUp += OnListBoxPreviewMouseUp;
-
-            watermarkTextBlock = Template.FindName("PART_Watermark", this) as TextBlock;
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
@@ -94,8 +98,6 @@ namespace Aronium.Wpf.Toolkit.Controls
                 ShowPopup();
             else
                 popup.IsOpen = false;
-
-            watermarkTextBlock.Visibility = string.IsNullOrEmpty(textBox.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ShowPopup()
@@ -199,7 +201,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (ClearSearchOnSelect)
                 textBox.Clear();
 
-            FoxusTextBox();
+            FocusTextBox();
         }
 
         private void HidePopup()
@@ -213,11 +215,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (e.Key == Key.Escape && popup.IsOpen)
             {
                 HidePopup();
-                FoxusTextBox();
+                FocusTextBox();
             }
         }
 
-        private void FoxusTextBox()
+        private void FocusTextBox()
         {
             textBox.Focus();
             textBox.SelectAll();
