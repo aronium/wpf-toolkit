@@ -281,5 +281,10 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             ((ClosingGuidedTourEventArgs)e).Cancel = MessageBox.Show("Are your sure you wish to dismiss this tour?", "Closing tour", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes;
         }
+
+        private void OnLiveSearchItemSelected(object sender, LiveSearchItemSelectedEventArgs e)
+        {
+            MessageBox.Show($"{SearchText}: {e.Item}");
+        }
     }
 }

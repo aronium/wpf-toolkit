@@ -26,22 +26,29 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
+        #region - Events -
+
+        public event EventHandler<LiveSearchItemSelectedEventArgs> ItemSelected;
+
+        #endregion
+
         #region - Dependecy properties -
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty MaxResultsHeightProperty = DependencyProperty.Register("MaxResultsHeight", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(LiveSearchTextBox));
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", 
-            typeof(string), 
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text",
+            typeof(string),
             typeof(LiveSearchTextBox),
             new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty ClearSearchOnSelectProperty = DependencyProperty.Register("ClearSearchOnSelect", typeof(bool), typeof(LiveSearchTextBox), new PropertyMetadata(true));
 
         #endregion
 
-        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged", 
-            RoutingStrategy.Bubble, 
-            typeof(RoutedEventHandler), 
+        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
             typeof(LiveSearchTextBox));
 
         /// <summary>
@@ -95,7 +102,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             popup.IsOpen = listBox.HasItems;
 
-            if(listBox.HasItems)
+            if (listBox.HasItems)
                 listBox.SelectedIndex = 0;
         }
 
@@ -123,18 +130,27 @@ namespace Aronium.Wpf.Toolkit.Controls
                     HandleEscKey(e);
                     break;
                 case Key.Down:
-                    listBox.Focus();
-                    Keyboard.Focus(listBox);
-
-                    if (listBox.SelectedItem != null)
+                    if (listBox.HasItems)
                     {
-                        FocusSelectedListBoxItem();
+                        if (listBox.SelectedIndex + 1 <= listBox.Items.Count)
+                        {
+                            listBox.SelectedIndex++;
+                            listBox.ScrollIntoView(listBox.SelectedItem);
+                        }
+
+                        e.Handled = true;
                     }
-                    else
+                    break;
+                case Key.Up:
+                    if (listBox.HasItems)
                     {
-                        listBox.SelectedIndex = 0;
+                        if (listBox.SelectedIndex > 0)
+                        {
+                            listBox.SelectedIndex--;
+                            listBox.ScrollIntoView(listBox.SelectedItem);
+                        }
 
-                        FocusSelectedListBoxItem();
+                        e.Handled = true;
                     }
                     break;
             }
@@ -176,9 +192,13 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void SelectItem(object item)
         {
-            MessageBox.Show(item.ToString());
-
             HidePopup();
+
+            ItemSelected?.Invoke(this, new LiveSearchItemSelectedEventArgs(item));
+
+            if (ClearSearchOnSelect)
+                textBox.Clear();
+
             FoxusTextBox();
         }
 
@@ -255,6 +275,29 @@ namespace Aronium.Wpf.Toolkit.Controls
             set { SetValue(MaxResultsHeightProperty, value); }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether search text is cleared in item select.
+        /// </summary>
+        [Bindable(true, BindingDirection.TwoWay)]
+        public bool ClearSearchOnSelect
+        {
+            get { return (bool)GetValue(ClearSearchOnSelectProperty); }
+            set { SetValue(ClearSearchOnSelectProperty, value); }
+        }
+
         #endregion
+    }
+
+    public class LiveSearchItemSelectedEventArgs : EventArgs
+    {
+        public LiveSearchItemSelectedEventArgs(object item)
+        {
+            Item = item;
+        }
+
+        /// <summary>
+        /// Gets selected item.
+        /// </summary>
+        public object Item { get; private set; }
     }
 }
