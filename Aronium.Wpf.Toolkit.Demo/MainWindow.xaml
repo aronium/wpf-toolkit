@@ -114,7 +114,7 @@
                                     <aronium:WatermarkTextBox Margin="0,5" Watermark="Watermarked TextBox" />
                                     <TextBlock Text="Title - Live Search" Style="{DynamicResource Title}" />
                                     <aronium:LiveSearchTextBox ItemsSource="{Binding SelectedCountries}" 
-                                                               MaxResultsHeight="300"
+                                                               MaxPopupHeight="300"
                                                                Watermark="Live search..."
                                                                ItemSelected="OnLiveSearchItemSelected"
                                                                Text="{Binding SearchText}"

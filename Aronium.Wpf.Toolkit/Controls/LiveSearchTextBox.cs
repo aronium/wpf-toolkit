@@ -34,16 +34,23 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(LiveSearchTextBox));
-        public static readonly DependencyProperty MaxResultsHeightProperty = DependencyProperty.Register("MaxResultsHeight", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
+        public static readonly DependencyProperty MaxPopupHeightProperty = DependencyProperty.Register("MaxPopupHeight", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
+        public static readonly DependencyProperty PopupWidthProperty = DependencyProperty.Register("PopupWidth", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text",
             typeof(string),
             typeof(LiveSearchTextBox),
             new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public static readonly DependencyProperty ClearSearchOnSelectProperty = DependencyProperty.Register("ClearSearchOnSelect", typeof(bool), typeof(LiveSearchTextBox), new PropertyMetadata(true));
+        public static readonly DependencyProperty IsLiveSearchEnabledProperty = DependencyProperty.Register("IsLiveSearchEnabled", typeof(bool), typeof(LiveSearchTextBox), new PropertyMetadata(true));
 
         #endregion
 
+        #region - Events -
+
+        /// <summary>
+        /// Occurs when search text is changed.
+        /// </summary>
         public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged",
             RoutingStrategy.Bubble,
             typeof(RoutedEventHandler),
@@ -58,6 +65,8 @@ namespace Aronium.Wpf.Toolkit.Controls
             remove { RemoveHandler(TextChangedEvent, value); }
         }
 
+        #endregion
+
         #region - Constructores -
 
         static LiveSearchTextBox()
@@ -67,13 +76,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        protected override void OnGotFocus(RoutedEventArgs e)
-        {
-            base.OnGotFocus(e);
-
-            if (!textBox.IsFocused)
-                FocusTextBox();
-        }
+        #region - Public methods -
 
         public override void OnApplyTemplate()
         {
@@ -90,13 +93,27 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             listBox = Template.FindName("PART_ListBox", this) as ListBox;
             listBox.PreviewMouseUp += OnListBoxPreviewMouseUp;
+        } 
+
+        #endregion
+
+        #region - Private methods -
+
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            base.OnGotFocus(e);
+
+            if (!textBox.IsFocused)
+                FocusTextBox();
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBox.Text != string.Empty)
+            if (!textBox.IsFocused) return;
+
+            if (textBox.Text != string.Empty && IsLiveSearchEnabled)
                 ShowPopup();
-            else
+            else if (popup.IsOpen)
                 popup.IsOpen = false;
         }
 
@@ -223,7 +240,9 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             textBox.Focus();
             textBox.SelectAll();
-        }
+        } 
+
+        #endregion
 
         #region - Properties -
 
@@ -271,10 +290,20 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// Gets or sets max height for result list.
         /// </summary>
         [Bindable(true)]
-        public double MaxResultsHeight
+        public double MaxPopupHeight
         {
-            get { return (double)GetValue(MaxResultsHeightProperty); }
-            set { SetValue(MaxResultsHeightProperty, value); }
+            get { return (double)GetValue(MaxPopupHeightProperty); }
+            set { SetValue(MaxPopupHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets popup width.
+        /// </summary>
+        [Bindable(true)]
+        public double PopupWidth
+        {
+            get { return (double)GetValue(PopupWidthProperty); }
+            set { SetValue(PopupWidthProperty, value); }
         }
 
         /// <summary>
@@ -285,6 +314,16 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(ClearSearchOnSelectProperty); }
             set { SetValue(ClearSearchOnSelectProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether live search is enabled.
+        /// </summary>
+        [Bindable(true, BindingDirection.TwoWay)]
+        public bool IsLiveSearchEnabled
+        {
+            get { return (bool)GetValue(IsLiveSearchEnabledProperty); }
+            set { SetValue(IsLiveSearchEnabledProperty, value); }
         }
 
         #endregion

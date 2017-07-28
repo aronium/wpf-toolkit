@@ -29,14 +29,16 @@
                                                 Padding="{TemplateBinding Padding}"/>
                         <Popup Name="PART_Popup"
                                Focusable="False"
+                               IsEnabled="{TemplateBinding IsLiveSearchEnabled}"
                                StaysOpen="False"
                                Placement="Bottom"
                                PlacementTarget="{Binding ElementName=PART_TextBox}"
+                               Width="{TemplateBinding PopupWidth}"
                                MinWidth="{Binding ElementName=PART_TextBox, Path=ActualWidth}"
                                VerticalOffset="1">
                             <ListBox ItemsSource="{TemplateBinding ItemsSource}"
                                      ItemTemplate="{TemplateBinding ItemTemplate}"
-                                     MaxHeight="{TemplateBinding MaxResultsHeight}"
+                                     MaxHeight="{TemplateBinding MaxPopupHeight}"
                                      Name="PART_ListBox" />
                         </Popup>
                     </Grid>
