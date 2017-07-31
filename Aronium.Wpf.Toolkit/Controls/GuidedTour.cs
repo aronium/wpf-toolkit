@@ -449,7 +449,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private GuidedTourItem GetGuideItem(FrameworkElement target)
         {
-            var item = Items.FirstOrDefault(x => x.Target == target);
+            var item = Items.FirstOrDefault(x => x.Target == target || (x.AlternateTargets != null && x.AlternateTargets.Any(a=>a == target)));
 
             if (item == null)
                 return CurrentItem;

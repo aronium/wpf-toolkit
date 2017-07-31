@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ButtonGroup.cs" />
+    <Compile Include="Controls\Callout.cs" />
     <Compile Include="Controls\ClosableTabControl.cs" />
     <Compile Include="Controls\ClosableTabItem.cs" />
     <Compile Include="Controls\CollapsibleTabControl.cs" />
@@ -118,6 +119,10 @@
     <Page Include="Themes\CalendarStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\CalloutStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\CheckBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>

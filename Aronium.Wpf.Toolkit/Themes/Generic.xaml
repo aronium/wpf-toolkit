@@ -41,5 +41,6 @@
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/TagControlStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/GuidedTourStyle.xaml"/>
         <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/LiveSearchTextBoxStyle.xaml"/>
+        <ResourceDictionary Source="/Aronium.Wpf.Toolkit;component/Themes/CalloutStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

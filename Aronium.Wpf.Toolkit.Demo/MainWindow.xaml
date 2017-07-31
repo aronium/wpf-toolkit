@@ -131,6 +131,16 @@
                                             </DataTemplate>
                                         </aronium:LiveSearchTextBox.ItemTemplate>
                                     </aronium:LiveSearchTextBox>
+
+                                    <aronium:Callout CalloutType="Info" Margin="5">
+                                        Info callout
+                                    </aronium:Callout>
+                                    <aronium:Callout CalloutType="Error" Margin="5">
+                                        Error callout
+                                    </aronium:Callout>
+                                    <aronium:Callout CalloutType="Warning" Margin="5">
+                                        Warning callout
+                                    </aronium:Callout>
                                 </StackPanel>
                             </GroupBox>
 

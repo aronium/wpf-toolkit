@@ -67,7 +67,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        #region - Constructores -
+        #region - Constructors -
 
         static LiveSearchTextBox()
         {
