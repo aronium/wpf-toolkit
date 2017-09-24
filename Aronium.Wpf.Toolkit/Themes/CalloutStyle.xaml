@@ -9,7 +9,7 @@
     <Style TargetType="{x:Type local:Callout}">
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="3" />
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Padding" Value="12,15" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -32,6 +32,7 @@
                             </Border>
 
                             <ContentPresenter Grid.Column="1" 
+                                              TextBlock.Foreground="{DynamicResource Foreground}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Content="{TemplateBinding Content}" 
                                               Margin="{TemplateBinding Padding}" />
