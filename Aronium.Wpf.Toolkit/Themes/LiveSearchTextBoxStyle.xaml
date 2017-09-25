@@ -36,10 +36,11 @@
                                Width="{TemplateBinding PopupWidth}"
                                MinWidth="{Binding ElementName=PART_TextBox, Path=ActualWidth}"
                                VerticalOffset="1">
-                            <ListBox ItemsSource="{TemplateBinding ItemsSource}"
+                            <ListBox Name="PART_ListBox"
+                                     ItemsSource="{TemplateBinding ItemsSource}"
                                      ItemTemplate="{TemplateBinding ItemTemplate}"
                                      MaxHeight="{TemplateBinding MaxPopupHeight}"
-                                     Name="PART_ListBox" />
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                         </Popup>
                     </Grid>
                 </ControlTemplate>

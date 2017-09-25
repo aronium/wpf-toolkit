@@ -90,6 +90,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Validators\EmptyValidationRule.cs" />
     <Compile Include="Validators\NumericValidationRule.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

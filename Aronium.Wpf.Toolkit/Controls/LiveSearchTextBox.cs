@@ -93,7 +93,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             listBox = Template.FindName("PART_ListBox", this) as ListBox;
             listBox.PreviewMouseUp += OnListBoxPreviewMouseUp;
-        } 
+        }
 
         #endregion
 
@@ -103,7 +103,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             base.OnGotFocus(e);
 
-            if (!textBox.IsFocused)
+            if (textBox != null && !textBox.IsFocused)
                 FocusTextBox();
         }
 
@@ -147,6 +147,9 @@ namespace Aronium.Wpf.Toolkit.Controls
                     break;
                 case Key.Escape:
                     HandleEscKey(e);
+                    break;
+                case Key.Tab:
+                    HidePopup();
                     break;
                 case Key.Down:
                     if (listBox.HasItems)
@@ -206,17 +209,19 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (popup.IsOpen && listBox.SelectedItem != null)
             {
                 SelectItem(listBox.SelectedItem);
+
+                e.Handled = true;
             }
         }
 
         private void SelectItem(object item)
         {
-            HidePopup();
-
             ItemSelected?.Invoke(this, new LiveSearchItemSelectedEventArgs(item));
 
             if (ClearSearchOnSelect)
                 textBox.Clear();
+
+            HidePopup();
 
             FocusTextBox();
         }
@@ -233,6 +238,8 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 HidePopup();
                 FocusTextBox();
+
+                e.Handled = true;
             }
         }
 
@@ -240,7 +247,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             textBox.Focus();
             textBox.SelectAll();
-        } 
+        }
 
         #endregion
 
