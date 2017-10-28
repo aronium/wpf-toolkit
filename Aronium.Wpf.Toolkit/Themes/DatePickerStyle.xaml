@@ -89,6 +89,7 @@
         <Setter Property="Height" Value="24" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CalendarStyle" Value="{DynamicResource CalendarStyle}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -109,7 +110,7 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="1" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
                                 Name="Bd"
                                 Background="{TemplateBinding Background}" 
                                 Padding="{TemplateBinding Padding}">
