@@ -91,6 +91,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         #region - Routed events -
 
         /// <summary>
+        /// Identifies ExpandingEvent routed event.
+        /// </summary>
+        public static readonly RoutedEvent ExpandingEvent = EventManager.RegisterRoutedEvent("Expanding", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Flyout));
+
+        /// <summary>
         /// Identifies ExpandedEvent routed event.
         /// </summary>
         public static readonly RoutedEvent ExpandedEvent = EventManager.RegisterRoutedEvent("Expanded", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Flyout));
@@ -99,6 +104,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// Identifies CollapsedEvent routed event.
         /// </summary>
         public static readonly RoutedEvent CollapsedEvent = EventManager.RegisterRoutedEvent("Collapsed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Flyout));
+
+        /// <summary>
+        /// Occurs when this instance is about to be expanded.
+        /// </summary>
+        public event RoutedEventHandler Expanding
+        {
+            add { AddHandler(ExpandingEvent, value); }
+            remove { RemoveHandler(ExpandingEvent, value); }
+        }
 
         /// <summary>
         /// Occurs when this instance is expanded.
@@ -146,6 +160,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 KeyDown += OnKeyDown;
             }
         }
+
         #endregion
 
         #region - Private methods -
@@ -204,6 +219,8 @@ namespace Aronium.Wpf.Toolkit.Controls
             Flyout @this = (Flyout)d;
             bool newValue = (bool)e.NewValue;
 
+            @this.RaiseEvent(new RoutedEventArgs(ExpandingEvent));
+
             if (newValue)
                 @this.ShowInternal();
             else if (!newValue)
@@ -239,11 +256,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (isOpening) return;
 
+            isOpening = true;
+
             // Try get currently focused element, use it to restore focus once flyout is closed
             var window = Window.GetWindow(this);
             previouslyFocusedElement = window != null ? FocusManager.GetFocusedElement(window) : null;
-
-            isOpening = true;
 
             Visibility = Visibility.Visible;
 
@@ -274,7 +291,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         #endregion
 
         #region - Public methods -
-
+        private bool isTemplateApplied;
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
