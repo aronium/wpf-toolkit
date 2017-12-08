@@ -291,7 +291,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         #endregion
 
         #region - Public methods -
-        private bool isTemplateApplied;
+        
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
