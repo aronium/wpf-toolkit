@@ -102,15 +102,22 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
         {
-            base.OnMouseWheel(e);
-
-            if (e.Delta > 0)
+            if (IsFocused)
             {
-                Up();
+                if (e.Delta > 0)
+                {
+                    Up();
+                }
+                else
+                {
+                    Down();
+                }
+
+                e.Handled = true;
             }
             else
             {
-                Down();
+                base.OnMouseWheel(e);
             }
         }
 
