@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
@@ -21,6 +19,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         private Popup popup;
         private TextBox textBox;
         private ListBox listBox;
+        private ScrollViewer scrollViewer;
 
         #endregion
 
@@ -30,31 +29,25 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         #endregion
 
-        #region - Dependecy properties -
+        #region - Dependency properties -
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(LiveSearchTextBox));
         public static readonly DependencyProperty MaxPopupHeightProperty = DependencyProperty.Register("MaxPopupHeight", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
         public static readonly DependencyProperty PopupWidthProperty = DependencyProperty.Register("PopupWidth", typeof(double), typeof(LiveSearchTextBox), new PropertyMetadata(Double.NaN));
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(LiveSearchTextBox));
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text",
-            typeof(string),
-            typeof(LiveSearchTextBox),
-            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(LiveSearchTextBox), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public static readonly DependencyProperty ClearSearchOnSelectProperty = DependencyProperty.Register("ClearSearchOnSelect", typeof(bool), typeof(LiveSearchTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty IsLiveSearchEnabledProperty = DependencyProperty.Register("IsLiveSearchEnabled", typeof(bool), typeof(LiveSearchTextBox), new PropertyMetadata(true));
 
         #endregion
 
-        #region - Events -
+        #region - Routed Events -
 
         /// <summary>
         /// Occurs when search text is changed.
         /// </summary>
-        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(LiveSearchTextBox));
+        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(LiveSearchTextBox));
 
         /// <summary>
         /// Occurs when this serach text is changed.
@@ -98,7 +91,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         #endregion
 
         #region - Private methods -
-
+        
         protected override void OnGotFocus(RoutedEventArgs e)
         {
             base.OnGotFocus(e);
@@ -112,9 +105,13 @@ namespace Aronium.Wpf.Toolkit.Controls
             if (!textBox.IsFocused) return;
 
             if (textBox.Text != string.Empty && IsLiveSearchEnabled)
+            {
                 ShowPopup();
+            }
             else if (popup.IsOpen)
+            {
                 popup.IsOpen = false;
+            }
         }
 
         private void ShowPopup()
@@ -122,7 +119,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             popup.IsOpen = listBox.HasItems;
 
             if (listBox.HasItems)
-                listBox.SelectedIndex = 0;
+            {
+                ScrollToTop();
+
+                listBox.SelectedItem = listBox.Items[0];
+            }
         }
 
         private void OnPopupPreviewKeyDown(object sender, KeyEventArgs e)
@@ -149,6 +150,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     HandleEscKey(e);
                     break;
                 case Key.Tab:
+                    ScrollToTop();
                     HidePopup();
                     break;
                 case Key.Down:
@@ -200,15 +202,25 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (item != null)
             {
-                SelectItem(item.DataContext);
+                ScrollToTop();
+
+                Dispatcher.BeginInvoke(((Action)(() =>
+                {
+                    SelectItem(item.DataContext);
+                })), DispatcherPriority.Input);
             }
         }
 
         private void HandleEnterKey(KeyEventArgs e)
         {
+            ScrollToTop();
+
             if (popup.IsOpen && listBox.SelectedItem != null)
             {
-                SelectItem(listBox.SelectedItem);
+                Dispatcher.BeginInvoke(((Action)(() =>
+                {
+                    SelectItem(listBox.SelectedItem);
+                })), DispatcherPriority.Input);
 
                 e.Handled = true;
             }
@@ -226,6 +238,15 @@ namespace Aronium.Wpf.Toolkit.Controls
             FocusTextBox();
         }
 
+        private void ScrollToTop()
+        {
+            if (scrollViewer == null)
+            {
+                scrollViewer = listBox.GetVisualChild<ScrollViewer>();
+            }
+            scrollViewer?.ScrollToTop();
+        }
+
         private void HidePopup()
         {
             popup.IsOpen = false;
@@ -236,6 +257,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (e.Key == Key.Escape && popup.IsOpen)
             {
+                ScrollToTop();
+
                 HidePopup();
                 FocusTextBox();
 
