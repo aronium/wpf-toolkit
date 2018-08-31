@@ -19,6 +19,8 @@ namespace Aronium.Wpf.Toolkit.Controls
         private decimal decimalValueParsed;
         private bool isUpdatingText;
 
+        private const string UNLIMITED_DECIMAL_PLACES_FORMAT = "#.#############################";
+
         #endregion
 
         #region - Dependency properties -
@@ -53,16 +55,19 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty AcceptEmptyValueProperty = DependencyProperty.Register("AcceptEmptyValue", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
 
-
         /// <summary>
         /// Identifies ShowUpDownArrowsProperty dependency property.
         /// </summary>
         public static readonly DependencyProperty ShowPlusMinusButtonsProperty = DependencyProperty.Register("ShowPlusMinusButtons", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
 
+        /// <summary>
+        /// Identifies UnlimitedDecimalPlacesProperty dependency property. Default value is false.
+        /// </summary>
+        public static readonly DependencyProperty UnlimitedDecimalPlacesProperty = DependencyProperty.Register("UnlimitedDecimalPlaces", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(false));
         #endregion
 
         #region - Constructor -
-        
+
         static NumericUpDown()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
@@ -182,7 +187,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             Value = value;
 
-            this.SetValue(TextProperty, value.ToString(stringFormat, CultureInfo.InvariantCulture));
+            this.SetValue(TextProperty, value.ToString(UnlimitedDecimalPlaces ? UNLIMITED_DECIMAL_PLACES_FORMAT : stringFormat, CultureInfo.InvariantCulture));
 
             this.Select(Text.Length, 0);
 
@@ -291,6 +296,22 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (bool)GetValue(ShowPlusMinusButtonsProperty); }
             set { SetValue(ShowPlusMinusButtonsProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether decimal places should be limited to specified number of <see cref="DecimalPlaces"/>.
+        /// <para>If set to true, <see cref="DecimalPlaces"/> porperty is ignored.</para>
+        /// </summary>
+        public bool UnlimitedDecimalPlaces
+        {
+            get
+            {
+                return (bool)GetValue(UnlimitedDecimalPlacesProperty);
+            }
+            set
+            {
+                SetValue(UnlimitedDecimalPlacesProperty, value);
+            }
         }
 
         #endregion
