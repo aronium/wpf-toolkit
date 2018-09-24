@@ -70,7 +70,7 @@
                                         CornerRadius="0" Opacity="0" />
                                 <ScrollViewer x:Name="PART_ContentHost" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                               BorderThickness="0" 
                                               IsTabStop="False" 
                                               Padding="{TemplateBinding Padding}" 
