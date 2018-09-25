@@ -71,6 +71,7 @@
                                 <ScrollViewer x:Name="PART_ContentHost" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               BorderThickness="0" 
                                               IsTabStop="False" 
                                               Padding="{TemplateBinding Padding}" 
