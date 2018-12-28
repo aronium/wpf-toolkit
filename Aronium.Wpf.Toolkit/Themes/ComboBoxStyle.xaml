@@ -104,6 +104,9 @@
                                         <DoubleAnimation Duration="0" To="0.5"
                                                 Storyboard.TargetProperty="(UIElement.Opacity)"
                                                 Storyboard.TargetName="ContentSite" />
+                                        <DoubleAnimation Duration="0" To="0.5"
+                                                Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                Storyboard.TargetName="PART_EditableTextBox" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
