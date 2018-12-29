@@ -6,7 +6,6 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource Window}"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
-        xmlns:system="clr-namespace:System.Collections;assembly=mscorlib"
         Title="MainWindow" Height="750" Width="950">
 
     <Window.Resources>
@@ -60,7 +59,14 @@
             <Grid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Grid item 1" />
-                    <MenuItem Header="Grid item 2" />
+                    <MenuItem Header="Grid item 2">
+                        <MenuItem.Icon>
+                            <Ellipse Fill="Green" Width="10" Height="10" VerticalAlignment="Center" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="Subitem 1" />
+                        <Separator />
+                        <MenuItem Header="Subitem 2" />
+                    </MenuItem>
                     <Separator />
                     <MenuItem Header="Grid item 3" />
                 </ContextMenu>
@@ -626,5 +632,12 @@
                 <TextBlock Text="Flyout Content..." VerticalAlignment="Center" HorizontalAlignment="Center" />
             </aronium:Flyout.Content>
         </aronium:Flyout>
+
+        <aronium:NotificationsControl ItemsSource="{Binding Notifications}" 
+                                      Margin="5,5,0,7" 
+                                      Grid.RowSpan="2"
+                                      Focusable="False"
+                                      IsTabStop="False"
+                                      HorizontalAlignment="Right" />
     </Grid>
 </Window>

@@ -260,31 +260,34 @@ namespace Aronium.Wpf.Toolkit.Demo
             };
         }
 
-        private void OnResetGuide(object sender, RoutedEventArgs e)
+        private void OnResetGuide(object sender, RoutedEventArgs e) 
         {
             guide.Reset();
         }
 
         private void OnGuidedTourClosed(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Guided tour closed!");
+            this.Notifications.Add(new NotificationItem() { Content = "Guided tour closed!" });
         }
 
         private void OnGuidedTourFinished(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Guided tour finished!");
+            this.Notifications.Add(new NotificationItem() { Content = "Guided tour completed" });
         }
 
         #endregion
 
         private void OnClosingGuidedTour(object sender, RoutedEventArgs e)
         {
-            ((ClosingGuidedTourEventArgs)e).Cancel = MessageBox.Show("Are your sure you wish to dismiss this tour?", "Closing tour", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes;
+            ((ClosingGuidedTourEventArgs)e).Cancel = MessageBox.Show("Are your sure you wish to dismiss this tour?", "Closing tour", MessageBoxButton.YesNo) != MessageBoxResult.Yes;
         }
 
         private void OnLiveSearchItemSelected(object sender, LiveSearchItemSelectedEventArgs e)
         {
             MessageBox.Show($"{SearchText}: {e.Item}");
         }
+
+        public ObservableCollection<NotificationItem> Notifications { get; set; } = new ObservableCollection<NotificationItem>();
+
     }
 }
