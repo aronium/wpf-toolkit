@@ -227,12 +227,16 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource DataGridBackgroundHoverBrush}" />
             </Trigger>
-            <Trigger Property="IsSelected" Value="True">
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
                 <Setter Property="Background" Value="{DynamicResource Accent}" />
                 <Setter Property="Control.Foreground" Value="{DynamicResource SelectedItemForeground}" />
                 <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
                 <Setter Property="BorderThickness" Value="0" />
-            </Trigger>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
@@ -266,9 +270,13 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsSelected" Value="True">
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True" />
+                    <Condition Property="IsEnabled" Value="True" />
+                </MultiTrigger.Conditions>
                 <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
-            </Trigger>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
