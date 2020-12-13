@@ -57,7 +57,7 @@
     </Style>
 
     <ControlTemplate x:Key="HorizontalSlider" TargetType="{x:Type Slider}">
-        <Grid Margin="5">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
@@ -67,7 +67,7 @@
                  Height="4" Margin="0,0,0,2" />
             <Border x:Name="TrackBackground"
                 Grid.Row="1"
-                Margin="4,1,4,0"
+                Margin="0,1,0,0"
                 Background="{DynamicResource BorderBrush}" 
                 VerticalAlignment="Center" Height="4" />
             <Track x:Name="PART_Track" Grid.Row="1">
@@ -102,7 +102,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="VerticalSlider" TargetType="{x:Type Slider}">
-        <Grid Margin="5">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}"/>
@@ -112,7 +112,6 @@
                  Width="4" Margin="0,0,2,0" />
             <Border x:Name="TrackBackground"
                 Grid.Column="1"
-                Margin="0,4"
                 Background="{DynamicResource BorderBrush}"
                 HorizontalAlignment="Center" Width="4" />
             <Track x:Name="PART_Track" Grid.Column="1">

@@ -1,41 +1,28 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Controls;
 
 namespace Aronium.Wpf.Toolkit.Validators
 {
     public class NumericValidationRule : ValidationRule
     {
-        private decimal _min = 0;
-        private decimal _max = Decimal.MaxValue;
-        private string _errorMessage;
+        public decimal Min { get; set; } = 0;
 
-        public decimal Min
-        {
-            get { return _min; }
-            set { _min = value; }
-        }
+        public decimal Max { get; set; } = decimal.MaxValue;
 
-        public decimal Max
-        {
-            get { return _max; }
-            set { _max = value; }
-        }
+        public string ErrorMessage { get; set; }
 
-        public string ErrorMessage
-        {
-            get { return _errorMessage; }
-            set { _errorMessage = value; }
-        }
+        public bool AllowNull { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            ValidationResult result = new ValidationResult(true, null);
+            if (AllowNull && string.IsNullOrEmpty(value?.ToString()))
+            {
+                return new ValidationResult(true, null);
+            }
 
-            decimal parsed = 0M;
             bool isNumberInRange = true;
 
-            if (decimal.TryParse(value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out parsed))
+            if (decimal.TryParse(value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsed))
             {
                 if (parsed < this.Min || parsed > this.Max)
                 {
@@ -49,12 +36,7 @@ namespace Aronium.Wpf.Toolkit.Validators
                 ErrorMessage = "Invalid value.";
             }
 
-            if (!isNumberInRange)
-            {
-                result = new ValidationResult(false, this.ErrorMessage);
-            }
-
-            return result;
+            return new ValidationResult(isNumberInRange, ErrorMessage);
         }
     }
 }
