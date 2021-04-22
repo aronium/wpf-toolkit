@@ -17,7 +17,8 @@
                 <ControlTemplate TargetType="{x:Type local:Callout}">
                     <Border CornerRadius="{TemplateBinding CornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />

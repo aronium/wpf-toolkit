@@ -359,7 +359,10 @@ namespace Aronium.Wpf.Toolkit.Controls
                     break;
                 case Key.C:
                     if (SelectedItem != null && Keyboard.Modifiers == ModifierKeys.Control)
-                        Clipboard.SetText(SelectedItem.ToString());
+                    {
+                        Clipboard.SetDataObject(SelectedItem.ToString(), true);
+                        e.Handled = true;
+                    }
                     break;
             }
         }
