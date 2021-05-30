@@ -94,7 +94,7 @@
                                               KeyboardNavigation.TabIndex="1"/>
                                     </ScrollViewer>
                                     <!-- Collapse button -->
-                                    <Border Grid.Row="1" BorderBrush="{TemplateBinding VerticalSeparatorBrush}" BorderThickness="0,1,0,0">
+                                    <Border Grid.Row="1" Name="collapseButtonContainer" BorderBrush="{TemplateBinding VerticalSeparatorBrush}" BorderThickness="0,1,0,0">
                                         <Button Style="{StaticResource FlatButtonStyle}"
                                                 VerticalAlignment="Center"
                                                 Focusable="False"
@@ -128,6 +128,9 @@
                         <Trigger Property="IsCollapsed" Value="True">
                             <Setter Property="Width" Value="Auto" TargetName="PART_ButtonCollapse" />
                             <Setter Property="HorizontalAlignment" Value="Stretch" TargetName="PART_ButtonCollapse" />
+                        </Trigger>
+                        <Trigger Property="IsCollapsible" Value="false">
+                            <Setter Property="Visibility" TargetName="collapseButtonContainer" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

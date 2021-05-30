@@ -62,6 +62,9 @@
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="0.7" />
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
     

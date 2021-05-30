@@ -10,8 +10,9 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="Padding" Value="12,15" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="False" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Callout}">
@@ -54,6 +55,10 @@
                             <Setter Property="BorderBrush" Value="#FFCC00" />
                             <Setter Property="Data" TargetName="icon" Value="{StaticResource CalloutIconWarning}" />
                             <Setter Property="Fill" TargetName="icon" Value="#843534" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundDisabledBrush}" />
+                            <Setter Property="Fill" TargetName="icon" Value="{DynamicResource BorderDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
