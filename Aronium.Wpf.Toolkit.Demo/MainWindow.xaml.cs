@@ -19,6 +19,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         public event PropertyChangedEventHandler PropertyChanged;
         private int _integerProperty;
         private decimal _decimalProperty;
+        private double _scale = 1;
         private string _themeName = "Dark";
         private List<string> _themes;
         private bool _showTabControlBorder;
@@ -174,6 +175,18 @@ namespace Aronium.Wpf.Toolkit.Demo
             }
         }
 
+        public double Scale
+        {
+            get
+            {
+                return _scale;
+            }
+            set
+            {
+                _scale = value; OnPropertyChanged("Scale");
+            }
+        }
+
         public ObservableCollection<string> Tags { get; private set; }
 
         public string SelectedTag
@@ -252,7 +265,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             guide.Items = new[]
             {
-                new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour" },
+                new GuidedTourItem() {Target = tabItemGuidedTour, Content = "Click to see guided tour in action", Placement = GuidedTourItem.ItemPlacement.Right, Title = "Start guided tour", },
                 new GuidedTourItem() {Target = guideElement1, AlternateTargets = new[] { altGuideElement1 }, Content = "Click the button to move to next guide...", Placement = GuidedTourItem.ItemPlacement.Right , Title = "Click first item"},
                 new GuidedTourItem() {Target = guideElement2, Content = "Write some text to this text box to move to next guide...", Title="Text box guide", Placement = GuidedTourItem.ItemPlacement.Left},
                 new GuidedTourItem() {Target = guideElement3, Content = "Click the button to move to next guide...", Title = "Guide item title", Placement = GuidedTourItem.ItemPlacement.Right },
@@ -285,6 +298,34 @@ namespace Aronium.Wpf.Toolkit.Demo
         private void OnLiveSearchItemSelected(object sender, LiveSearchItemSelectedEventArgs e)
         {
             MessageBox.Show($"{SearchText}: {e.Item}");
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                switch (e.Key)
+                {
+                    case Key.OemMinus:
+                        if (Scale > 0.5)
+                        {
+                            Scale -= 0.1;
+                        }
+                        break;
+                    case Key.OemPlus:
+                        if (Scale < 1.5)
+                        {
+                            Scale += 0.1;
+                        }
+                        break;
+                    case Key.NumPad0:
+                    case Key.D0:
+                        Scale = 1;
+                        break;
+                }
+            }
+
+            base.OnKeyDown(e);
         }
 
         public ObservableCollection<NotificationItem> Notifications { get; set; } = new ObservableCollection<NotificationItem>();

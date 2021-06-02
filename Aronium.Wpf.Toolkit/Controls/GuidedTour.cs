@@ -53,6 +53,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         /// </summary>
         public static readonly DependencyProperty DismissButtonTextProperty = DependencyProperty.Register("DismissButtonText", typeof(string), typeof(GuidedTour), new PropertyMetadata("(don't show this again)"));
 
+        /// <summary>
+        /// Identifies ScaleProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(GuidedTour), new PropertyMetadata((double)1));
+
         #endregion
 
         #region - Events -
@@ -254,27 +259,32 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             if (!IsLoaded) return;
 
+            PresentationSource source = PresentationSource.FromVisual(this);
+            double dpiX = source?.CompositionTarget.TransformToDevice.M11 ?? 1;
+            double dpiY = source?.CompositionTarget.TransformToDevice.M22 ?? 1;
+
             var targetPoint = item.Target.PointToScreen(new Point(0, 0));
-            var thisPoint = this.PointToScreen(new Point(0, 0));
+            var thisPoint = PointToScreen(new Point(0, 0));
+
+            var x = ((targetPoint.X - thisPoint.X) / dpiX) / Scale;
+            var y = ((targetPoint.Y - thisPoint.Y) / dpiY) / Scale;
 
             switch (item.Placement)
             {
                 case GuidedTourItem.ItemPlacement.Left:
-                    item.Position = new Point((targetPoint.X - thisPoint.X) - item.ActualWidth - MARGIN, targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
+                    item.Position = new Point(x - item.ActualWidth - MARGIN, y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
                 case GuidedTourItem.ItemPlacement.Right:
-                    item.Position = new Point((targetPoint.X - thisPoint.X) + item.Target.ActualWidth + MARGIN, targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
+                    item.Position = new Point(x + item.Target.ActualWidth + MARGIN, y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
                 case GuidedTourItem.ItemPlacement.Bottom:
-                    item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
-                       targetPoint.Y - thisPoint.Y + (item.Target.ActualHeight + MARGIN));
+                    item.Position = new Point(x + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)), y + (item.Target.ActualHeight + MARGIN));
                     break;
                 case GuidedTourItem.ItemPlacement.Top:
-                    item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)),
-                       targetPoint.Y - thisPoint.Y - (item.ActualHeight + MARGIN));
+                    item.Position = new Point(x + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)), y - (item.ActualHeight + MARGIN));
                     break;
                 default:
-                    item.Position = new Point((targetPoint.X - thisPoint.X) + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)), targetPoint.Y - thisPoint.Y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
+                    item.Position = new Point(x + ((item.Target.ActualWidth / 2) - (item.ActualWidth / 2)), y + ((item.Target.ActualHeight / 2) - (item.ActualHeight / 2)));
                     break;
             }
 
@@ -449,7 +459,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private GuidedTourItem GetGuideItem(FrameworkElement target)
         {
-            var item = Items.FirstOrDefault(x => x.Target == target || (x.AlternateTargets != null && x.AlternateTargets.Any(a=>a == target)));
+            var item = Items.FirstOrDefault(x => x.Target == target || (x.AlternateTargets != null && x.AlternateTargets.Any(a => a == target)));
 
             if (item == null)
                 return CurrentItem;
@@ -553,6 +563,15 @@ namespace Aronium.Wpf.Toolkit.Controls
         {
             get { return (string)GetValue(DismissButtonTextProperty); }
             set { SetValue(DismissButtonTextProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets custom scale.
+        /// </summary>
+        public double Scale
+        {
+            get { return (double)GetValue(ScaleProperty); }
+            set { SetValue(ScaleProperty, value); }
         }
 
         /// <summary>

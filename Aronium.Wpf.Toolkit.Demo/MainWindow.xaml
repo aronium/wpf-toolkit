@@ -27,6 +27,11 @@
     </Window.Resources>
 
     <Grid>
+
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
+        </Grid.LayoutTransform>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -107,7 +112,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
- 
+
                             <GroupBox Header="Text Box">
                                 <StackPanel>
                                     <TextBox Text="{Binding IntegerProperty}" Margin="0,5"/>
@@ -625,7 +630,7 @@
             </TabControl>
 
             <!--Guided tour-->
-            <aronium:GuidedTour Name="guide" Animate="True" AllowDismiss="True" Grid.RowSpan="2" Closing="OnClosingGuidedTour" Closed="OnGuidedTourClosed" Finished="OnGuidedTourFinished" />
+            <aronium:GuidedTour Name="guide" Scale="{Binding Scale}" Animate="True" AllowDismiss="True" Grid.RowSpan="2" Closing="OnClosingGuidedTour" Closed="OnGuidedTourClosed" Finished="OnGuidedTourFinished" />
         </Grid>
         <aronium:Flyout Grid.RowSpan="2" x:Name="flyout" Title="Flyout Title" Visibility="Collapsed">
             <aronium:Flyout.Content>
