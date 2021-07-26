@@ -55,6 +55,11 @@ namespace Aronium.Wpf.Toolkit.Controls
         public static readonly DependencyProperty AllowDuplicatesProperty = DependencyProperty.Register("AllowDuplicates", typeof(bool), typeof(TagControl), new PropertyMetadata(false));
 
         /// <summary>
+        /// Idenftifies CanAddTags dependency property.
+        /// </summary>
+        public static readonly DependencyProperty UserCanAddTagsProperty = DependencyProperty.Register("UserCanAddTags", typeof(bool), typeof(TagControl), new PropertyMetadata(true));
+
+        /// <summary>
         /// Identifies SelectedItemProperty dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem",
@@ -390,12 +395,21 @@ namespace Aronium.Wpf.Toolkit.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether listshould accept duplicates.
+        /// Gets or sets a value indicating whether list should accept duplicates.
         /// </summary>
         public bool AllowDuplicates
         {
             get { return (bool)GetValue(AllowDuplicatesProperty); }
             set { SetValue(AllowDuplicatesProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether user can add new tags.
+        /// </summary>
+        public bool UserCanAddTags
+        {
+            get { return (bool)GetValue(UserCanAddTagsProperty); }
+            set { SetValue(UserCanAddTagsProperty, value); }
         }
 
         #endregion
