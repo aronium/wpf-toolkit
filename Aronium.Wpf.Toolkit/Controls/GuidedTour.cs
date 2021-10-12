@@ -269,6 +269,11 @@ namespace Aronium.Wpf.Toolkit.Controls
             var x = ((targetPoint.X - thisPoint.X) / dpiX) / Scale;
             var y = ((targetPoint.Y - thisPoint.Y) / dpiY) / Scale;
 
+            if(FlowDirection == FlowDirection.RightToLeft)
+            {
+                x = -x;
+            }
+
             switch (item.Placement)
             {
                 case GuidedTourItem.ItemPlacement.Left:

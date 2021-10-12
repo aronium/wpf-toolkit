@@ -102,6 +102,7 @@
                                                 Name="PART_ButtonCollapse"
                                                 Padding="0,15">
                                             <Path Data="{StaticResource CollapseArrow}"
+                                                  FlowDirection="{TemplateBinding FlowDirection}"
                                                   Height="12"
                                                   Name="Arrow"
                                                   Stretch="Uniform"

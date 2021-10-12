@@ -343,6 +343,7 @@
             </VisualStateManager.VisualStateGroups>
             <Grid  Background="Transparent">
                 <Path x:Name="path" SnapsToDevicePixels="True"
+                      FlowDirection="{TemplateBinding FlowDirection}"
                       Margin="14,0,0,0"
                       Stretch="Fill"
                       HorizontalAlignment="Left"
@@ -384,6 +385,7 @@
             </VisualStateManager.VisualStateGroups>
             <Grid Background="Transparent">
                 <Path x:Name="path" 
+                      FlowDirection="{TemplateBinding FlowDirection}"
                       SnapsToDevicePixels="True"
                       Data="M282.875,231.875 L282.875,240.375 L288.625,236 z"
                       HorizontalAlignment="Right"
