@@ -274,6 +274,7 @@
                           Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=Foreground}" 
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
+                          FlowDirection="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=FlowDirection}"
                           Data="{StaticResource _Arrow}">
                         <Path.LayoutTransform>
                             <RotateTransform Angle="90" />
