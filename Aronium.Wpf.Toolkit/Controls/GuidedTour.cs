@@ -242,7 +242,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             else if (target is TextBoxBase)
                 ((TextBoxBase)target).TextChanged += OnGuideStepComplete;
             else
-                target.PreviewMouseDown += OnElementMouseDown;
+                target.PreviewMouseLeftButtonDown += OnElementMouseDown;
         }
 
         private void OnTargetIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -392,7 +392,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             else if (target is TextBoxBase)
                 ((TextBoxBase)target).TextChanged -= OnGuideStepComplete;
             else
-                target.PreviewMouseDown -= OnElementMouseDown;
+                target.PreviewMouseLeftButtonDown -= OnElementMouseDown;
         }
 
         private void RemoveAnimation()
