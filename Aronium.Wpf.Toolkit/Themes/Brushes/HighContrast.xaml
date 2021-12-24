@@ -17,7 +17,7 @@
     <Color x:Key="ForegroundDisabledColor">#FF979797</Color>
     <SolidColorBrush x:Key="ForegroundDisabled" Color="{StaticResource ForegroundDisabledColor}" />
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
-    <Color x:Key="BackgroundHoverColor">#1992be</Color>
+    <Color x:Key="BackgroundHoverColor">#FF0E1C28</Color>
     <SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundHoverColor}" />
 
     <Color x:Key="SelectedItemForegroundColor">#FFFFFFFF</Color>
@@ -49,7 +49,7 @@
     <SolidColorBrush x:Key="DataGridColumnHeaderBorderBrush" Color="{StaticResource BorderBrushColor}" />
 
     <!--Closable tab control-->
-    <SolidColorBrush x:Key="CloseTabItemBackgroundHover" Color="#036797" />
+    <SolidColorBrush x:Key="CloseTabItemBackgroundHover" Color="{StaticResource BackgroundHoverColor}" />
 
     <!--Tags-->
     <SolidColorBrush x:Key="TagItemBackground" Color="{StaticResource AccentColor}" />
