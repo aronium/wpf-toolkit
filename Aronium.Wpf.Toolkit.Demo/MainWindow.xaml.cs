@@ -20,7 +20,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         private int _integerProperty;
         private decimal _decimalProperty;
         private double _scale = 1;
-        private string _themeName = "Dark";
+        private string _themeName;
         private List<string> _themes;
         private bool _showTabControlBorder;
         private string _selectedTag;
@@ -32,7 +32,9 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             InitializeComponent();
 
-            Themes = new List<string>(new[] { "Light", "Dark" });
+            Themes = new List<string>(new[] { "Light", "Dark", "Dimmed", "HighContrast" });
+
+            ThemeName = "Dimmed";
 
             DataContext = this;
 
@@ -57,9 +59,9 @@ namespace Aronium.Wpf.Toolkit.Demo
             {
                 if (_themeName != value)
                 {
-                    var currentResourceIndex = GetResourceIndex();
-
                     _themeName = value;
+
+                    var currentResourceIndex = GetResourceIndex();
 
                     OnPropertyChanged("ThemeName");
 

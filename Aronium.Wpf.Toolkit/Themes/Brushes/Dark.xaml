@@ -46,6 +46,7 @@
     <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundDarkColor}" />
     <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="{StaticResource DataGridBackgroundHoverBrushColor}" />
     <SolidColorBrush x:Key="DataGridLineBrush" Color="#FF373A36" />
+    <SolidColorBrush x:Key="DataGridColumnHeaderBorderBrush" Color="{StaticResource AccentColor}" />
 
     <!--Closable tab control-->
     <SolidColorBrush x:Key="CloseTabItemBackgroundHover" Color="#036797" />

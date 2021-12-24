@@ -5,6 +5,7 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource Window}"
+        SnapsToDevicePixels="True"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
         Title="MainWindow" Height="750" Width="950">
 

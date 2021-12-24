@@ -1,58 +1,58 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="AccentColor">#FF1BA1E2</Color>
+    <Color x:Key="AccentColor">#1f9ec9</Color>
     <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}" />
 
-    <Color x:Key="BackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="BackgroundColor">#000000</Color>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
-    <Color x:Key="BackgroundDarkColor">#FFFEFEFE</Color>
+    <Color x:Key="BackgroundDarkColor">#000000</Color>
     <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDarkColor}" />
-    <SolidColorBrush x:Key="BackgroundDisabledBrush">#FFCCCCCC</SolidColorBrush>
-    <Color x:Key="BorderBrushColor">#FFBDBDBD</Color>
+    <SolidColorBrush x:Key="BackgroundDisabledBrush">#364045</SolidColorBrush>
+    <Color x:Key="BorderBrushColor">#FFFFFF</Color>
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}" />
-    <SolidColorBrush x:Key="BorderDisabledBrush">#FFDEDEDE</SolidColorBrush>
-    <Color x:Key="ForegroundColor">#FF333333</Color>
+    <SolidColorBrush x:Key="BorderDisabledBrush">#999999</SolidColorBrush>
+    <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
     <SolidColorBrush x:Key="Foreground" Color="{StaticResource ForegroundColor}" />
     <Color x:Key="ForegroundDisabledColor">#FF979797</Color>
     <SolidColorBrush x:Key="ForegroundDisabled" Color="{StaticResource ForegroundDisabledColor}" />
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
-    <Color x:Key="BackgroundHoverColor">#FFEEEEEE</Color>
+    <Color x:Key="BackgroundHoverColor">#1992be</Color>
     <SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundHoverColor}" />
 
     <Color x:Key="SelectedItemForegroundColor">#FFFFFFFF</Color>
     <SolidColorBrush x:Key="SelectedItemForeground" Color="{StaticResource SelectedItemForegroundColor}" />
-    <SolidColorBrush x:Key="SelectedItemBorder" Color="#991BA1E2" />
-    
+    <SolidColorBrush x:Key="SelectedItemBorder" Color="#74D1F0" />
+
     <!--Group box-->
     <SolidColorBrush x:Key="GroupBoxHeaderBackgroundBrush" Color="{StaticResource AccentColor}" />
     <SolidColorBrush x:Key="GroupBoxHeaderForegroundBrush" Color="#FFFFFFFF" />
 
     <!-- Scroll Bar -->
-    <SolidColorBrush x:Key="ScrollBarMouseDownBrush" Color="#FF6D6D6D"/>
-    <SolidColorBrush x:Key="ScrollbarGlyphBrush" Color="#FFAEACAC" />
-    <SolidColorBrush x:Key="ScrollbarGlyphMouseOver" Color="#FF7E7C7C"/>
+    <SolidColorBrush x:Key="ScrollBarMouseDownBrush" Color="#FFECECEC"/>
+    <SolidColorBrush x:Key="ScrollbarGlyphBrush" Color="#FF9C9A9A" />
+    <SolidColorBrush x:Key="ScrollbarGlyphMouseOver" Color="#FFC7C7C7"/>
 
     <!--On off button-->
-    <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FFA1A1A1" />
-    <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#FF52D468" />
-    <SolidColorBrush x:Key="OnOffButtonBorderBrush" Color="#FFDDDDDD" />
-    <SolidColorBrush x:Key="OnOffButtonBorderBrushCheked" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FF0E1C28" />
+    <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#8DEE36" />
+    <SolidColorBrush x:Key="OnOffButtonBorderBrush" Color="#FF28323C" />
+    <SolidColorBrush x:Key="OnOffButtonBorderBrushCheked" Color="#FF28323C" />
     <SolidColorBrush x:Key="OnOffButtonThumbBackground" Color="White" />
     <SolidColorBrush x:Key="OnOffButtonThumbBackgroundChecked" Color="White" />
 
     <!--Datagrid-->
-    <Color x:Key="DataGridBackgroundHoverBrushColor">#FFEEEEEE</Color>
-    <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundColor}" />
+    <Color x:Key="DataGridBackgroundHoverBrushColor">#101923</Color>
+    <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundDarkColor}" />
     <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="{StaticResource DataGridBackgroundHoverBrushColor}" />
-    <SolidColorBrush x:Key="DataGridLineBrush" Color="{StaticResource BorderBrushColor}" />
-    <SolidColorBrush x:Key="DataGridColumnHeaderBorderBrush" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="DataGridLineBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="DataGridColumnHeaderBorderBrush" Color="{StaticResource BorderBrushColor}" />
 
     <!--Closable tab control-->
     <SolidColorBrush x:Key="CloseTabItemBackgroundHover" Color="#036797" />
 
     <!--Tags-->
     <SolidColorBrush x:Key="TagItemBackground" Color="{StaticResource AccentColor}" />
-    <SolidColorBrush x:Key="TagItemBackgroundSelected" Color="#FF036797" />
+    <SolidColorBrush x:Key="TagItemBackgroundSelected" Color="#1b749c" />
 
 </ResourceDictionary>

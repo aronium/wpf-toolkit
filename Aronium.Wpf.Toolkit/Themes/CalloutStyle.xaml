@@ -42,7 +42,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="CalloutType" Value="Info">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter Property="BorderBrush" Value="#1BA1E2" />
                             <Setter Property="Data" TargetName="icon" Value="{StaticResource CalloutIconInfo}" />
                             <Setter Property="Fill" TargetName="icon" Value="White" />
                         </Trigger>
