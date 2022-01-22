@@ -110,7 +110,6 @@
     
     <Style TargetType="{x:Type local:ToggleSwitch}">
         <Setter Property="IsThreeState" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Background" Value="{DynamicResource OnOffButtonSliderBackground}" />
         <Setter Property="BackgroundChecked" Value="{DynamicResource OnOffButtonSliderBackgroundChecked}" />
         <Setter Property="BorderBrushChecked" Value="{DynamicResource OnOffButtonBorderBrushCheked}" />

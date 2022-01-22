@@ -6,7 +6,6 @@
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Padding" Value="13,4" />
         <Setter Property="Template">
@@ -72,8 +71,6 @@
                             <Setter TargetName="arrow" Property="VerticalAlignment" Value="Center" />
                             <Setter TargetName="arrow" Property="Margin" Value="-5,0.5,0,0" />
                             <Setter TargetName="ContentSite" Property="HorizontalAlignment" Value="Right" />
-                            <!--When turned on, for some reason, arrow is not positioned properly-->
-                            <Setter Property="UseLayoutRounding" Value="False" />
                         </Trigger>
 
                         <Trigger Property="TabItem.TabStripPlacement" Value="Bottom">
@@ -210,8 +207,6 @@
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <!-- If UseLayoutRounding is turned off, arrow with left layout is not positioned propely -->
-        <Setter Property="UseLayoutRounding" Value="True" />
         <Style.Triggers>
             <Trigger Property="TabStripPlacement" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TabControlTemplate}" />
@@ -259,7 +254,6 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Padding" Value="14,7" />
         <Setter Property="Template">
@@ -329,6 +323,7 @@
         <Setter Property="Template" Value="{StaticResource MaterialTabControlTemplate}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialTabItemStyle}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
 </ResourceDictionary>

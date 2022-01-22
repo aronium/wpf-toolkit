@@ -217,7 +217,9 @@
 
                 <ContentPresenter Content="{TemplateBinding Header}" />
 
+                <!--Use negative bottom margin to eliminate wierd empty space between scroll viewer and the bottom border--> 
                 <ScrollViewer x:Name="PART_ScrollViewer" 
+                              Margin="0, 0, 0, -1"
                               Grid.Column="1"
                               CanContentScroll="True" 
                               Background="Transparent" 
@@ -226,7 +228,7 @@
                     <TabPanel x:Name="HeaderPanel"
                               IsItemsHost="True"
                               Panel.ZIndex="10"
-                              Margin="0,-1"
+                              Margin="0"
                               KeyboardNavigation.TabIndex="1"
                               Background="Transparent" />
                 </ScrollViewer>
@@ -284,7 +286,8 @@
 
                 <Border BorderBrush="{TemplateBinding BorderBrush}" 
                         Grid.ColumnSpan="5"
-                        BorderThickness="0,2,0,0" Grid.Row="1">
+                        BorderThickness="0,2,0,0" 
+                        Grid.Row="1">
                     <ContentPresenter x:Name="PART_SelectedContentHost" 
                                       Margin="{TemplateBinding Padding}" 
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -298,7 +301,6 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>
             <Trigger Property="TabStripPlacement" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TabControlTemplate}" />

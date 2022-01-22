@@ -7,7 +7,6 @@
     <Style TargetType="{x:Type local:Flyout}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Flyout">

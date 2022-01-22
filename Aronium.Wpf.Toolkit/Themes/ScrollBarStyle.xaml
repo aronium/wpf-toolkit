@@ -7,7 +7,6 @@
     <Thickness x:Key="HorizontalDefaultMargin">0,3,0,0</Thickness>
     
     <Style x:Key="ScrollBarLineButton" TargetType="{x:Type RepeatButton}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="Template">
@@ -41,7 +40,6 @@
     </Style>
 
     <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
@@ -56,7 +54,6 @@
     </Style>
 
     <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
@@ -177,7 +174,6 @@
 
     <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
