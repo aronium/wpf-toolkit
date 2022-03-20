@@ -11,18 +11,19 @@
     <SolidColorBrush x:Key="BackgroundDisabledBrush">#364045</SolidColorBrush>
     <Color x:Key="BorderBrushColor">#4d515b</Color>
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderBrushColor}" />
-    <SolidColorBrush x:Key="BorderDisabledBrush">#999999</SolidColorBrush>
+    <SolidColorBrush x:Key="BorderDisabledBrush">#29434e</SolidColorBrush>
     <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
     <SolidColorBrush x:Key="Foreground" Color="{StaticResource ForegroundColor}" />
-    <Color x:Key="ForegroundDisabledColor">#FF979797</Color>
+    <Color x:Key="ForegroundDisabledColor">#FF546e7a</Color>
     <SolidColorBrush x:Key="ForegroundDisabled" Color="{StaticResource ForegroundDisabledColor}" />
     <SolidColorBrush x:Key="ForegroundSelected">#FFFFFFFF</SolidColorBrush>
-    <Color x:Key="BackgroundHoverColor">#FF2c3447</Color>
+    <Color x:Key="BackgroundHoverColor">#FF2C3447</Color>
     <SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundHoverColor}" />
 
     <Color x:Key="SelectedItemForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="SelectedItemBorderColor">#620D22</Color>
     <SolidColorBrush x:Key="SelectedItemForeground" Color="{StaticResource SelectedItemForegroundColor}" />
-    <SolidColorBrush x:Key="SelectedItemBorder" Color="#74D1F0" />
+    <SolidColorBrush x:Key="SelectedItemBorder" Color="{StaticResource SelectedItemBorderColor}" />
 
     <!--Group box-->
     <SolidColorBrush x:Key="GroupBoxHeaderBackgroundBrush" Color="{StaticResource AccentColor}" />
@@ -35,14 +36,14 @@
 
     <!--On off button-->
     <SolidColorBrush x:Key="OnOffButtonSliderBackground" Color="#FF0E1C28" />
-    <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#56BE00" />
+    <SolidColorBrush x:Key="OnOffButtonSliderBackgroundChecked" Color="#3D8068" />
     <SolidColorBrush x:Key="OnOffButtonBorderBrush" Color="#FF28323C" />
     <SolidColorBrush x:Key="OnOffButtonBorderBrushCheked" Color="#FF28323C" />
     <SolidColorBrush x:Key="OnOffButtonThumbBackground" Color="White" />
     <SolidColorBrush x:Key="OnOffButtonThumbBackgroundChecked" Color="White" />
 
     <!--Datagrid-->
-    <Color x:Key="DataGridBackgroundHoverBrushColor">#101923</Color>
+    <Color x:Key="DataGridBackgroundHoverBrushColor">#FF2C3447</Color>
     <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundDarkColor}" />
     <SolidColorBrush x:Key="DataGridBackgroundHoverBrush" Color="{StaticResource DataGridBackgroundHoverBrushColor}" />
     <SolidColorBrush x:Key="DataGridLineBrush" Color="#FF373A36" />
@@ -53,6 +54,6 @@
 
     <!--Tags-->
     <SolidColorBrush x:Key="TagItemBackground" Color="{StaticResource AccentColor}" />
-    <SolidColorBrush x:Key="TagItemBackgroundSelected" Color="#1b749c" />
+    <SolidColorBrush x:Key="TagItemBackgroundSelected" Color="{StaticResource SelectedItemBorderColor}" />
 
 </ResourceDictionary>
