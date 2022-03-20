@@ -32,9 +32,9 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             InitializeComponent();
 
-            Themes = new List<string>(new[] { "Light", "Dark", "Dimmed", "HighContrast" });
+            Themes = new List<string>(new[] { "Light", "Dark", "Dimmed", "HighContrast", "Gray" });
 
-            ThemeName = "Dimmed";
+            ThemeName = "Gray";
 
             DataContext = this;
 

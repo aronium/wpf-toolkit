@@ -269,7 +269,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             var x = ((targetPoint.X - thisPoint.X) / dpiX) / Scale;
             var y = ((targetPoint.Y - thisPoint.Y) / dpiY) / Scale;
 
-            if(FlowDirection == FlowDirection.RightToLeft)
+            if (FlowDirection == FlowDirection.RightToLeft)
             {
                 x = -x;
             }
@@ -453,13 +453,12 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnItemMouseLeave(object sender, MouseEventArgs e)
         {
-            if (animateGuideStoryboard != null)
-                animateGuideStoryboard.Resume();
+            animateGuideStoryboard?.Resume();
         }
 
         private void OnItemMouseEnter(object sender, MouseEventArgs e)
         {
-            animateGuideStoryboard.Pause();
+            animateGuideStoryboard?.Pause();
         }
 
         private GuidedTourItem GetGuideItem(FrameworkElement target)

@@ -114,6 +114,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Themes\Brushes\Gray.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Brushes\HighContrast.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
