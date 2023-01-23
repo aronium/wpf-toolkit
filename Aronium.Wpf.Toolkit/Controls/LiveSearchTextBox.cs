@@ -180,17 +180,6 @@ namespace Aronium.Wpf.Toolkit.Controls
             }
         }
 
-        private void FocusSelectedListBoxItem()
-        {
-            var element = GetListBoxElementFromSelectedItem(listBox.SelectedItem);
-
-            if (element != null)
-            {
-                element.Focus();
-                Keyboard.Focus(element);
-            }
-        }
-
         private ListBoxItem GetListBoxElementFromSelectedItem(object item)
         {
             return listBox.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;

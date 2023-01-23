@@ -7,6 +7,7 @@
         Style="{DynamicResource Window}"
         SnapsToDevicePixels="True"
         FocusManager.FocusedElement="{Binding ElementName=cbTabPlacement}"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="MainWindow" Height="750" Width="950">
 
     <Window.Resources>
@@ -25,6 +26,7 @@
         <Style TargetType="{x:Type aronium:SplitButton}" BasedOn="{StaticResource {x:Type aronium:SplitButton}}">
             <Setter Property="Height" Value="{StaticResource ButtonHeightGlobal}" />
         </Style>
+
     </Window.Resources>
 
     <Grid>
@@ -101,6 +103,13 @@
 
             <TabControl Grid.Row="1" Name="tabControl" SnapsToDevicePixels="True" BorderBrush="{DynamicResource Accent}">
                 <TabItem Header="Tab item 1">
+
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
+                            <Setter Property="Padding" Value="5 2" />
+                        </Style>
+                    </TabItem.Resources>
+                    
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                         <Grid>
@@ -144,13 +153,13 @@
                                         </aronium:LiveSearchTextBox.ItemTemplate>
                                     </aronium:LiveSearchTextBox>
 
-                                    <aronium:Callout CalloutType="Info" Margin="5">
+                                    <aronium:Callout CalloutType="Info" Margin="0 5">
                                         Info callout
                                     </aronium:Callout>
-                                    <aronium:Callout CalloutType="Error" Margin="5">
+                                    <aronium:Callout CalloutType="Error" Margin="0 5">
                                         Error callout
                                     </aronium:Callout>
-                                    <aronium:Callout CalloutType="Warning" Margin="5">
+                                    <aronium:Callout CalloutType="Warning" Margin="0 5">
                                         Warning callout
                                     </aronium:Callout>
                                 </StackPanel>
@@ -160,7 +169,7 @@
 
                             <GroupBox Header="Combo Box" Grid.Column="2" SnapsToDevicePixels="True">
                                 <StackPanel>
-                                    <ComboBox Margin="0,5" Width="180" HorizontalAlignment="Left">
+                                    <ComboBox Margin="0,5">
                                         <ComboBoxItem Content="Item 1" />
                                         <ComboBoxItem Content="Item 2" />
                                         <ComboBoxItem Content="Item 3" />
@@ -168,7 +177,7 @@
                                         <ComboBoxItem Content="Item 5" />
                                     </ComboBox>
 
-                                    <ComboBox IsEditable="True" Margin="0,5" Width="180" HorizontalAlignment="Left">
+                                    <ComboBox IsEditable="True" Margin="0,5">
                                         <ComboBoxItem Content="Editable Item 1" />
                                         <ComboBoxItem Content="Editable Item 2" />
                                         <ComboBoxItem Content="Editable Item 3" />
@@ -176,9 +185,27 @@
                                         <ComboBoxItem Content="Editable Item 5" />
                                     </ComboBox>
 
-                                    <ComboBox IsEnabled="False" Margin="0,5" Width="180" HorizontalAlignment="Left">
+                                    <ComboBox IsEnabled="False" Margin="0,5">
                                         <ComboBoxItem IsSelected="True" Content="Disabled" />
                                     </ComboBox>
+
+                                    <TextBlock>
+                                        <Run Text="Selected country:" />
+                                        <Run Text="{Binding SelectedCountry, TargetNullValue='(none)'}" />
+                                    </TextBlock>
+                                    <aronium:SearchableComboBox Margin="0,5,5,5" 
+                                                                ItemsSource="{Binding Countries}"
+                                                                Watermark="Search countries..." 
+                                                                NoItemsText="No results"
+                                                                AllowNullSelection="False">
+                                        <ComboBox.SelectedItem>
+                                            <Binding Path="SelectedCountry" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <aronium:NotNullValidation ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </ComboBox.SelectedItem>
+                                    </aronium:SearchableComboBox>
 
                                     <aronium:TextSeparator FontSize="18" FontFamily="Segoe UI Light" Content="Text separator" />
 

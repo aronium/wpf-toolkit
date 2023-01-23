@@ -27,6 +27,8 @@ namespace Aronium.Wpf.Toolkit.Demo
         List<User> _users;
         private string _searchText;
         List<string> countries = new List<string>(new[] { "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Myanmar/Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominican Republic", "Dominica", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "French Guiana", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Great Britain", "Greece", "Grenada", "Guadeloupe", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Israel and the Occupied Territories", "Italy", "Ivory Coast (Cote d'Ivoire)", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kosovo", "Kuwait", "Kyrgyz Republic (Kyrgyzstan)", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Republic of Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Moldova, Republic of", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Korea, Democratic Republic of (North Korea)", "Norway", "Oman", "Pacific Islands", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent's & Grenadines", "Samoa", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovak Republic (Slovakia)", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Korea, Republic of (South Korea)", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor Leste", "Togo", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos Islands", "Uganda", "Ukraine", "United Arab Emirates", "United States of America (USA)", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Virgin Islands (UK)", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe" });
+        private string countryComboBoxFilter;
+        private string selectedCountry = "United States of America (USA)";
 
         public MainWindow()
         {
@@ -34,9 +36,7 @@ namespace Aronium.Wpf.Toolkit.Demo
 
             Themes = new List<string>(new[] { "Light", "Dark", "Dimmed", "HighContrast", "Gray" });
 
-            ThemeName = "Gray";
-
-            DataContext = this;
+            ThemeName = "Dark";
 
             IntegerProperty = new Random().Next(0, 1000);
 
@@ -223,11 +223,10 @@ namespace Aronium.Wpf.Toolkit.Demo
             {
                 if (!string.IsNullOrEmpty(SearchText))
                 {
-                    foreach (var country in Countries.Where(x => x.ToUpper().Contains(SearchText.ToUpper())))
-                    {
-                        yield return country;
-                    }
+                    return FindCountries(SearchText);
                 }
+
+                return Enumerable.Empty<string>();
             }
         }
 
@@ -275,7 +274,7 @@ namespace Aronium.Wpf.Toolkit.Demo
             };
         }
 
-        private void OnResetGuide(object sender, RoutedEventArgs e) 
+        private void OnResetGuide(object sender, RoutedEventArgs e)
         {
             guide.Reset();
         }
@@ -332,5 +331,50 @@ namespace Aronium.Wpf.Toolkit.Demo
 
         public ObservableCollection<NotificationItem> Notifications { get; set; } = new ObservableCollection<NotificationItem>();
 
+        public string SelectedCountry
+        {
+            get => selectedCountry;
+            set
+            {
+                selectedCountry = value;
+                OnPropertyChanged(nameof(SelectedCountry));
+            }
+        }
+
+        public string CountryComboBoxFilter
+        {
+            get => countryComboBoxFilter; 
+            set
+            {
+                countryComboBoxFilter = value;
+            }
+        }
+
+        public IEnumerable<string> FilteredCountries
+        {
+            get
+            {
+                return FindCountries(CountryComboBoxFilter);
+            }
+        }
+
+        private IEnumerable<string> FindCountries(string input)
+        {
+            input = input?.ToUpper();
+
+            foreach (var country in countries)
+            {
+                if (string.IsNullOrEmpty(input) || country.ToUpper().Contains(input))
+                {
+                    yield return country;
+                }
+            }
+        }
+
+        private void OnSearchChanged(object sender, SearchTextChangedEventArgs e)
+        {
+            countryComboBoxFilter = e.Value;
+            OnPropertyChanged(nameof(FilteredCountries));
+        }
     }
 }

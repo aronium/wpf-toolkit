@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -75,6 +75,7 @@
     <Compile Include="Controls\NotificationsControl.cs" />
     <Compile Include="Controls\NotificationItem.cs" />
     <Compile Include="Controls\Rating.cs" />
+    <Compile Include="Controls\SearchableComboBox.cs" />
     <Compile Include="Controls\TagItem.cs" />
     <Compile Include="Controls\TagControl.cs" />
     <Compile Include="Controls\ToggleSwitch.cs" />
@@ -103,6 +104,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Validators\EmptyValidationRule.cs" />
+    <Compile Include="Validators\NotNullValidation.cs" />
     <Compile Include="Validators\NumericValidationRule.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -154,6 +156,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\ClosableTabControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SearchableComboBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

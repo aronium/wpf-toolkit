@@ -12,7 +12,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     [TemplatePart(Name = "PART_DropDownButton", Type = typeof(Button))]
     public class SplitButton : ContentControl
     {
-        #region -  Dependency Properties -
+        #region - Dependency Properties -
 
         /// <summary>
         /// Identifies thie DropDown dependency property.
