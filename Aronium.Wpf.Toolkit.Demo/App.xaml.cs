@@ -10,6 +10,8 @@ namespace Aronium.Wpf.Toolkit.Demo
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
         }
     }
 }
