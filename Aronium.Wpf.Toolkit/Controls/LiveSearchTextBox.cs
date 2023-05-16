@@ -91,7 +91,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         #endregion
 
         #region - Private methods -
-        
+
         protected override void OnGotFocus(RoutedEventArgs e)
         {
             base.OnGotFocus(e);
@@ -193,10 +193,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             {
                 ScrollToTop();
 
-                Dispatcher.BeginInvoke(((Action)(() =>
-                {
-                    SelectItem(item.DataContext);
-                })), DispatcherPriority.Input);
+                SelectItem(item.DataContext);
             }
         }
 
@@ -206,10 +203,7 @@ namespace Aronium.Wpf.Toolkit.Controls
 
             if (popup.IsOpen && listBox.SelectedItem != null)
             {
-                Dispatcher.BeginInvoke(((Action)(() =>
-                {
-                    SelectItem(listBox.SelectedItem);
-                })), DispatcherPriority.Input);
+                SelectItem(listBox.SelectedItem);
 
                 e.Handled = true;
             }
@@ -217,14 +211,17 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void SelectItem(object item)
         {
-            ItemSelected?.Invoke(this, new LiveSearchItemSelectedEventArgs(item));
+            _ = Dispatcher.BeginInvoke(((Action)(() =>
+            {
+                ItemSelected?.Invoke(this, new LiveSearchItemSelectedEventArgs(item));
 
-            if (ClearSearchOnSelect)
-                textBox.Clear();
+                if (ClearSearchOnSelect)
+                    textBox.Clear();
 
-            HidePopup();
+                HidePopup();
 
-            FocusTextBox();
+                FocusTextBox();
+            })), DispatcherPriority.Input);
         }
 
         private void ScrollToTop()
