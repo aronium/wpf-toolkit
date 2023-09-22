@@ -246,26 +246,21 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="4,0" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="ToolTip" Value="{Binding Column.(ToolTipService.ToolTip), RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Grid Name="Root" Background="{TemplateBinding Background}">
-                        <!--<Label SnapsToDevicePixels="True" 
-                               Foreground="{TemplateBinding Foreground}"
-                               Margin="0" 
-                               Padding="4,0" 
-                               HorizontalAlignment="Stretch"
-                               VerticalAlignment="Stretch"
-                               VerticalContentAlignment="Center"
-                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                               Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"/>-->
+                    <Border Name="Root" 
+                            Background="{TemplateBinding Background}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}">
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Margin="{TemplateBinding Padding}" />
-                    </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -275,8 +270,17 @@
                     <Condition Property="IsSelected" Value="True" />
                     <Condition Property="IsEnabled" Value="True" />
                 </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource Accent}"/>
                 <Setter Property="Foreground" Value="{DynamicResource SelectedItemForeground}" />
             </MultiTrigger>
+            <Trigger Property="IsEditing" Value="True">
+                <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
@@ -284,15 +288,12 @@
 
     <!-- Content style / Right alignment -->
     <Style TargetType="{x:Type DataGridCell}" x:Key="AlignRight" BasedOn="{StaticResource DefaultCellStyle}">
-        <Style.Setters>
-            <Setter Property="Label.HorizontalContentAlignment" Value="Right" />
-        </Style.Setters>
+        <Setter Property="Label.HorizontalContentAlignment" Value="Right" />
     </Style>
+    
     <!-- Content style / Center alignment -->
     <Style TargetType="{x:Type DataGridCell}" x:Key="AlignCenter" BasedOn="{StaticResource DefaultCellStyle}">
-        <Style.Setters>
-            <Setter Property="Label.HorizontalContentAlignment" Value="Center" />
-        </Style.Setters>
+        <Setter Property="Label.HorizontalContentAlignment" Value="Center" />
     </Style>
 
 </ResourceDictionary>

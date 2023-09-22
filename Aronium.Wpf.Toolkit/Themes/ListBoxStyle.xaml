@@ -40,19 +40,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBox">
-                    <Grid>
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <ScrollViewer Focusable="False" 
-                                          Padding="{TemplateBinding Padding}"
-                                          Background="Transparent" 
-                                          BorderBrush="Transparent">
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </ScrollViewer>
-                        </Border>
-                    </Grid>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ScrollViewer Focusable="False" 
+                                        Padding="{TemplateBinding Padding}"
+                                        Background="Transparent" 
+                                        BorderBrush="Transparent">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
