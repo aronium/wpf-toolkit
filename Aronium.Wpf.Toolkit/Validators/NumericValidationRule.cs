@@ -17,7 +17,7 @@ namespace Aronium.Wpf.Toolkit.Validators
         {
             if (AllowNull && string.IsNullOrEmpty(value?.ToString()))
             {
-                return new ValidationResult(true, null);
+                return ValidationResult.ValidResult;
             }
 
             bool isNumberInRange = true;

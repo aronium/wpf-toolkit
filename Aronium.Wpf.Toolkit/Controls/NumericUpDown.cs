@@ -105,7 +105,7 @@ namespace Aronium.Wpf.Toolkit.Controls
             @this.UpdateText();
         }
 
-        protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             if (IsFocused)
             {
@@ -174,7 +174,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     if (!AcceptEmptyValue)
                         this.UpdateText(this.Minimum);
                 }
-                else if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimalValueParsed))
+                else if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint | NumberStyles.Number, CultureInfo.InvariantCulture, out decimalValueParsed))
                 {
                     this.UpdateText(decimalValueParsed);
                 }
@@ -203,7 +203,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 this.Focus();
             }
 
-            if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimalValueParsed))
+            if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint | NumberStyles.Number, CultureInfo.InvariantCulture, out decimalValueParsed))
             {
                 if (decimalValueParsed + Increment <= Maximum)
                 {
@@ -221,7 +221,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 this.Focus();
             }
 
-            if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimalValueParsed))
+            if (decimal.TryParse(this.Text, NumberStyles.AllowDecimalPoint | NumberStyles.Number, CultureInfo.InvariantCulture, out decimalValueParsed))
             {
                 if (decimalValueParsed - Increment >= Minimum)
                 {
