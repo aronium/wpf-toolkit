@@ -1,4 +1,4 @@
-﻿using Aronium.Wpf.Toolkit.Controls;
+using Aronium.Wpf.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +34,7 @@ namespace Aronium.Wpf.Toolkit.Demo
         {
             InitializeComponent();
 
-            Themes = new List<string>(new[] { "Light", "Dark", "Dimmed", "HighContrast", "Gray" });
+            Themes = new List<string>(new[] { "Light", "Dark", "Night", "Dimmed", "HighContrast", "Gray" });
 
             ThemeName = "Dark";
 

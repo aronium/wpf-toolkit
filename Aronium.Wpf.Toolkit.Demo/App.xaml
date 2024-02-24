@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Brushes/Dark.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Brushes/Night.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Brushes/Dimmed.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Brushes/Light.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Aronium.Wpf.Toolkit;component/Themes/Brushes/HighContrast.xaml"/>
