@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Aronium.Wpf.Toolkit.Controls
 {
@@ -11,7 +10,6 @@ namespace Aronium.Wpf.Toolkit.Controls
     {
         #region - Fields -
 
-        private ContextMenu contextMenu = new ContextMenu();
         private static RoutedCommand _closeAllCommand = new RoutedCommand("CloseAllCommand", typeof(ClosableTabItem));
         private static RoutedCommand _closeAllButActiveCommand = new RoutedCommand("CloseAllButActiveCommand", typeof(ClosableTabItem));
         private static RoutedCommand _closeTabCommand = new RoutedCommand("CloseTabCommand", typeof(ClosableTabItem));
