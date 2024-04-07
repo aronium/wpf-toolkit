@@ -32,20 +32,20 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
+                            <ContentControl Content="{TemplateBinding Content}" VerticalAlignment="Center" />
+
                             <Button Style="{DynamicResource FlatButtonStyle}"
                                     Name="PART_CloseButton"
                                     Focusable="False"
                                     Grid.Column="1"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center">
-                                <Polygon Points="438.393,374.595 319.757,255.977 438.378,137.348 374.595,73.607 255.995,192.225 137.375,73.622 73.607,137.352 192.246,255.983 73.622,374.625 137.352,438.393 256.002,319.734 374.652,438.378" 
-                                         Fill="{TemplateBinding Foreground}" 
-                                         Stretch="Uniform" 
-                                         Height="14" 
-                                         Margin="5"/>
+                                <Path Data="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" 
+                                      Fill="{TemplateBinding Foreground}" 
+                                      Stretch="Uniform" 
+                                      Height="14" 
+                                      Margin="5"/>
                             </Button>
-
-                            <ContentControl Content="{TemplateBinding Content}" VerticalAlignment="Center" />
 
                         </Grid>
                     </Border>
