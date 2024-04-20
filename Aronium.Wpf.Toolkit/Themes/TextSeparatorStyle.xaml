@@ -28,6 +28,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabled}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
 </ResourceDictionary>

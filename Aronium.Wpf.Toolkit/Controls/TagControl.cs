@@ -365,7 +365,15 @@ namespace Aronium.Wpf.Toolkit.Controls
                 case Key.C:
                     if (SelectedItem != null && Keyboard.Modifiers == ModifierKeys.Control)
                     {
-                        Clipboard.SetDataObject(SelectedItem.ToString(), true);
+                        try
+                        {
+                            Clipboard.SetDataObject(SelectedItem.ToString(), true);
+                        }
+                        catch
+                        {
+                            // Swallowing exception on purpose, we can't do much with Clipboard failing and known race conditions
+                        }
+
                         e.Handled = true;
                     }
                     break;

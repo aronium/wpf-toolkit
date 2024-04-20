@@ -20,7 +20,8 @@
                         <!--Header-->
                         <Border BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{DynamicResource GroupBoxHeaderBackgroundBrush}"
-                                BorderBrush="{TemplateBinding BorderBrush}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                x:Name="bd">
                             <ContentPresenter Margin="4" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -34,13 +35,23 @@
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="1,0,1,1"
                                 BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}" 
+                            <ContentPresenter x:Name="ContentSite"
+                                              Margin="{TemplateBinding Padding}" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                               TextElement.Foreground="{DynamicResource Foreground}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource ForegroundDisabled}" />
+                            <Setter Property="Background" TargetName="bd" Value="{DynamicResource BorderDisabledBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource BackgroundDisabledBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource BorderDisabledBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
