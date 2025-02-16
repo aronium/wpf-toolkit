@@ -134,9 +134,14 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnNotificationItemIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (!isApplicationClosing && !((bool)e.NewValue))
+            if (!((bool)e.NewValue))
             {
-                this.RaiseEvent(new RoutedEventArgs(ItemClosedEvent, sender));
+                ((NotificationItem)sender).IsVisibleChanged -= OnNotificationItemIsVisibleChanged;
+
+                if (!isApplicationClosing)
+                {
+                    this.RaiseEvent(new RoutedEventArgs(ItemClosedEvent, sender));
+                }
             }
         }
 

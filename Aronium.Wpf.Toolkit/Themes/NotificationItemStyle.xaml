@@ -1,5 +1,4 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Aronium.Wpf.Toolkit.Controls">
     
     <Style TargetType="local:NotificationItem">
@@ -12,11 +11,6 @@
         <Setter Property="Margin" Value="5" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="BorderThickness" Value="1" />
-        <!--<Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect Opacity="0.3" />
-            </Setter.Value>
-        </Setter>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:NotificationItem">

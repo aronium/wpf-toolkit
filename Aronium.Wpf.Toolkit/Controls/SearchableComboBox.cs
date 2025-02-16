@@ -83,7 +83,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         private void OnSearchTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             // If no custom search is used, filter current view
-            if(SearchTextChanged == null)
+            if (SearchTextChanged == null)
             {
                 CollectionViewSource.GetDefaultView(ItemsSource).Refresh();
             }
@@ -91,7 +91,6 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void OnItemsListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             // If null is not allowed, and selected item is not in the list anymore,
             // select the first item in the list
             Dispatcher.BeginInvoke((Action)(() =>
@@ -132,7 +131,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                 case Key.Up:
                     // Same as above for Key.Down
                     e.Handled = ItemsListBox.SelectedIndex == 0;
-                    
+
                     // Forcibly select item so we have a constant behaviour when scrolling manually while SearchTextBox is focused 
                     if (!AllowNullSelection && SelectedItem != ItemsListBox.SelectedItem)
                     {
@@ -178,6 +177,7 @@ namespace Aronium.Wpf.Toolkit.Controls
                     HandleEnterKey(e);
                     break;
                 case Key.Escape:
+                    e.Handled = IsDropDownOpen;
                     HandleEscKey();
                     break;
                 default:
