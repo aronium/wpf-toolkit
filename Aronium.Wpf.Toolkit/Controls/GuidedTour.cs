@@ -257,9 +257,15 @@ namespace Aronium.Wpf.Toolkit.Controls
 
         private void SetGuideItemPosition(GuidedTourItem item)
         {
-            if (!IsLoaded) return;
+            if (!IsLoaded || item?.Target == null) return;
+            if (!item.Target.IsLoaded || !item.Target.IsVisible) return;
 
+            // Ensure both visuals are in a live tree
             PresentationSource source = PresentationSource.FromVisual(this);
+            if (source == null) return;
+
+            if (PresentationSource.FromVisual(item.Target) == null) return;
+
             double dpiX = source?.CompositionTarget.TransformToDevice.M11 ?? 1;
             double dpiY = source?.CompositionTarget.TransformToDevice.M22 ?? 1;
 
