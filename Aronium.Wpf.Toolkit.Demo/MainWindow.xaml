@@ -162,6 +162,9 @@
                                     <aronium:Callout CalloutType="Warning" Margin="0 5">
                                         Warning callout
                                     </aronium:Callout>
+                                    <aronium:Callout CalloutType="Success" Margin="0 5">
+                                        Success callout
+                                    </aronium:Callout>
                                 </StackPanel>
                             </GroupBox>
 

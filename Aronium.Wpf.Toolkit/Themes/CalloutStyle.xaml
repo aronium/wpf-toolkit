@@ -5,6 +5,7 @@
     <Geometry x:Key="CalloutIconInfo">M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 18h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z</Geometry>
     <Geometry x:Key="CalloutIconError">M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.31 7.526c-.099-.807.528-1.526 1.348-1.526.771 0 1.377.676 1.28 1.451l-.757 6.053c-.035.283-.276.496-.561.496s-.526-.213-.562-.496l-.748-5.978zm1.31 10.724c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z</Geometry>
     <Geometry x:Key="CalloutIconWarning">M12 5.177l8.631 15.823h-17.262l8.631-15.823zm0-4.177l-12 22h24l-12-22zm-1 9h2v6h-2v-6zm1 9.75c-.689 0-1.25-.56-1.25-1.25s.561-1.25 1.25-1.25 1.25.56 1.25 1.25-.561 1.25-1.25 1.25z</Geometry>
+    <Geometry x:Key="CalloutIconsuccess">M24 6.278l-11.16 12.722-6.84-6 1.319-1.49 5.341 4.686 9.865-11.196 1.475 1.278zm-22.681 5.232l6.835 6.01-1.314 1.48-6.84-6 1.319-1.49zm9.278.218l5.921-6.728 1.482 1.285-5.921 6.756-1.482-1.313z</Geometry>
     
     <Style TargetType="{x:Type local:Callout}">
         <Setter Property="BorderThickness" Value="1" />
@@ -53,6 +54,11 @@
                             <Setter Property="BorderBrush" Value="#FFCC00" />
                             <Setter Property="Data" TargetName="icon" Value="{StaticResource CalloutIconWarning}" />
                             <Setter Property="Fill" TargetName="icon" Value="#843534" />
+                        </Trigger>
+                        <Trigger Property="CalloutType" Value="Success">
+                            <Setter Property="BorderBrush" Value="#28a745" />
+                            <Setter Property="Data" TargetName="icon" Value="{StaticResource CalloutIconsuccess}" />
+                            <Setter Property="Fill" TargetName="icon" Value="White" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="BorderBrush" Value="{DynamicResource BackgroundDisabledBrush}" />

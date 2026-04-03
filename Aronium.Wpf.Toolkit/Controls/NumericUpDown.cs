@@ -19,7 +19,7 @@ namespace Aronium.Wpf.Toolkit.Controls
         private decimal decimalValueParsed;
         private bool isUpdatingText;
 
-        private const string UNLIMITED_DECIMAL_PLACES_FORMAT = "#.#############################";
+        private const string UNLIMITED_DECIMAL_PLACES_FORMAT = "0.#############################";
 
         #endregion
 

@@ -42,6 +42,7 @@ namespace Aronium.Wpf.Toolkit.Controls
     {
         Info,
         Warning,
-        Error
+        Error,
+        Success
     }
 }
